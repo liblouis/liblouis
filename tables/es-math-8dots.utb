@@ -1,0 +1,349 @@
+# liblouis: Spanish 8-dot Mathematics Braille Table (CBE B 14-1 V3)
+#
+# -----------
+#-index-name: Spanish, 8-dot mathematics
+#-display-name: Spanish 8-dot mathematical braille (CBE B 14-1 V3)
+#
+#+language:es
+#+type:literary
+#+system:cbe-b14-1
+#+dots:8
+#+unicode-range: ucs4
+#+direction:forward
+# -----------
+#
+#  Copyright (C) 2026 Contributors to liblouis
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+# -------------------------------------------------------------------------------
+#  Spanish 8-dot Braille Mathematical Code
+#  Based on Comisión Braille Española (CBE / ONCE):
+#  Documento técnico B 14-1: Código matemático de ocho puntos, Versión 3
+#  (marzo de 2019).
+#
+#  Note: Built standalone over digits6DotsPlusDot6.uti and latinLetterDef8Dots.uti
+#  (rather than including Es-Es-G0.utb directly) so CBE B 14-1 V3 overrides of
+#  8-dot delimiters and operators (<, >, /, *, ×, ·, ±, °, [, ], {, }) take
+#  precedence deterministically.
+# -------------------------------------------------------------------------------
+
+space \s 0
+space \t 9
+space \x001B 1b
+space \x000A 0
+space \x000D 0
+space \x00A0 0
+
+include braille-patterns.cti
+
+# 1. Cifras (B 14-1 V3 §1): digits 1-9 use dot 6 without numsign; 0 is 34678
+digit 0 34678
+include digits6DotsPlusDot6.uti
+
+# 2. Caracteres latinos (B 14-1 V3 §2) y letras españolas (CBE B 15 V2)
+include latinLetterDef8Dots.uti
+
+lowercase \x00E1 12356       # á
+lowercase \x00E9 2346        # é
+lowercase \x00ED 34          # í
+lowercase \x00F3 346         # ó
+lowercase \x00FA 23456       # ú
+lowercase \x00FC 12568       # ü
+lowercase \x00F1 124568      # ñ
+lowercase \x00E7 123468      # ç
+lowercase \x00E0 123568      # à
+lowercase \x00E8 23468       # è
+lowercase \x00EC 348         # ì
+lowercase \x00F2 3468        # ò
+lowercase \x00F9 234568      # ù
+
+uppercase \x00C1 123567      # Á
+uppercase \x00C9 23467       # É
+uppercase \x00CD 347         # Í
+uppercase \x00D3 3467        # Ó
+uppercase \x00DA 234567      # Ú
+uppercase \x00DC 125678      # Ü
+uppercase \x00D1 124567      # Ñ
+uppercase \x00C7 1234678     # Ç
+
+# 3. Letras griegas (B 14-1 V3 §3)
+# 3.1 Minúsculas
+lowercase \x03B1 4-1         # α alfa
+lowercase \x03B2 4-12        # β beta
+lowercase \x03B3 4-1245      # γ gamma
+lowercase \x03B4 4-145       # δ delta
+lowercase \x03B5 4-15        # ε épsilon
+lowercase \x03B6 4-1356      # ζ zeta
+lowercase \x03B7 4-156       # η eta
+lowercase \x03B8 4-1456      # θ theta
+lowercase \x03B9 4-24        # ι iota
+lowercase \x03BA 4-13        # κ kappa
+lowercase \x03BB 4-123       # λ lambda
+lowercase \x03BC 4-134       # μ my
+lowercase \x03BD 4-1345      # ν ny
+lowercase \x03BE 4-1346      # ξ xi
+lowercase \x03BF 4-135       # ο ómicron
+lowercase \x03C0 4-1234      # π pi
+lowercase \x03C1 4-1235      # ρ rho
+lowercase \x03C2 4-234       # ς sigma final
+lowercase \x03C3 4-234       # σ sigma
+lowercase \x03C4 4-2345      # τ tau
+lowercase \x03C5 4-136       # υ ípsilon
+lowercase \x03C6 4-124       # φ phi
+lowercase \x03C7 4-12346     # χ ji
+lowercase \x03C8 4-13456     # ψ psi
+lowercase \x03C9 4-2456      # ω omega
+
+# 3.2 Variantes griegas (prefijo 4-134578)
+lowercase \x03D1 4-134578-1456   # ϑ vartheta
+lowercase \x03F5 4-134578-15     # ϵ varépsilon
+lowercase \x03F1 4-134578-1235   # ϱ varrho
+lowercase \x03D6 4-134578-1234   # ϖ varpi
+lowercase \x03DB 4-134578-234    # ϛ varsigma
+lowercase \x03D5 4-134578-124    # ϕ varphi
+lowercase \x03F0 4-134578-13     # ϰ varkappa
+uppercase \x03DC 4-134578-1245   # Ϝ digamma
+
+# 3.3 Mayúsculas griegas
+uppercase \x0391 4-17        # Α Alfa
+uppercase \x0392 4-127       # Β Beta
+uppercase \x0393 4-12457     # Γ Gamma
+uppercase \x0394 4-1457      # Δ Delta
+uppercase \x0395 4-157       # Ε Épsilon
+uppercase \x0396 4-13567     # Ζ Zeta
+uppercase \x0397 4-1567      # Η Eta
+uppercase \x0398 4-14567     # Θ Theta
+uppercase \x0399 4-247       # Ι Iota
+uppercase \x039A 4-137       # Κ Kappa
+uppercase \x039B 4-1237      # Λ Lambda
+uppercase \x039C 4-1347      # Μ My
+uppercase \x039D 4-13457     # Ν Ny
+uppercase \x039E 4-13467     # Ξ Xi
+uppercase \x039F 4-1357      # Ο Ómicron
+uppercase \x03A0 4-12347     # Π Pi
+uppercase \x03A1 4-12357     # Ρ Rho
+uppercase \x03A3 4-2347      # Σ Sigma
+uppercase \x03A4 4-23457     # Τ Tau
+uppercase \x03A5 4-1367      # Υ Ípsilon
+uppercase \x03A6 4-1247      # Φ Phi
+uppercase \x03A7 4-123467    # Χ Ji
+uppercase \x03A8 4-134567    # Ψ Psi
+uppercase \x03A9 4-24567     # Ω Omega
+
+# 4. Índices y marcas (B 14-1 V3 §4)
+sign \x2032 345             # ′ prima
+sign \x2033 345-345         # ″ segunda
+sign \x2034 345-345-345     # ‴ tercera
+sign \x00AF 46              # ¯ barra superior
+sign \x0304 46              # combining macron
+sign \x0303 3467            # combining tilde
+sign \x02DC 3467            # ˜ tilde
+sign \x0302 124568          # combining circumflex
+sign \x02C6 124568          # ˆ circunflejo / sombrero
+sign \x0307 5               # combining dot above
+sign \x0308 5-5             # combining diaeresis
+sign \x20D7 68              # combining right arrow above (vector)
+
+# Unicode superscripts (exponente simple 45 + base character) & subscripts (subíndice 47 + base)
+math \x2070 45-34678        # ⁰
+math \x00B9 45-16           # ¹
+math \x00B2 45-126          # ²
+math \x00B3 45-146          # ³
+math \x2074 45-1456         # ⁴
+math \x2075 45-156          # ⁵
+math \x2076 45-1246         # ⁶
+math \x2077 45-12456        # ⁷
+math \x2078 45-1256         # ⁸
+math \x2079 45-246          # ⁹
+math \x207A 45-235          # ⁺
+math \x207B 45-36           # ⁻
+math \x207F 45-1345         # ⁿ
+math \x2071 45-24           # ⁱ
+math \x2080 47-34678        # ₀
+math \x2081 47-16           # ₁
+math \x2082 47-126          # ₂
+math \x2083 47-146          # ₃
+math \x2084 47-1456         # ₄
+math \x2085 47-156          # ₅
+math \x2086 47-1246         # ₆
+math \x2087 47-12456        # ₇
+math \x2088 47-1256         # ₈
+math \x2089 47-246          # ₉
+math \x208A 47-235          # ₊
+math \x208B 47-36           # ₋
+math \x2099 47-1345         # ₙ
+math \x1D62 47-24           # ᵢ
+math \x2090 47-1            # ₐ
+math \x2091 47-15           # ₑ
+math \x2092 47-135          # ₒ
+math \x2093 47-1346         # ₓ
+math \x1D63 47-1235         # ᵣ
+math \x1D64 47-136          # ᵤ
+math \x1D65 47-1236         # ᵥ
+math \x2C7C 47-245          # ⱼ
+math \x2096 47-13           # ₖ
+math \x2097 47-123          # ₗ
+math \x2098 47-134          # ₘ
+math \x209A 47-1234         # ₚ
+math \x209B 47-234          # ₛ
+math \x209C 47-2345         # ₜ
+
+# 5. Delimitadores y puntuación matemática (B 14-1 V3 §5)
+punctuation ( 1268
+punctuation ) 3457
+punctuation [ 23678
+punctuation ] 35678
+punctuation { 1238
+punctuation } 4567
+punctuation \x27E8 2348     # ⟨ paréntesis angular izq
+punctuation \x27E9 1567     # ⟩ paréntesis angular der
+punctuation \x2329 2348     # 〈
+punctuation \x232A 1567     # 〉
+punctuation . 3             # punto de millar / separación
+punctuation , 2             # coma decimal / separación
+punctuation ; 23            # punto y coma
+punctuation : 25            # dos puntos
+sign \x2026 3-3-3           # … puntos suspensivos
+sign / 8-3                  # barra oblicua
+sign \x005C 6-7             # \ barra inversa
+sign | 4568                 # barra vertical
+sign \x2013 36              # –
+sign \x2014 36              # —
+
+# 6. Conjuntos (B 14-1 V3 §6) & 16. Conjuntos numéricos
+math \x222A 568-567         # ∪ unión
+math \x2229 568-268         # ∩ intersección
+math \x2216 568-36          # ∖ diferencia de conjuntos
+math \x2296 568-368         # ⊖ diferencia simétrica
+math \x2A2F 568-378         # ⨯ producto cartesiano
+math \x22C3 568-5678-25-15678  # ⋃ unión de una familia
+math \x22C2 568-2568-25-15678  # ⋂ intersección de una familia
+math \x2282 1267            # ⊂ incluido
+math \x2283 3458            # ⊃ contiene
+math \x2286 12678           # ⊆ incluido o igual
+math \x2287 34578           # ⊇ contiene o es igual
+math \x2284 458-1267        # ⊄ no incluido
+math \x2285 458-3458        # ⊅ no contiene
+math \x2288 458-12678       # ⊈ no incluido ni igual
+math \x2289 458-34578       # ⊉ no contiene ni es igual
+math \x2208 238             # ∈ perteneciente
+math \x220B 567             # ∋ comprende como elemento
+math \x2209 458-238         # ∉ no perteneciente
+math \x220C 458-567         # ∌ no comprende como elemento
+math \x2118 568-2357        # ℘ potencia de un conjunto
+math \x2205 568-356         # ∅ conjunto vacío
+math \x2135 12567           # ℵ Aleph
+math \x2115 568-13457       # ℕ naturales
+math \x2124 568-13567       # ℤ enteros
+math \x211A 568-123457      # ℚ racionales
+math \x211D 568-12357       # ℝ reales
+math \x2102 568-147         # ℂ complejos
+math \y1D540 568-247        # 𝕀 irracionales
+
+# 7. Operadores aritméticos (B 14-1 V3 §7)
+math + 235                  # suma
+math - 36                   # resta
+math \x2212 36              # − resta Unicode
+math \x00D7 236             # × multiplicación (aspa)
+math \x00B7 37              # · multiplicación (punto)
+math \x22C5 37              # ⋅ multiplicación (dot operator)
+math * 256                  # * división ASCII (B 14-1 §7)
+math \x00F7 2578            # ÷ división
+math \x00B1 235-36          # ± más o menos
+math \x2213 36-235          # ∓ menos o más
+sign ! 2357                 # ! factorial
+sign \x203C 2357-2357       # ‼ doble factorial
+sign % 456                  # % tanto por ciento
+sign \x2030 456-3           # ‰ tanto por mil
+math \x2217 56-3            # ∗ operador genérico
+
+# 8. Relaciones (B 14-1 V3 §8)
+math < 358                  # < menor que
+math > 267                  # > mayor que
+math \x2264 3578            # ≤ menor o igual
+math \x2265 2678            # ≥ mayor o igual
+math \x226A 358-358         # ≪ mucho menor que
+math \x226B 267-267         # ≫ mucho mayor que
+math \x227A 6-358           # ≺ anterior
+math \x227B 267-3           # ≻ posterior
+math \x2223 4568-2          # ∣ divisor
+math \x223C 2358            # ∼ semejante o similar
+math \x2241 458-2358        # ≁ no semejante
+math = 2356                 # = igual
+math \x2248 23567           # ≈ aproximado
+math \x221D 23568           # ∝ proporcional
+math \x2261 235678          # ≡ idéntico o equivalente
+math \x2262 458-235678      # ≢ no idéntico
+math \x2245 5-2356          # ≅ congruente con
+math \x2260 458-2356        # ≠ distinto de
+math \x226E 458-2368        # ≮ no menor que (B 14-1 §8 ej.)
+math \x226F 458-267         # ≯ no mayor que
+math \x2270 458-3578        # ≰ no menor ni igual
+math \x2271 458-2678        # ≱ no mayor ni igual
+
+# 9. Lógica (B 14-1 V3 §9)
+math \x2228 1358            # ∨ o (disyunción lógica)
+math \x2227 134568          # ∧ y (conjunción lógica)
+math \x22BB 13578           # ⊻ disyunción excluyente
+math \x00AC 458             # ¬ no (negación lógica)
+math \x2200 28              # ∀ para todo
+math \x2203 268             # ∃ existe
+always \x2203! 268-3        # ∃! existe un único
+math \x2204 458-268         # ∄ no existe
+math \x22A4 123567          # ⊤ tautología
+math \x22A5 234568          # ⊥ contradicción
+math \x21D2 36-2367         # ⇒ implicación
+math \x21D4 3568-36-2367    # ⇔ equivalencia lógica
+math \x21D0 3568-36         # ⇐ implicación recíproca
+math \x2234 8-28            # ∴ por lo tanto
+
+# 10. Álgebra y 13. Análisis y cálculo (B 14-1 V3 §§10, 13)
+math ^ 45                   # exponente simple
+math \x2044 2568           # ⁄ barra de fracción simple
+math \x221A 12468          # √ raíz cuadrada simple
+math \x2211 4-23478-15678  # ∑ sumatorio
+math \x220F 4-123478-25-15678  # ∏ productorio
+math \x2218 678            # ∘ composición de funciones
+math \x2202 4-14568        # ∂ derivada parcial
+math \x222B 4-123468       # ∫ integral
+math \x222C 4-123468-123468         # ∬ integral doble
+math \x222D 4-123468-123468-123468  # ∭ integral triple
+math \x222E 5-123468       # ∮ integral de contorno
+math \x2206 2468           # ∆ operador laplaciano
+math \x2207 2467           # ∇ operador nabla
+
+# 11. Geometría y 14. Flechas y 16. Otros símbolos (B 14-1 V3 §§11, 14, 16)
+math \x2225 123456         # ∥ paralela con
+math \x2226 458-123456     # ∦ no paralela
+math \x27C2 24568          # ⟂ perpendicular
+math \x2220 2378           # ∠ ángulo
+math \x00B0 356            # ° grados sexagesimales
+math \x2297 2368           # ⊗ producto tensorial
+math \x25B3 258            # △ triángulo
+math \x25A1 3678           # □ cuadrado
+math \x25CB 367            # ○ círculo
+math \x2192 8-267          # → flecha derecha
+math \x2190 358-7          # ← flecha izquierda
+math \x2194 358-36-267     # ↔ doble flecha
+math \x2191 457            # ↑ flecha arriba
+math \x2193 128            # ↓ flecha abajo
+sign _ 6                    # _ prefijo para unidades / guion bajo
+sign $ 123467               # $ dólares
+sign \x20AC 12358          # € euros
+math \x221E 125678         # ∞ infinito
+always \x00B0C 6-356-147    # °C Celsius (_>C en tabla de unidades §17)

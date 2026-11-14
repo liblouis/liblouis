@@ -1,0 +1,80 @@
+# Copyright © 2026 Contributors to liblouis
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# Spanish 6-dot Braille for Chess Notation (CBE / ONCE Documento técnico B 8 V2,
+# septiembre de 2016)
+
+display: unicode-without-blank.dis
+table:
+  language: es
+  system: cbe-b8
+  __assert-match: es-chess.ctb
+
+flags: {testmode: forward}
+tests:
+
+  # §2.1 Piece symbols (Figurines mapped to Spanish initials R D T A C P)
+  - ['♔', '⠨⠗']
+  - ['♕', '⠨⠙']
+  - ['♖', '⠨⠞']
+  - ['♗', '⠨⠁']
+  - ['♘', '⠨⠉']
+  - ['♙', '⠨⠏']
+  - ['♚', '⠨⠗']
+  - ['♛', '⠨⠙']
+  - ['♜', '⠨⠞']
+  - ['♝', '⠨⠁']
+  - ['♞', '⠨⠉']
+  - ['♟', '⠨⠏']
+  - ['♘f3', '⠨⠉⠋⠒']
+  - ['♗xf7+', '⠨⠁⠭⠋⠶⠌⠡']
+
+  # §3.2 Notación algebraica extendida (ejemplos oficiales CBE B 8 V2 pp. 11-12)
+  - ['1. e2-e4 e7-e5', '⠂ ⠑⠆⠤⠑⠲ ⠑⠶⠤⠑⠢']
+  - ['2. Cg1-f3 d7-d6', '⠆ ⠨⠉⠛⠂⠤⠋⠒ ⠙⠶⠤⠙⠖']
+  - ['3. Af1-c4 Ac8-g4', '⠒ ⠨⠁⠋⠂⠤⠉⠲ ⠨⠁⠉⠦⠤⠛⠲']
+  - ['4. Cb1-c3 h7-h6', '⠲ ⠨⠉⠃⠂⠤⠉⠒ ⠓⠶⠤⠓⠖']
+  - ['5. Cf3xe5 Ag4xd1', '⠢ ⠨⠉⠋⠒⠭⠑⠢ ⠨⠁⠛⠲⠭⠙⠂']
+  - ['6. Ac4xf7+ Re8-e7', '⠖ ⠨⠁⠉⠲⠭⠋⠶⠌⠡ ⠨⠗⠑⠦⠤⠑⠶']
+  - ['7. Cc3-d5#', '⠶ ⠨⠉⠉⠒⠤⠙⠢⠌⠡⠍']
+
+  # §3.3 Notación algebraica abreviada (ejemplos oficiales CBE B 8 V2 p. 13)
+  - ['1. e4 e5', '⠂ ⠑⠲ ⠑⠢']
+  - ['2. Cf3 d6', '⠆ ⠨⠉⠋⠒ ⠙⠖']
+  - ['3. Ac4 Ag4', '⠒ ⠨⠁⠉⠲ ⠨⠁⠛⠲']
+  - ['4. Cc3 h6', '⠲ ⠨⠉⠉⠒ ⠓⠖']
+  - ['5. Ce5 Ad1', '⠢ ⠨⠉⠑⠢ ⠨⠁⠙⠂']
+  - ['6. Af7+ Re7', '⠖ ⠨⠁⠋⠶⠌⠡ ⠨⠗⠑⠶']
+  - ['7. Cd5#', '⠶ ⠨⠉⠙⠢⠌⠡⠍']
+  - ['1. e4 e5 2. Cf3 d6 3. Ac4 Ag4 4. Cc3 h6 5. Ce5 Ad1 6. Af7+ Re7 7. Cd5#',
+     '⠂ ⠑⠲ ⠑⠢ ⠆ ⠨⠉⠋⠒ ⠙⠖ ⠒ ⠨⠁⠉⠲ ⠨⠁⠛⠲ ⠲ ⠨⠉⠉⠒ ⠓⠖ ⠢ ⠨⠉⠑⠢ ⠨⠁⠙⠂ ⠖ ⠨⠁⠋⠶⠌⠡ ⠨⠗⠑⠶ ⠶ ⠨⠉⠙⠢⠌⠡⠍']
+
+  # Disambiguation, promotion vs equality attached to move, black continuation 1...
+  - ['T1e1', '⠨⠞⠂⠑⠂']
+  - ['e8=D', '⠑⠦⠶⠨⠙']
+  - ['e4=', '⠑⠲⠌⠶']
+  - ['1... e5', '⠂ ⠤ ⠑⠢']
+
+  # §4.2 Castling, checkmate ++, results, and move quality indicators
+  - ['0-0', '⠚⠤⠚']
+  - ['0-0-0', '⠚⠤⠚⠤⠚']
+  - ['O-O', '⠚⠤⠚']
+  - ['O-O-O', '⠚⠤⠚⠤⠚']
+  - ['0-0+', '⠚⠤⠚⠌⠡']
+  - ['1-0', '⠼⠁⠤⠼⠚']
+  - ['0-1', '⠼⠚⠤⠼⠁']
+  - ['½-½', '⠼⠂⠃⠤⠼⠂⠃']
+  - ['1/2-1/2', '⠼⠂⠃⠤⠼⠂⠃']
+  - ['0,5-0,5', '⠼⠚⠂⠑⠤⠼⠚⠂⠑']
+  - ['12. g4!?', '⠂⠆ ⠛⠲⠌⠖⠢']
+  - ['15. d4?!', '⠂⠢ ⠙⠲⠌⠢⠖']
+
+  # §4.3 Valuation & Chess Informant symbols (attached after separator 34 or standalone)
+  - ['11. b5□', '⠂⠂ ⠃⠢⠌⠸⠽']
+  - ['31. Tf4⊕', '⠒⠂ ⠨⠞⠋⠲⠌⠪⠖']
+  - ['± ∓ ∞ ⩲ ⩱ ⟳ ○ → ↑ ⇄ ⊙ ∆ □ ⌓ ↔ ↗ ⊞',
+     '⠖⠒⠤ ⠤⠒⠖ ⠼⠳ ⠖⠒⠶ ⠶⠒⠖ ⠕⠒ ⠕⠄ ⠒⠂ ⠸ ⠈⠭⠄ ⠪⠂ ⠪ ⠸⠽ ⠸⠕ ⠺⠗ ⠸⠁ ⠯⠖']

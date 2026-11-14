@@ -145,9 +145,12 @@ table_files = \
 	eo-g1-x-system.ctb \
 	eo.tbl \
 	es-chardefs.cti \
+	es-chem-8dots.utb \
+	es-chess.ctb \
 	Es-Es-G0.utb \
 	es-g1.ctb \
 	es-g2.ctb \
+	es-math-8dots.utb \
 	es-no.utb \
 	es-new.dis \
 	es-old.dis \
