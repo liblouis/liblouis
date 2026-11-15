@@ -586,7 +586,10 @@ isPlausibleEmphIndicator(const TranslationTableHeader *table,
 	case CTO_EmphLetter:
 	case CTO_BegEmphWord:
 	case CTO_BegEmphPhrase:
-		/* A begin indicator precedes the text it emphasises. */
+		/* A begin indicator precedes the text it emphasises. Right after a digit the
+		 * cells are more likely part of the number (EBAE uses dots 46 for both the
+		 * italic sign and the decimal point). */
+		if (beforeAttributes & (CTC_Digit | CTC_LitDigit)) return 0;
 		return !(afterAttributes & CTC_Space);
 	case CTO_EndEmphPhrase:
 		if (indicatorType == endPhraseBeforeOffset) {
@@ -948,6 +951,12 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 						if (ctx.itsANumber && !(afterAttributes & CTC_LitDigit)) return;
 						break;
 					case CTO_DecPoint:
+						/* Not at the start of a word outside a number: there, in front
+						 * of a word starting a-j, which are also digits, EBAE's 46 is
+						 * its italic sign. */
+						if (!ctx.itsANumber &&
+								(beforeAttributes & (CTC_Space | CTC_Punctuation)))
+							break;
 						if (afterAttributes & (CTC_Digit | CTC_LitDigit)) return;
 						break;
 					case CTO_EndCapsWord:

@@ -451,6 +451,22 @@ tests:
     - "⠘⠺⠲ ⠼⠨⠑"
     - "word. .5"
 
+  - # dots 46 between two numbers is the decimal point, not the italic sign
+    - "⠼⠁⠨⠼⠃"
+    - "1.2"
+
+  - # italic sign before words starting with a-j, which are also digits: not
+    # the decimal point
+    - "⠨⠉⠁⠞ ⠨⠁⠝⠙ ⠨⠙⠕⠛"
+    - "cat and dog"
+
+  - - "⠨⠎⠊⠇⠧⠊⠕ ⠁⠝⠙"
+    - "silvio and"
+
+  - # italic words in capitals, as in the author line of an NLS braille book
+    - "⠨⠠⠠⠎⠊⠇⠧⠊⠕ ⠨⠠⠁⠲ ⠨⠠⠠⠃⠫⠔⠊"
+    - "SILVIO A. BEDINI"
+
 # Danish 1993: dots 56 is begemphphrase, endemphphrase (after) and the
 # diaeresis. The indicator is taken where it precedes or follows text, the
 # diaeresis where it stands on its own.
