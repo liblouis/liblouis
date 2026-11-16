@@ -1,0 +1,49 @@
+# Test the singlecapsword opcode: a single capital is treated as a
+# capitalized word of one letter and gets begcapsword, unless it is
+# directly followed by a lowercase letter, in which case it keeps
+# capsletter.
+
+display: tables/unicode-without-blank.dis
+
+# Without the opcode every single capital gets capsletter
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  punctuation . 256
+  punctuation - 36
+  capsletter 46
+  begcapsword 45
+  endcapsword 6
+
+tests:
+  - ["A", "⠨⠁"]
+  - ["kW", "⠅⠨⠺"]
+  - ["Haus", "⠨⠓⠁⠥⠎"]
+
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  punctuation . 256
+  punctuation - 36
+  capsletter 46
+  begcapsword 45
+  endcapsword 6
+  singlecapsword
+
+flags: {testmode: bothDirections}
+tests:
+  # a capital followed by a lowercase letter keeps capsletter
+  - ["Haus", "⠨⠓⠁⠥⠎"]
+  - ["kWh", "⠅⠨⠺⠓"]
+  # a capital at the end of a word gets begcapsword
+  - ["A", "⠘⠁"]
+  - ["x A y", "⠭ ⠘⠁ ⠽"]
+  - ["kW", "⠅⠘⠺"]
+  - ["GmbH", "⠨⠛⠍⠃⠘⠓"]
+  # a capital followed by punctuation gets begcapsword
+  - ["A.", "⠘⠁⠲"]
+  - ["U-Bahn", "⠘⠥⠤⠨⠃⠁⠓⠝"]
+  # capitalized words are unaffected
+  - ["AB", "⠘⠁⠃"]
+  - ["ABc", "⠘⠁⠃⠠⠉"]
+  - ["KPdSU", "⠘⠅⠏⠠⠙⠘⠎⠥"]

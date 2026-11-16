@@ -3352,6 +3352,20 @@ markEmphases(const TranslationTableHeader *table, const InString *input,
 				}
 			}
 		}
+		if (emphClass->mode == CTC_UpperCase && table->singleCapsWord &&
+				emphRule[begWordOffset]) {
+			/* use the capsletter indicator only for a capital that is directly followed
+			 * by a lowercase letter, and the begcapsword indicator for any other single
+			 * capital */
+			for (int i = 0; i < input->length; i++) {
+				if (!(emphasisBuffer[i].symbol & emphClass->value)) continue;
+				if (i + 1 < input->length &&
+						checkCharAttr(input->chars[i + 1], CTC_LowerCase, table))
+					continue;
+				emphasisBuffer[i].symbol &= ~emphClass->value;
+				emphasisBuffer[i].word |= emphClass->value;
+			}
+		}
 	}
 }
 
