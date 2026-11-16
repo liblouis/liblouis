@@ -4027,16 +4027,18 @@ doOpcode:
 			return 1;
 		}
 		case CTO_Replace:
-			if (getRuleCharsText(file, &ruleChars)) {
-				if (atEndOfLine(file))
+			if (!getRuleCharsText(file, &ruleChars)) return 0;
+			if (atEndOfLine(file))
+				ruleDots.length = ruleDots.chars[0] = 0;
+			else {
+				if (!getRuleDotsText(file, &ruleDots)) return 0;
+				if (ruleDots.length > 0 && ruleDots.chars[0] == '#')
 					ruleDots.length = ruleDots.chars[0] = 0;
-				else {
-					getRuleDotsText(file, &ruleDots);
-					if (ruleDots.chars[0] == '#')
-						ruleDots.length = ruleDots.chars[0] = 0;
-					else if (ruleDots.chars[0] == '\\' && ruleDots.chars[1] == '#')
-						memmove(&ruleDots.chars[0], &ruleDots.chars[1],
-								ruleDots.length-- * CHARSIZE);
+				else if (ruleDots.length > 1 && ruleDots.chars[0] == '\\' &&
+						ruleDots.chars[1] == '#') {
+					ruleDots.length--;
+					memmove(&ruleDots.chars[0], &ruleDots.chars[1],
+							ruleDots.length * CHARSIZE);
 				}
 			}
 			for (int k = 0; k < ruleChars.length; k++)
@@ -4676,7 +4678,9 @@ resolveSubtable(const char *table, const char *base, const char *searchPath) {
 	//
 	// Then search `LOUIS_TABLEPATH`, `dataPath` and `programPath`
 	//
-	if (searchPath[0] != '\0') {
+	// searchPath may be NULL if _lou_getTablePath failed (e.g. because the
+	// data path was too long); the earlier resolution steps still apply.
+	if (searchPath != NULL && searchPath[0] != '\0') {
 		char *dir;
 		int last;
 		char *cp;
@@ -5281,8 +5285,6 @@ lou_getTypeformForEmphClass(const char *tableList, const char *emphClass) {
 	return 0;
 }
 
-static unsigned char *destSpacing = NULL;
-static int sizeDestSpacing = 0;
 static formtype *typebuf = NULL;
 static unsigned int *wordBuffer = NULL;
 static EmphasisInfo *emphasisBuffer = NULL;
@@ -5324,14 +5326,6 @@ _lou_allocMem(AllocBuf buffer, int index, int srcmax, int destmax) {
 		if (emphasisBuffer == NULL) _lou_outOfMemory();
 		return emphasisBuffer;
 
-	case alloc_destSpacing:
-		if (destmax > sizeDestSpacing) {
-			if (destSpacing != NULL) free(destSpacing);
-			destSpacing = malloc(destmax + 4);
-			if (!destSpacing) _lou_outOfMemory();
-			sizeDestSpacing = destmax;
-		}
-		return destSpacing;
 	case alloc_passbuf:
 		if (index < 0 || index >= MAXPASSBUF) {
 			_lou_logMessage(LOU_LOG_FATAL, "Index out of bounds: %d\n", index);
@@ -5423,9 +5417,6 @@ lou_free(void) {
 	if (emphasisBuffer != NULL) free(emphasisBuffer);
 	emphasisBuffer = NULL;
 	sizeTypebuf = 0;
-	if (destSpacing != NULL) free(destSpacing);
-	destSpacing = NULL;
-	sizeDestSpacing = 0;
 	{
 		int k;
 		for (k = 0; k < MAXPASSBUF; k++) {

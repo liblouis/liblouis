@@ -136,12 +136,12 @@ lou_charSize(void);
  * @warning BUFFER OVERFLOW RISK: Caller must ensure that:
  *          - `inlen` does not exceed actual size of `inbuf`
  *          - `typeform` array is NULL or at least `inlen` elements long
- *          - `spacing` is NULL or at least `inlen` elements long
  *          - `outbuf` can hold at least `outlen` elements
  *          Passing incorrect lengths will cause buffer overflows
  *
  * @note `typeform` may be NULL if no typeform checking is needed
- * @note `spacing` may be NULL if no spacing information is to be computed
+ * @note `spacing` is deprecated and must be NULL; any other value is
+ * ignored and a warning is logged
  */
 LIBLOUIS_API
 int EXPORT_CALL

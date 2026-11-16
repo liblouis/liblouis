@@ -12,6 +12,7 @@
 #
 #  Copyright (C) 2021 Ekaterina Anisimova <musicate@yandex.ru>
 #  Copyright (C) 2021-2022 Andrey Yakuboy <braille@yakuboy.ru>
+#  Copyright (C) 2025-2026 Dmitriy Lazarev <dmitriy.braille.numeric674@aleeas.com>
 #
 #  This file is part of liblouis.
 #
@@ -34,8 +35,6 @@
 # Contracted braille isn't used in Russia oficially, and not many people know it.
 # This table was created to make contracted braille more popular.
 # It may be not perfect because there're no data to test it.
-
-# Based on ru-litbrl.ctb which is included at the end of the file
 
 attribute consonant бвгджзйклмнпрстфхцчшщъь
 attribute vowel аеёиоуыэюя
@@ -129,6 +128,7 @@ begword непро 16-12356
 midendword ро 12356
 partword ра 45
 partword ре 2
+partword рё 2
 partword ри 5
 sufword со 2346
 word ы 6-2346
@@ -327,8 +327,6 @@ endword ий 12346
 endword ийся 12346-234
 endword ый 12346
 endword ыйся 12346-234
-endword им 134
-endword имся 134-234
 midword ирова 6-3456
 midword лирова 123-6-3456
 midword мирова 134-6-3456
@@ -449,8 +447,8 @@ word вами 2456-124
 word весь 23456
 word ь 6-23456
 word Ь 6-23456
-always всё 156
 always все 156
+always всё 156
 word ш 6-156
 word Ш 6-156
 word всю 156-1256
@@ -687,6 +685,103 @@ word формально 124-134-2356-126
 word частично 12345-126
 word чрезвычайно 12345-1356-126
 word характерно 125-1235-126
+
+#Table VIII
+
+before muffled begword ис 36
+begword предб 1234-12
+begword предбуд 1234-12
+begword предбывш 1234-12
+begword предв 1234-2456
+begword предво 1234-1236
+begword предвсе 1234-156
+begword предва 1234-3456
+begword предве 1234-23456
+begword предг 1234-1245
+begword предго 1234-12456
+begword предм 1234-134
+begword предмог 1234-134
+begword предме 1234-146
+begword предмож 1234-134
+begword предми 1234-124
+begword предн 1234-1345
+begword предна 1234-345
+begword предне 1234-16
+begword предни 1234-34
+begword предно 1234-126
+begword предност 1234-25
+begword предп 1234-1234
+begword предпо 1234-235
+begword предст 1234-25
+begword предста 1234-25
+begword разб 1235-12
+begword разбуд 1235-12
+begword разг 1235-1245
+begword разго 1235-12456
+begword разе 1235-15
+begword разева 1235-3456
+begword разени 1235-34
+begword разз 1235-1356
+begword раза 1235-356
+begword разл 1235-123
+begword разли 1235-35
+begword разль 1235-2356
+begword разла 1235-4
+begword разле 1235-26
+begword разло 1235-456
+begword разм 1235-134
+begword размог 1235-134
+begword разме 1235-146
+begword размож 1235-134
+begword разми 1235-124
+begword разн 1235-1345
+begword разна 1235-345
+begword разне 1235-16
+begword разни 1235-34
+begword разно 1235-126
+begword разност 1235-25
+begword разр 1235-1235
+begword разра 1235-45
+begword разре 1235-2
+begword разри 1235-5
+begword разро 1235-12356
+begword разя 1235-1246
+begword разявить 1235-1246-23456
+begword разяв 1235-1246
+begword разяви 1235-1246
+begword разявит 1235-1246-2345
+begword разявят 1235-1246-2345
+begword раск 1235-13
+begword раско 1235-1456
+begword раска 1235-346
+begword раскотор 1235-13
+begword раски 1235-246
+begword расп 1235-1234
+begword распо 1235-235
+begword расс 1235-234
+begword расст 1235-25
+begword расста 1235-25
+begword расственн 1235-25-1345
+begword расственност 1235-25-25
+begword расска 1235-346
+begword расски 1235-246
+begword расско 1235-1456
+begword расф 1235-124
+begword расх 1235-125
+begword расхоч 1235-125
+begword расхоте 1235-125
+begword расхоти 1235-125
+begword расхотя 1235-125
+begword расц 1235-14
+begword расч 1235-12345
+begword расче 1235-236
+begword расческ 1235-6-13
+begword расчайш 1235-6-12345
+begword расш 1235-156
+begword расщ 1235-1346
+midword ска 346
+midendword ски 246
+midword ско 1456
 
 # Abbreviations that shouldn't be contracted
 

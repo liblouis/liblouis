@@ -1,0 +1,38 @@
+name: Windows NMAKE
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+    paths:
+      - '**.h'
+      - '**.c'
+      - 'liblouis/liblouis/liblouis.h.in'
+      - 'windows/**.*'
+  pull_request:
+    branches: [ master ]
+    paths:
+      - '**.h'
+      - '**.c'
+      - 'liblouis/liblouis/liblouis.h.in'
+      - 'windows/**.*'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build x64 / UCS4
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+    - name: Setup Visual Studio Command Prompt
+      uses: step-security/msvc-dev-cmd@22c98154b708dbd743e6f27a933cf6ceba3305c4 # v1.13.1
+      with:
+        arch: amd64
+    - name: Run NMAKE
+      run: |
+        cd windows
+        nmake /f Makefile.nmake ARCH=x64 UCS=4

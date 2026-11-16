@@ -46,6 +46,7 @@ EXTRA_DIST =					\
 	en-gb-g1_harness.yaml			\
 	en-gb-comp8.yaml			\
 	en-nabcc.yaml				\
+	en-nz.yaml				\
 	en-ueb.yaml				\
 	en-ueb-g1_backward.yaml			\
 	en-ueb-g1_harness.yaml			\
@@ -84,6 +85,7 @@ EXTRA_DIST =					\
 	he-IL.yaml				\
 	hi_harness.yaml				\
 	hr-8dots_harness.yaml			\
+	ht.yaml				\
 	hu-hu-comp8_harness.yaml		\
 	hu-hu-g1_harness.yaml			\
 	hu-hu-g1-hyph_harness.yaml		\
@@ -108,6 +110,7 @@ EXTRA_DIST =					\
 	lo.yaml					\
 	lt.yaml				\
 	lv_harness.yaml				\
+	mi.yaml					\
 	mk.yaml					\
 	ml.yaml					\
 	mn-MN_harness.yaml			\

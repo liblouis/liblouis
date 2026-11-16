@@ -130,6 +130,18 @@ main(int argc, char **argv)
   setenv ("LOUIS_TABLEPATH", "tables/resolve_table/dir_1", 1);
   ASSERT (lou_getTable ("tables/resolve_table/table_6"));
 
+  // Overlong LOUIS_TABLEPATH: the search path cannot be constructed, but
+  // this must not crash, and full paths must still resolve (see issue #1999)
+  {
+    char longPath[4096];
+    memset (longPath, 'a', sizeof(longPath) - 1);
+    longPath[sizeof(longPath) - 1] = '\0';
+    setenv ("LOUIS_TABLEPATH", longPath, 1);
+    lou_free();  // clear the table cache so resolution actually runs
+    ASSERT (!lou_getTable ("table_1"));
+    ASSERT (lou_getTable ("tables/resolve_table/table_1"));
+  }
+
   lou_free();
 
   return result;

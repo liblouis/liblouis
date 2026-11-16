@@ -1,0 +1,114 @@
+#  Copyright (C) 2024-2025 Seeing Hands <haitianbraille@seeinghands.org>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+#+language:ht
+#+type:literary
+#+contraction:no
+#+dots:6
+#+grade:1
+#+direction:both
+#-index-name: Haitian Creole
+#-display-name: Haitian Creole braille
+#-author: Seeing Hands, Haitian Braille Table Maintainers <haitianbraille@seeinghands.org>
+#-license: LGPLv2.1
+#-updated: 2025-11-27
+
+# Notes
+# -----
+# This Haitian Creole Braille table is primarily based on the French Unified 6-dot Braille table. It
+# shares many character definitions for punctuation, mathematics, and unusual symbols (E.G. Greek
+# letters) with French braille. Some symbols that are commonly used in French are in a sub-table for
+# compatibility with it but are not part of Haitian Creole and may not always be present. See the
+# file ht-frenchcompatibility.uti.
+# As far as we know at Seeing Hands, there exists no official standards body or standard for Haitian
+# Creole Braille. This has been confirmed by the Société Haïtienne d’Aide aux Aveugles
+# (shaa-haiti.org), and so far, no standardization body has been created.
+# This table has been verified by braille readers and teachers who speak and have taught Haitian
+# Creole. If you are aware of any standard or any errors included in this Braille table, please send
+# us an email at haitianbraille@seeinghands.org. # We will continue to maintain this table to fix
+# any problems detected.
+
+include spaces.uti
+
+include latinLetterDef6Dots.uti
+
+# For practical reasons, extra symbols are included to support French texts. See the notes for this
+# include table for more context.
+include ht-frenchcompatibility.uti
+
+# Letters with diacritics used in Haitian Creole
+# Note that these have the same definitions as in French braille
+lowercase \x00e8 2346 # è
+lowercase \x00f2 346 # o accent grave (ò), called o fòs in Haitian Creole
+
+# o fòs has a second, older, braille representation, that is included as well for people typing using this table
+nofor lowercase \x00f2 1456
+
+digit 0 3456
+litdigit        0      3456
+comp6 0 3456
+
+include digits6DotsPlusDot6.uti
+include litdigits6DotsPlusDot6.uti
+
+# Many types of paired brackets without official signs will all use dots 2356. This symbol, by
+# default, will type the mark most often used for quotations in Haitian Creole (« ») known as
+# guillemets. These rules should therefore come before include
+# fr-bfu-comp6-puncs-math.uti.
+
+punctuation « 2356
+punctuation » 2356
+prepunc « 2356
+postpunc » 2356
+
+# Unicode braille
+include braille-patterns.cti
+
+# Punctuation and mathematics
+# (identical to French braille and therefore separated into these two include files)
+include fr-bfu-comp68.cti
+include fr-bfu-comp6-puncs-math.uti
+
+# Capitalization and emphasis
+# (identical to French braille)
+capsletter 46
+begcapsword 46-46
+endcapsword 6-3
+capsmodechars -'./
+emphclass italic
+emphclass underline
+emphclass bold
+begemphword italic 456
+begemphword underline 456
+begemphword bold 456
+endemphword italic 6-3
+endemphword underline 6-3
+endemphword bold 6-3
+begemphphrase italic 25-456
+endemphphrase italic before 456
+lenemphphrase italic 4
+begemphphrase underline 25-456
+endemphphrase underline before 456
+lenemphphrase underline 4
+begemphphrase bold 25-456
+endemphphrase bold before 456
+lenemphphrase bold 4
+noemphchars italic ,\s
+noemphchars underline ,\s
+noemphchars bold ,\s
+

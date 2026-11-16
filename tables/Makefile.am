@@ -123,6 +123,8 @@ table_files = \
 	en_GB.tbl \
 	en-in-g1.ctb \
 	en-nabcc.utb \
+	en-nz-g1.utb \
+	en-nz-g2.ctb \
 	en-ueb-chardefs.uti \
 	en-ueb-g1.ctb \
 	en-ueb-g2.ctb \
@@ -160,6 +162,7 @@ table_files = \
 	fil-g2.ctb \
 	fi.utb \
 	fr-bfu-comp68.cti \
+	fr-bfu-comp6-puncs-math.uti \
 	fr-bfu-comp6.utb \
 	fr-bfu-comp8.utb \
 	fr-bfu-g2.ctb \
@@ -202,6 +205,8 @@ table_files = \
 	hr-g1.ctb \
 	hr-g1.tbl \
 	hr-translation.cti \
+	ht-g1.utb \
+	ht-frenchcompatibility.uti \
 	hu-backtranslate-correction.dis \
 	hu-backtranslate-word-corrections.cti \
 	hu-chardefs.cti \
@@ -357,6 +362,7 @@ table_files = \
 	ru-letters.dis \
 	ru-litbrl.ctb \
 	ru-litbrl-detailed.utb \
+	ru-math.uti \
 	ru-ru-g1.ctb \
 	ru-unicode.dis \
 	rw-rw-g1.utb \

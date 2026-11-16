@@ -50,19 +50,16 @@ noback correct "‏" ?  # Right-to-left mark
 noback correct "‭" ?  # left-to-right override
 noback correct "‮" ?  # Right-to-left override
 
-# In rules below, attribute $x is %vowel, defined in he-common-vowels-ihbc.uti
-# Attribute $y is %extcant, defined in he-common-vowels-ihbc.uti
-
 # character reordering
 ## Move dagesh before nearest preceding consonant
 noback correct [$l]"ּ" "ּ"*
-noback correct [$l$xy.]"ּ" "ּ"*
+noback correct [$l%vowelCant.]"ּ" "ּ"*
 
 ## Move shin and sin dot next to sin/shin consonant
 ## Prerequisite for “always” rule in he-common-consonants.uti
 ## to work with vocalized texts.
-noback correct [$xy.]"ׂ" "ׂ"*
-noback correct [$xy.]"ׁ" "ׁ"*
+noback correct [%vowelCant.]"ׂ" "ׂ"*
+noback correct [%vowelCant.]"ׁ" "ׁ"*
 
 # Contracting dagesh for bet, kaf, pe, and tav
 noback context "ּב" @12
@@ -73,17 +70,24 @@ noback context "ּף" @1234
 noback context "ּת" @1256
 
 # Contracting ultralong vowels (vowel+mater lectionis)
-attribute majCant \x05bc\x05bd
+## Dagesh and meteg complete the vowelCantDagesh union
+attribute vowelCantDagesh \x05bc\x05bd
 
 ## Holam-waw and consonantal waw
-noback pass3 !$xyz[@2456-135a] @246
+noback pass3 !%vowelCantDagesh[@2456-135a] @246
 noback pass3 [@2456-135a]$sp @246
 noback pass3 [@2456-135a]~ @246
 noback pass3 [@135a-2456]%hebLetter @246
 
 ## Shuruq and consonantal waw
+## A dagesh+waw that is followed by a vowel is a consonantal waw with
+## dagesh, not a shuruq. We distinguish the two up front, on the Hebrew
+## "ּו" sequence itself, so that the bare dot pattern 346 is only ever
+## produced for a genuine shuruq. This avoids a later pass rule matching
+## the naked 346 cell, which would also match identical cells produced by
+## other languages when this table is combined with them.
+noback context ["ּו"]%vowel @5a-2456
 noback context "ּו" @346
-noback pass2 [@346]$xy @5a-2456
 
 ## Hiriq Yod
 noback pass3 @24a-245 @35 Hiriq-yod
@@ -92,8 +96,8 @@ noback pass3 @24a-245 @35 Hiriq-yod
 noback pass3 @34a-245 @3456
 
 ## Shin and sin with dagesh
-noback correct ["ש"$xy.]"\x05bc\x05c2" "\x05bc\x05c2"*
-noback correct ["ש"$xy.]"\x05bc\x05c1" "\x05bc\x05c1"*
+noback correct ["ש"%vowelCant.]"\x05bc\x05c2" "\x05bc\x05c2"*
+noback correct ["ש"%vowelCant.]"\x05bc\x05c1" "\x05bc\x05c1"*
 noback always \x05c1\x05e9 146
 noback always \x05c2\x05e9 156
 noback pass2 @146-5a @5a-146
@@ -103,8 +107,10 @@ noback pass2 @156-5a @5a-156
 noback pass3 @5a-125 @45-125
 
 # Back-translation rules
-## dagesh
-nofor pass2 @5[$l] *@5
+## Move the dagesh cell after the following consonant or sin, as
+## virtual dots 5a
+nofor pass2 @5[$l] *@5a
+nofor pass2 @5[@156] *@5a
 
 ## Reverse mappiq
 nofor pass3 @45-125 @5-125
@@ -113,7 +119,8 @@ nofor pass3 @45-125 @5-125
 nofor pass4 @35 @24-245 Hiriq-yod
 
 ## Uncontract tsere-yod
-nofor pass4 $lxy[@3456] @34-245
+nofor pass4 $l[@3456] @34-245
+nofor pass4 %vowelCant[@3456] @34-245
 
 ## Final letters
 nofor correct _$lS"כ"~ "ך"
@@ -140,3 +147,6 @@ nofor correct _$lS"צ"[$S.]~ "ץ"*
 ## Holam-waw and shuruq
 nofor always וּ 346
 nofor always וֹ 246
+
+## Consonantal waw with holam haser for vav (U+05BA)
+nofor always \x05d5\x05ba 2456-135

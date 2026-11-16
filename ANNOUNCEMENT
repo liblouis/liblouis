@@ -1,7 +1,7 @@
-liblouis 3.38.0 has been released
+liblouis 3.39.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.38.0. The release is available for download at:
+3.39.0. The release is available for download at:
 
 https://github.com/liblouis/liblouis/releases
 
@@ -18,12 +18,22 @@ liblouisutdml [2]_ deals with formatting of braille.
 Noteworthy changes in this release
 ==================================
 
-This release is highlighted by a new Norwegian grade 3 contraction
-table, the result of Lars Bjørndal's work implementing the revised
-Braille Authority rules. The Swedish tables have been thoroughly renewed
-and now also cover Sami and Elfdalian. Malayalam has been updated to
-comply with the new Bharati Braille 2026 rules. Several security
-vulnerabilities were fixed, and the documentation was improved.
+A lot of dedicated work by Bue, Tiago, Clive, Leonard, Anthony, Andrey,
+Dimitar, Danil Kostenkov, Dmitriy Lazarev, Christian Comaschi and Seeing
+Hands went into this release, and as always Bert did a lot of the work
+that holds it all together. It adds braille for Haitian Creole and for
+Māori, the latter following the policy of the Braille Authority of New
+Zealand Aotearoa Trust, which also brings new tables for English text in
+New Zealand. The Portuguese grade 1 table has been thoroughly
+overhauled, the English grade 3 table gained more than 5000 new
+hyphenation patterns, and the Russian tables gained mathematical braille
+definitions as well as the last of the grade 1 contractions. The
+Bulgarian, Italian and Biblical Hebrew tables all back-translate
+considerably better than before, and the UEB grade 2 shortforms have
+been cleaned up, which also makes the compiled table smaller. On the
+technical side several memory safety issues were fixed, building with
+clang and MSVC on Windows works again, and the ``spacing`` parameter of
+the translation functions has been deprecated.
 
 I'd like to thank everybody for helping to bring liblouis forward.
 
@@ -33,51 +43,105 @@ issues [3]_.
 Bug fixes
 ---------
 
--  Fix several memory safety issues:
+- Fix several memory safety issues:
 
-   -  a heap-buffer-overflow in ``back_passDoAction`` thanks to Justin
-      Stitt;
-   -  a null pointer dereference in ``pattern_compile_expression``, a
-      buffer overflow in ``_lou_logWidecharBuf``, null pointer
-      dereferences in ``_lou_compileTranslationRule`` and
-      ``_lou_compileDisplayRule``, a segfault in ``lou_compileString``,
-      and missing length validation in ``_lou_backTranslate``, all
-      thanks to FuzzAnything.
+  - an ``output->length`` underflow and buffer overflows in the grouping
+    pass actions, thanks to Kevin Valerio;
+  - a null pointer dereference in ``resolveSubtable`` when the table
+    search path is unavailable, thanks to Anthony Tibbs;
+  - undefined behaviour from incompatible function pointer casts in
+    ``metadata.c``, thanks to Yvonne.
+  - a stack-buffer-overflow in ``compileRule`` when compiling a
+    ``replace`` rule with a malformed dots operand, thanks to Darren
+    Carreras.
 
 Braille table improvements
 --------------------------
 
--  Major renewal of Swedish 6- and 8-dot tables, now reorganized to
-   share common data. New tables for Sami and Elfdalian are also
-   included, thanks to InsynScandinavia.
--  Updated Malayalam table with Bharati Braille 2026 rules, thanks to
-   Jake Kyle.
--  Improvements to Hungarian forward and backward translation thanks to
-   Attila Hammer.
--  Fix UK Grade 2 back-translation incorrectly expanding letter
-   combinations such as ``bl`` and ``ac`` when they appear in the middle
-   of a word, thanks to Kara Louise.
--  Fix a long-standing typo with ``begnum mt`` in all 5 Danish Grade 2
-   tables, thanks to Bue Vester-Andersen.
--  Add a Norwegian table for Spanish text (``es-no.utb``), thanks to
-   Bert Frees.
--  Add a Norwegian grade 3 contraction table implementing the revised
-   Braille Authority rules, along with missing grade 2 contractions and
-   minor fixes, thanks to Lars Bjørndal and Hans Anton Ålien.
--  Replace Estonian computer braille table ``et.ctb`` with the newer
-   ``et-g0.utb``, thanks to Taniel Kirikal and Bert Frees.
+- Add Russian mathematical braille definitions in ``ru-math.uti``,
+  following the Russian "System of Symbols for Math, Physics, Chemistry,
+  and Astronomy" (Bykov et al., 1982), thanks to Danil Kostenkov and
+  Andrey Yakuboy.
+- Complete the Russian grade 1 contracted table with the optional
+  contractions of Table VIII and additional ё combinations, thanks to
+  Dmitriy Lazarev.
+- Add a Haitian Creole uncontracted table, thanks to Seeing Hands. The
+  punctuation and mathematics rules it shares with French are factored
+  out into ``fr-bfu-comp6-puncs-math.uti``.
+- Implement the policy of the Braille Authority of New Zealand Aotearoa
+  Trust for Māori text, thanks to Clive Lansink and James Bowden.
+- General update of the Portuguese grade 1 table, thanks to Tiago Casal.
+  Many back-translation fixes, 6-dot computer braille, Unicode braille,
+  and support for Greek, Russian, Hebrew and Esperanto letters, along
+  with a large number of new mathematical and currency symbols.
+- Improvements to the English grade 3 table, thanks to Bue
+  Vester-Andersen.
+- Fixes to the Thai tables, thanks to Christian Egli: the
+  ``AfterAeSpell`` swap in ``th-g2.ctb`` was missing the dot pattern for
+  ง, and an unused ``swapdd`` rule in ``th-g1.uti`` used a multi-cell
+  dot pattern in its search operand, which is not allowed.
+- New forward and backward exceptions for Hungarian braille input,
+  thanks to Attila Hammer.
+- Improvements to the back-translation of the Biblical Hebrew tables,
+  thanks to Leonard de Ruijter.
+- Fixes to the UEB grade 2 table, thanks to Anthony Tibbs:
+
+  - the back-translation rule for ``whereabouts's`` was missing the
+    apostrophe;
+  - the redundant shortform ``match`` rules are replaced by
+    bidirectional ``word`` rules, which reduces the size of the compiled
+    table;
+  - the combining macron has the correct dot pattern.
+
+- Fixes to the back-translation rules in the Italian 6-dot and 8-dot
+  tables, thanks to Christian Comaschi.
+- Minor fixes to the Norwegian tables, thanks to Lars Bjørndal.
+- Expand Russian mathematical Braille, using the Russian mathematical
+  notation system and publication guidelines as references. Mathematical
+  multi-cell symbols are forward-only to preserve reliable literary
+  back-translation.
+- Improvements to Bulgarian back-translation and new symbols thanks to
+  Dimitar Dimitrov
+
+  - bare cells back-translate as Bulgarian letters;
+  - cells after the number sign back-translate as digits;
+  - numeric operators are handled in numeric context: +, ,, -, \*, /, =,
+    ×, ÷, and trailing 1.;
+  - / is dots 34;
+  - –, —, and • are dots 6-36, with back-translation preferring –;
+  - № no longer emits a trailing blank cell;
+  - forward mappings are added for the wider Bulgarian Braille-viewer
+    symbol set, including math, set notation, currencies, chess symbols,
+    and Greek letters.
 
 Other changes
 -------------
 
--  Updated documentation to clarify the differences between ``digit``,
-   ``litdigit`` and ``numsign`` opcodes, thanks to Anthony Tibbs.
+- Fix building with clang and MSVC on Windows, thanks to André
+  Polykanine, and use the native Windows directory API under MinGW too,
+  thanks to Sihu Hwang.
+
+Deprecation notice
+------------------
+
+- The ``spacing`` parameter of ``lou_translate``,
+  ``lou_translateString``, ``lou_backTranslate`` and
+  ``lou_backTranslateString`` is deprecated. It never worked reliably
+  and has no known users. Pass ``NULL`` instead. API and ABI
+  compatibility are preserved. Thanks to Anthony Tibbs.
 
 Backwards incompatible changes
 ------------------------------
 
--  The table compiler now rejects uppercase virtual dots (``A``..~F~);
-   only the lowercase forms (``a``..~f~) are valid as documented.
+Invisible changes
+-----------------
+
+- Silence compiler warnings, thanks to Klaus Rettinghaus.
+- More test cases for the German grade 2 contraction dictionary, thanks
+  to Marcel Fichtner.
+- The docker images are based on debian:bookworm instead of
+  debian:bullseye, thanks to Attila Hammer.
+- Add a workflow for NMAKE, thanks to Leonard de Ruijter.
 
 New, renamed or removed tables
 ------------------------------
@@ -85,44 +149,27 @@ New, renamed or removed tables
 New
 ~~~
 
--  ``es-no.utb``
--  ``ovd-6g0.utb``
--  ``ovd-8g0.utb``
--  ``smi-6g0.utb``
--  ``smi-8g0.utb``
--  ``sv-6common.uti``
--  ``sv-6g0d.utb``
--  ``sv-6g0p.utb``
--  ``sv-6g1.uti``
--  ``sv-6g1d.ctb``
--  ``sv-6g2.uti``
--  ``sv-6g2d.ctb``
--  ``sv-8g0d.utb``
--  ``sv-8g0n.utb``
--  ``sv-8g1.uti``
--  ``sv-8g1d.ctb``
--  ``sv-8g1n.ctb``
--  ``sv-8g2.uti``
--  ``sv-8g2d.ctb``
--  ``sv-8g2n.ctb``
--  ``sv-phon.uti``
+- ``en-nz-g1.utb``
+- ``en-nz-g2.ctb``
+- ``fr-bfu-comp6-puncs-math.uti``
+- ``ht-frenchcompatibility.uti``
+- ``ht-g1.utb``
+- ``ru-math.uti``
 
 Renamed
 ~~~~~~~
 
--  None
+- None
 
 Removed
 ~~~~~~~
 
--  ``et.ctb``
-
-   -  use ``et-g0.utb`` instead
+- None
 
 Next release
 ============
 
-The next release will be published on August 31 2026 so please keep up
+The next release will be published on November 30 2026 so please keep up
 the excellent work and keep those improvements coming.
 
 Share and Enjoy!
@@ -139,4 +186,4 @@ Footnotes
    https://github.com/liblouis/liblouisutdml
 
 .. [3]
-   https://github.com/liblouis/liblouis/milestone/48?closed=1
+   https://github.com/liblouis/liblouis/milestone/49?closed=1

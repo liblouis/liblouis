@@ -23,6 +23,7 @@ getTable_SOURCES = getTable.c
 hash_collision_SOURCES = hash_collision.c
 hyphenate_xxx_SOURCES = hyphenate_xxx.c
 logging_SOURCES = logging.c
+malformedTables_SOURCES = malformedTables.c
 resolve_table_SOURCES = resolve_table.c
 typeform_SOURCES = typeform.c
 typeform_for_emphclass_SOURCES = typeform_for_emphclass.c
@@ -41,6 +42,7 @@ program_TESTS =					\
 	hash_collision				\
 	hyphenate_xxx				\
 	logging					\
+	malformedTables				\
 	resolve_table				\
 	typeform				\
 	typeform_for_emphclass			\
@@ -104,6 +106,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/en-gb-g1_harness.yaml		  \
 	braille-specs/en-gb-comp8.yaml			  \
 	braille-specs/en-nabcc.yaml			  \
+	braille-specs/en-nz.yaml			  \
 	braille-specs/en-ueb.yaml	  		  \
 	braille-specs/en-ueb-g1_backward.yaml		  \
 	braille-specs/en-ueb-g1_harness.yaml		  \
@@ -141,6 +144,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/he-IL.yaml			  \
 	braille-specs/hi_harness.yaml			  \
 	braille-specs/hr-8dots_harness.yaml		  \
+	braille-specs/ht.yaml				  \
 	braille-specs/hu-hu-comp8_harness.yaml		  \
 	braille-specs/hu-hu-g1_harness.yaml		  \
 	braille-specs/hu-hu-g1_braille_input_backward.yaml\
@@ -163,6 +167,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/lo.yaml				  \
 	braille-specs/lt.yaml				  \
 	braille-specs/lv_harness.yaml			  \
+	braille-specs/mi.yaml				  \
 	braille-specs/mk.yaml				  \
 	braille-specs/ml.yaml				  \
 	braille-specs/mn-MN_harness.yaml		  \

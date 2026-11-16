@@ -1,6 +1,7 @@
 # Regression test for an issue that was fixed in https://github.com/liblouis/liblouis/pull/492.
 # Tests the '=' operand with compbrlAtCursor mode active.
 
+display: tables/text_nabcc.dis
 table: |
   include tables/latinLetterDef6Dots.uti
   begword pilis 1234-24-123-24-234

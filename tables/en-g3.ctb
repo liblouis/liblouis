@@ -1,6 +1,7 @@
 # liblouis: English, Grade 3 table
 #
 # Copyright (C) 2020-2026, Bue Vester-Andersen <bue@vester-andersen.dk>
+# Copyright (C) 2026, Dima (Daredevilsprmcy) <dlazarev86@gmail.com>
 # Copyright (C) 1995-2004 by The BRLTTY Team.
 # Copyright (C) 2004 ViewPlus Technologies, Inc., www.viewplustech.com
 # Copyright (C) 2004 Computers to Help People, Inc., www.chpi.org
@@ -305,29 +306,29 @@ always ¥ 4-13456 yen
 always µ 2-134 mu
 
 # special character sequences
-literal :// URLs
-literal www.
+compbrl :// URLs
+compbrl www.
 
-literal .com
-literal .edu
-literal .gov
-literal .mil
-literal .net
-literal .org
-literal .doc
+compbrl .com
+compbrl .edu
+compbrl .gov
+compbrl .mil
+compbrl .net
+compbrl .org
+compbrl .doc
 compbrl .xml
 compbrl .xsl
-literal .htm
-literal .html
-literal .tex
-literal .txt
-literal .gif
-literal .jpg
-literal .png
-literal .wav
-literal .tar
-literal .zip
-literal .uk
+compbrl .htm
+compbrl .html
+compbrl .tex
+compbrl .txt
+compbrl .gif
+compbrl .jpg
+compbrl .png
+compbrl .wav
+compbrl .tar
+compbrl .zip
+compbrl .uk
 
 # include countries.cti
 
@@ -382,6 +383,30 @@ match - 48 (%[^])|(!%[#])|(%[#]%[#])+ 236
 match - 49 (%[^])|(!%[#])|(%[#]%[#])+ 35
 match - 50 (%[^])|(!%[#])|(%[#]%[#])+ 356
 
+# Extended number contractions
+# Normally, only the numbers 11-50 are contracted using this 
+# technique. However, it is also possible to contract the numbers# 51-63, although the patterns for these are less obvious.
+# If you want to use the contractions for the numbers 51-63,
+# you can uncomment the following lines.
+
+# Note that these rules are tested in en-g3.yaml, which includes them after including en-g3.ctb
+
+# match - 51 (%[^])|(!%[#])|(%[#]%[#])+ 34
+# match - 52 (%[^])|(!%[#])|(%[#]%[#])+ 346
+# match - 53 (%[^])|(!%[#])|(%[#]%[#])+ 3456
+# match - 54 (%[^])|(!%[#])|(%[#]%[#])+ 345
+# match - 55 (%[^])|(!%[#])|(%[#]%[#])+ 3
+# match - 56 (%[^])|(!%[#])|(%[#]%[#])+ 36
+# match - 57 (%[^])|(!%[#])|(%[#]%[#])+ 4
+# match - 58 (%[^])|(!%[#])|(%[#]%[#])+ 45
+# match - 59 (%[^])|(!%[#])|(%[#]%[#])+ 456
+# match - 60 (%[^])|(!%[#])|(%[#]%[#])+ 5
+# match - 61 (%[^])|(!%[#])|(%[#]%[#])+ 46
+# match - 62 (%[^])|(!%[#])|(%[#]%[#])+ 56
+# match - 63 (%[^])|(!%[#])|(%[#]%[#])+ 6
+
+# End of commented section
+ 
  # Fractions
 punctuation \x00bc 3456-1-256 VULGAR FRACTION ONE QUARTER
 punctuation \x00bd 3456-1-23 VULGAR FRACTION ONE HALF
@@ -564,16 +589,16 @@ word bear 249-45-12-1249
 nocross always bear 349-45-12
 joinword become 249-5-23-1249
 word become 249-5-23-1249
-nocross always become 349-5-23
+nocross begmidword become 349-5-23
 joinword beginning 249-4-23-1249
 word beginning 249-4-23-1249
-nocross always beginning 349-4-23
+nocross begmidword beginning 349-4-23
 joinword believe 249-45-23-1249
 word believe 249-45-23-1249
 nocross always believe 349-45-23
 joinword belong 249-456-23-1249
 word belong 249-456-23-1249
-nocross always belong 349-456-23
+nocross begmidword belong 349-456-23
 joinword better 249-4-12-1249
 word better 249-4-12-1249
 nocross always better 349-4-12
@@ -764,6 +789,7 @@ nocross always gone 349-456-1245
 joinword great 249-45-2356-1249
 word great 249-45-2356-1249
 nocross always great 349-45-2356
+nocross endword great 1245-1235-2345
 
 # H
 joinword had 249-456-125-1249
@@ -1026,8 +1052,8 @@ nocross always regular 349-456-1235
 joinword represent 249-4-1235-1249
 word represent 249-4-1235-1249
 nocross always represent 349-4-1235
-joinword right 249-5-1235-1249
 nocross always representa 349-4-1235 # For representative etc.
+joinword right 249-5-1235-1249
 word right 249-5-1235-1249
 nocross always right 349-5-1235
 
@@ -1107,7 +1133,7 @@ nocross always strong 349-456-34
 # T
 joinword than 249-4-1456-1249
 word than 249-4-1456-1249
-nocross always than 349-4-1456
+nocross always than 249-4-1456
 joinword their 249-456-2346-1249
 word their 249-456-2346-1249
 nocross always their 349-456-2346
@@ -1128,7 +1154,6 @@ word thing 249-45-3-1249
 # nocross always thing 349-45-3
 joinword things 249-456-3-1249
 word things 249-456-3-1249
-nocross always things 349-456-3
 joinword those 249-45-1456-1249
 word those 249-45-1456-1249
 nocross always those 349-45-1456
@@ -1158,7 +1183,6 @@ word true 249-4-2345-1249
 nocross always true 349-4-2345
 joinword truly 249-456-2345-1249
 word truly 249-456-2345-1249
-nocross always truly 349-456-2345
 joinword two 249-456-235-1249
 word two 249-456-235-1249
 nocross always two 349-456-235
@@ -1206,7 +1230,7 @@ word while 249-456-1246-1249
 nocross always while 349-456-1246
 joinword who 249-4-156-1249
 word who 249-4-156-1249
-nocross always who 349-4-156
+#nocross always who 349-4-156
 joinword whole 249-456-156-1249
 word whole 249-456-156-1249
 nocross always whole 349-456-156
@@ -1265,202 +1289,353 @@ word your 249-456-13456-1249
 ### Word contractions with two or more letters ###
 # It is not clear which of these may appear as partwords.
 # If a contraction could be used as a partword (e.g. "whereabouts),
-#it is entered as "nocross always".
+#it is entered both as word and as "nocross always".
 # This section also contains derived words
 # from word signs. These contractions are 
 # not in themselves treated as word signs.
+word about 1-12
 nocross always about 1-12
 word above 1-12-1236
+word according 1-14
 nocross always according 1-14
+word account 1-14-14
 nocross always account 1-14-14
+word accounted 1-14-14-1246
+nocross always accounted 1-14-14-1246
+word accounting 1-14-14-346
+nocross always accounting 1-14-14-346
+word acknowledge 1-14-13
 nocross always acknowledge 1-14-13
+word acknowledged 1-14-13-145
+nocross always acknowledged 1-14-13-145
+word acknowledging 1-14-13-1245
 nocross always acknowledging 1-14-13-1245
+word acknowledgment 1-14-13-56-2345
 nocross always acknowledgment 1-14-13-56-2345
 word across 1-14-1235
+word after 1-124
 nocross always after 1-124
+word afternoon 1-124-1345
 nocross always afternoon 1-124-1345
+word afterward 1-124-2456
 nocross always afterward 1-124-2456
 word again 1-1245
 word against 1-1245-34
+nocross always against 1-1245-34
+word agree 1-1245-1235
 nocross always agree 1-1245-1235
+word agreeable 1-1245-1235-3456
 nocross always agreeable 1-1245-1235-3456
 word almost 1-123-134
 word already 1-123-1235
+word also 1-123
 nocross always also 1-123
 word although 1-123-1456
 word altogether 1-123-2345
 word always 1-123-2456
+word answer 1-1345-234
 nocross always answer 1-1345-234
+word anxious 1-1345-1346
 nocross always anxious 1-1345-1346
 word anymore 349-4-12346-134
 word because 1349-23-14
+word becoming 349-5-23-1245
 nocross always becoming 349-5-23-1245
 word before 1349-23-124
 word behind 1349-23-125
+word believing 349-45-23-1245
 nocross always believing 349-45-23-1245
 nocross always believa 349-45-23 # Believable etc.
+word below 23-123
 nocross always below 23-123
 word beneath 1349-23-1345
+word beside 1349-23-234
 nocross always beside 1349-23-234
+word best 12-34
 nocross always best 12-34
+word between 1349-23-2345
 nocross always between 1349-23-2345
 word beyond 1349-23-13456
+word blind 12-123
 nocross always blind 12-123
+word book 12-13
 nocross always book 12-13
+word both 12-1456
 nocross always both 12-1456
 word braille 12-1235-123
+nocross always braille 12-1235-123
+word business 12-56-234
 nocross always business 12-56-234
+word changing 349-4-16-1245
 nocross always changing 349-4-16-1245
+word charging 349-456-16-1245
 nocross always charging 349-456-16-1245
+word children 16-1345
 nocross always children 16-1345
+word church 16-16
 nocross always church 16-16
 word city 14-56-13456
+word conceive 1349-25-14-1236
 nocross always conceive 1349-25-14-1236
 nocross always conceiva 1349-25-14-1236 # conceivable etc.
+word conceiving 1349-25-14-1236-1245
 nocross always conceiving 1349-25-14-1236-1245
+word continuing 349-456-25-1245
 nocross always continuing 349-456-25-1245
+word could 14-145
 nocross always could 14-145
 contraction cd
 word coursing 349-4-14-1245
+word deceive 145-14-1236
 nocross always deceive 145-14-1236
+nocross always deceiva 1349-145-14-1236 # deceivable etc.
+word deceiving 145-14-1236-1245
 nocross always deceiving 145-14-1236-1245
+word difficult 145-235-14
 nocross always difficult 145-235-14
 word either 15-24
+word enclosing 349-456-26-1245
 nocross always enclosing 349-456-26-1245
 word evermore 349-5-15-134
 word everybody 15-12-145-13456
 word everything 15-1456-346
+word exampling 349-456-1346-1245
 nocross always exampling 349-456-1346-1245
+word exceeding 1346-145-346
 nocross always exceeding 1346-145-346
+word faith 124-1456
 nocross always faith 124-1456
+word few 124-2456
 nocross always few 124-2456
 word five 124-1236
 nocross always five 124-1236
+word forward 123456-2456
 nocross always forward 123456-2456
+word friend 124-1235
 nocross always friend 124-1235
 contraction fr
+word frequent 124-1235-12345
 nocross always frequent 124-1235-12345
+contraction frq
 nocross midendword full 124-456
 word furthermore 124-136-1235-2346-1235-134
+word general 1245-26
 nocross always general 1245-26
+word get 1245-2345
 nocross always get 1245-2345
+word getting 1245-356-346
 nocross always getting 1245-356-346
+word glory 1245-123
 nocross always glory 1245-123
+word good 1245-145
 nocross always good 1245-145
+word govern 1245-135-1236
 nocross always govern 1245-135-1236
+word grace 1245-1235
 nocross always grace 1245-1235
+word help 125-123-1234
 nocross always help 125-123-1234
 word hers 125-12456-234
 word herself 125-12456-124
 word him 125-134
 word himself 125-134-124
+word holy 125-123
 nocross always holy 125-123
+word home 125-134-15
 nocross always home 125-134-15
+word homes 125-134-1356
 nocross always homes 125-134-1356
+word hope 125-1234-15
 nocross always hope 125-1234-15
+word hoped 125-1234-1246
 nocross always hoped 125-1234-1246
+word hopes 125-1234-1356
 nocross always hopes 125-1234-1356
+word hoping 125-1234-1245
 nocross always hoping 125-1234-1245
+word housing 349-5-236-1245
 nocross always housing 349-5-236-1245
+word immediate 24-134-134
 nocross always immediate 24-134-134
+word important 5-24-1345-2345
 nocross always important 5-24-1345-2345
+word improving 349-456-24-1245
 nocross always improving 349-456-24-1245
+word inclosing 349-456-26-1245
 nocross always inclosing 349-456-26-1245
+word indeed 35-145
 nocross always indeed 35-145
 word its 1346-234
 word itself 1346-124
+word judging 349-45-245-1245
 nocross always judging 349-45-245-1245
+word justice 245-36
 nocross always justice 245-36
+word justly 245-45
 nocross always justly 245-45
+word leaving 349-45-1236-1245
 nocross always leaving 349-45-1236-1245
+word let 123-2345
 nocross always let 123-2345
+word letter 123-1235
 nocross always letter 123-1235
+word letting 123-356-346
 nocross always letting 123-356-346
+word likely 123-45
 nocross always likely 123-45
+word likewise 123-2456-156
 nocross always likewise 123-2456-156
+word little 123-123
 nocross always little 123-123
+word littling 123-123-1245
+nocross always littling 123-123-1245
+word living 349-4-1236-1245
 nocross always living 349-4-1236-1245
+word look 123-13
 nocross always look 123-13
+word loving 349-5-1236-1245
 nocross always loving 349-5-1236-1245
+word makes 134-13-1356
 nocross always makes 134-13-1356
+word making 134-13-346
 nocross always making 134-13-346
+word member 134-134
 nocross always member 134-134
-#nocross always mighty 134-126-56
 word moreover 134-135
+word much 134-16
 nocross always much 134-16
+word must 134-34
 nocross always must 134-34
+word myself 134-13456-124
 nocross always myself 134-13456-124
 word naming 349-5-1345-1245
+nocross always naming 349-5-1345-1245
+word necessarily 1345-15-14-45
 nocross always necessarily 1345-15-14-45
+word necessary 1345-15-14
 nocross always necessary 1345-15-14
+word neither 1345-15-24
 nocross always neither 1345-15-24
+word nevertheless 456-1345-46
 nocross always nevertheless 456-1345-46
+word new 1345-2456
 nocross always new 1345-2456
 word nor 1345-1235
+word north 1345-1235-1456
 nocross always north 1345-1235-1456
+word note 1345-356
 nocross always note 1345-356
+word notes 1345-2345-1356
 nocross always notes 1345-2345-1356
 word notwithstanding 1345-346
 word o'clock 135-3-14
+word once 135-36
 nocross always once 135-36
+word oneself 5-135-124
 nocross always oneself 5-135-124
+word only 135-45
 nocross always only 135-45
 nocross always ouncing 45-1256-1245
+word ourselves 1256-1235-1236-234
 nocross always ourselves 1256-1235-1236-234
+word paid 1234-145
 nocross always paid 1234-145
+word particular 5-1234-1235
 nocross always particular 5-1234-1235
+word perceive 1234-12456-14-1236
 nocross always perceive 1234-12456-14-1236
+nocross always perceiva 1234-12456-14-1236
+word perceiving 1234-12456-14-1236-1245
 nocross always perceiving 1234-12456-14-1236-1245
+word perhaps 1234-12456-125
 nocross always perhaps 1234-12456-125
 word peoples 1234-234
 word pity 1234-56-13456
+word pleasing 349-45-1234-1245
 nocross always pleasing 349-45-1234-1245
+word possible 1234-3456
 nocross always possible 1234-3456
+word possibly 1234-46-13456
 nocross always possibly 1234-46-13456
+word present 4-1234-234
 nocross always present 4-1234-234
+word prevent 4-1234-1236
 nocross always prevent 4-1234-1236
+word probable 456-1234-3456
 nocross always probable 456-1234-3456
-nocross always probably 456-1234-46-13456
+word probably 456-1234-46-13456
+word put 1234-2345
 nocross always put 1234-2345
+word putting 1234-356-346
 nocross always putting 1234-356-346
+word receive 1235-14-1236
 nocross always receive 1235-14-1236
+nocross always receiva 1235-14-1236
+word receiving 1235-14-1236-1245
 nocross always receiving 1235-14-1236-1245
+word receiver 1235-14-1236-1235
 nocross always receiver 1235-14-1236-1235
+word rejoice 1235-245-14
 nocross always rejoice 1235-245-14
+word rejoicing 1235-245-14-1245
 nocross always rejoicing 1235-245-14-1245
-nocross always rule 1235-12345
-word ruled 1235-123-1246
-word rules 1235-123-1356
-nocross always ruling 1235-12345-1245
+word rule 1235-12345 # Aparrently only this form is contracted
+# nocross always rule 1235-12345
+word said 234-145
 nocross always said 234-145
+word seven 234-1236-26
 nocross always seven 234-1236-26
+word should 146-145
 nocross always should 146-145
+word sideward 4-1356-2456
 nocross always sideward 4-1356-2456
+word siding 349-4-1356-1245
 nocross always siding 349-4-1356-1245
+word sign 234-1245-1345
 nocross always sign 234-1245-1345
 nocross begmidword signa 234-1245-1345
+word six 234-1346
 nocross always six 234-1346
+word somebody 234-12-145-13456
 nocross always somebody 234-12-145-13456
+word somehow 234-125-246
 nocross always somehow 234-125-246
+word someone 234-5-135
+word sons 234-1345-234
 nocross always someone 234-5-135
+word something 234-1456-346
 nocross always something 234-1456-346
+word sometimes 234-2345-234
 nocross always sometimes 234-2345-234
+word somewhat 234-1246
 nocross always somewhat 234-1246
+word somewhere 234-5-156
 nocross always somewhere 234-5-156
 word son 234-1345
+word subject 234-12-245-14-2345
 nocross always subject 234-12-245-14-2345
-nocross always subjective 234-12-245-14-2345-1236
+nocross always subjecta 234-12-245-14-2345
+nocross always subjecti 234-12-245-14-2345
+word such 234-16
 nocross always such 234-16
+word suggest 234-2356-34
 nocross always suggest 234-2356-34
+nocross always suggesta 234-2356-34
 nocross always suggesti 234-2356-34
+word surely 234-136-45
 nocross always surely 234-136-45
-nocross always themselves 126-1236-234
+word themselves 126-1236-234
+word therefore 2346-124
 nocross always therefore 2346-124
+word think 1456-13
 nocross always think 1456-13
+nocross always thinka 1456-13
 word three 1456-1235
 nocross always three 1456-1235
+word thus 1456-234
 nocross always thus 1456-234
-nocross always thyself 1456-13456-124
+word thyself 1456-13456-124
+word timing 349-5-2345-1245
 nocross always timing 349-5-2345-1245
 sufword to-day 2345-135-36-145
 sufword to-morrow 2345-135-36-134
@@ -1469,29 +1644,51 @@ nocross always today 2345-145
 nocross always tomorrow 2345-134
 contraction tm
 nocross always tonight 2345-1345
+word took 2345-13
 nocross always took 2345-13
+word trust 2345-1235-34
 nocross always trust 2345-1235-34
+word truth 2345-1235-1456
 nocross always truth 2345-1235-1456
+word turn 2345-1235-1345
 nocross always turn 2345-1235-1345
 word undo 346-145
+word unjust 346-245
 nocross always unjust 346-245
+word unless 346-46
 nocross always unless 346-46-234
+word unlike 346-123
 nocross always unlike 346-123
 word until 346-2345
+word valuable 1236-123-3456
+nocross always valuable 1236-123-3456
+word value 1236-123
 nocross always value 1236-123
+word valuing 1236-123-1245
 nocross always valuing 1236-123-1245
+word various 1236-345
 nocross always various 1236-345
-nocross always variously 1236-345-45
+word west 2456-34
 nocross always west 2456-34
+word whatever 1246-5-15
 nocross always whatever 1246-5-15
+word whatsoever 1246-234-135-5-15
 nocross always whatsoever 1246-234-135-5-15
+word wherefore 156-124
 nocross always wherefore 156-124
+word wherever 156-1235
 nocross always wherever 156-1235
+word whichever 156-5-15
 nocross always whichever 156-5-15
+word whom 156-134
 nocross always whom 156-134
+word woman 2456-134-1345
 nocross always woman 2456-134-1345
+word women 2456-134-26
 nocross always women 2456-134-26
+word would 2456-145
 nocross always would 2456-145
+word yesterday 13456-145
 nocross always yesterday 13456-145
 word yours 13456-1235-234
 word yourself 13456-1235-124
@@ -1757,7 +1954,7 @@ nocross midword oa 45
 nocross midword oe 45
 #nocross midendword oge 2356
 nocross midword oi 45
-nocross always ong 56-1245
+nocross midendword ong 56-1245
 nocross begmidword origina 349-4-346
 nocross midword oo 45
 #nocross midendword ose 156

@@ -1,62 +1,65 @@
-#mao#1#Maori Uncontracted#
-# liblouis: Maori Braille Table
+# liblouis: Unified English Braille Code New Zealand Māori (Grade 1)
 #
-# -----------
-#-index-name: Maori
-#-display-name: Maori braille
-#
+#-index-name: Māori
+#-display-name: Māori braille
 #+language:mi
 #+type:literary
 #+contraction:no
 #+grade:1
+#+system:ubc-nz
 #
-# TODO: Please correct the metadata above. It is not meant to be
-# accurate nor complete. It hasn't been verified by the table
-# author yet. It is merely an attempt by the liblouis maintainers
-# to get some sensible initial values in place.
+# This table implements the policy of the Braille Authority of New
+# Zealand Aotearoa Trust relating to translating words in the Māori
+# language into braille, (see
+# https://www.banzat.org.nz/documents/BANZATPolicy8TranscribingMaoriTextInBraille.docx
+# ). This table is for converting Māori text into grade 1 braille,
+# noting that Māori is the indigenous language of New Zealand and
+# currently has no grade 2 braille code.
 #
-# TODO: Please add a reference to official documentation about
-# the implemented braille code. Preferably submit the documents
-# to https://github.com/liblouis/braille-specs.
-# -----------
+#  This file is part of liblouis.
 #
-# Based on World Braille Usage 2013
-# <http://liblouis.io/braille-specs/world-braille-usage-third-edition.pdf>.
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
 #
-# Copyright (C) 2014, Greg Kearney, gkearney@gmail.com
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
 #
-# This file is part of liblouis.
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
 #
-# liblouis is free software: you can redistribute it and/or modify it
-# under the terms of the GNU Lesser General Public License as
-# published by the Free Software Foundation, either version 2.1 of
-# the License, or (at your option) any later version.
-#
-# liblouis is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-# Lesser General Public License for more details.
-#
-# You should have received a copy of the GNU Lesser General Public
-# License along with liblouis. If not, see
-# <http://www.gnu.org/licenses/>.
+#-maintainer: James Bowden <james.bowden@rnib.org.uk>
+#-author: Clive Lansink <clive@aicomms.co.nz>
 
-#include text_nabcc.dis All display opcodes
+include text_nabcc.dis
 
-include en-ueb-g1.ctb
+# Here I implement symbol 456 as the macron prefix indicating vowel macrons.
+lowercase \x0101 456-1 ā
+lowercase \x0113 456-15 ē
+lowercase \x012b 456-24 ī
+lowercase \x014d 456-135 ō
+lowercase \x016b 456-136 ū
 
-# Maori specific
+# The uppercase mappings are included as standard
 
-always	ng	1345-1245
+# The following implements the combining macron character, Unicode
+# 0x0304, which adds a macron to the character it follows. For capital
+# letters with macrons, UEB requires the capitalisation indicator to
+# come before the macron prefix. But I understand that when processing
+# macrons indicated by this combining macron character, Lib Louis has
+# a known limitation in that it applies the capitalisation indicator
+# after the macron prefix. Also Lib Louis seems to incorrectly treat
+# the combining macron character as terminating any existing
+# capitalisation.
+sign \x0304 456 ̄
+
+# Implement translation of wh. This is regarded as a single letter in
+# the Māori language so this translation applies even in grade 1.
 always	wh	156
-lowercase	ā	456-1
-lowercase	ē	456-15
-lowercase	ī	456-24
-lowercase	ō	456-135
-lowercase	ū	456-136
 
-base uppercase	Ā ā
-base uppercase	Ē ē
-base uppercase	Ī ī
-base uppercase	Ō ō
-base uppercase	Ū ū
+# For everything else, fall back to normal UEB grade 1 translation. 
+include en-ueb-g1.ctb
