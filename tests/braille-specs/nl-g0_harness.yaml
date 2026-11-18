@@ -587,6 +587,117 @@ tests:
   - [Jäger. Händel is jäger., ⠨⠚⠜⠛⠑⠗⠲ ⠨⠓⠜⠝⠙⠑⠇ ⠊⠎ ⠚⠜⠛⠑⠗⠲]
   - [info@braille.nl, ⠊⠝⠋⠕⠜⠃⠗⠁⠊⠇⠇⠑⠲⠝⠇]
 
+# Examples from the 2019 standard
+#
+# «Braillestandaard voor algemeen gebruik in het Nederlandse taalgebied, versie 2019»
+# by Braille Autoriteit (https://braille-autoriteit.org/versie-2019-van-zespunts-standaard/)
+# The section of the standard is given for each example.
+flags: {testmode: bothDirections}
+tests:
+  # §2.5 Asterisk/sterretje
+  - ['De stern*2 was nog jong.', '⠨⠙⠑ ⠎⠞⠑⠗⠝⠔⠼⠃ ⠺⠁⠎ ⠝⠕⠛ ⠚⠕⠝⠛⠲']
+  - ['3*lang zal hij leven*', '⠼⠉⠔⠇⠁⠝⠛ ⠵⠁⠇ ⠓⠊⠚ ⠇⠑⠧⠑⠝⠔']
+  - ['7*st. av., 1 omslag, 3 st. samen av., 1 omslag*', '⠼⠛⠔⠎⠞⠲ ⠁⠧⠲⠂ ⠼⠁ ⠕⠍⠎⠇⠁⠛⠂ ⠼⠉ ⠎⠞⠲ ⠎⠁⠍⠑⠝ ⠁⠧⠲⠂ ⠼⠁ ⠕⠍⠎⠇⠁⠛⠔']
+  # §2.6 Beklemtoonde klinkers
+  - ['Ik zeg het maar één keer.', '⠨⠊⠅ ⠵⠑⠛ ⠓⠑⠞ ⠍⠁⠁⠗ ⠿⠿⠝ ⠅⠑⠑⠗⠲']
+  - ['Omdat ík het zeg.', '⠨⠕⠍⠙⠁⠞ ⠌⠅ ⠓⠑⠞ ⠵⠑⠛⠲']
+  - ['Reageer vóór het te laat is!', '⠨⠗⠑⠁⠛⠑⠑⠗ ⠧⠬⠬⠗ ⠓⠑⠞ ⠞⠑ ⠇⠁⠁⠞ ⠊⠎⠖']
+  - ['Doe het nú!', '⠨⠙⠕⠑ ⠓⠑⠞ ⠝⠾⠖']
+  # §2.9 Haakjes
+  - ['Een directeur (directrice) moet met tact optreden.', '⠨⠑⠑⠝ ⠙⠊⠗⠑⠉⠞⠑⠥⠗ ⠦⠙⠊⠗⠑⠉⠞⠗⠊⠉⠑⠴ ⠍⠕⠑⠞ ⠍⠑⠞ ⠞⠁⠉⠞ ⠕⠏⠞⠗⠑⠙⠑⠝⠲']
+  - ['[Voorzitter: J. Voet; leden: (o.a.) R. Wellens, H. Engels].', '⠷⠨⠧⠕⠕⠗⠵⠊⠞⠞⠑⠗⠒ ⠨⠚⠲ ⠨⠧⠕⠑⠞⠆ ⠇⠑⠙⠑⠝⠒ ⠦⠕⠲⠁⠲⠴ ⠨⠗⠲ ⠨⠺⠑⠇⠇⠑⠝⠎⠂ ⠨⠓⠲ ⠨⠑⠝⠛⠑⠇⠎⠾⠲']
+  # §2.11 Hoofdletters
+  - ['MacLean, 3D, E40', '⠨⠍⠁⠉⠨⠇⠑⠁⠝⠂ ⠼⠉⠨⠙⠂ ⠨⠑⠼⠙⠚']
+  - ['EU, WMO, VDAB', '⠘⠑⠥⠂ ⠘⠺⠍⠕⠂ ⠘⠧⠙⠁⠃']
+  - ['Vlucht SN2233', '⠨⠧⠇⠥⠉⠓⠞ ⠘⠎⠝⠼⠃⠃⠉⠉']
+  - ['Zie refertes D-NE004w, D-NB007B en D-NB007BDK.', '⠨⠵⠊⠑ ⠗⠑⠋⠑⠗⠞⠑⠎ ⠨⠙⠤⠘⠝⠑⠼⠚⠚⠙⠺⠂ ⠨⠙⠤⠘⠝⠃⠼⠚⠚⠛⠨⠃ ⠑⠝ ⠨⠙⠤⠘⠝⠃⠼⠚⠚⠛⠘⠃⠙⠅⠲']
+  - ['VERENIGING VOOR DE BEVORDERING VAN HET ALGEMEEN WELZIJN', '⠘⠘⠧⠑⠗⠑⠝⠊⠛⠊⠝⠛ ⠧⠕⠕⠗ ⠙⠑ ⠃⠑⠧⠕⠗⠙⠑⠗⠊⠝⠛ ⠧⠁⠝ ⠓⠑⠞ ⠁⠇⠛⠑⠍⠑⠑⠝ ⠘⠺⠑⠇⠵⠊⠚⠝']
+  - ['REIS MET VLUCHT SN2233 NAAR ZUID-AFRIKA.', '⠘⠘⠗⠑⠊⠎ ⠍⠑⠞ ⠧⠇⠥⠉⠓⠞ ⠎⠝⠼⠃⠃⠉⠉ ⠝⠁⠁⠗ ⠵⠥⠊⠙⠤⠘⠁⠋⠗⠊⠅⠁⠲']
+  - ['II (2) III (3) IV (4)', '⠘⠊⠊ ⠦⠼⠃⠴ ⠘⠊⠊⠊ ⠦⠼⠉⠴ ⠘⠊⠧ ⠦⠼⠙⠴']
+  - ['MCM (1900) MM (2000)', '⠘⠍⠉⠍ ⠦⠼⠁⠊⠚⠚⠴ ⠘⠍⠍ ⠦⠼⠃⠚⠚⠚⠴']
+  # §2.12 ICT-gerelateerde tekens
+  - ['Het bestand Adressen.txt staat in de map c:\\Mijn documenten.', '⠨⠓⠑⠞ ⠃⠑⠎⠞⠁⠝⠙ ⠨⠁⠙⠗⠑⠎⠎⠑⠝⠲⠞⠭⠞ ⠎⠞⠁⠁⠞ ⠊⠝ ⠙⠑ ⠍⠁⠏ ⠉⠒⠐⠡⠨⠍⠊⠚⠝ ⠙⠕⠉⠥⠍⠑⠝⠞⠑⠝⠲']
+  - ['petra2adams@gmail.com', '⠏⠑⠞⠗⠁⠼⠃⠠⠁⠙⠁⠍⠎⠜⠛⠍⠁⠊⠇⠲⠉⠕⠍']
+  - ['#dtv #a11y', '⠐⠼⠙⠞⠧ ⠐⠼⠁⠼⠁⠁⠽']
+  # §2.17 Punt
+  - ['Geef me wat water, a.u.b.', '⠨⠛⠑⠑⠋ ⠍⠑ ⠺⠁⠞ ⠺⠁⠞⠑⠗⠂ ⠁⠲⠥⠲⠃⠲']
+  - ['Hij zou komen maar …', '⠨⠓⠊⠚ ⠵⠕⠥ ⠅⠕⠍⠑⠝ ⠍⠁⠁⠗ ⠲⠲⠲']
+  - ['Sapper…', '⠨⠎⠁⠏⠏⠑⠗⠲⠲⠲']
+  - ['Zie ook punt 10.2.1.', '⠨⠵⠊⠑ ⠕⠕⠅ ⠏⠥⠝⠞ ⠼⠁⠚⠲⠃⠲⠁⠲']
+  - ['Dit toestel kost 1.250 euro.', '⠨⠙⠊⠞ ⠞⠕⠑⠎⠞⠑⠇ ⠅⠕⠎⠞ ⠼⠁⠲⠃⠑⠚ ⠑⠥⠗⠕⠲']
+  # §3.1 Het cijferteken
+  - ['35 246 133.718', '⠼⠉⠑ ⠼⠃⠙⠋ ⠼⠁⠉⠉⠲⠛⠁⠓']
+  - ['1,5 (anderhalf)', '⠼⠁⠂⠑ ⠦⠁⠝⠙⠑⠗⠓⠁⠇⠋⠴']
+  - ['Wereldoorlog 1940-1945', '⠨⠺⠑⠗⠑⠇⠙⠕⠕⠗⠇⠕⠛ ⠼⠁⠊⠙⠚⠤⠼⠁⠊⠙⠑']
+  - ['+ 44-20.73.88.12.66', '⠖ ⠼⠙⠙⠤⠼⠃⠚⠲⠛⠉⠲⠓⠓⠲⠁⠃⠲⠋⠋']
+  - ['bankrekeningnummer 210-0934653-17', '⠃⠁⠝⠅⠗⠑⠅⠑⠝⠊⠝⠛⠝⠥⠍⠍⠑⠗ ⠼⠃⠁⠚⠤⠼⠚⠊⠉⠙⠋⠑⠉⠤⠼⠁⠛']
+  - ['1a, 15de eeuw, 8ste.', '⠼⠁⠠⠁⠂ ⠼⠁⠑⠠⠙⠑ ⠑⠑⠥⠺⠂ ⠼⠓⠎⠞⠑⠲']
+  - ['Hij was als 43ste binnengekomen.', '⠨⠓⠊⠚ ⠺⠁⠎ ⠁⠇⠎ ⠼⠙⠉⠎⠞⠑ ⠃⠊⠝⠝⠑⠝⠛⠑⠅⠕⠍⠑⠝⠲']
+  # §3.4 Procent- en promilleteken
+  - ['drie procent 3 %', '⠙⠗⠊⠑ ⠏⠗⠕⠉⠑⠝⠞ ⠼⠉ ⠿']
+  - ['drie promille 3 ‰', '⠙⠗⠊⠑ ⠏⠗⠕⠍⠊⠇⠇⠑ ⠼⠉ ⠿⠿']
+  # §3.6 Graad-, minuut- en secondeteken
+  - ['De temperatuur is 22°.', '⠨⠙⠑ ⠞⠑⠍⠏⠑⠗⠁⠞⠥⠥⠗ ⠊⠎ ⠼⠃⠃⠈⠴⠲']
+  - ['Een hoek van 27°30''.', '⠨⠑⠑⠝ ⠓⠕⠑⠅ ⠧⠁⠝ ⠼⠃⠛⠈⠴⠼⠉⠚⠈⠔⠲']
+  - ['Het record is 3''5''''.', '⠨⠓⠑⠞ ⠗⠑⠉⠕⠗⠙ ⠊⠎ ⠼⠉⠈⠔⠼⠑⠈⠔⠔⠲']
+  - ['Die plaats ligt op 57°38'' noorderbreedte.', '⠨⠙⠊⠑ ⠏⠇⠁⠁⠞⠎ ⠇⠊⠛⠞ ⠕⠏ ⠼⠑⠛⠈⠴⠼⠉⠓⠈⠔ ⠝⠕⠕⠗⠙⠑⠗⠃⠗⠑⠑⠙⠞⠑⠲']
+
+# Examples from the 2019 standard for which the forward translation is lossy
+flags: {testmode: forward}
+tests:
+  # §2.1 Aanhalingstekens
+  - ['“Kan ik deze jurk passen?” vroeg ze.', '⠶⠨⠅⠁⠝ ⠊⠅ ⠙⠑⠵⠑ ⠚⠥⠗⠅ ⠏⠁⠎⠎⠑⠝⠢⠶ ⠧⠗⠕⠑⠛ ⠵⠑⠲']
+  - ['Is dat nou je “nieuwe” wagen?', '⠨⠊⠎ ⠙⠁⠞ ⠝⠕⠥ ⠚⠑ ⠶⠝⠊⠑⠥⠺⠑⠶ ⠺⠁⠛⠑⠝⠢']
+  - ['Hij leest “Het verdriet van België” van Hugo Claus.', '⠨⠓⠊⠚ ⠇⠑⠑⠎⠞ ⠶⠨⠓⠑⠞ ⠧⠑⠗⠙⠗⠊⠑⠞ ⠧⠁⠝ ⠨⠃⠑⠇⠛⠊⠫⠶ ⠧⠁⠝ ⠨⠓⠥⠛⠕ ⠨⠉⠇⠁⠥⠎⠲']
+  # §2.4 Apostrof/weglatingsteken
+  - ['’s morgens, baby’s, baby’tje, Alex’ boeken, m’n autootje, ’19 (voor 2019).', '⠄⠎ ⠍⠕⠗⠛⠑⠝⠎⠂ ⠃⠁⠃⠽⠄⠎⠂ ⠃⠁⠃⠽⠄⠞⠚⠑⠂ ⠨⠁⠇⠑⠭⠄ ⠃⠕⠑⠅⠑⠝⠂ ⠍⠄⠝ ⠁⠥⠞⠕⠕⠞⠚⠑⠂ ⠄⠼⠁⠊ ⠦⠧⠕⠕⠗ ⠼⠃⠚⠁⠊⠴⠲']
+  # §2.6 Beklemtoonde klinkers
+  - ['Het kost máár € 20.', '⠨⠓⠑⠞ ⠅⠕⠎⠞ ⠍⠷⠷⠗ ⠑⠼⠃⠚⠲']
+  # §2.11 Hoofdletters
+  - ['PAGINA’S', '⠘⠏⠁⠛⠊⠝⠁⠄⠎']
+  # §2.12 ICT-gerelateerde tekens
+  - ['http://www.voorbeeld.com/~wimsmit/index_en.htm', '⠓⠞⠞⠏⠒⠌⠌⠺⠺⠺⠲⠧⠕⠕⠗⠃⠑⠑⠇⠙⠲⠉⠕⠍⠌⠐⠢⠺⠊⠍⠎⠍⠊⠞⠌⠊⠝⠙⠑⠭⠸⠑⠝⠲⠓⠞⠍']
+  # §2.15 Liggend streepje
+  - ['3 – 2 = 1', '⠼⠉ ⠤ ⠼⠃ ⠶ ⠼⠁']
+  # §2.16 Muntsymbolen/valutatekens
+  - ['10 dollar: $ 10', '⠼⠁⠚ ⠙⠕⠇⠇⠁⠗⠒ ⠙⠼⠁⠚']
+  - ['10 euro: € 10', '⠼⠁⠚ ⠑⠥⠗⠕⠒ ⠑⠼⠁⠚']
+  # §2.17 Punt
+  - ['Hij werkte enkel ’s avonds.', '⠨⠓⠊⠚ ⠺⠑⠗⠅⠞⠑ ⠑⠝⠅⠑⠇ ⠄⠎ ⠁⠧⠕⠝⠙⠎⠲']
+  # §3.1 Het cijferteken
+  - ['1 juli ’18', '⠼⠁ ⠚⠥⠇⠊ ⠄⠼⠁⠓']
+  # §3.5 Oppervlakte- en inhoudsmaten
+  - ['een kamer van 25 m^2', '⠑⠑⠝ ⠅⠁⠍⠑⠗ ⠧⠁⠝ ⠼⠃⠑ ⠍⠬⠼⠃']
+  - ['Het flesje heeft een inhoud van 30 cm^3 of 30 cc.', '⠨⠓⠑⠞ ⠋⠇⠑⠎⠚⠑ ⠓⠑⠑⠋⠞ ⠑⠑⠝ ⠊⠝⠓⠕⠥⠙ ⠧⠁⠝ ⠼⠉⠚ ⠉⠍⠬⠼⠉ ⠕⠋ ⠼⠉⠚ ⠉⠉⠲']
+
+# ... and their back-translation (canonical form)
+flags: {testmode: backward}
+tests:
+  # §2.1 Aanhalingstekens
+  - ['⠶⠨⠅⠁⠝ ⠊⠅ ⠙⠑⠵⠑ ⠚⠥⠗⠅ ⠏⠁⠎⠎⠑⠝⠢⠶ ⠧⠗⠕⠑⠛ ⠵⠑⠲', '"Kan ik deze jurk passen?" vroeg ze.']
+  - ['⠨⠊⠎ ⠙⠁⠞ ⠝⠕⠥ ⠚⠑ ⠶⠝⠊⠑⠥⠺⠑⠶ ⠺⠁⠛⠑⠝⠢', 'Is dat nou je "nieuwe" wagen?']
+  - ['⠨⠓⠊⠚ ⠇⠑⠑⠎⠞ ⠶⠨⠓⠑⠞ ⠧⠑⠗⠙⠗⠊⠑⠞ ⠧⠁⠝ ⠨⠃⠑⠇⠛⠊⠫⠶ ⠧⠁⠝ ⠨⠓⠥⠛⠕ ⠨⠉⠇⠁⠥⠎⠲', 'Hij leest "Het verdriet van België" van Hugo Claus.']
+  # §2.4 Apostrof/weglatingsteken
+  - ['⠄⠎ ⠍⠕⠗⠛⠑⠝⠎⠂ ⠃⠁⠃⠽⠄⠎⠂ ⠃⠁⠃⠽⠄⠞⠚⠑⠂ ⠨⠁⠇⠑⠭⠄ ⠃⠕⠑⠅⠑⠝⠂ ⠍⠄⠝ ⠁⠥⠞⠕⠕⠞⠚⠑⠂ ⠄⠼⠁⠊ ⠦⠧⠕⠕⠗ ⠼⠃⠚⠁⠊⠴⠲', '''s morgens, baby''s, baby''tje, Alex'' boeken, m''n autootje, ''19 (voor 2019).']
+  # §2.6 Beklemtoonde klinkers
+  - ['⠨⠓⠑⠞ ⠅⠕⠎⠞ ⠍⠷⠷⠗ ⠑⠼⠃⠚⠲', 'Het kost máár e20.']
+  # §2.11 Hoofdletters
+  - ['⠘⠏⠁⠛⠊⠝⠁⠄⠎', 'PAGINA''S']
+  # §2.12 ICT-gerelateerde tekens
+  - ['⠓⠞⠞⠏⠒⠌⠌⠺⠺⠺⠲⠧⠕⠕⠗⠃⠑⠑⠇⠙⠲⠉⠕⠍⠌⠐⠢⠺⠊⠍⠎⠍⠊⠞⠌⠊⠝⠙⠑⠭⠸⠑⠝⠲⠓⠞⠍', 'http://www.voorbeeld.com/~wimsmit/index_en.htm', xfail: 'dots 34 between letters is read as í, not /']
+  # §2.15 Liggend streepje
+  - ['⠼⠉ ⠤ ⠼⠃ ⠶ ⠼⠁', '3 - 2 = 1']
+  # §2.16 Muntsymbolen/valutatekens
+  - ['⠼⠁⠚ ⠙⠕⠇⠇⠁⠗⠒ ⠙⠼⠁⠚', '10 dollar: d10']
+  - ['⠼⠁⠚ ⠑⠥⠗⠕⠒ ⠑⠼⠁⠚', '10 euro: e10']
+  # §2.17 Punt
+  - ['⠨⠓⠊⠚ ⠺⠑⠗⠅⠞⠑ ⠑⠝⠅⠑⠇ ⠄⠎ ⠁⠧⠕⠝⠙⠎⠲', 'Hij werkte enkel ''s avonds.']
+  # §3.1 Het cijferteken
+  - ['⠼⠁ ⠚⠥⠇⠊ ⠄⠼⠁⠓', '1 juli ''18']
+  # §3.5 Oppervlakte- en inhoudsmaten
+  - ['⠑⠑⠝ ⠅⠁⠍⠑⠗ ⠧⠁⠝ ⠼⠃⠑ ⠍⠬⠼⠃', 'een kamer van 25 m²']
+  - ['⠨⠓⠑⠞ ⠋⠇⠑⠎⠚⠑ ⠓⠑⠑⠋⠞ ⠑⠑⠝ ⠊⠝⠓⠕⠥⠙ ⠧⠁⠝ ⠼⠉⠚ ⠉⠍⠬⠼⠉ ⠕⠋ ⠼⠉⠚ ⠉⠉⠲', 'Het flesje heeft een inhoud van 30 cm³ of 30 cc.']
+
 # Test virtual dots
 # The forward tests from above (except the xfail ones) are repeated
 # but with display table nl-print.dis instead of nl-unicode.dis.
