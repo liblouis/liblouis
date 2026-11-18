@@ -82,6 +82,9 @@
 #  All foreign characters use 'noback'. Typing on a 6-key braille keyboard
 #  always gives native Ukrainian letters. The Ukrainian alphabet is defined
 #  BEFORE punctuation, so 345 = є and 1456 = ї (not ')' and '#').
+#  Latin letters can be typed as in uk.utb: dot 6 before a word gives
+#  lowercase Latin letters until the end of the word, dots 46 a capital
+#  Latin letter. This is needed for passwords, e-mail and web addresses.
 # =====================================================================
 
 # Braille indicators:
@@ -710,6 +713,74 @@ noback always \x041e\x0301 45-4-135   # О́
 noback always \x0423\x0301 45-4-136   # У́
 noback always \x042e\x0301 45-4-1256  # Ю́
 noback always \x042f\x0301 45-4-1246  # Я́
+
+# =====================================================================
+#  LATIN INPUT ON A PERKINS KEYBOARD (back-translation only)
+#  Dot 6 before a word: lowercase Latin letters until the end of the word.
+#  Dots 46: the next letter is a capital Latin letter, then lowercase.
+#  Needed for passwords, e-mail and web addresses, logins.
+# =====================================================================
+
+nofor context [@6] #5=1             # start of Latin lowercase input
+nofor context #5=1@1 "a"
+nofor context #5=1@12 "b"
+nofor context #5=1@14 "c"
+nofor context #5=1@145 "d"
+nofor context #5=1@15 "e"
+nofor context #5=1@124 "f"
+nofor context #5=1@1245 "g"
+nofor context #5=1@125 "h"
+nofor context #5=1@24 "i"
+nofor context #5=1@245 "j"
+nofor context #5=1@13 "k"
+nofor context #5=1@123 "l"
+nofor context #5=1@134 "m"
+nofor context #5=1@1345 "n"
+nofor context #5=1@135 "o"
+nofor context #5=1@1234 "p"
+nofor context #5=1@12345 "q"
+nofor context #5=1@1235 "r"
+nofor context #5=1@234 "s"
+nofor context #5=1@2345 "t"
+nofor context #5=1@136 "u"
+nofor context #5=1@1236 "v"
+nofor context #5=1@2456 "w"
+nofor context #5=1@1346 "x"
+nofor context #5=1@13456 "y"
+nofor context #5=1@1356 "z"
+
+nofor context [@46] #5=2            # Latin capital letter
+nofor context #5=2@1 "A"#5=1
+nofor context #5=2@12 "B"#5=1
+nofor context #5=2@14 "C"#5=1
+nofor context #5=2@145 "D"#5=1
+nofor context #5=2@15 "E"#5=1
+nofor context #5=2@124 "F"#5=1
+nofor context #5=2@1245 "G"#5=1
+nofor context #5=2@125 "H"#5=1
+nofor context #5=2@24 "I"#5=1
+nofor context #5=2@245 "J"#5=1
+nofor context #5=2@13 "K"#5=1
+nofor context #5=2@123 "L"#5=1
+nofor context #5=2@134 "M"#5=1
+nofor context #5=2@1345 "N"#5=1
+nofor context #5=2@135 "O"#5=1
+nofor context #5=2@1234 "P"#5=1
+nofor context #5=2@12345 "Q"#5=1
+nofor context #5=2@1235 "R"#5=1
+nofor context #5=2@234 "S"#5=1
+nofor context #5=2@2345 "T"#5=1
+nofor context #5=2@136 "U"#5=1
+nofor context #5=2@1236 "V"#5=1
+nofor context #5=2@2456 "W"#5=1
+nofor context #5=2@1346 "X"#5=1
+nofor context #5=2@13456 "Y"#5=1
+nofor context #5=2@1356 "Z"#5=1
+
+# Latin mode ends at a space or at any character that is not a Latin letter
+attribute allowLatinMode ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'&`
+nofor context !#5=0@0 "\s"#5=0
+nofor context !#5=0[!%allowLatinMode] *#5=0
 
 # Standard tables at the end
 include braille-patterns.cti

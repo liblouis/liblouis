@@ -133,3 +133,13 @@ tests:
     - "1, 2, 3"
   - - "⠼⠃⠚⠃⠙⠆⠞⠁⠅"
     - "2024; так"
+  # Latin input on a Perkins keyboard: dot 6 before a word, 46 for a capital
+  - - "⠠⠺⠊⠝⠙⠕⠺⠎"
+    - "windows"
+  - - "⠨⠺⠕⠗⠙ ⠽ ⠏⠗⠊⠺⠽⠞"
+    - "Word і привіт"
+  - - "⠠⠏⠁⠎⠎⠺⠕⠗⠙⠼⠁⠃⠉"
+    - "password123"
+  # Brackets typed with dot 6 still work
+  - - "⠠⠷"
+    - "["
