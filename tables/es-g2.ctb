@@ -70,14 +70,20 @@
 #  the user may encounter in applying it to his or her work. So reporting of any of those
 #  is always encouraged.
 #
+#  Update (2025): the abbreviations, word beginnings (principles), endings, sequences,
+#  contractions and the use of dot 5 follow the current official reference, published by
+#  the Comision Braille Espanola (ONCE): Documento tecnico B 16-1, "Estenografia espanola
+#  y criterios didacticos para su aprendizaje", version 3, October 2025. Found at
+#  https://www.once.es/servicios-sociales/braille/comision-braille-espanola/documentos-tecnicos/documentos-tecnicos-relacionados-con-el-braille/documentos-tecnicos-b-16-estenografia
+#  Section numbers of that document are given in the comments of the rules.
+#
 # ----------------------------------------------------------------------
 
-# Add virtual dot to k, w and x (see below). This overwrites the definitions from
+# Add virtual dot to k and w (see below). This overwrites the definitions from
 # es-g1.ctb. For the table to work these rules need to be defined before AND after the
 # include.
 lowercase k 13b
 lowercase w 2456b
-lowercase x 1346b
 
 include es-g1.ctb
 
@@ -98,107 +104,103 @@ endemph bold 5-35
 begemph italic 5-35
 endemph italic 5-35
 
+# Contractions made of signs in the lower part of the cell
+
+# These are used like any other contraction, also in words made up of nothing but such
+# contractions (Documento tecnico B 16-1, version 3, section 3.4.2: tren, trinen, drenen).
+
+always ab 2
+always br 23
+always cr 25
+always dr 256
+always en 26
+always in 35
+always er 236
+always gr 2356
+always pr 235
+always tr 356
+
 # Spanish grade 2 situations solved with the use of multi-pass implementations
 
-# If a word happens to be made up of only lowered signs, then first contraction is not
-# contracted to avoid confussion with punctuation. A multi-pass implementation is in order
-# here. In a first pass all the contractions are made, but with a temporary virtual dot;
-# then in a second pass some contractions are cancelled, and for the other contractions the
-# virtual dot is removed.
+# Whenever w or k is anywhere in a word the entire word is uncontracted and dot 5 prefixes the word
+# (Documento tecnico B 16-1, version 3, 4.2.1). The letter x does not interrupt contractions.
 
-# Adding the virtual dot to lowered cell contractions.
-
-sign \xe001 2a
-sign \xe002 23a
-sign \xe003 25a
-sign \xe004 256a
-sign \xe005 26a
-sign \xe009 35a
-sign \xe008 236a
-sign \xe007 2356a
-sign \xe006 235a
-sign \xe000 356a
-
-# Forcing the contractions to have the virtual dot.
-
-begmidword ab 2a
-always br 23a
-always cr 25a
-always dr 256a
-always en 26a
-always in 35a
-always er 236a
-always gr 2356a
-always pr 235a
-always tr 356a
-
-# Grouping all of these into a class.
-
-attribute contraction \xe000\xe001\xe002\xe003\xe004\xe005\xe006\xe007\xe008\xe009
-swapdd cancelcontraction 2a,23a,25a,256a,26a,35a,236a,2356a,235a,356a 1-12,12-1235,14-1235,145-1235,15-1345,24-1345,15-1235,1245-1235,1234-1235,2345-1235
-swapdd finalizecontraction 2a,23a,25a,256a,26a,35a,236a,2356a,235a,356a 2,23,25,256,26,35,236,2356,235,356
-
-#  contraction cancellations using variables
-
-noback pass2 $s[%contraction]$s %cancelcontraction
-noback pass2 $s[%contraction]%contraction.$s %cancelcontraction
-noback pass2 $s[%contraction]~ %cancelcontraction
-noback pass2 $s[%contraction]%contraction.~ %cancelcontraction
-noback pass2 `[%contraction]$s %cancelcontraction
-noback pass2 `[%contraction]%contraction.$s %cancelcontraction
-noback pass2 `[%contraction]~ %cancelcontraction
-noback pass2 `[%contraction]%contraction.~ %cancelcontraction
-# same with leading capsign
-noback pass2 $s@46[%contraction]$s %cancelcontraction
-noback pass2 $s@46[%contraction]$wx.$s %cancelcontraction
-noback pass2 $s@46[%contraction]~ %cancelcontraction
-noback pass2 $s@46[%contraction]$wx.~ %cancelcontraction
-noback pass2 `@46[%contraction]$s %cancelcontraction
-noback pass2 `@46[%contraction]$wx.$s %cancelcontraction
-noback pass2 `@46[%contraction]~ %cancelcontraction
-noback pass2 `@46[%contraction]$wx.~ %cancelcontraction
-
-noback pass2 %contraction %finalizecontraction
-
-# Whenever x, w or k is anywhere in a word the entire word is uncontracted and dot 5 prefixes the word.
-
-# Translate words containing k, w or x according to character definitions.
+# Translate words containing k or w according to character definitions.
 
 nocont K
 nocont W
-nocont X
 nocont k
 nocont w
-nocont x
 
 # To prefix the words with dot 5 we use a multi-pass implementation. First we add a virtual
-# dot to k, w and x so that they can be distinguished in pass2.
+# dot to k and w so that they can be distinguished in pass2.
 lowercase k 13b
 lowercase w 2456b
-lowercase x 1346b
 
 # Then we define a class and a swap set. The class is needed to make the negations work.
 # (does not work with only the swapdd rule: is this a bug?)
-attribute kwx kwx # this is the 2nd class defined in this table, so we can also use $x instead of %kwx
+attribute kw kw # this is the 1st class defined in this table, so we can also use $w instead of %kw
 # The swap set is needed for the rule that removes the virtual dots.
-swapdd kwx 13b,2456b,1346b 13,2456,1346
+swapdd kw 13b,2456b 13,2456
 # We are using the same name for both because we can.
 
 # In a first pass we add the dot 5.
-noback pass2 _$s[%kwx] @5*
-noback pass2 _$s[!$xs.%kwx] @5* # !$xs means "anything but a K, W, X or SPACE"
-noback pass2 `[%kwx] @5*
-noback pass2 `[!$xs.%kwx] @5*
+noback pass2 _$s[%kw] @5*
+noback pass2 _$s[!$ws.%kw] @5* # !$ws means "anything but a K, W or SPACE"
+noback pass2 `[%kw] @5*
+noback pass2 `[!$ws.%kw] @5*
 
 # In a second pass we remove the virtual dots.
-noback pass3 %kwx %kwx
+noback pass3 %kw %kw
 
-# Special omnipresent mandatory rules for dot 5 to avoid punctuation ending
-# ambiguity. Closing quotation, question marks, or both.
+# Dot 5 (Documento tecnico B 16-1, version 3, 4.2) separates a punctuation or expression sign
+# from a stenographic sign that is written with the same cell.
 
+# The closing question mark, quotation marks and special typography always carry it when they
+# are the only closing sign.
 endword ?" 5-26-236
 endword " 5-236
 endword ? 5-26
+endword » 5-236
+endword ” 5-236
+
+# An opening sign in front of a word in lower case: dot 5 before the sign. In front of a
+# capital letter or a number the sign for those separates it. With several opening signs the
+# dot 5 goes before the last one.
+noback context ["¿"]$u @5-26
+noback context ["¡"]$u @5-235
+noback context ["«"]$u @5-236
+noback context ["“"]$u @5-236
+noback context ["("]$u @5-126
+noback context $s["–"]$u @5-36
+noback context `["–"]$u @5-36
+noback context $s["\""]$u @5-236
+noback context `["\""]$u @5-236
+
+# One dot 5 is enough when the word has its own (qué, kilómetro).
+noback pass2 @5@26@5 @26@5
+noback pass2 @5@235@5 @235@5
+noback pass2 @5@236@5 @236@5
+noback pass2 @5@126@5 @126@5
+noback pass2 @5@36@5 @36@5
+noback pass3 @5@5@26 @26@5
+noback pass3 @5@5@235 @235@5
+noback pass3 @5@5@236 @236@5
+noback pass3 @5@5@126 @126@5
+
+# With several closing signs the dot 5 goes before the first one, also when it does not
+# usually carry it (exclamation mark, parenthesis). A sign that is repeated is not another one.
+attribute closeq ?)»”"
+attribute closee ?!»”"
+noback context ["!"]%closeq @5-235
+noback context [")"]%closee @5-345
+
+# A semicolon after a word that ends in -bre and a comma after a word that ends in ab
+# (baobab, octubre;) would be read as part of the word.
+noback pass2 @23[@23]$s @5-23
+noback pass2 @23[@23]~ @5-23
+noback pass2 @2[@2]$s @5-2
+noback pass2 @2[@2]~ @5-2
 
 # single cell word contractions, single letters
 
@@ -208,7 +210,7 @@ word de 145
 word el 15
 word fue 124
 word gran 1245
-word haber 125
+word haber 125-1235
 word si 24
 word jamás 245
 word al 13
@@ -231,7 +233,6 @@ word este 1356
 
 word las 12346
 word ella 123456
-word mas 134-12346
 word él 2346
 word según 23456
 word para 16
@@ -263,10 +264,6 @@ word su 345
 
 word estos 1356-246
 word estas 1356-12346
-word eso 1246-135
-word esa 1246-1
-word esos 1246-246
-word ésas 1246-12346
 word aquello 346-135
 word aquella 346-1
 word aquellas 346-12346
@@ -282,20 +279,14 @@ word una 136-1
 word uno 136-135
 word unos 136-246
 word unas 136-12346
-word ese 1246-15
 word años 12456-246
 word grados 2356-246
 word números 3456-246
-word seres 234-1246
-word sones 1346-1246
 word hacer 236-1235
-word hacen 236-1345
-word hacemos 236-134-246
 
 # dot 5 as stenographic accentuator for a few of those words
 
 word qué 5-12345
-word sé 5-234
 word cómo 5-2456
 word más 12356
 word e 5-15
@@ -320,14 +311,14 @@ word buenamente 12-134
 word buen 12-1345
 word bueno 12-135
 word bastante 12-2345
-sufword bondad 12-1456
+word bondad 12-1456
 
 # letter c
 
 contraction cc
 
 # this specific word has potential back translation problems
-sufword cerca 14-14
+word cerca 14-14
 contraction cd
 word cuando 14-145
 word ciego 14-1245
@@ -343,17 +334,17 @@ word cuyo 14-13456
 
 word debajo 145-12-245
 contraction dc
-sufword decía 145-14
-prfword decían 145-14-1345
+word decía 145-14
+word decían 145-14-1345
 word donde 145-145
 word dondequiera 145-145-12345
 contraction df
-sufword difícil 145-124
-prfword diferencia 145-124-14
-prfword diferente 145-124-2345
-prfword dijo 145-245
+word difícil 145-124
+word diferencia 145-124-14
+word diferente 145-124-2345
+word dijo 145-245
 word delante 145-123
-prfword demás 145-134
+word demás 145-134
 word demasiado 145-134-145
 word después 145-1234
 word desde 145-234
@@ -364,22 +355,22 @@ word detrás 145-356
 
 word efecto 15-124
 word efectivo 15-124-1236
-sufword efectividad 15-124-1236-1456
+word efectividad 15-124-1236-1456
 word ejemplo 15-245
-sufword ejemplar 15-245-1235
+word ejemplar 15-245-1235
 
 # letter f
 
-sufword favor 124-1236
-sufword fácil 124-12356
-sufword facilidad 124-1456
+word favor 124-1236
+word fácil 124-12356
+word facilidad 124-1456
 
 # letter g
 
 # this specific word conflicts with back translation but many words in the language can contract it
 noback always grande 1245-145
-sufword general 1245-1345
-sufword generalidad 1245-1345-1456
+word general 1245-1345
+word generalidad 1245-1345-1456
 
 # letter h
 
@@ -400,14 +391,14 @@ word hombre 125-2456
 
 # letter i
 
-sufword igual 24-1245
-sufword igualdad 24-1245-1456
+word igual 24-1245
+word igualdad 24-1245-1456
 
 # leter j
 
 word junto 245-2345
 word joven 245-1236
-sufword juventud 245-1236-2345
+word juventud 245-1236-2345
 
 # letter k
 
@@ -417,7 +408,7 @@ word alguien 13-1245-1345
 word algún 13-1345
 word alguna 13-1345-1
 word alguno 13-1345-135
-sufword alrededor 13-1235
+word alrededor 13-1235
 
 # letter l
 
@@ -425,23 +416,22 @@ contraction lg
 word largo 123-1245
 word lejos 123-245
 contraction lu
-sufword lugar 123-136
+word lugar 123-136
 word luego 123-1256
-word luegos 123-1256-234
 
 # letter m
 
 contraction ma
-prfword madre 134-1
-prfword medio 134-145
+word madre 134-1
+word medio 134-145
 always mediante 134-145-2345
-sufword mejor 134-245
+word mejor 134-245
 contraction mm
 word mismo 134-134
 word manera 134-1345
 word menos 134-234
-sufword mujer 134-136
-sufword mayor 134-13456
+word mujer 134-136
+word mayor 134-13456
 word mayoría 134-13456-1235
 word mientras 134-356
 
@@ -449,26 +439,26 @@ word mientras 134-356
 
 word nunca 1345-14
 word necesario 1345-14-1235
-sufword necesidad 1345-14-1456
+word necesidad 1345-14-1456
 word nadie 1345-145
 word ningún 1345-1245
 word ninguna 1345-1245-1
 word ninguno 1345-1245-135
-sufword natural 1345-2345
+word natural 1345-2345
 word naturaleza 1345-2345-1356
 word naturalidad 1345-2345-1456
 word nuevo 1345-1236
-sufword novedad 1345-1236-1456
-prfword nada 1345-1456
+word novedad 1345-1236-1456
+word nada 1345-1456
 word niño 1345-12456
 word nuestro 1345-1256
 
 # letter o
 
-sufword oficio 135-124
-sufword oficial 135-124-123
+word oficio 135-124
+word oficial 135-124-123
 word oportuno 135-1234
-sufword oportunidad 135-1234-1456
+word oportunidad 135-1234-1456
 word otro 135-356
 word ocasión 135-3456
 
@@ -479,8 +469,8 @@ contraction pc
 word poco 1234-14
 word podía 1234-145 
 word podían 1234-145-1345
-sufword persona 1234-1345
-word personalidad 1234-1345-1456
+word persona 1234-1345
+word personalidad 1234-1345-123-1456
 word porque 1234-12345
 word poder 1234-1235
 word pequeño 1234-12456
@@ -501,7 +491,7 @@ word razón 1235-1356
 # letter s
 
 word sido 234-145
-prfword siguiente 234-1245
+word siguiente 234-1245
 word solo 234-123
 word sino 234-1345
 word superior 234-1234
@@ -520,7 +510,7 @@ word tenido 2345-1345-145
 word tenían 2345-1345-1345
 word tiempo 2345-1234
 word tampoco 2345-1234-14
-sufword temporal 2345-1234-123
+word temporal 2345-1234-123
 word tener 2345-1235
 word tanto 2345-2345
 contraction tv
@@ -531,12 +521,12 @@ word tuyo 2345-13456
 
 word veces 1236-14
 word vida 1236-145
-prfword verdad 1236-1456
+word verdad 1236-1456
 word vuestro 1236-1256
 
 # letter x
 
-sufword exterior 1346-1235
+word exterior 1346-1235
 
 # u acute
 
@@ -546,8 +536,8 @@ word último 23456-123
 # misc symbols
 
 word arriba 16-1235
-sufword anterior 146-1235
-sufword anterioridad 146-1235-1456
+word anterior 146-1235
+word anterioridad 146-1235-1456
 word antes 146-234
 word adelante 1456-123
 word además 1456-134
@@ -559,33 +549,33 @@ word estando 1246-1345-145
 word estar 1246-1235
 word está 1246-2345
 word estuvo 1246-1236
-sufword abajo 2-345
+word abajo 2-245
 word breve 23-1236
 word  brevedad 23-1236-1456
 word condición 25-145-3456
 word conmigo 25-134
 word consigo 25-234
 word consecuencia 25-234-14
-prfword consecuente 25-324-2345
+word consecuente 25-234-2345
 word contigo 25-2345
-prfword contra 25-356
+word contra 25-356
 word contrario 25-356-1235
 word  contrariedad 25-356-1235-1456
 word encima 26-14
 word entonces 26-2345
 word principio 235-14
 word principal 235-14-123
-word propio 235-1234
-sufword propiedad 235-1234-1456
-word pronto 235-2345
-sufword hacía 236-14
+word propio 1234-1234
+word propiedad 1234-1234-1456
+word pronto 1234-2345
+word hacía 236-14
 word hacían 236-14-1345
-sufword hacer 236-1235
-sufword inferior 35-124
-sufword inferioridad 35-124-1456
+word hacer 236-1235
+word inferior 35-124
+word inferioridad 35-124-1456
 word inmediato 35-134
-sufword interior 35-1235
-sufword interioridad 35-1235-1456
+word interior 35-1235
+word interioridad 35-1235-1456
 word interés 35-2345
 word interesante 35-2345-2345
 word trabajo 356-12
@@ -604,27 +594,23 @@ word sus 345-234
 # plurals, common derivatives and accentuations for every one of these words when needed
 
 word absolutos 1-12-246
-word absolutas 1-12-246
+word absolutas 1-12-12346
 word absolutamente 1-12-134
 word acciones 1-3456-1246
-word accionando 1-3456-146-145
 word bajos 12-245-246
 word bajas 12-245-12346
-word bajes 12-245-1246
-word buenos 12-1345-246
-word buenas 12-1345-12346
+word buenos 12-246
+word buenas 12-12346
 word buenamente 12-1345-134
 word bastantes 12-2345-1246
 word bondades 12-1456-1246
-word cercas 14-14-12346
 word ciegas 14-1245-12346
 word ciegos 14-1245-246
 word ciegamente 14-1245-134
 word cierta 14-2345-1
 word ciertas 14-2345-12346
-prfword ciertos 14-2345-246
+word ciertos 14-2345-246
 word ciertamente 14-2345-134
-word concierto 25-14-2345
 word cuales 14-123-1246
 word cuál 5-14-123
 word cuáles 5-14-123-1246
@@ -637,16 +623,16 @@ word cuya 14-13456-1
 word cuyas 14-13456-12346
 word cuyos 14-13456-246
 word dónde 5-145-145
-prfword diferencias 145-124-14-12346
-prfword diferentes 145-124-2345-1246
+word diferencias 145-124-14-12346
+word diferentes 145-124-2345-1246
 word demasiados 145-134-145-246
 word demasiadas 145-134-145-12346
 word efectos 15-124-246
 word efectivos 15-124-1236-246
 word efectivas 15-124-1236-12346
-word efectiva 15-124-1236-a
+word efectiva 15-124-1236-1
 word efectivamente 15-124-1236-134
-word ejemplos 15-245-246
+word ejemplos 15-245-234
 word favores 124-1236-1246
 word grandes 1245-145-1246
 word hijos 125-245-246
@@ -654,10 +640,6 @@ word hijas 125-245-12346
 word hermanos 125-134-246
 word hermanas 125-134-12346
 word hermana 125-134-1
-word hermanastra 125-134-1-234-356-1
-word hermanastro 125-134-1-234-356-135
-word hermanastras 125-134-1-234-356-12346
-word hermanastros 125-134-1-234-356-246
 word historias 125-2345-12346
 word prehistoria 235-125-2345
 word prehistorias 235-125-2345-12346
@@ -676,8 +658,8 @@ word algunos 13-1345-246
 word largos 123-1245-246
 word largas 123-1245-12346
 word madres 134-1-1246
-prfword medias 134-145-12346
-prfword medios 134-145-246
+word medias 134-145-12346
+word medios 134-145-246
 word misma 134-134-1
 word mismas 134-134-12346
 word mismos 134-134-246
@@ -693,24 +675,18 @@ word nuevamente 1345-1236-134
 word niña 1345-12456-1
 word niñas 1345-12456-12346
 word niños 1345-12456-246
-word nuestras 1345-136-12346
-word nuestros 1345-136-246
-sufword oficios 135-124-246
-sufword extraoficial 1346-2345-1235-1-135-124-123
+word nuestras 1345-1256-12346
+word nuestros 1345-1256-246
+word oficios 135-124-246
 word oportunas 135-1234-12346
 word oportunos 135-1234-246
-word inoportuno 35-135-1234
-word inoportunos 35-135-1234-246
-sufword inoportuna 35-135-1234-1
-word inoportunas 35-135-1234-12346
-sufword inoportunidad 35-135-1234-1456
 word jóvenes 245-1236-1246
 word otras 135-356-12346
 word otros 135-356-246
 word ocasiones 135-3456-1246
-word ocasionalmente 135-3456-13-134
+word ocasionalmente 135-3456-123-134
 word padres 1234-1-1246
-word compadre 36-1234-1-1246
+word compadre 36-1234-1
 word compadres 36-1234-1-1246
 word poca 1234-14-1
 word pocas 1234-14-12346
@@ -719,23 +695,18 @@ word personas 1234-1345-12346
 word pequeña 1234-12456-1
 word pequeñas 1234-12456-12346
 word pequeños 1234-12456-246
-word pequeñez 1234-12456-15-1356
-word pequeñeces 1234-12456-15-14-1246
 word pueden 1234-1256-1345
 word puedes 1234-1256-234
-prfword quién 5-12345-1345
+word quién 5-12345-1345
 word relaciones 1235-123-1246
-word relacionando 1235-123-146-145
 word relativa 1235-123-1236-1
 word relativas 1235-123-1236-12346
 word relativos 1235-123-1236-246
-word relativamente 1235-123-1236-1-134
+word relativamente 1235-123-1236-134
 word razones 1235-1356-1246
-prfword razon 1235-1356
-prfword siguientes 234-1245-1246
+word siguientes 234-1245-1246
 word solos 234-123-246
 word solas 234-123-12346
-word sólamente 234-123-1-134
 word sola 234-123-1
 word sitios 234-2345-246
 word situaciones 234-2345-3456-1246
@@ -753,48 +724,42 @@ word retenían 1235-2345-1345-1345
 word entretiempo 356-2345-1234
 word tiempos 2345-1234-246
 word entretiempos 356-2345-1234-246
-word sobretiempo 23-2345-1234
 word contener 25-2345-1235
 word entretener 356-2345-1235
 word tuyas 2345-13456-12346
 word tuyos 2345-13456-246
-word convida 25-1236-145
-word convidas 25-1236-145-12346
 word vidas 1236-145-12346
 word vuestras 1236-1256-12346
 word vuestros 1236-1256-246
 word única 23456-14-1
-word únicamente 23456-14-1-134
+word únicamente 23456-14-134
 word únicas 23456-14-12346
 word únicos 23456-14-246
 word última 23456-123-1
-word últimamente 23456-123-1-134
+word últimamente 23456-123-134
 word últimas 23456-123-12346
 word últimos 23456-123-246
 word brevemente 23-1236-134
 word breves 23-1236-1246
 word brevedades 23-1236-1456-1246
 word condiciones 25-145-3456-1246
-word condicionalmente 25-145-3456-13-134
-word incondicionalmente 35-25-145-3456-13-134
+word condicionalmente 25-145-3456-123-134
 word consecuencias 25-234-14-12346
 word principios 235-14-246
-word propia 235-1234-1
-word propiamente 235-1234-1-134
-word propias 235-1234-12346
-word propios 235-1234-246
-word inmediatamente 35-134-1-134
+word propia 1234-1234-1
+word propiamente 1234-1234-134
+word propias 1234-1234-12346
+word propios 1234-1234-246
+word inmediatamente 35-134-134
 word inmediatas 35-134-12346
 word inmediata 35-134-1
 word inmediatos 35-134-246
-word inmediatez 35-134-15-1356
 word intereses 35-2345-1246
 word interesantemente 35-2345-2345-134
 word interesantes 35-2345-2345-1246
-word trabajas 356-12-12346
 word trabajos 356-12-246
-word numerosos 3456-246-246
-word numerosas 3456-246-12346
+word numerosos 3456-234-246
+word numerosas 3456-234-12346
 word muchas 4-134-12346
 word muchos 4-134-246
 word nosotras 45-1345-12346
@@ -813,6 +778,7 @@ word quién 5-12345-1345
 
 attribute consonants BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZzÑñ
 after consonants always on 1346
+before consonants begword on 1346
 # same applies to ion
 after consonants always ion 3456
 # The u e contraction may never be used after the letter g, avoids confussion with u
@@ -832,86 +798,655 @@ partword em 126
 partword es 1246
 partword im 345
 partword ion 3456
+partword ll 123456
 partword om 2456
 partword or 156
 partword os 246
 partword qu 12345
 partword ue 1256
 
-# word endings, including plurals. Some are formed using ES, others just the letter S.
+# sequences (Documento tecnico B 16-1, version 3, 3.3): groups of letters that are written with the
+# sign of a one-cell word. Like principles and endings they have priority over contractions.
 
-prfword acción 1-3456
-endword acciónes 1-3456-1246
-endword ando 146-145
-endword andos 146-145-234
-endword ección 15-3456
-endword ecciones 15-3456-1246
-endword endo 26-145
-endword endos 26-145-234
-endword icción 24-3456
-endword icciones 24-3456-1246
-endword iendo 256-145
+# que: at the beginning and in the middle of a word; at the end it is the ending -que
+begmidword que 12345
+# para: anywhere
+partword para 456-16
+# ante: at the beginning and in the middle; at the end of a word the ending -te is used,
+# after the contraction an
+begmidword ante 456-146
+endword antes 146-2345-234
+endword antemente 146-2345-134
+endword anteando 146-2345-146-145
+endword antedad 146-2345-1456
+endword antedades 146-2345-1456-1246
+# para and esta are followed by the ending -ando: the ending has priority, the sequence
+# does not use its last letter (parando, gestando)
+endword parando 1234-16-146-145
+endword parandos 1234-16-146-145-234
+word parando 1234-16-146-145
+word parandos 1234-16-146-145-234
+endword estando 1246-2345-146-145
+# esta: before a consonant at the beginning, between consonants in the middle and after a
+# consonant at the end
+before consonants begword esta 1356
+after consonants before consonants midword esta 1356
+after consonants endword esta 1356
+
+# word endings, including plurals (Documento tecnico B 16-1, version 3, 3.2). Several endings
+# can follow one another (3.2.2); the ones that occur in Spanish texts in at least five
+# different words, plus the examples of the document, are listed.
+
+word acción 1-3456
+endword ble 12
+endword bles 12-234
+endword cia 14
+endword cias 14-234
+endword bre 23
+endword bres 23-234
 endword ión 3456
 endword iones 3456-1246
 endword mente 134
 endword mentes 134-234
 endword que 12345
 endword ques 12345-234
+endword te 2345
+endword tes 2345-234
+endword dad 1456
+endword dades 1456-1246
+endword acción 1-3456
+endword acciones 1-3456-1246
+endword ección 15-3456
+endword ecciones 15-3456-1246
+endword icción 24-3456
+endword icciones 24-3456-1246
 endword ucción 136-3456
 endword ucciones 136-3456-1246
+endword ando 146-145
+endword andos 146-145-234
+endword endo 26-145
+endword endos 26-145-234
+endword iendo 256-145
+endword iendos 256-145-234
+endword iento 256-2345
+endword ientos 256-2345-246
+endword ienta 256-2345-1
+endword ientas 256-2345-12346
+endword iente 256-2345-15
+endword ientes 256-2345-1246
+endword mento 134-2345
+endword mentos 134-2345-246
+endword menta 134-2345-1
+endword mentas 134-2345-12346
+endword tura 2345-1235
+endword turas 2345-1235-234
+endword blemente 12-134
+endword temente 2345-134
+endword ientemente 256-2345-15-134
+endword ientamente 256-2345-1-134
+endword ciamente 14-134
+endword bremente 23-134
+endword turamente 2345-1235-134
+endword mentable 134-2345-1-12
+endword mentables 134-2345-1-12-234
+endword ciable 14-12
+endword ciables 14-12-234
+endword turable 2345-1235-12
+endword turables 2345-1235-12-234
+endword ientable 256-2345-1-12
+endword ientables 256-2345-1-12-234
+endword teando 2345-146-145
+endword queando 12345-146-145
+endword breando 23-146-145
+endword quete 12345-2345
+endword quetes 12345-2345-234
+endword brete 23-2345
+endword bretes 23-2345-234
+endword blete 12-2345
+endword bletes 12-2345-234
+endword andote 146-145-2345
+endword andotes 146-145-2345-234
+endword quedad 12345-1456
+endword quedades 12345-1456-1246
+endword tedad 2345-1456
+endword tedades 2345-1456-1246
+endword bleque 12-12345
+endword bleques 12-12345-234
+endword ciatura 14-2345-1235
+endword ciaturas 14-2345-1235-234
+endword ciate 14-2345
+endword ciates 14-2345-234
+endword ciablemente 14-12-134
+endword mentablemente 134-2345-1-12-134
+endword queteando 12345-2345-146-145
+endword able 1-12
+endword ables 1-12-234
+endword abre 1-23
+endword abres 1-23-234
+endword emente 15-134
+endword imente 24-134
+endword omente 135-134
+endword ementes 15-134-234
+endword imentes 24-134-234
+endword omentes 135-134-234
+endword emento 15-134-2345
+endword imento 24-134-2345
+endword omento 135-134-2345
+endword ementos 15-134-2345-246
+endword imentos 24-134-2345-246
+endword omentos 135-134-2345-246
+endword ementa 15-134-2345-1
+endword imenta 24-134-2345-1
+endword omenta 135-134-2345-1
+endword ementas 15-134-2345-12346
+endword imentas 24-134-2345-12346
+endword omentas 135-134-2345-12346
+endword ablemente 1-12-134
+endword abremente 1-23-134
+endword ementable 15-134-2345-1-12
+endword imentable 24-134-2345-1-12
+endword omentable 135-134-2345-1-12
+endword ementables 15-134-2345-1-12-234
+endword imentables 24-134-2345-1-12-234
+endword omentables 135-134-2345-1-12-234
+endword abreando 1-23-146-145
+endword abrete 1-23-2345
+endword abretes 1-23-2345-234
+endword ablete 1-12-2345
+endword abletes 1-12-2345-234
+endword ableque 1-12-12345
+endword ableques 1-12-12345-234
+endword ementablemente 15-134-2345-1-12-134
+endword imentablemente 24-134-2345-1-12-134
+endword omentablemente 135-134-2345-1-12-134
+endword uección 136-15-3456
+endword uecciones 136-15-3456-1246
+endword uendo 136-26-145
+endword uendos 136-26-145-234
+endword uemente 136-15-134
+endword uementes 136-15-134-234
+endword uemento 136-15-134-2345
+endword uementos 136-15-134-2345-246
+endword uementa 136-15-134-2345-1
+endword uementas 136-15-134-2345-12346
+endword uementable 136-15-134-2345-1-12
+endword uementables 136-15-134-2345-1-12-234
+endword uementablemente 136-15-134-2345-1-12-134
 
-# Word beginnings may not be followed by vowels (to avoid confussion with punctuation
-# signs), including accented ones. More classes follow.
-attribute vowels AaEeIiOoUuÁáÉéÍíÓóÚúÜü
+# words of the list in Documento tecnico B 16-1, version 3, Apendice C (with the variants
+# of gender, number and so on that the document accepts)
 
-# Setting the exceptions, though note that this will not work when back translating but it
-# willb e needed in a few cases.
-before vowels begword com 14-2456
-before vowels begword con 14-1346
-before vowels begword dis 145-24-234
-before vowels begword entre 35-356-15
-before vowels begword ex 15-1346
-before vowels begword inter 35-2345-236
-before vowels begword pre 1234-1235-15
-before vowels begword re 1235-15
-before vowels begword sobre 234-135-23-15
+word absoluta 1-12-1
+word alrededores 13-1235-1246
+word anteriores 146-1235-1246
+word anterioridades 146-1235-1456-1246
+word anteriormente 146-1235-134
+word baja 12-245-1
+word braille 23-123456
+word brailles 23-123456-1246
+word ceguera 14-1245-1235
+word cegueras 14-1245-1235-12346
+word ciega 14-1245-1
+word concreta 25-25-2345-1
+word concretamente 25-25-2345-134
+word concretas 25-25-2345-12346
+word concreto 25-25-2345
+word concretos 25-25-2345-246
+word condicional 25-145-3456-123
+word condicionales 25-145-3456-123-1246
+word conjuntamente 25-245-2345-134
+word connatural 25-1345-2345
+word connaturales 25-1345-2345-1246
+word connaturalidad 25-1345-2345-1456
+word connaturalidades 25-1345-2345-1456-1246
+word connaturalmente 25-1345-2345-134
+word consecuencial 25-234-14-123
+word consecuenciales 25-234-14-123-1246
+word consecuencialmente 25-234-14-123-134
+word consecuentemente 25-234-2345-134
+word consecuentes 25-234-2345-1246
+word consiguiente 25-234-1245
+word consiguientemente 25-234-1245-134
+word consiguientes 25-234-1245-1246
+word contenida 25-2345-1345-145-1
+word contenidamente 25-2345-1345-145-134
+word contenidas 25-2345-1345-145-12346
+word contenido 25-2345-1345-145
+word contenidos 25-2345-1345-145-246
+word contenías 25-2345-1345-234
+word contrabajo 25-356-12
+word contrabajos 25-356-12-246
+word contraria 25-356-1235-1
+word contrariamente 25-356-1235-134
+word contrarias 25-356-1235-12346
+word contrariedades 25-356-1235-1456-1246
+word contrarios 25-356-1235-246
+word contras 25-356-12346
+word cuanta 14-136-1
+word cuándo 5-14-145
+word cuánta 5-14-136-1
+word decías 145-14-234
+word demasiada 145-134-145-1
+word diferenciable 145-124-14-12
+word diferenciables 145-124-14-12-1246
+word diferencial 145-124-14-123
+word diferenciales 145-124-14-123-1246
+word diferencialmente 145-124-14-123-134
+word diferentemente 145-124-2345-134
+word difíciles 145-124-1246
+word difícilmente 145-124-134
+word disjunta 256-245-2345-1
+word disjuntamente 256-245-2345-134
+word disjunto 256-245-2345
+word doctor 145-1235
+word doctora 145-1235-1
+word doctoras 145-1235-1-234
+word doctores 145-1235-15-234
+word efectividades 15-124-1236-1456-1246
+word ejemplares 15-245-1235-1246
+word ejemplaridad 15-245-1235-1456
+word ejemplaridades 15-245-1235-1456-1246
+word ejemplarmente 15-245-1235-134
+word ente 26-2345-15
+word entes 26-2345-1246
+word entretantos 356-2345-246
+word entretenida 356-2345-1345-145-1
+word entretenidamente 356-2345-1345-145-134
+word entretenidas 356-2345-1345-145-12346
+word entretenido 356-2345-1345-145
+word entretenidos 356-2345-1345-145-246
+word entretenías 356-2345-1345-234
+word esta 1356-1
+word estabas 1246-12-234
+word estados 1246-145-246
+word esto 1356-135
+word estás 1246-2345-234
+word exgeneral 1346-1245-1345
+word exgenerales 1346-1245-1345-1246
+word exmujer 1346-134-136
+word exmujeres 1346-134-136-1246
+word exteriores 1346-1235-1246
+word exterioridad 1346-1235-1456
+word exterioridades 1346-1235-1456-1246
+word exteriormente 1346-1235-134
+word facilidades 124-1456-1246
+word favorable 124-1236-12
+word favorablemente 124-1236-12-134
+word favorables 124-1236-12-1246
+word fáciles 124-12356-1246
+word fácilmente 124-12356-134
+word generales 1245-1345-1246
+word generalidades 1245-1345-1456-1246
+word generalmente 1245-1345-134
+word grande 1245-145
+word grandemente 1245-145-134
+word ha 125
+word haberes 125-1235-1246
+word habías 125-12-234
+word hacías 236-14-234
+word hayas 125-13456-234
+word hija 125-245-1
+word historiable 125-2345-12
+word historiables 125-2345-12-1246
+word historial 125-2345-123
+word historiales 125-2345-123-1246
+word histórica 125-2345-14-1
+word históricamente 125-2345-14-134
+word históricas 125-2345-14-12346
+word histórico 125-2345-14
+word históricos 125-2345-14-246
+word igualdades 24-1245-1456-1246
+word iguales 24-1245-1246
+word igualmente 24-1245-134
+word importantemente 345-1234-2345-134
+word inferiores 35-124-1246
+word inferioridades 35-124-1456-1246
+word inferiormente 35-124-134
+word interiores 35-1235-1246
+word interioridades 35-1235-1456-1246
+word interiormente 35-1235-134
+word intermedio 13456-134-145
+word intermedios 13456-134-145-246
+word interrelacional 13456-1235-123-123
+word interrelacionales 13456-1235-123-123-1246
+word interrelacionalmente 13456-1235-123-123-134
+word interrelaciones 13456-1235-123-1246
+word interrelación 13456-1235-123
+word juntamente 245-2345-134
+word juventudes 245-1236-2345-1246
+word larga 123-1245-1
+word largamente 123-1245-134
+word les 123-1246
+word lugares 123-136-1246
+word mayores 134-13456-1246
+word mayormente 134-13456-134
+word mayorías 134-13456-1235-12346
+word media 134-145-1
+word mediante 134-145-2345
+word mejores 134-245-1246
+word mismamente 134-134-134
+word mucha 4-134-1
+word mujeres 134-136-1246
+word naturales 1345-2345-1246
+word naturalidades 1345-2345-1456-1246
+word naturalmente 1345-2345-134
+word necesaria 1345-14-1235-1
+word necesidades 1345-14-1456-1246
+word ningunas 1345-1245-12346
+word ningunos 1345-1245-246
+word novedades 1345-1236-1456-1246
+word nuestra 1345-1256-1
+word nueva 1345-1236-1
+word numeral 3456-123
+word numerales 3456-123-1246
+word numerosa 3456-234-1
+word ocasional 135-3456-123
+word ocasionales 135-3456-123-1246
+word oficiales 135-124-123-1246
+word oficialidad 135-124-123-1456
+word oficialidades 135-124-123-1456-1246
+word oficialmente 135-124-123-134
+word oficina 135-124-1345
+word oficinas 135-124-1345-12346
+word oportuna 135-1234-1
+word oportunamente 135-1234-134
+word oportunidades 135-1234-1456-1246
+word otra 135-356-1
+word país 1234-34
+word países 1234-34-234
+word pequeñamente 1234-12456-134
+word personal 1234-1345-123
+word personales 1234-1345-123-1246
+word personalidades 1234-1345-123-1456-1246
+word personalmente 1234-1345-123-134
+word poderes 1234-1235-1246
+word podías 1234-145-234
+word porqué 5-1234-12345
+word porqués 5-1234-12345-1246
+word prebraille 235-23-123456
+word predecía 235-145-14
+word predecían 235-145-14-1345
+word predecías 235-145-14-234
+word predijo 235-145-245
+word pregrado 235-2356
+word pregrados 235-2356-246
+word prehistórica 235-125-2345-14-1
+word prehistóricamente 235-125-2345-14-134
+word prehistóricas 235-125-2345-14-12346
+word prehistórico 235-125-2345-14
+word prehistóricos 235-125-2345-14-246
+word principales 235-14-123-1246
+word principalmente 235-14-123-134
+word probraille 1234-23-123456
+word prociegos 1234-14-1245-246
+word prohombre 1234-125-2456
+word prohombres 1234-125-2456-1246
+word promedio 1234-134-145
+word promedios 1234-134-145-246
+word pronta 1234-2345-1
+word prontamente 1234-2345-134
+word prontas 1234-2345-12346
+word prontos 1234-2345-246
+word propiedades 1234-1234-1456-1246
+word razonable 1235-1356-12
+word razonablemente 1235-1356-12-134
+word razonables 1235-1356-12-1246
+word rehacer 1235-236-1235
+word rehacía 1235-236-14
+word rehacían 1235-236-14-1345
+word rehacías 1235-236-14-234
+word relacionable 1235-123-12
+word relacionables 1235-123-12-1246
+word relacional 1235-123-123
+word relacionales 1235-123-123-1246
+word relacionalmente 1235-123-123-134
+word remedio 1235-134-145
+word remedios 1235-134-145-246
+word retener 1235-2345-1235
+word retenida 1235-2345-1345-145-1
+word retenidamente 1235-2345-1345-145-134
+word retenidas 1235-2345-1345-145-12346
+word retenido 1235-2345-1345-145
+word retenidos 1235-2345-1345-145-246
+word retenías 1235-2345-1345-234
+word señor 234-1235
+word señora 234-1235-1
+word señoras 234-1235-1-234
+word señores 234-1235-15-234
+word sinos 234-1345-246
+word situacional 234-2345-3456-123
+word situacionales 234-2345-3456-123-1246
+word situacionalmente 234-2345-3456-123-134
+word sobrenatural 23-1345-2345
+word sobrenaturales 23-1345-2345-1246
+word sobrenaturalidad 23-1345-2345-1456
+word sobrenaturalidades 23-1345-2345-1456-1246
+word sobrenaturalmente 23-1345-2345-134
+word sobretodos 23-2345-145-246
+word solamente 234-123-134
+word soledad 234-123-1456
+word soledades 234-123-1456-1246
+word sorda 234-156-1
+word sordamente 234-156-134
+word sordas 234-156-12346
+word sordera 234-156-1235
+word sorderas 234-156-1235-12346
+word sordo 234-156
+word sordoceguera 234-14-1235
+word sordocegueras 234-14-1235-12346
+word sordociega 234-14-1245-1
+word sordociegas 234-14-1245-12346
+word sordociego 234-14-1245
+word sordociegos 234-14-1245-246
+word sordos 234-156-246
+word superiores 234-1234-1246
+word superioridades 234-1234-1456-1246
+word superiormente 234-1234-134
+word suya 234-13456-1
+word tanta 2345-2345-1
+word tantas 2345-2345-12346
+word tantos 2345-2345-246
+word teléfono 2345-123-124
+word teléfonos 2345-123-124-234
+word temporales 2345-1234-123-1246
+word temporalidad 2345-1234-123-1456
+word temporalidades 2345-1234-123-1456-1246
+word temporalmente 2345-1234-123-134
+word tenida 2345-1345-145-1
+word tenidas 2345-1345-145-12346
+word tenidos 2345-1345-145-246
+word tenías 2345-1345-234
+word toda 2345-145-1
+word trabajadora 356-12-156-1
+word trabajadoras 356-12-156-12346
+word trabajadores 356-12-156-1246
+word tuya 2345-13456-1
+word usted 136-145
+word ustedes 136-145-234
+word verdades 1236-1456-1246
+word vuestra 1236-1256-1
+
+# the accented forms sólo, éste and aquél and their variants: dot 5 before the sign of the word
+word sólo 5-234-123
+word éste 5-1356
+word ésta 5-1356-1
+word éstos 5-1356-246
+word éstas 5-1356-12346
+word aquél 5-346
+word aquélla 5-346-1
+word aquéllos 5-346-246
+word aquéllas 5-346-12346
+
+# Names of countries (Apendice C of Documento tecnico B 16-1, version 3): the sign 456 takes
+# the place of the capital sign, so the capital sign is removed in a second pass. The name is
+# only abbreviated as a whole word, followed by a space, a comma, a full stop, a double quote or
+# the end of the text; with anything else after it (a letter, a semicolon, a parenthesis, a
+# hyphen) it is written out. The rules use the match opcode, whose pattern can look at what
+# follows; the characters of the name are compared without regard to case.
+
+match (^|!%a) argentina (%_|[,."»”]|^) 456-1-1235
+match (^|!%a) bolivia (%_|[,."»”]|^) 456-12-135
+match (^|!%a) brasil (%_|[,."»”]|^) 456-12-1235
+match (^|!%a) chile (%_|[,."»”]|^) 456-14-123
+match (^|!%a) colombia (%_|[,."»”]|^) 456-14-135
+match (^|!%a) cuba (%_|[,."»”]|^) 456-14-136
+match (^|!%a) ecuador (%_|[,."»”]|^) 456-15-14
+match (^|!%a) españa (%_|[,."»”]|^) 456-15-234
+match (^|!%a) guatemala (%_|[,."»”]|^) 456-1245-2345
+match (^|!%a) honduras (%_|[,."»”]|^) 456-125-1345
+match (^|!%a) méxico (%_|[,."»”]|^) 456-134-1346
+match (^|!%a) nicaragua (%_|[,."»”]|^) 456-1345-24
+match (^|!%a) panamá (%_|[,."»”]|^) 456-1234-1
+match (^|!%a) paraguay (%_|[,."»”]|^) 456-1234-13456
+match (^|!%a) perú (%_|[,."»”]|^) 456-1234-15
+match (^|!%a) portugal (%_|[,."»”]|^) 456-1234-2345
+match (^|!%a) uruguay (%_|[,."»”]|^) 456-136-13456
+match (^|!%a) venezuela (%_|[,."»”]|^) 456-1236-15
+
+noback pass2 @46@456@1@1235 @456@1@1235
+noback pass2 @46@46@456@1@1235 @456@1@1235
+noback pass2 @46@456@12@135 @456@12@135
+noback pass2 @46@46@456@12@135 @456@12@135
+noback pass2 @46@456@12@1235 @456@12@1235
+noback pass2 @46@46@456@12@1235 @456@12@1235
+noback pass2 @46@456@14@123 @456@14@123
+noback pass2 @46@46@456@14@123 @456@14@123
+noback pass2 @46@456@14@135 @456@14@135
+noback pass2 @46@46@456@14@135 @456@14@135
+noback pass2 @46@456@14@136 @456@14@136
+noback pass2 @46@46@456@14@136 @456@14@136
+noback pass2 @46@456@15@14 @456@15@14
+noback pass2 @46@46@456@15@14 @456@15@14
+noback pass2 @46@456@15@234 @456@15@234
+noback pass2 @46@46@456@15@234 @456@15@234
+noback pass2 @46@456@1245@2345 @456@1245@2345
+noback pass2 @46@46@456@1245@2345 @456@1245@2345
+noback pass2 @46@456@125@1345 @456@125@1345
+noback pass2 @46@46@456@125@1345 @456@125@1345
+noback pass2 @46@456@134@1346 @456@134@1346
+noback pass2 @46@46@456@134@1346 @456@134@1346
+noback pass2 @46@456@1345@24 @456@1345@24
+noback pass2 @46@46@456@1345@24 @456@1345@24
+noback pass2 @46@456@1234@1 @456@1234@1
+noback pass2 @46@46@456@1234@1 @456@1234@1
+noback pass2 @46@456@1234@13456 @456@1234@13456
+noback pass2 @46@46@456@1234@13456 @456@1234@13456
+noback pass2 @46@456@1234@15 @456@1234@15
+noback pass2 @46@46@456@1234@15 @456@1234@15
+noback pass2 @46@456@1234@2345 @456@1234@2345
+noback pass2 @46@46@456@1234@2345 @456@1234@2345
+noback pass2 @46@456@136@13456 @456@136@13456
+noback pass2 @46@46@456@136@13456 @456@136@13456
+noback pass2 @46@456@1236@15 @456@1236@15
+noback pass2 @46@46@456@1236@15 @456@1236@15
+
+# Names of countries made of several words: Costa Rica 456-14-1235, El Salvador 456-234-1236,
+# Republica Dominicana 456-145-135. A rule cannot contain a space, so each word is translated on
+# its own (with its capital sign) and the second pass replaces the whole expression, space
+# included, by the sign of the name. Only when what follows is a space, a comma, a full stop,
+# a double quote (dot 5 and 236) or the end of the text, as for the other countries. The cells
+# are the ones the words have in the first pass (costa = c + os + t + a, salvador = s + al + v +
+# ad + or).
+
+noback pass2 [@46@14@246@2345@1@0@46@1235@24@14@1]$s @456@14@1235
+noback pass2 [@46@14@246@2345@1@0@46@1235@24@14@1]@2 @456@14@1235
+noback pass2 [@46@14@246@2345@1@0@46@1235@24@14@1]@3 @456@14@1235
+noback pass2 [@46@14@246@2345@1@0@46@1235@24@14@1]@5@236 @456@14@1235
+noback pass2 [@46@14@246@2345@1@0@46@1235@24@14@1]~ @456@14@1235
+noback pass2 [@46@46@14@246@2345@1@0@46@46@1235@24@14@1]$s @456@14@1235
+noback pass2 [@46@46@14@246@2345@1@0@46@46@1235@24@14@1]@2 @456@14@1235
+noback pass2 [@46@46@14@246@2345@1@0@46@46@1235@24@14@1]@3 @456@14@1235
+noback pass2 [@46@46@14@246@2345@1@0@46@46@1235@24@14@1]@5@236 @456@14@1235
+noback pass2 [@46@46@14@246@2345@1@0@46@46@1235@24@14@1]~ @456@14@1235
+noback pass2 [@46@15@0@46@234@13@1236@1456@156]$s @456@234@1236
+noback pass2 [@46@15@0@46@234@13@1236@1456@156]@2 @456@234@1236
+noback pass2 [@46@15@0@46@234@13@1236@1456@156]@3 @456@234@1236
+noback pass2 [@46@15@0@46@234@13@1236@1456@156]@5@236 @456@234@1236
+noback pass2 [@46@15@0@46@234@13@1236@1456@156]~ @456@234@1236
+noback pass2 [@46@46@15@0@46@46@234@13@1236@1456@156]$s @456@234@1236
+noback pass2 [@46@46@15@0@46@46@234@13@1236@1456@156]@2 @456@234@1236
+noback pass2 [@46@46@15@0@46@46@234@13@1236@1456@156]@3 @456@234@1236
+noback pass2 [@46@46@15@0@46@46@234@13@1236@1456@156]@5@236 @456@234@1236
+noback pass2 [@46@46@15@0@46@46@234@13@1236@1456@156]~ @456@234@1236
+noback pass2 [@46@1235@1234@23456@12@123@24@14@1@0@46@145@2456@35@24@14@146@1]$s @456@145@135
+noback pass2 [@46@1235@1234@23456@12@123@24@14@1@0@46@145@2456@35@24@14@146@1]@2 @456@145@135
+noback pass2 [@46@1235@1234@23456@12@123@24@14@1@0@46@145@2456@35@24@14@146@1]@3 @456@145@135
+noback pass2 [@46@1235@1234@23456@12@123@24@14@1@0@46@145@2456@35@24@14@146@1]@5@236 @456@145@135
+noback pass2 [@46@1235@1234@23456@12@123@24@14@1@0@46@145@2456@35@24@14@146@1]~ @456@145@135
+noback pass2 [@46@46@1235@1234@23456@12@123@24@14@1@0@46@46@145@2456@35@24@14@146@1]$s @456@145@135
+noback pass2 [@46@46@1235@1234@23456@12@123@24@14@1@0@46@46@145@2456@35@24@14@146@1]@2 @456@145@135
+noback pass2 [@46@46@1235@1234@23456@12@123@24@14@1@0@46@46@145@2456@35@24@14@146@1]@3 @456@145@135
+noback pass2 [@46@46@1235@1234@23456@12@123@24@14@1@0@46@46@145@2456@35@24@14@146@1]@5@236 @456@145@135
+noback pass2 [@46@46@1235@1234@23456@12@123@24@14@1@0@46@46@145@2456@35@24@14@146@1]~ @456@145@135
+
+# Word beginnings (principles) are only used before a consonant (Documento tecnico B 16-1,
+# version 3, 3.1). Before a vowel the letters are written with their contractions as usual
+# (reactivo, comun). The consonant that follows a principle may be contracted (comprar,
+# contrato).
 
 # word beginnings
 
-begword com 36
-begword con 25
-begword dis 256
-begword entre 356
-begword ex 1346
-begword inter 13456
-begword pre 235
-begword re 1235
-begword sobre 23
+before consonants begword com 36
+before consonants begword con 25
+before consonants begword dis 256
+before consonants begword entre 356
+before consonants begword ex 1346
+before consonants begword inter 13456
+before consonants begword pre 235
+before consonants begword pro 1234
+before consonants begword re 1235
+before consonants begword sobre 23
 
-# The consonant which follows a word beginning may not be contracted. Not many exceptions so setting them one by one.
+# Several word beginnings in a row (3.1.1). The last one must precede a consonant. Chains
+# ending in pre- include its vowel (comprension, representar).
 
-begword compr 36-1234-1235
-begword contr 25-2345-1235
-begword consu 25-234-136
-begword congr 25-1245-1235
-begword concr 25-14-1235
-begword condr 25-145-1235
-begword disgr 245-1245-1235
-begword distr 256-2345-1235
-begword entrecr 356-14-1235
-begword extr 1346-3245-1235
-begword expr 1346-1234-1235
-begword interpr 13456-1234-1235
-begword intergr 13456-1245-1235
-begword pregr 235-1245-1235
-begword prepr 235-1234-1235
-begword retr 1235-2345-1235
-begword repr 1235-1234-1235
-begword regr 1235-1245-1235
-begword recr 1235-14-1235
-begword rebr 1235-12-1235
-begword redr 1235-145-1235
-begword sobrepr 23-1234-1235
+before consonants begword repre 1235-235
+before consonants begword expre 1346-235
+before consonants begword compre 36-235
+before consonants begword compro 36-1234
+before consonants begword interpre 13456-235
+before consonants begword sobrepre 23-235
+before consonants begword repro 1235-1234
+before consonants begword recon 1235-25
+before consonants begword recom 1235-36
+before consonants begword redis 1235-256
+before consonants begword reex 1235-1346
+before consonants begword reinter 1235-13456
+before consonants begword reentre 1235-356
+before consonants begword expro 1346-1234
+before consonants begword exre 1346-1235
+before consonants begword excon 1346-25
+before consonants begword excom 1346-36
+before consonants begword interre 13456-1235
+before consonants begword intercon 13456-25
+before consonants begword interdis 13456-256
+before consonants begword interpro 13456-1234
+before consonants begword intercom 13456-36
+before consonants begword predis 235-256
+before consonants begword precon 235-25
+before consonants begword prepro 235-1234
+before consonants begword preex 235-1346
+before consonants begword precom 235-36
+before consonants begword discon 256-25
+before consonants begword condis 25-256
+before consonants begword sobreex 23-1346
+before consonants begword sobrepro 23-1234
+before consonants begword sobrecom 23-36
+before consonants begword sobrecon 23-25
+before consonants begword sobreinter 23-13456
+before consonants begword sobredis 23-256
+before consonants begword sobreentre 23-356
+before consonants begword procom 1234-36
+before consonants begword procon 1234-25
+before consonants begword proex 1234-1346
+
+before consonants begword reinterpre 1235-13456-235
+before consonants begword sobreinterpre 23-13456-235
+before consonants begword recompre 1235-36-235
+before consonants begword sobreexpre 23-1346-235
+before consonants begword recompro 1235-36-1234
+before consonants begword reexpro 1235-1346-1234
+before consonants begword reprepro 1235-235-1234
 
 # A word beginning should be followed by at least a consonant and a vowel or a consonant
 # and a stenographic contraction. Some words are thus entirely uncontracted. Again, very
@@ -920,25 +1455,26 @@ begword sobrepr 23-1234-1235
 word red 1235-15-145
 word rey 1235-15-13456
 word res 1235-15-234
-word sobren 234-135-23-25
-word extra 1346-2345-1235-1
-word sobres 234-135-23-1246
+word sobren 234-135-23-26
+word entren 26-356-26
+word sobres 23-1246
 
 # exceptions to the entire table, words which may never be contracted or brailled
 # differently to avoid confussion with other contracted words
 word vodca 1236-135-14-145-1
-word entrenen 15-1345-356-26-26
+word entrenen 26-356-26-26
 word as 1-234
 word os 135-234
 word ion 24-135-1345
 
 # Whenever some partword contractions overlap, such as ad and dr, in a single word
-# (ladrillo) the dr contraction is preferred. Setting the only six cases where this can
-# occur.
+# (ladrillo) the dr contraction is preferred (B 16-1 v3, 3.4.1, Table 19). Setting the seven
+# cases where this can occur.
 
+always abr 1-23
 always adr 1-256
+always all 1-123456
 always uen 136-26
-always quem 12345-126
 always uem 136-126
 always uer 136-236
 always ues 136-1246
@@ -949,7 +1485,3 @@ endword emando 126-146-145
 endword emandos 126-146-145-234
 endword imando 345-146-145
 endword imandos 345-146-145-234
-endword emente 15-134
-endword ementes 15-134-234
-endword imente 24-134
-endword imentes 24-134-234
