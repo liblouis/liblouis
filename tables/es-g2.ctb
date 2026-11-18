@@ -102,7 +102,7 @@ endemph italic 5-35
 # These are used like any other contraction, also in words made up of nothing but such
 # contractions (Documento tecnico B 16-1, version 3, section 3.4.2: tren, trinen, drenen).
 
-begmidword ab 2
+always ab 2
 always br 23
 always cr 25
 always dr 256
@@ -146,12 +146,54 @@ noback pass2 `[!$ws.%kw] @5*
 # In a second pass we remove the virtual dots.
 noback pass3 %kw %kw
 
-# Special omnipresent mandatory rules for dot 5 to avoid punctuation ending
-# ambiguity. Closing quotation, question marks, or both.
+# Dot 5 (Documento tecnico B 16-1, version 3, 4.2) separates a punctuation or expression sign
+# from a stenographic sign that is written with the same cell.
 
+# The closing question mark, quotation marks and special typography always carry it when they
+# are the only closing sign.
 endword ?" 5-26-236
 endword " 5-236
 endword ? 5-26
+endword » 5-236
+endword ” 5-236
+
+# An opening sign in front of a word in lower case: dot 5 before the sign. In front of a
+# capital letter or a number the sign for those separates it. With several opening signs the
+# dot 5 goes before the last one.
+noback context ["¿"]$u @5-26
+noback context ["¡"]$u @5-235
+noback context ["«"]$u @5-236
+noback context ["“"]$u @5-236
+noback context ["("]$u @5-126
+noback context $s["–"]$u @5-36
+noback context `["–"]$u @5-36
+noback context $s["\""]$u @5-236
+noback context `["\""]$u @5-236
+
+# One dot 5 is enough when the word has its own (qué, kilómetro).
+noback pass2 @5@26@5 @26@5
+noback pass2 @5@235@5 @235@5
+noback pass2 @5@236@5 @236@5
+noback pass2 @5@126@5 @126@5
+noback pass2 @5@36@5 @36@5
+noback pass3 @5@5@26 @26@5
+noback pass3 @5@5@235 @235@5
+noback pass3 @5@5@236 @236@5
+noback pass3 @5@5@126 @126@5
+
+# With several closing signs the dot 5 goes before the first one, also when it does not
+# usually carry it (exclamation mark, parenthesis). A sign that is repeated is not another one.
+attribute closeq ?)»”"
+attribute closee ?!»”"
+noback context ["!"]%closeq @5-235
+noback context [")"]%closee @5-345
+
+# A semicolon after a word that ends in -bre and a comma after a word that ends in ab
+# (baobab, octubre;) would be read as part of the word.
+noback pass2 @23[@23]$s @5-23
+noback pass2 @23[@23]~ @5-23
+noback pass2 @2[@2]$s @5-2
+noback pass2 @2[@2]~ @5-2
 
 # single cell word contractions, single letters
 
@@ -1214,6 +1256,17 @@ word usted 136-145
 word ustedes 136-145-234
 word verdades 1236-1456-1246
 word vuestra 1236-1256-1
+
+# the accented forms sólo, éste and aquél and their variants: dot 5 before the sign of the word
+word sólo 5-234-123
+word éste 5-1356
+word ésta 5-1356-1
+word éstos 5-1356-246
+word éstas 5-1356-12346
+word aquél 5-346
+word aquélla 5-346-1
+word aquéllos 5-346-246
+word aquéllas 5-346-12346
 
 # names of countries: the sign 456 takes the place of the capital sign, so the capital
 # sign is removed in a second pass

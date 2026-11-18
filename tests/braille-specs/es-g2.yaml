@@ -148,8 +148,9 @@ tests:
     - ⠓⠳⠇⠛⠁
   - - tenue
     - ⠞⠢⠳
+  # ab at the end of a word (B 16-1 v3, Table 23)
   - - mayab
-    - ⠍⠁⠽⠁⠃
+    - ⠍⠁⠽⠂
 
   # intersyllabic tests where a contraction might be a syllable itself or part syllable
   - - abdica
@@ -573,7 +574,7 @@ tests:
   - - no quieres que hablen?
     - ⠝ ⠟⠊⠦⠫ ⠟ ⠓⠂⠇⠢⠐⠢
   - - la tienda se llama "el retén"
-    - ⠄ ⠞⠊⠢⠙⠁ ⠎ ⠇⠇⠁⠍⠁ ⠦⠑ ⠗⠞⠮⠝⠐⠦
+    - ⠄ ⠞⠊⠢⠙⠁ ⠎ ⠇⠇⠁⠍⠁ ⠐⠦⠑ ⠗⠞⠮⠝⠐⠦
 
   # test lower sign exceptions and stenographic interruption with capitalization
   - - toma un Tren
@@ -590,16 +591,13 @@ tests:
   # and before the closing question mark and quotation mark
   - - no "drenen" el lago
     - ⠝ ⠐⠦⠲⠢⠢⠐⠦ ⠑ ⠇⠁⠛⠕
-    - xfail: dot 5 before opening signs is not implemented yet
   - - toma un "tren"
     - ⠞⠺⠁ ⠥ ⠐⠦⠴⠢⠐⠦
-    - xfail: dot 5 before opening signs is not implemented yet
   - - toma un ¿tren?
     - ⠞⠺⠁ ⠥ ⠐⠢⠴⠢⠐⠢
-    - xfail: dot 5 before opening signs is not implemented yet
   - - es su ¿bikini?
     - ⠫ ⠜ ⠢⠐⠃⠊⠅⠊⠝⠊⠐⠢
-    - xfail: dot 5 before opening signs is not implemented yet
+    - xfail: the closing question mark after a word with k or w does not get its dot 5
 
   # Spanish grade 2 word list, Documento técnico B 16-1 (CBE), version 3, Apéndice C.
   # Word and its listed variants with their prefixed abbreviation.
@@ -1469,3 +1467,50 @@ tests:
     - ⠓⠁⠉⠢
   - - sé
     - ⠎⠮
+
+  # Dot 5 (B 16-1 v3, 4.1 and 4.2.2): before an opening sign that precedes a word in lower case,
+  # before the first of several closing signs, after the sign when the word has its own dot 5,
+  # before a semicolon after -bre and before a comma after ab. Accented sólo, éste and aquél.
+  # Checked by hand against the examples of the document.
+  - - ¿qué hora es?
+    - ⠢⠐⠟ ⠓⠱⠁ ⠫⠐⠢
+  - - ¿tú qué opinas?
+    - ⠐⠢⠞⠾ ⠐⠟ ⠕⠏⠔⠯⠐⠢
+  - - ¿Cómo te sientes?
+    - ⠢⠨⠐⠺ ⠞ ⠎⠲⠞⠫⠐⠢
+  - - ¡ojo con eso!
+    - ⠐⠖⠕⠚⠕ ⠉ ⠫⠕⠖
+  - - ¡¡ojo!!
+    - ⠖⠐⠖⠕⠚⠕⠖⠖
+  - - «cuidado con lo que dices»
+    - ⠐⠦⠉⠥⠊⠙⠹⠕ ⠉ ⠤ ⠟ ⠙⠊⠉⠫⠐⠦
+  - - «¿qué?»
+    - ⠦⠢⠐⠟⠐⠢⠦
+  - - 'Me dijo: «Ven a comer».'
+    - ⠨⠍ ⠙⠚⠒ ⠦⠨⠧⠢ ⠁ ⠉⠺⠦⠐⠦⠄
+  - - (ver más).
+    - ⠐⠣⠧⠦ ⠷⠜⠄
+  - - “¡ahora!”
+    - ⠦⠐⠖⠈⠓⠐⠖⠦
+  - - (¡ahora!)
+    - ⠣⠐⠖⠈⠓⠐⠖⠜
+  - - Llueve en otoño, en octubre; pero
+    - ⠨⠇⠇⠳⠧⠑ ⠢ ⠕⠞⠕⠻⠕⠂ ⠢ ⠕⠉⠞⠥⠆⠐⠆ ⠖
+  - - baobab, pero
+    - ⠃⠁⠕⠃⠂⠐⠂ ⠖
+  - - sobre; pero
+    - ⠆⠐⠆ ⠖
+  - - Aquel hombre (Manuel) es mi padre.
+    - ⠨⠬ ⠓⠺ ⠣⠨⠍⠩⠳⠇⠜ ⠫ ⠍⠊ ⠏⠁⠄
+  - - Mejor déjalo –dijo– y vete.
+    - ⠨⠍⠚ ⠙⠮⠚⠅⠕ ⠐⠤⠙⠚⠤ ⠽ ⠧⠑⠞⠄
+  - - Cómo
+    - ⠨⠐⠺
+  - - Quién
+    - ⠨⠐⠟⠝
+  - - éste
+    - ⠐⠵
+  - - aquél
+    - ⠐⠬
+  - - sólo
+    - ⠐⠎⠇
