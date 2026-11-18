@@ -771,6 +771,7 @@ word quién 5-12345-1345
 
 attribute consonants BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZzÑñ
 after consonants always on 1346
+before consonants begword on 1346
 # same applies to ion
 after consonants always ion 3456
 # The u e contraction may never be used after the letter g, avoids confussion with u
@@ -790,6 +791,7 @@ partword em 126
 partword es 1246
 partword im 345
 partword ion 3456
+partword ll 123456
 partword om 2456
 partword or 156
 partword os 246
@@ -1403,22 +1405,25 @@ before consonants begword reprepro 1235-235-1234
 word red 1235-15-145
 word rey 1235-15-13456
 word res 1235-15-234
-word sobren 234-135-23-25
+word sobren 234-135-23-26
+word entren 26-356-26
 word sobres 23-1246
 
 # exceptions to the entire table, words which may never be contracted or brailled
 # differently to avoid confussion with other contracted words
 word vodca 1236-135-14-145-1
-word entrenen 15-1345-356-26-26
+word entrenen 26-356-26-26
 word as 1-234
 word os 135-234
 word ion 24-135-1345
 
 # Whenever some partword contractions overlap, such as ad and dr, in a single word
-# (ladrillo) the dr contraction is preferred. Setting the only five cases where this can
-# occur.
+# (ladrillo) the dr contraction is preferred (B 16-1 v3, 3.4.1, Table 19). Setting the seven
+# cases where this can occur.
 
+always abr 1-23
 always adr 1-256
+always all 1-123456
 always uen 136-26
 always uem 136-126
 always uer 136-236
