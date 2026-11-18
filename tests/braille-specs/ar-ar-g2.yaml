@@ -1,5 +1,6 @@
 # Copyright © 2018, 2020 Ikrami Ahmad
 # Copyright © 2020 Bert Frees
+# Copyright © 2026 by Ammar Rahhal
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -174,9 +175,24 @@ tests:
   - - بنات
     - ⠃⠝⠨
   - - قائمون
-    - ⠘⠽⠸
+    - ⠟⠁⠽⠍⠸
   - - قالوا
     - ⠟⠉⠼
+
+  # Regression cases for the reviewed multiword and lexical contraction entries.
+  - - لم يلبث
+    - ⠘⠑
+  - - صائم
+    - ⠘⠽
+  - - أسئلة
+    - ⠌
+  # The two nearby spellings must not take the other word's contraction.
+  - - قائم
+    - ⠟⠁⠽⠍
+  - - إسئلة
+    - ⠨⠎⠽⠇⠡
+  - - صائمون
+    - ⠘⠽⠸
 
   # grade 1 indicator
 
