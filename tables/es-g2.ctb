@@ -1277,27 +1277,31 @@ word aquélla 5-346-1
 word aquéllos 5-346-246
 word aquéllas 5-346-12346
 
-# names of countries: the sign 456 takes the place of the capital sign, so the capital
-# sign is removed in a second pass
+# Names of countries (Apendice C of Documento tecnico B 16-1, version 3): the sign 456 takes
+# the place of the capital sign, so the capital sign is removed in a second pass. The name is
+# only abbreviated as a whole word, followed by a space, a comma, a full stop, a double quote or
+# the end of the text; with anything else after it (a letter, a semicolon, a parenthesis, a
+# hyphen) it is written out. The rules use the match opcode, whose pattern can look at what
+# follows; the characters of the name are compared without regard to case.
 
-word argentina 456-1-1235
-word bolivia 456-12-135
-word brasil 456-12-1235
-word chile 456-14-123
-word colombia 456-14-135
-word cuba 456-14-136
-word ecuador 456-15-14
-word españa 456-15-234
-word guatemala 456-1245-2345
-word honduras 456-125-1345
-word méxico 456-134-1346
-word nicaragua 456-1345-24
-word panamá 456-1234-1
-word paraguay 456-1234-13456
-word perú 456-1234-15
-word portugal 456-1234-2345
-word uruguay 456-136-13456
-word venezuela 456-1236-15
+match (^|!%a) argentina (%_|[,."»”]|^) 456-1-1235
+match (^|!%a) bolivia (%_|[,."»”]|^) 456-12-135
+match (^|!%a) brasil (%_|[,."»”]|^) 456-12-1235
+match (^|!%a) chile (%_|[,."»”]|^) 456-14-123
+match (^|!%a) colombia (%_|[,."»”]|^) 456-14-135
+match (^|!%a) cuba (%_|[,."»”]|^) 456-14-136
+match (^|!%a) ecuador (%_|[,."»”]|^) 456-15-14
+match (^|!%a) españa (%_|[,."»”]|^) 456-15-234
+match (^|!%a) guatemala (%_|[,."»”]|^) 456-1245-2345
+match (^|!%a) honduras (%_|[,."»”]|^) 456-125-1345
+match (^|!%a) méxico (%_|[,."»”]|^) 456-134-1346
+match (^|!%a) nicaragua (%_|[,."»”]|^) 456-1345-24
+match (^|!%a) panamá (%_|[,."»”]|^) 456-1234-1
+match (^|!%a) paraguay (%_|[,."»”]|^) 456-1234-13456
+match (^|!%a) perú (%_|[,."»”]|^) 456-1234-15
+match (^|!%a) portugal (%_|[,."»”]|^) 456-1234-2345
+match (^|!%a) uruguay (%_|[,."»”]|^) 456-136-13456
+match (^|!%a) venezuela (%_|[,."»”]|^) 456-1236-15
 
 noback pass2 @46@456@1@1235 @456@1@1235
 noback pass2 @46@46@456@1@1235 @456@1@1235
@@ -1335,6 +1339,45 @@ noback pass2 @46@456@136@13456 @456@136@13456
 noback pass2 @46@46@456@136@13456 @456@136@13456
 noback pass2 @46@456@1236@15 @456@1236@15
 noback pass2 @46@46@456@1236@15 @456@1236@15
+
+# Names of countries made of several words: Costa Rica 456-14-1235, El Salvador 456-234-1236,
+# Republica Dominicana 456-145-135. A rule cannot contain a space, so each word is translated on
+# its own (with its capital sign) and the second pass replaces the whole expression, space
+# included, by the sign of the name. Only when what follows is a space, a comma, a full stop,
+# a double quote (dot 5 and 236) or the end of the text, as for the other countries. The cells
+# are the ones the words have in the first pass (costa = c + os + t + a, salvador = s + al + v +
+# ad + or).
+
+noback pass2 [@46@14@246@2345@1@0@46@1235@24@14@1]$s @456@14@1235
+noback pass2 [@46@14@246@2345@1@0@46@1235@24@14@1]@2 @456@14@1235
+noback pass2 [@46@14@246@2345@1@0@46@1235@24@14@1]@3 @456@14@1235
+noback pass2 [@46@14@246@2345@1@0@46@1235@24@14@1]@5@236 @456@14@1235
+noback pass2 [@46@14@246@2345@1@0@46@1235@24@14@1]~ @456@14@1235
+noback pass2 [@46@46@14@246@2345@1@0@46@46@1235@24@14@1]$s @456@14@1235
+noback pass2 [@46@46@14@246@2345@1@0@46@46@1235@24@14@1]@2 @456@14@1235
+noback pass2 [@46@46@14@246@2345@1@0@46@46@1235@24@14@1]@3 @456@14@1235
+noback pass2 [@46@46@14@246@2345@1@0@46@46@1235@24@14@1]@5@236 @456@14@1235
+noback pass2 [@46@46@14@246@2345@1@0@46@46@1235@24@14@1]~ @456@14@1235
+noback pass2 [@46@15@0@46@234@13@1236@1456@156]$s @456@234@1236
+noback pass2 [@46@15@0@46@234@13@1236@1456@156]@2 @456@234@1236
+noback pass2 [@46@15@0@46@234@13@1236@1456@156]@3 @456@234@1236
+noback pass2 [@46@15@0@46@234@13@1236@1456@156]@5@236 @456@234@1236
+noback pass2 [@46@15@0@46@234@13@1236@1456@156]~ @456@234@1236
+noback pass2 [@46@46@15@0@46@46@234@13@1236@1456@156]$s @456@234@1236
+noback pass2 [@46@46@15@0@46@46@234@13@1236@1456@156]@2 @456@234@1236
+noback pass2 [@46@46@15@0@46@46@234@13@1236@1456@156]@3 @456@234@1236
+noback pass2 [@46@46@15@0@46@46@234@13@1236@1456@156]@5@236 @456@234@1236
+noback pass2 [@46@46@15@0@46@46@234@13@1236@1456@156]~ @456@234@1236
+noback pass2 [@46@1235@1234@23456@12@123@24@14@1@0@46@145@2456@35@24@14@146@1]$s @456@145@135
+noback pass2 [@46@1235@1234@23456@12@123@24@14@1@0@46@145@2456@35@24@14@146@1]@2 @456@145@135
+noback pass2 [@46@1235@1234@23456@12@123@24@14@1@0@46@145@2456@35@24@14@146@1]@3 @456@145@135
+noback pass2 [@46@1235@1234@23456@12@123@24@14@1@0@46@145@2456@35@24@14@146@1]@5@236 @456@145@135
+noback pass2 [@46@1235@1234@23456@12@123@24@14@1@0@46@145@2456@35@24@14@146@1]~ @456@145@135
+noback pass2 [@46@46@1235@1234@23456@12@123@24@14@1@0@46@46@145@2456@35@24@14@146@1]$s @456@145@135
+noback pass2 [@46@46@1235@1234@23456@12@123@24@14@1@0@46@46@145@2456@35@24@14@146@1]@2 @456@145@135
+noback pass2 [@46@46@1235@1234@23456@12@123@24@14@1@0@46@46@145@2456@35@24@14@146@1]@3 @456@145@135
+noback pass2 [@46@46@1235@1234@23456@12@123@24@14@1@0@46@46@145@2456@35@24@14@146@1]@5@236 @456@145@135
+noback pass2 [@46@46@1235@1234@23456@12@123@24@14@1@0@46@46@145@2456@35@24@14@146@1]~ @456@145@135
 
 # Word beginnings (principles) are only used before a consonant (Documento tecnico B 16-1,
 # version 3, 3.1). Before a vowel the letters are written with their contractions as usual
