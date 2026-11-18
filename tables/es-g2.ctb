@@ -184,7 +184,6 @@ word este 1356
 
 word las 12346
 word ella 123456
-word mas 134-12346
 word él 2346
 word según 23456
 word para 16
@@ -216,10 +215,6 @@ word su 345
 
 word estos 1356-246
 word estas 1356-12346
-word eso 1246-135
-word esa 1246-1
-word esos 1246-246
-word ésas 1246-12346
 word aquello 346-135
 word aquella 346-1
 word aquellas 346-12346
@@ -235,20 +230,14 @@ word una 136-1
 word uno 136-135
 word unos 136-246
 word unas 136-12346
-word ese 1246-15
 word años 12456-246
 word grados 2356-246
 word números 3456-246
-word seres 234-236-1246
-word sones 1346-1246
 word hacer 236-1235
-word hacen 236-1345
-word hacemos 236-134-246
 
 # dot 5 as stenographic accentuator for a few of those words
 
 word qué 5-12345
-word sé 5-234
 word cómo 5-2456
 word más 12356
 word e 5-15
@@ -273,14 +262,14 @@ word buenamente 12-134
 word buen 12-1345
 word bueno 12-135
 word bastante 12-2345
-sufword bondad 12-1456
+word bondad 12-1456
 
 # letter c
 
 contraction cc
 
 # this specific word has potential back translation problems
-sufword cerca 14-14
+word cerca 14-14
 contraction cd
 word cuando 14-145
 word ciego 14-1245
@@ -296,17 +285,17 @@ word cuyo 14-13456
 
 word debajo 145-12-245
 contraction dc
-sufword decía 145-14
-prfword decían 145-14-1345
+word decía 145-14
+word decían 145-14-1345
 word donde 145-145
 word dondequiera 145-145-12345
 contraction df
-sufword difícil 145-124
-prfword diferencia 145-124-14
-prfword diferente 145-124-2345
-prfword dijo 145-245
+word difícil 145-124
+word diferencia 145-124-14
+word diferente 145-124-2345
+word dijo 145-245
 word delante 145-123
-prfword demás 145-134
+word demás 145-134
 word demasiado 145-134-145
 word después 145-1234
 word desde 145-234
@@ -317,22 +306,22 @@ word detrás 145-356
 
 word efecto 15-124
 word efectivo 15-124-1236
-sufword efectividad 15-124-1236-1456
+word efectividad 15-124-1236-1456
 word ejemplo 15-245
-sufword ejemplar 15-245-1235
+word ejemplar 15-245-1235
 
 # letter f
 
-sufword favor 124-1236
-sufword fácil 124-12356
-sufword facilidad 124-1456
+word favor 124-1236
+word fácil 124-12356
+word facilidad 124-1456
 
 # letter g
 
 # this specific word conflicts with back translation but many words in the language can contract it
 noback always grande 1245-145
-sufword general 1245-1345
-sufword generalidad 1245-1345-1456
+word general 1245-1345
+word generalidad 1245-1345-1456
 
 # letter h
 
@@ -353,14 +342,14 @@ word hombre 125-2456
 
 # letter i
 
-sufword igual 24-1245
-sufword igualdad 24-1245-1456
+word igual 24-1245
+word igualdad 24-1245-1456
 
 # leter j
 
 word junto 245-2345
 word joven 245-1236
-sufword juventud 245-1236-2345
+word juventud 245-1236-2345
 
 # letter k
 
@@ -370,7 +359,7 @@ word alguien 13-1245-1345
 word algún 13-1345
 word alguna 13-1345-1
 word alguno 13-1345-135
-sufword alrededor 13-1235
+word alrededor 13-1235
 
 # letter l
 
@@ -378,23 +367,22 @@ contraction lg
 word largo 123-1245
 word lejos 123-245
 contraction lu
-sufword lugar 123-136
+word lugar 123-136
 word luego 123-1256
-word luegos 123-1256-234
 
 # letter m
 
 contraction ma
-prfword madre 134-1
-prfword medio 134-145
+word madre 134-1
+word medio 134-145
 always mediante 134-145-2345
-sufword mejor 134-245
+word mejor 134-245
 contraction mm
 word mismo 134-134
 word manera 134-1345
 word menos 134-234
-sufword mujer 134-136
-sufword mayor 134-13456
+word mujer 134-136
+word mayor 134-13456
 word mayoría 134-13456-1235
 word mientras 134-356
 
@@ -402,26 +390,26 @@ word mientras 134-356
 
 word nunca 1345-14
 word necesario 1345-14-1235
-sufword necesidad 1345-14-1456
+word necesidad 1345-14-1456
 word nadie 1345-145
 word ningún 1345-1245
 word ninguna 1345-1245-1
 word ninguno 1345-1245-135
-sufword natural 1345-2345
+word natural 1345-2345
 word naturaleza 1345-2345-1356
 word naturalidad 1345-2345-1456
 word nuevo 1345-1236
-sufword novedad 1345-1236-1456
-prfword nada 1345-1456
+word novedad 1345-1236-1456
+word nada 1345-1456
 word niño 1345-12456
 word nuestro 1345-1256
 
 # letter o
 
-sufword oficio 135-124
-sufword oficial 135-124-123
+word oficio 135-124
+word oficial 135-124-123
 word oportuno 135-1234
-sufword oportunidad 135-1234-1456
+word oportunidad 135-1234-1456
 word otro 135-356
 word ocasión 135-3456
 
@@ -432,7 +420,7 @@ contraction pc
 word poco 1234-14
 word podía 1234-145 
 word podían 1234-145-1345
-sufword persona 1234-1345
+word persona 1234-1345
 word personalidad 1234-1345-123-1456
 word porque 1234-12345
 word poder 1234-1235
@@ -454,7 +442,7 @@ word razón 1235-1356
 # letter s
 
 word sido 234-145
-prfword siguiente 234-1245
+word siguiente 234-1245
 word solo 234-123
 word sino 234-1345
 word superior 234-1234
@@ -473,7 +461,7 @@ word tenido 2345-1345-145
 word tenían 2345-1345-1345
 word tiempo 2345-1234
 word tampoco 2345-1234-14
-sufword temporal 2345-1234-123
+word temporal 2345-1234-123
 word tener 2345-1235
 word tanto 2345-2345
 contraction tv
@@ -484,12 +472,12 @@ word tuyo 2345-13456
 
 word veces 1236-14
 word vida 1236-145
-prfword verdad 1236-1456
+word verdad 1236-1456
 word vuestro 1236-1256
 
 # letter x
 
-sufword exterior 1346-1235
+word exterior 1346-1235
 
 # u acute
 
@@ -499,8 +487,8 @@ word último 23456-123
 # misc symbols
 
 word arriba 16-1235
-sufword anterior 146-1235
-sufword anterioridad 146-1235-1456
+word anterior 146-1235
+word anterioridad 146-1235-1456
 word antes 146-234
 word adelante 1456-123
 word además 1456-134
@@ -512,16 +500,16 @@ word estando 1246-1345-145
 word estar 1246-1235
 word está 1246-2345
 word estuvo 1246-1236
-sufword abajo 2-245
+word abajo 2-245
 word breve 23-1236
 word  brevedad 23-1236-1456
 word condición 25-145-3456
 word conmigo 25-134
 word consigo 25-234
 word consecuencia 25-234-14
-prfword consecuente 25-234-2345
+word consecuente 25-234-2345
 word contigo 25-2345
-prfword contra 25-356
+word contra 25-356
 word contrario 25-356-1235
 word  contrariedad 25-356-1235-1456
 word encima 26-14
@@ -529,16 +517,16 @@ word entonces 26-2345
 word principio 235-14
 word principal 235-14-123
 word propio 1234-1234
-sufword propiedad 1234-1234-1456
+word propiedad 1234-1234-1456
 word pronto 1234-2345
-sufword hacía 236-14
+word hacía 236-14
 word hacían 236-14-1345
-sufword hacer 236-1235
-sufword inferior 35-124
-sufword inferioridad 35-124-1456
+word hacer 236-1235
+word inferior 35-124
+word inferioridad 35-124-1456
 word inmediato 35-134
-sufword interior 35-1235
-sufword interioridad 35-1235-1456
+word interior 35-1235
+word interioridad 35-1235-1456
 word interés 35-2345
 word interesante 35-2345-2345
 word trabajo 356-12
@@ -560,24 +548,20 @@ word absolutos 1-12-246
 word absolutas 1-12-12346
 word absolutamente 1-12-134
 word acciones 1-3456-1246
-word accionando 1-3456-146-145
 word bajos 12-245-246
 word bajas 12-245-12346
-word bajes 12-245-1246
 word buenos 12-246
 word buenas 12-12346
 word buenamente 12-1345-134
 word bastantes 12-2345-1246
 word bondades 12-1456-1246
-word cercas 14-14-12346
 word ciegas 14-1245-12346
 word ciegos 14-1245-246
 word ciegamente 14-1245-134
 word cierta 14-2345-1
 word ciertas 14-2345-12346
-prfword ciertos 14-2345-246
+word ciertos 14-2345-246
 word ciertamente 14-2345-134
-word concierto 25-14-2345
 word cuales 14-123-1246
 word cuál 5-14-123
 word cuáles 5-14-123-1246
@@ -590,8 +574,8 @@ word cuya 14-13456-1
 word cuyas 14-13456-12346
 word cuyos 14-13456-246
 word dónde 5-145-145
-prfword diferencias 145-124-14-12346
-prfword diferentes 145-124-2345-1246
+word diferencias 145-124-14-12346
+word diferentes 145-124-2345-1246
 word demasiados 145-134-145-246
 word demasiadas 145-134-145-12346
 word efectos 15-124-246
@@ -607,10 +591,6 @@ word hijas 125-245-12346
 word hermanos 125-134-246
 word hermanas 125-134-12346
 word hermana 125-134-1
-word hermanastra 125-134-1-234-356-1
-word hermanastro 125-134-1-234-356-135
-word hermanastras 125-134-1-234-356-12346
-word hermanastros 125-134-1-234-356-246
 word historias 125-2345-12346
 word prehistoria 235-125-2345
 word prehistorias 235-125-2345-12346
@@ -629,8 +609,8 @@ word algunos 13-1345-246
 word largos 123-1245-246
 word largas 123-1245-12346
 word madres 134-1-1246
-prfword medias 134-145-12346
-prfword medios 134-145-246
+word medias 134-145-12346
+word medios 134-145-246
 word misma 134-134-1
 word mismas 134-134-12346
 word mismos 134-134-246
@@ -648,15 +628,9 @@ word niñas 1345-12456-12346
 word niños 1345-12456-246
 word nuestras 1345-1256-12346
 word nuestros 1345-1256-246
-sufword oficios 135-124-246
-sufword extraoficial 1346-2345-1235-1-135-124-123
+word oficios 135-124-246
 word oportunas 135-1234-12346
 word oportunos 135-1234-246
-word inoportuno 35-135-1234
-word inoportunos 35-135-1234-246
-sufword inoportuna 35-135-1234-1
-word inoportunas 35-135-1234-12346
-sufword inoportunidad 35-135-1234-1456
 word jóvenes 245-1236-1246
 word otras 135-356-12346
 word otros 135-356-246
@@ -672,23 +646,18 @@ word personas 1234-1345-12346
 word pequeña 1234-12456-1
 word pequeñas 1234-12456-12346
 word pequeños 1234-12456-246
-word pequeñez 1234-12456-15-1356
-word pequeñeces 1234-12456-15-14-1246
 word pueden 1234-1256-1345
 word puedes 1234-1256-234
-prfword quién 5-12345-1345
+word quién 5-12345-1345
 word relaciones 1235-123-1246
-word relacionando 1235-123-146-145
 word relativa 1235-123-1236-1
 word relativas 1235-123-1236-12346
 word relativos 1235-123-1236-246
 word relativamente 1235-123-1236-134
 word razones 1235-1356-1246
-prfword razon 1235-1356
-prfword siguientes 234-1245-1246
+word siguientes 234-1245-1246
 word solos 234-123-246
 word solas 234-123-12346
-word sólamente 234-123-1-134
 word sola 234-123-1
 word sitios 234-2345-246
 word situaciones 234-2345-3456-1246
@@ -706,13 +675,10 @@ word retenían 1235-2345-1345-1345
 word entretiempo 356-2345-1234
 word tiempos 2345-1234-246
 word entretiempos 356-2345-1234-246
-word sobretiempo 23-2345-1234
 word contener 25-2345-1235
 word entretener 356-2345-1235
 word tuyas 2345-13456-12346
 word tuyos 2345-13456-246
-word convida 25-1236-145
-word convidas 25-1236-145-12346
 word vidas 1236-145-12346
 word vuestras 1236-1256-12346
 word vuestros 1236-1256-246
@@ -729,7 +695,6 @@ word breves 23-1236-1246
 word brevedades 23-1236-1456-1246
 word condiciones 25-145-3456-1246
 word condicionalmente 25-145-3456-123-134
-word incondicionalmente 35-25-145-3456-123-134
 word consecuencias 25-234-14-12346
 word principios 235-14-246
 word propia 1234-1234-1
@@ -740,11 +705,9 @@ word inmediatamente 35-134-134
 word inmediatas 35-134-12346
 word inmediata 35-134-1
 word inmediatos 35-134-246
-word inmediatez 35-134-15-1356
 word intereses 35-2345-1246
 word interesantemente 35-2345-2345-134
 word interesantes 35-2345-2345-1246
-word trabajas 356-12-12346
 word trabajos 356-12-246
 word numerosos 3456-234-246
 word numerosas 3456-234-12346
@@ -823,7 +786,7 @@ after consonants endword esta 1356
 # can follow one another (3.2.2); the ones that occur in Spanish texts in at least five
 # different words, plus the examples of the document, are listed.
 
-prfword acción 1-3456
+word acción 1-3456
 endword ble 12
 endword bles 12-234
 endword cia 14
