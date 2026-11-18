@@ -231,7 +231,6 @@ dist_yaml_TESTS =				\
 	yaml/attribute.yaml			\
 	yaml/back_cont_then_punc.yaml		\
 	yaml/backtranslation_emphasis.yaml	\
-	yaml/backtranslation_mode_indicators.yaml	\
 	yaml/begcaps_endcaps.yaml		\
 	yaml/before_begmidword.yaml		\
 	yaml/broken_equals_operand.yaml		\
@@ -255,6 +254,7 @@ dist_yaml_TESTS =				\
 	yaml/issue-963.yaml			\
 	yaml/letterDefTest_harness.yaml		\
 	yaml/match-vs-always.yaml		\
+	yaml/mode_indicators.yaml		\
 	yaml/multipass-backward.yaml		\
 	yaml/multipass-forward.yaml		\
 	yaml/multipass.yaml			\
