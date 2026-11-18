@@ -311,20 +311,22 @@ tests:
   - - trompos
     - ⠴⠺⠏⠪
 
-  # lower sign exceptions: when a word consists of lowered signs only, first contraction is
-  # destroyed to avoid confussion with punctuation signs
+  # words made up only of contractions whose signs are in the lower part of the cell
+  # (B 16-1 v3, 3.4.2): all contractions are used
   - - tren
-    - ⠞⠗⠢
+    - ⠴⠢
   - - trinen
-    - ⠞⠗⠔⠢
+    - ⠴⠔⠢
   - - entrenen
     - ⠑⠝⠴⠢⠢
   - - crin
-    - ⠉⠗⠔
+    - ⠒⠔
   - - graben
-    - ⠛⠗⠂⠢
+    - ⠶⠂⠢
   - - drenen
-    - ⠙⠗⠢⠢
+    - ⠲⠢⠢
+  - - traben
+    - ⠴⠂⠢
 
   # lang realization: contractions may not abbreviate accented (acute) vowels
   - - ábside
@@ -572,7 +574,7 @@ tests:
 
   # test lower sign exceptions and stenographic interruption with capitalization
   - - toma un Tren
-    - ⠞⠺⠁ ⠥ ⠨⠞⠗⠢
+    - ⠞⠺⠁ ⠥ ⠨⠴⠢
   - - fueron con Walter
     - ⠋⠥⠦⠭ ⠉ ⠐⠨⠺⠁⠇⠞⠑⠗
   - - es el señor Kraller
@@ -581,18 +583,20 @@ tests:
     - ⠫ ⠡ ⠐⠨⠨⠍⠁⠭⠺⠑⠇⠇
 
   # testing these with punctuation
+  # B 16-1 v3, 4.2.2: dot 5 goes before an opening sign that precedes a lowercase word
+  # and before the closing question mark and quotation mark
   - - no "drenen" el lago
-    - ⠝ ⠦⠙⠗⠢⠢⠐⠦ ⠑ ⠇⠁⠛⠕
-    - xfail: unresolved multipass situation
+    - ⠝ ⠐⠦⠲⠢⠢⠐⠦ ⠑ ⠇⠁⠛⠕
+    - xfail: dot 5 before opening signs is not implemented yet
   - - toma un "tren"
-    - ⠞⠺⠁ ⠥ ⠦⠞⠗⠢⠐⠦
-    - xfail: unresolved multipass situation
+    - ⠞⠺⠁ ⠥ ⠐⠦⠴⠢⠐⠦
+    - xfail: dot 5 before opening signs is not implemented yet
   - - toma un ¿tren?
-    - ⠞⠺⠁ ⠥ ⠢⠞⠗⠢⠐⠢
-    - xfail: unresolved multipass situation
+    - ⠞⠺⠁ ⠥ ⠐⠢⠴⠢⠐⠢
+    - xfail: dot 5 before opening signs is not implemented yet
   - - es su ¿bikini?
     - ⠫ ⠜ ⠢⠐⠃⠊⠅⠊⠝⠊⠐⠢
-    - xfail: unresolved multipass situation
+    - xfail: dot 5 before opening signs is not implemented yet
 
   # Spanish grade 2 word list, Documento técnico B 16-1 (CBE), version 3, Apéndice C.
   # Word and its listed variants with their prefixed abbreviation.

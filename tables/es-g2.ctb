@@ -98,67 +98,23 @@ endemph bold 5-35
 begemph italic 5-35
 endemph italic 5-35
 
+# Contractions made of signs in the lower part of the cell
+
+# These are used like any other contraction, also in words made up of nothing but such
+# contractions (Documento tecnico B 16-1, version 3, section 3.4.2: tren, trinen, drenen).
+
+begmidword ab 2
+always br 23
+always cr 25
+always dr 256
+always en 26
+always in 35
+always er 236
+always gr 2356
+always pr 235
+always tr 356
+
 # Spanish grade 2 situations solved with the use of multi-pass implementations
-
-# If a word happens to be made up of only lowered signs, then first contraction is not
-# contracted to avoid confussion with punctuation. A multi-pass implementation is in order
-# here. In a first pass all the contractions are made, but with a temporary virtual dot;
-# then in a second pass some contractions are cancelled, and for the other contractions the
-# virtual dot is removed.
-
-# Adding the virtual dot to lowered cell contractions.
-
-sign \xe001 2a
-sign \xe002 23a
-sign \xe003 25a
-sign \xe004 256a
-sign \xe005 26a
-sign \xe009 35a
-sign \xe008 236a
-sign \xe007 2356a
-sign \xe006 235a
-sign \xe000 356a
-
-# Forcing the contractions to have the virtual dot.
-
-begmidword ab 2a
-always br 23a
-always cr 25a
-always dr 256a
-always en 26a
-always in 35a
-always er 236a
-always gr 2356a
-always pr 235a
-always tr 356a
-
-# Grouping all of these into a class.
-
-attribute contraction \xe000\xe001\xe002\xe003\xe004\xe005\xe006\xe007\xe008\xe009
-swapdd cancelcontraction 2a,23a,25a,256a,26a,35a,236a,2356a,235a,356a 1-12,12-1235,14-1235,145-1235,15-1345,24-1345,15-1235,1245-1235,1234-1235,2345-1235
-swapdd finalizecontraction 2a,23a,25a,256a,26a,35a,236a,2356a,235a,356a 2,23,25,256,26,35,236,2356,235,356
-
-#  contraction cancellations using variables
-
-noback pass2 $s[%contraction]$s %cancelcontraction
-noback pass2 $s[%contraction]%contraction.$s %cancelcontraction
-noback pass2 $s[%contraction]~ %cancelcontraction
-noback pass2 $s[%contraction]%contraction.~ %cancelcontraction
-noback pass2 `[%contraction]$s %cancelcontraction
-noback pass2 `[%contraction]%contraction.$s %cancelcontraction
-noback pass2 `[%contraction]~ %cancelcontraction
-noback pass2 `[%contraction]%contraction.~ %cancelcontraction
-# same with leading capsign
-noback pass2 $s@46[%contraction]$s %cancelcontraction
-noback pass2 $s@46[%contraction]$wx.$s %cancelcontraction
-noback pass2 $s@46[%contraction]~ %cancelcontraction
-noback pass2 $s@46[%contraction]$wx.~ %cancelcontraction
-noback pass2 `@46[%contraction]$s %cancelcontraction
-noback pass2 `@46[%contraction]$wx.$s %cancelcontraction
-noback pass2 `@46[%contraction]~ %cancelcontraction
-noback pass2 `@46[%contraction]$wx.~ %cancelcontraction
-
-noback pass2 %contraction %finalizecontraction
 
 # Whenever x, w or k is anywhere in a word the entire word is uncontracted and dot 5 prefixes the word.
 
@@ -179,16 +135,16 @@ lowercase x 1346b
 
 # Then we define a class and a swap set. The class is needed to make the negations work.
 # (does not work with only the swapdd rule: is this a bug?)
-attribute kwx kwx # this is the 2nd class defined in this table, so we can also use $x instead of %kwx
+attribute kwx kwx # this is the 1st class defined in this table, so we can also use $w instead of %kwx
 # The swap set is needed for the rule that removes the virtual dots.
 swapdd kwx 13b,2456b,1346b 13,2456,1346
 # We are using the same name for both because we can.
 
 # In a first pass we add the dot 5.
 noback pass2 _$s[%kwx] @5*
-noback pass2 _$s[!$xs.%kwx] @5* # !$xs means "anything but a K, W, X or SPACE"
+noback pass2 _$s[!$ws.%kwx] @5* # !$ws means "anything but a K, W, X or SPACE"
 noback pass2 `[%kwx] @5*
-noback pass2 `[!$xs.%kwx] @5*
+noback pass2 `[!$ws.%kwx] @5*
 
 # In a second pass we remove the virtual dots.
 noback pass3 %kwx %kwx
