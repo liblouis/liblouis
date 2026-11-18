@@ -606,11 +606,11 @@ tests:
     - xfail: tbh, not sure if swallowing white space should be liblouis responsibilty
   - # Swallow white space whith embed new lines
     - "Gedanken
-— Strich"
+      — Strich"
     - "&dkc'- }r#"
   - # Swallow white space whith embed new lines
     - "Gedanken
-  — Strich"
+      — Strich"
     - "&dkc'- }r#"
   - # Swallow white space whith embed new lines
     - "Gedanken
@@ -792,7 +792,7 @@ tests:
   # line break before ndash
   # Bug #1212
   - - "word
-– word"
+      – word"
     - "w?d'- w?d"
 
   # originally from https://github.com/sbsdev/sbs-braille-tables/blob/master/tests/accents.yaml
