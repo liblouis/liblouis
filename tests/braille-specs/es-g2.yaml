@@ -509,15 +509,15 @@ tests:
   - - sobreproducido
     - ⠆⠏⠗⠕⠙⠥⠉⠊⠙⠕
 
-  # stenographic interruption: whenever x, w or k is anywhere in a word, the entire word is
-  # uncontracted and dot 5 prefixes the word.
+  # stenographic interruption: whenever w or k is anywhere in a word, the entire word is
+  # uncontracted and dot 5 prefixes the word (B 16-1 v3, 4.2.1).
   # most are african based or arabic derived words in the language.
   - - kiosco
     - ⠐⠅⠊⠕⠎⠉⠕
   - - wagner
     - ⠐⠺⠁⠛⠝⠑⠗
   - - xalapa
-    - ⠐⠭⠁⠇⠁⠏⠁
+    - ⠭⠅⠁⠏⠁
   - - hardware
     - ⠐⠓⠁⠗⠙⠺⠁⠗⠑
   - - hawaiano
@@ -551,20 +551,24 @@ tests:
   - - folklórica
     - ⠐⠋⠕⠇⠅⠇⠬⠗⠊⠉⠁
   - - anexar
-    - ⠐⠁⠝⠑⠭⠁⠗
+    - ⠩⠑⠭⠡
   - - anorexia
-    - ⠐⠁⠝⠕⠗⠑⠭⠊⠁
+    - ⠩⠱⠑⠭⠊⠁
   - - aproximación
-    - ⠐⠁⠏⠗⠕⠭⠊⠍⠁⠉⠊⠬⠝
+    - ⠁⠖⠕⠭⠜⠁⠉⠼
   - - aproximadamente
-    - ⠐⠁⠏⠗⠕⠭⠊⠍⠁⠙⠁⠍⠑⠝⠞⠑
+    - ⠁⠖⠕⠭⠜⠹⠁⠍
   - - auxiliador
-    - ⠐⠁⠥⠭⠊⠇⠊⠁⠙⠕⠗
+    - ⠁⠥⠭⠊⠇⠊⠹⠱
   - - xilófono
-    - ⠐⠭⠊⠇⠬⠋⠕⠝⠕
+    - ⠭⠊⠇⠬⠋⠭⠕
   - - exponer
-    - ⠐⠑⠭⠏⠕⠝⠑⠗
-    - xfail: the exception to the interruption rule is applied correctly here
+    - ⠭⠏⠭⠦
+  # the letter x does not interrupt stenography
+  - - taxi
+    - ⠞⠁⠭⠊
+  - - examen
+    - ⠑⠭⠁⠍⠢
     
   # testing to check if dot 5 is also added before closing quotation or question mark symbols
   - - no quieres que hablen?

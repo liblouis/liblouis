@@ -72,12 +72,11 @@
 #
 # ----------------------------------------------------------------------
 
-# Add virtual dot to k, w and x (see below). This overwrites the definitions from
+# Add virtual dot to k and w (see below). This overwrites the definitions from
 # es-g1.ctb. For the table to work these rules need to be defined before AND after the
 # include.
 lowercase k 13b
 lowercase w 2456b
-lowercase x 1346b
 
 include es-g1.ctb
 
@@ -116,38 +115,36 @@ always tr 356
 
 # Spanish grade 2 situations solved with the use of multi-pass implementations
 
-# Whenever x, w or k is anywhere in a word the entire word is uncontracted and dot 5 prefixes the word.
+# Whenever w or k is anywhere in a word the entire word is uncontracted and dot 5 prefixes the word
+# (Documento tecnico B 16-1, version 3, 4.2.1). The letter x does not interrupt contractions.
 
-# Translate words containing k, w or x according to character definitions.
+# Translate words containing k or w according to character definitions.
 
 nocont K
 nocont W
-nocont X
 nocont k
 nocont w
-nocont x
 
 # To prefix the words with dot 5 we use a multi-pass implementation. First we add a virtual
-# dot to k, w and x so that they can be distinguished in pass2.
+# dot to k and w so that they can be distinguished in pass2.
 lowercase k 13b
 lowercase w 2456b
-lowercase x 1346b
 
 # Then we define a class and a swap set. The class is needed to make the negations work.
 # (does not work with only the swapdd rule: is this a bug?)
-attribute kwx kwx # this is the 1st class defined in this table, so we can also use $w instead of %kwx
+attribute kw kw # this is the 1st class defined in this table, so we can also use $w instead of %kw
 # The swap set is needed for the rule that removes the virtual dots.
-swapdd kwx 13b,2456b,1346b 13,2456,1346
+swapdd kw 13b,2456b 13,2456
 # We are using the same name for both because we can.
 
 # In a first pass we add the dot 5.
-noback pass2 _$s[%kwx] @5*
-noback pass2 _$s[!$ws.%kwx] @5* # !$ws means "anything but a K, W, X or SPACE"
-noback pass2 `[%kwx] @5*
-noback pass2 `[!$ws.%kwx] @5*
+noback pass2 _$s[%kw] @5*
+noback pass2 _$s[!$ws.%kw] @5* # !$ws means "anything but a K, W or SPACE"
+noback pass2 `[%kw] @5*
+noback pass2 `[!$ws.%kw] @5*
 
 # In a second pass we remove the virtual dots.
-noback pass3 %kwx %kwx
+noback pass3 %kw %kw
 
 # Special omnipresent mandatory rules for dot 5 to avoid punctuation ending
 # ambiguity. Closing quotation, question marks, or both.
