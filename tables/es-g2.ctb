@@ -791,6 +791,34 @@ partword os 246
 partword qu 12345
 partword ue 1256
 
+# sequences (Documento tecnico B 16-1, version 3, 3.3): groups of letters that are written with the
+# sign of a one-cell word. Like principles and endings they have priority over contractions.
+
+# que: at the beginning and in the middle of a word; at the end it is the ending -que
+begmidword que 12345
+# para: anywhere
+partword para 456-16
+# ante: at the beginning and in the middle; at the end of a word the ending -te is used,
+# after the contraction an
+begmidword ante 456-146
+endword antes 146-2345-234
+endword antemente 146-2345-134
+endword anteando 146-2345-146-145
+endword antedad 146-2345-1456
+endword antedades 146-2345-1456-1246
+# para and esta are followed by the ending -ando: the ending has priority, the sequence
+# does not use its last letter (parando, gestando)
+endword parando 1234-16-146-145
+endword parandos 1234-16-146-145-234
+word parando 1234-16-146-145
+word parandos 1234-16-146-145-234
+endword estando 1246-2345-146-145
+# esta: before a consonant at the beginning, between consonants in the middle and after a
+# consonant at the end
+before consonants begword esta 1356
+after consonants before consonants midword esta 1356
+after consonants endword esta 1356
+
 # word endings, including plurals (Documento tecnico B 16-1, version 3, 3.2). Several endings
 # can follow one another (3.2.2); the ones that occur in Spanish texts in at least five
 # different words, plus the examples of the document, are listed.
@@ -1019,12 +1047,11 @@ word os 135-234
 word ion 24-135-1345
 
 # Whenever some partword contractions overlap, such as ad and dr, in a single word
-# (ladrillo) the dr contraction is preferred. Setting the only six cases where this can
+# (ladrillo) the dr contraction is preferred. Setting the only five cases where this can
 # occur.
 
 always adr 1-256
 always uen 136-26
-always quem 12345-126
 always uem 136-126
 always uer 136-236
 always ues 136-1246
