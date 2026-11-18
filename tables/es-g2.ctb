@@ -813,58 +813,74 @@ endword ques 12345-234
 endword ucción 136-3456
 endword ucciones 136-3456-1246
 
-# Word beginnings may not be followed by vowels (to avoid confussion with punctuation
-# signs), including accented ones. More classes follow.
-attribute vowels AaEeIiOoUuÁáÉéÍíÓóÚúÜü
-
-# Setting the exceptions, though note that this will not work when back translating but it
-# willb e needed in a few cases.
-before vowels begword com 14-2456
-before vowels begword con 14-1346
-before vowels begword dis 145-24-234
-before vowels begword entre 35-356-15
-before vowels begword ex 15-1346
-before vowels begword inter 35-2345-236
-before vowels begword pre 1234-1235-15
-before vowels begword re 1235-15
-before vowels begword sobre 234-135-23-15
+# Word beginnings (principles) are only used before a consonant (Documento tecnico B 16-1,
+# version 3, 3.1). Before a vowel the letters are written with their contractions as usual
+# (reactivo, comun). The consonant that follows a principle may be contracted (comprar,
+# contrato).
 
 # word beginnings
 
-begword com 36
-begword con 25
-begword dis 256
-begword entre 356
-begword ex 1346
-begword inter 13456
-begword pre 235
-begword re 1235
-begword sobre 23
+before consonants begword com 36
+before consonants begword con 25
+before consonants begword dis 256
+before consonants begword entre 356
+before consonants begword ex 1346
+before consonants begword inter 13456
+before consonants begword pre 235
+before consonants begword pro 1234
+before consonants begword re 1235
+before consonants begword sobre 23
 
-# The consonant which follows a word beginning may not be contracted. Not many exceptions so setting them one by one.
+# Several word beginnings in a row (3.1.1). The last one must precede a consonant. Chains
+# ending in pre- include its vowel (comprension, representar).
 
-begword compr 36-1234-1235
-begword contr 25-2345-1235
-begword consu 25-234-136
-begword congr 25-1245-1235
-begword concr 25-14-1235
-begword condr 25-145-1235
-begword disgr 245-1245-1235
-begword distr 256-2345-1235
-begword entrecr 356-14-1235
-begword extr 1346-3245-1235
-begword expr 1346-1234-1235
-begword interpr 13456-1234-1235
-begword intergr 13456-1245-1235
-begword pregr 235-1245-1235
-begword prepr 235-1234-1235
-begword retr 1235-2345-1235
-begword repr 1235-1234-1235
-begword regr 1235-1245-1235
-begword recr 1235-14-1235
-begword rebr 1235-12-1235
-begword redr 1235-145-1235
-begword sobrepr 23-1234-1235
+before consonants begword repre 1235-235
+before consonants begword expre 1346-235
+before consonants begword compre 36-235
+before consonants begword compro 36-1234
+before consonants begword interpre 13456-235
+before consonants begword sobrepre 23-235
+before consonants begword repro 1235-1234
+before consonants begword recon 1235-25
+before consonants begword recom 1235-36
+before consonants begword redis 1235-256
+before consonants begword reex 1235-1346
+before consonants begword reinter 1235-13456
+before consonants begword reentre 1235-356
+before consonants begword expro 1346-1234
+before consonants begword exre 1346-1235
+before consonants begword excon 1346-25
+before consonants begword excom 1346-36
+before consonants begword interre 13456-1235
+before consonants begword intercon 13456-25
+before consonants begword interdis 13456-256
+before consonants begword interpro 13456-1234
+before consonants begword intercom 13456-36
+before consonants begword predis 235-256
+before consonants begword precon 235-25
+before consonants begword prepro 235-1234
+before consonants begword preex 235-1346
+before consonants begword precom 235-36
+before consonants begword discon 256-25
+before consonants begword condis 25-256
+before consonants begword sobreex 23-1346
+before consonants begword sobrepro 23-1234
+before consonants begword sobrecom 23-36
+before consonants begword sobrecon 23-25
+before consonants begword sobreinter 23-13456
+before consonants begword sobredis 23-256
+before consonants begword sobreentre 23-356
+before consonants begword procom 1234-36
+before consonants begword procon 1234-25
+before consonants begword proex 1234-1346
+
+before consonants begword reinterpre 1235-13456-235
+before consonants begword sobreinterpre 23-13456-235
+before consonants begword recompre 1235-36-235
+before consonants begword sobreexpre 23-1346-235
+before consonants begword recompro 1235-36-1234
+before consonants begword reexpro 1235-1346-1234
+before consonants begword reprepro 1235-235-1234
 
 # A word beginning should be followed by at least a consonant and a vowel or a consonant
 # and a stenographic contraction. Some words are thus entirely uncontracted. Again, very
@@ -874,7 +890,6 @@ word red 1235-15-145
 word rey 1235-15-13456
 word res 1235-15-234
 word sobren 234-135-23-25
-word extra 1346-2345-1235-1
 word sobres 23-1246
 
 # exceptions to the entire table, words which may never be contracted or brailled

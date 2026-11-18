@@ -133,7 +133,7 @@ tests:
   - - cocos
     - ⠉⠕⠉⠪
   - - probeta
-    - ⠖⠕⠃⠑⠞⠁
+    - ⠏⠃⠑⠞⠁
   - - aprisa
     - ⠁⠖⠊⠎⠁
   - - quieto
@@ -458,7 +458,6 @@ tests:
     - ⠎⠌⠛⠥⠣⠑
   
   # word beginnings may not be followed by vowels (to avoid confussion with punctuation signs), including accented ones.
-  # also, word beginnings might not be followed by a contraction which abbreviates a consonant.
   - - comunicar
     - ⠉⠺⠥⠝⠊⠉⠡
   - - comando
@@ -468,46 +467,46 @@ tests:
   - - conato
     - ⠉⠭⠁⠞⠕
   - - contrato
-    - ⠒⠞⠗⠁⠞⠕
+    - ⠒⠴⠁⠞⠕
   - - consumo
     - ⠒⠎⠥⠍⠕
   - - congruente
-    - ⠒⠛⠗⠥⠢⠞⠑
+    - ⠒⠶⠥⠢⠞⠑
   - - ingrato
     - ⠔⠶⠁⠞⠕
   - - distrae
-    - ⠲⠞⠗⠁⠑
+    - ⠲⠴⠁⠑
   - - concreto
-    - ⠒⠉⠗⠑⠞⠕
+    - ⠒⠒⠑⠞⠕
   - - comprar
-    - ⠤⠏⠗⠡
+    - ⠤⠖⠡
 
   - - expresar
-    - ⠭⠏⠗⠫⠡
+    - ⠭⠖⠎⠡
   - - interpretar
-    - ⠽⠏⠗⠑⠞⠡
+    - ⠽⠖⠞⠡
   - - pregrabar
-    - ⠖⠛⠗⠂⠡
+    - ⠖⠶⠂⠡
   - - pregrado
-    - ⠖⠛⠗⠹⠕
+    - ⠖⠶⠹⠕
   - - pregrados
-    - ⠖⠛⠗⠹⠪
+    - ⠖⠶⠹⠪
   - - condrioma
-    - ⠒⠙⠗⠊⠺⠁
+    - ⠒⠲⠊⠺⠁
   - - reprende
-    - ⠗⠏⠗⠢⠙⠑
+    - ⠗⠖⠝⠙⠑
   - - ingresaron
     - ⠔⠶⠫⠡⠭
   - - retraso
-    - ⠗⠞⠗⠯⠕
+    - ⠗⠴⠯⠕
   - - extraño
-    - ⠭⠞⠗⠁⠻⠕
+    - ⠭⠴⠁⠻⠕
   - - entrecruzar
-    - ⠴⠉⠗⠥⠵⠡
+    - ⠴⠒⠥⠵⠡
   - - intergrupal
-    - ⠽⠛⠗⠥⠏⠅
+    - ⠽⠶⠥⠏⠅
   - - sobreproducido
-    - ⠆⠏⠗⠕⠙⠥⠉⠊⠙⠕
+    - ⠆⠏⠙⠥⠉⠊⠙⠕
 
   # stenographic interruption: whenever w or k is anywhere in a word, the entire word is
   # uncontracted and dot 5 prefixes the word (B 16-1 v3, 4.2.1).
@@ -662,3 +661,67 @@ tests:
     - ⠆⠫
   - - seres
     - ⠎⠦⠫
+
+  # Word beginnings (B 16-1 v3, 3.1): used before a consonant only, the consonant after
+  # them may be contracted, and several can follow one another. Examples from the document.
+  - - retina
+    - ⠗⠞⠔⠁
+  - - comparar
+    - ⠤⠏⠡⠡
+  - - extraño
+    - ⠭⠴⠁⠻⠕
+  - - entreplanta
+    - ⠴⠏⠇⠩⠞⠁
+  - - trazo
+    - ⠴⠁⠵⠕
+  - - exvoto
+    - ⠭⠧⠕⠞⠕
+  - - repreprogramar
+    - ⠗⠖⠏⠶⠁⠍⠡
+  - - precomponer
+    - ⠖⠤⠏⠭⠦
+  - - reconquista
+    - ⠗⠒⠟⠊⠎⠞⠁
+  - - sobreinterpretar
+    - ⠆⠽⠖⠞⠡
+  - - reinterpretación
+    - ⠗⠽⠖⠞⠁⠉⠼
+  - - disconforme
+    - ⠲⠒⠋⠱⠍⠑
+  - - recompensa
+    - ⠗⠤⠏⠢⠎⠁
+  - - interdisciplinar
+    - ⠽⠲⠉⠊⠏⠇⠔⠡
+  - - preconsular
+    - ⠖⠒⠎⠥⠇⠡
+  - - exconvicto
+    - ⠭⠒⠧⠊⠉⠞⠕
+  - - comprensión
+    - ⠤⠖⠝⠎⠼
+  - - intercontinental
+    - ⠽⠒⠞⠔⠢⠞⠅
+  - - recomponer
+    - ⠗⠤⠏⠭⠦
+  - - recompre
+    - ⠗⠤⠖⠑
+  - - recompremos
+    - ⠗⠤⠖⠍⠪
+  - - consumo
+    - ⠒⠎⠥⠍⠕
+  - - contrato
+    - ⠒⠴⠁⠞⠕
+  - - renglón
+    - ⠗⠝⠛⠇⠬⠝
+  - - reno
+    - ⠗⠝⠕
+  - - procede
+    - ⠏⠉⠑⠙⠑
+  - - propósito
+    - ⠏⠏⠬⠎⠊⠞⠕
+  - - prohibir
+    - ⠏⠓⠊⠃⠊⠗
+  # not before a vowel
+  - - reactivo
+    - ⠗⠑⠁⠉⠞⠊⠧⠕
+  - - común
+    - ⠉⠺⠾⠝
