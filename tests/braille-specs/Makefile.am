@@ -145,6 +145,7 @@ EXTRA_DIST =					\
 	tr.yaml					\
 	tt.yaml					\
 	uga.yaml				\
+	uk-eu.yaml				\
 	uk.yaml					\
 	ur-pk-g2.yaml				\
 	uz.yaml					\
