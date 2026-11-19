@@ -34,6 +34,9 @@ issues]].
   - a stack-buffer-overflow in ~compileRule~ when compiling a ~replace~
     rule with a malformed dots operand, thanks to Darren Carreras.
 ** Braille table improvements
+- The Russian table with indication of capitals now uses a double
+  capital sign for consecutive uppercase Latin letters, as for Cyrillic.
+  Roman numerals and two-letter vector names retain a single sign.
 - Add Russian mathematical braille definitions in ~ru-math.uti~,
   following the Russian "System of Symbols for Math, Physics,
   Chemistry, and Astronomy" (Bykov et al., 1982), thanks to Danil
