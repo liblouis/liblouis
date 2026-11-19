@@ -1651,6 +1651,19 @@ compileSwapDots(const FileInfo *file, CharsString *source, CharsString *dest) {
 	return 1;
 }
 
+/* Count the dot patterns in an operand compiled by `compileSwapDots'. Each
+ * pattern is stored as its cell count plus one, followed by that many cells. */
+static int
+countSwapDots(const CharsString *dots) {
+	int k = 0;
+	int count = 0;
+	while (k < dots->length) {
+		k += dots->chars[k];
+		count++;
+	}
+	return count;
+}
+
 static int
 compileSwap(FileInfo *file, TranslationTableOpcode opcode, int noback, int nofor,
 		TranslationTableHeader **table) {
@@ -1660,6 +1673,8 @@ compileSwap(FileInfo *file, TranslationTableOpcode opcode, int noback, int nofor
 	CharsString matches;
 	CharsString replacements;
 	TranslationTableOffset ruleOffset;
+	int matchCount;
+	int swapCount;
 	if (!getToken(file, &name, "name operand")) return 0;
 	if (!getToken(file, &matches, "matches operand")) return 0;
 	if (!getToken(file, &replacements, "replacements operand")) return 0;
@@ -1672,6 +1687,18 @@ compileSwap(FileInfo *file, TranslationTableOpcode opcode, int noback, int nofor
 		if (!parseChars(file, &ruleDots, &replacements)) return 0;
 	} else {
 		if (!compileSwapDots(file, &replacements, &ruleDots)) return 0;
+	}
+	/* A swap opcode substitutes each item of its second operand for the item in
+	 * the corresponding place in its third operand, so the two operands must
+	 * contain the same number of items. */
+	matchCount = (opcode == CTO_SwapDd) ? countSwapDots(&ruleChars) : ruleChars.length;
+	swapCount = (opcode == CTO_SwapCc) ? ruleDots.length : countSwapDots(&ruleDots);
+	if (matchCount != swapCount) {
+		compileError(file,
+				"%d items in the second operand but %d in the third: the operands of a "
+				"swap opcode must contain the same number of items",
+				matchCount, swapCount);
+		return 0;
 	}
 	if (!addRule(file, opcode, &ruleChars, &ruleDots, 0, 0, &ruleOffset, NULL, noback,
 				nofor, table))

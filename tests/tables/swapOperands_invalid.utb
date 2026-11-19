@@ -1,0 +1,12 @@
+display A 17
+sign a 1
+sign b 12
+sign c 14
+
+# A swap opcode substitutes each item of its second operand for the
+# item in the corresponding place in its third operand, so the two
+# operands must contain the same number of items. Here the third
+# operand is one item short, which should make the table compilation
+# fail in a test.
+
+swapcd dots abc 1,12

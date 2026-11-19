@@ -18,6 +18,7 @@ backtranslation_emphasis_SOURCES = backtranslation_emphasis.c
 checkTable_SOURCES = checkTable.c
 emphclass_SOURCES = emphclass.c
 attributeNames_SOURCES = attributeNames.c
+swapOperands_SOURCES = swapOperands.c
 findTable_SOURCES = findTable.c
 getTable_SOURCES = getTable.c
 hash_collision_SOURCES = hash_collision.c
@@ -37,6 +38,7 @@ program_TESTS =					\
 	check_metadata				\
 	emphclass				\
 	attributeNames				\
+	swapOperands				\
 	findTable				\
 	getTable				\
 	hash_collision				\
