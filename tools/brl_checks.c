@@ -236,16 +236,21 @@ check_base(const char *tableList, const char *input, const char *expected,
 			print_widechars(outbuf, outlen);
 			fprintf(stderr, "' (length %d)\n", outlen);
 
-			uint8_t *expected_utf8;
-			uint8_t *out_utf8;
-			size_t expected_utf8_len;
-			size_t out_utf8_len;
+			// Only convert the character at index i on the side that has one:
+			// expectedbuf has exactly expectedlen characters, so reading
+			// expectedbuf[i] when i == expectedlen is out of bounds.
+			uint8_t *expected_utf8 = NULL;
+			uint8_t *out_utf8 = NULL;
+			size_t expected_utf8_len = 0;
+			size_t out_utf8_len = 0;
 #ifdef WIDECHARS_ARE_UCS4
-			expected_utf8 = u32_to_u8(&expectedbuf[i], 1, NULL, &expected_utf8_len);
-			out_utf8 = u32_to_u8(&outbuf[i], 1, NULL, &out_utf8_len);
+			if (i < expectedlen)
+				expected_utf8 = u32_to_u8(&expectedbuf[i], 1, NULL, &expected_utf8_len);
+			if (i < outlen) out_utf8 = u32_to_u8(&outbuf[i], 1, NULL, &out_utf8_len);
 #else
-			expected_utf8 = u16_to_u8(&expectedbuf[i], 1, NULL, &expected_utf8_len);
-			out_utf8 = u16_to_u8(&outbuf[i], 1, NULL, &out_utf8_len);
+			if (i < expectedlen)
+				expected_utf8 = u16_to_u8(&expectedbuf[i], 1, NULL, &expected_utf8_len);
+			if (i < outlen) out_utf8 = u16_to_u8(&outbuf[i], 1, NULL, &out_utf8_len);
 #endif
 
 			if (i < outlen && i < expectedlen) {
