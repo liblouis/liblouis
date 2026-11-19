@@ -2728,8 +2728,10 @@ resolveEmphasisWords(EmphasisInfo *buffer, const EmphasisClass *class,
 	int last_char = -1;	 // position of the last emphasizable character
 	const TranslationTableOffset *emphRule = table->emphRules[class->rule];
 	int letter_defined = emphRule[letterOffset];
+	/* a phrase-specific end indicator takes precedence over the generic end indicator */
 	int endphraseafter_defined = emphRule[begPhraseOffset] &&
-			(emphRule[endPhraseAfterOffset] || emphRule[endOffset]);
+			(emphRule[endPhraseAfterOffset] ||
+					(!emphRule[endPhraseBeforeOffset] && emphRule[endOffset]));
 
 	for (int i = 0; i < input->length; i++) {
 
@@ -2892,8 +2894,10 @@ convertToPassage(const int pass_start, const int pass_end, const int word_start,
 	}
 
 	buffer[pass_start].begin |= class->value;
-	if (brailleIndicatorDefined(emphRule[endOffset], table, &indicRule) ||
-			brailleIndicatorDefined(emphRule[endPhraseAfterOffset], table, &indicRule))
+	/* a phrase-specific end indicator takes precedence over the generic end indicator */
+	if (brailleIndicatorDefined(emphRule[endPhraseAfterOffset], table, &indicRule) ||
+			(!emphRule[endPhraseBeforeOffset] &&
+					brailleIndicatorDefined(emphRule[endOffset], table, &indicRule)))
 		buffer[pass_end].end |= class->value;
 	else if (brailleIndicatorDefined(
 					 emphRule[endPhraseBeforeOffset], table, &indicRule)) {
@@ -2922,7 +2926,9 @@ resolveEmphasisPassages(EmphasisInfo *buffer, const EmphasisClass *class,
 	int in_emph_word = 0, last_emph_symbol = -1;
 	int in_pass = 0, last_pass_word_start = -1, last_pass_word_end = -1, pass_start = -1;
 	unsigned int pass_word_cnt = 0;
-	int endphraseafter_defined = emphRule[endPhraseAfterOffset] || emphRule[endOffset];
+	/* a phrase-specific end indicator takes precedence over the generic end indicator */
+	int endphraseafter_defined = emphRule[endPhraseAfterOffset] ||
+			(!emphRule[endPhraseBeforeOffset] && emphRule[endOffset]);
 
 	for (int i = 0; i < input->length; i++) {
 
@@ -3404,7 +3410,22 @@ insertEmphasisEnd(const EmphasisInfo *buffer, const int at, const EmphasisClass 
 				for_updatePositions(&indicRule->charsdots[0], 0, indicRule->dotslen, -1,
 						pos, input, output, posMapping, cursorPosition, cursorStatus);
 		} else {
-			if (brailleIndicatorDefined(emphRule[endOffset], table, &indicRule))
+			/* when a word indicator is defined this is the end of a phrase, and a
+			 * phrase-specific end indicator takes precedence over the generic end
+			 * indicator; otherwise it is the end of a permanent block */
+			int phrase = emphRule[begWordOffset] &&
+					(emphRule[endPhraseAfterOffset] || emphRule[endPhraseBeforeOffset]);
+			if (phrase &&
+					brailleIndicatorDefined(
+							emphRule[endPhraseAfterOffset], table, &indicRule))
+				for_updatePositions(&indicRule->charsdots[0], 0, indicRule->dotslen, -1,
+						pos, input, output, posMapping, cursorPosition, cursorStatus);
+			else if (phrase &&
+					brailleIndicatorDefined(
+							emphRule[endPhraseBeforeOffset], table, &indicRule))
+				for_updatePositions(&indicRule->charsdots[0], 0, indicRule->dotslen, 0,
+						pos, input, output, posMapping, cursorPosition, cursorStatus);
+			else if (brailleIndicatorDefined(emphRule[endOffset], table, &indicRule))
 				for_updatePositions(&indicRule->charsdots[0], 0, indicRule->dotslen, -1,
 						pos, input, output, posMapping, cursorPosition, cursorStatus);
 			else if (brailleIndicatorDefined(

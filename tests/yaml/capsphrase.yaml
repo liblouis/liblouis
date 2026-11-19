@@ -1,0 +1,116 @@
+# Tests for the begcapsphrase, endcapsphrase and lencapsphrase opcodes,
+# in particular how they interact with begcaps and endcaps.
+
+display: |
+  display \s 0
+  display a 1
+  display b 2
+  display c 3
+  display + 12
+  display [ 13
+  display ] 14
+  display < 15
+  display > 16
+  display ( 25
+  display ) 26
+  display ' 3
+
+# endcapsphrase after takes precedence over endcaps at the end of a phrase
+table: |
+  include tables/spaces.uti
+  lowercase a 1
+  lowercase b 2
+  lowercase c 3
+  base uppercase A a
+  base uppercase B b
+  base uppercase C c
+  capsletter 12
+  begcapsword 13
+  endcapsword 14
+  begcaps 15
+  endcaps 16
+  begcapsphrase 25
+  endcapsphrase after 26
+  lencapsphrase 3
+tests:
+  - [ABC ABC, '[abc [abc']
+  - [ABC ABC ABC, '(abc abc abc)']
+  - [ABC ABC ABC abc, '(abc abc abc) abc']
+  - [ABC ABC ABc, '[abc [abc [ab]c']
+
+# endcapsphrase before takes precedence over endcaps at the end of a phrase
+table: |
+  include tables/spaces.uti
+  lowercase a 1
+  lowercase b 2
+  lowercase c 3
+  base uppercase A a
+  base uppercase B b
+  base uppercase C c
+  capsletter 12
+  begcapsword 13
+  endcapsword 14
+  begcaps 15
+  endcaps 16
+  begcapsphrase 25
+  endcapsphrase before 26
+  lencapsphrase 3
+tests:
+  - [ABC ABC, '[abc [abc']
+  - [ABC ABC ABC, '(abc abc )abc']
+  - [ABC ABC ABC abc, '(abc abc )abc abc']
+
+# without endcapsphrase, endcaps terminates the phrase
+table: |
+  include tables/spaces.uti
+  lowercase a 1
+  lowercase b 2
+  lowercase c 3
+  base uppercase A a
+  base uppercase B b
+  base uppercase C c
+  capsletter 12
+  begcapsword 13
+  endcapsword 14
+  begcaps 15
+  endcaps 16
+  begcapsphrase 25
+  lencapsphrase 3
+tests:
+  - [ABC ABC, '[abc [abc']
+  - [ABC ABC ABC, '(abc abc abc>']
+
+# without lencapsphrase the phrase indicators are never used
+table: |
+  include tables/spaces.uti
+  lowercase a 1
+  lowercase b 2
+  lowercase c 3
+  base uppercase A a
+  base uppercase B b
+  base uppercase C c
+  capsletter 12
+  begcapsword 13
+  endcapsword 14
+  begcapsphrase 25
+  endcapsphrase after 26
+tests:
+  - [ABC ABC ABC ABC, '[abc [abc [abc [abc']
+
+# without lencapsphrase, begcaps and endcaps are not used as phrase indicators
+# either
+table: |
+  include tables/spaces.uti
+  lowercase a 1
+  lowercase b 2
+  lowercase c 3
+  base uppercase A a
+  base uppercase B b
+  base uppercase C c
+  capsletter 12
+  begcapsword 13
+  endcapsword 14
+  begcaps 15
+  endcaps 16
+tests:
+  - [ABC ABC ABC ABC ABC, '[abc [abc [abc [abc [abc']
