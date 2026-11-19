@@ -162,3 +162,30 @@ tests:
   # endcapsword still works as before
   - - "ABCabc"
     - ",abc.abc"
+
+# The capitals passage indicator "before last word" has the same cells as
+# begcapsword (as in Dutch braille). Inside a passage, it must be read as the
+# end of the passage, otherwise the passage never ends.
+table: |
+  display ^ 45
+  display ~ 46
+  display ' 6
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  capsletter 46
+  begcapsword 45
+  endcapsword 6
+  lencapsphrase 4
+  begcapsphrase 45-45
+  endcapsphrase before 45
+
+flags: {testmode: bothDirections}
+tests:
+  - - "ONE TWO THREE FOUR five"
+    - "^^one two three ^four five"
+  - - "ONE TWO THREE FOUR five SIX"
+    - "^^one two three ^four five ^six"
+  - - "ONE TWO THREE FOUR"
+    - "^^one two three ^four"
+  - - "ONE TWO five"
+    - "^one ^two five"
