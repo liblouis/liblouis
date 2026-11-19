@@ -3109,10 +3109,10 @@ doOpcode:
 			if (!patterns) _lou_outOfMemory();
 			memset(patterns, 0xffff, patternsByteSize);
 			noback = 1;
-			getMatchPatternCharacters(file, &ptn_before);
-			getRuleCharsText(file, &ruleChars);
-			getMatchPatternCharacters(file, &ptn_after);
-			getRuleDotsPattern(file, &ruleDots);
+			if (!getMatchPatternCharacters(file, &ptn_before)) goto CTO_Match_cleanup;
+			if (!getRuleCharsText(file, &ruleChars)) goto CTO_Match_cleanup;
+			if (!getMatchPatternCharacters(file, &ptn_after)) goto CTO_Match_cleanup;
+			if (!getRuleDotsPattern(file, &ruleDots)) goto CTO_Match_cleanup;
 			if (!addRule(file, opcode, &ruleChars, &ruleDots, after, before, &ruleOffset,
 						&rule, noback, nofor, table))
 				goto CTO_Match_cleanup;
@@ -3160,10 +3160,10 @@ doOpcode:
 			if (!patterns) _lou_outOfMemory();
 			memset(patterns, 0xffff, patternsByteSize);
 			nofor = 1;
-			getMatchPatternCharacters(file, &ptn_before);
-			getRuleCharsText(file, &ruleChars);
-			getMatchPatternCharacters(file, &ptn_after);
-			getRuleDotsPattern(file, &ruleDots);
+			if (!getMatchPatternCharacters(file, &ptn_before)) goto CTO_BackMatch_cleanup;
+			if (!getRuleCharsText(file, &ruleChars)) goto CTO_BackMatch_cleanup;
+			if (!getMatchPatternCharacters(file, &ptn_after)) goto CTO_BackMatch_cleanup;
+			if (!getRuleDotsPattern(file, &ruleDots)) goto CTO_BackMatch_cleanup;
 			if (!addRule(file, opcode, &ruleChars, &ruleDots, 0, 0, &ruleOffset, &rule,
 						noback, nofor, table))
 				goto CTO_BackMatch_cleanup;
