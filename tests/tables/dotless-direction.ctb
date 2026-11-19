@@ -1,0 +1,16 @@
+# Direction prefixes on the dotless opcodes contraction, nocont and
+# compbrl. These opcodes only apply to forward translation, so nofor
+# makes the rule useless and noback is redundant. Each prefixed rule
+# should produce a compiler warning. See issue #2093.
+
+include tables/latinLetterDef6Dots.uti
+
+space \s 0
+letsign 56
+
+contraction cd
+nocont ab
+compbrl xy
+nofor contraction ef
+noback nocont gh
+noback compbrl ij
