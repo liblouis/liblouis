@@ -1,0 +1,194 @@
+# Tests for https://github.com/liblouis/liblouis/issues/1168
+#
+# When several braille indicators share one dot pattern, back-translation
+# must pick the one that fits the current translation state and must not
+# depend on the order in which the table declares them. Each family of
+# colliding indicators is therefore tested in both declaration orders.
+#
+# The real-table block at the end sets a display table, so it has to stay
+# last: a display setting applies to every table that follows it.
+
+# ---- nocontractsign vs endcapsword --------------------------------------
+table: |
+  display | 456
+  display ; 56
+  display # 3456
+  display & 12346
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  include tables/digits6Dots.uti
+  include tables/litdigits6Dots.uti
+  include tables/braille-patterns.cti
+  sign & 12346
+  numsign 3456
+  begcapsword 456
+  endcapsword 56      # endcapsword first
+  nocontractsign 56
+  nonumsign 56
+  numericnocontchars abcdefghij
+  always and 12346
+table: |
+  display | 456
+  display ; 56
+  display # 3456
+  display & 12346
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  include tables/digits6Dots.uti
+  include tables/litdigits6Dots.uti
+  include tables/braille-patterns.cti
+  sign & 12346
+  numsign 3456
+  begcapsword 456
+  nocontractsign 56   # nocontractsign first
+  nonumsign 56
+  endcapsword 56
+  numericnocontchars abcdefghij
+  always and 12346
+flags: {testmode: backward}
+tests:
+  - ["|abc;def", "ABCdef"]
+  - ["|abc;&", "ABCand"]
+  - ["#a;&", "1and"]
+  - ["#a;abc", "1abc"]
+  - ["|abc#a;abc", "ABC1abc"]
+
+# ---- letsign vs endcapsword (cf. da-dk-g16/g26) ------------------------
+table: |
+  display | 456
+  display ; 56
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  include tables/braille-patterns.cti
+  begcapsword 456
+  endcapsword 56      # endcapsword first
+  letsign 56
+  word but 12
+table: |
+  display | 456
+  display ; 56
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  include tables/braille-patterns.cti
+  begcapsword 456
+  letsign 56          # letsign first
+  endcapsword 56
+  word but 12
+flags: {testmode: backward}
+tests:
+  - ["|abc;def", "ABCdef"]
+  - ["abc b", "abc but"]
+  - ["abc ;b", "abc b"]
+  - ["|abc ;b", "ABC b"]
+
+# ---- endemphword vs endcapsword (cf. nl-NL-g0, hr, ht-g1) ---------------
+table: |
+  display | 456
+  display ; 56
+  display _ 46
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  include tables/braille-patterns.cti
+  emphclass italic
+  begcapsword 456
+  endcapsword 56      # endcapsword first
+  begemphword italic 46
+  endemphword italic 56
+table: |
+  display | 456
+  display ; 56
+  display _ 46
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  include tables/braille-patterns.cti
+  emphclass italic
+  begemphword italic 46
+  endemphword italic 56   # endemphword first
+  begcapsword 456
+  endcapsword 56
+flags: {testmode: backward}
+tests:
+  - - "|abc;def"
+    - "ABCdef"
+  - - "|abc;def"
+    - "ABCdef"
+    - expected_typeform:
+        italic: '      '
+  - - "_abc;def"
+    - "abcdef"
+    - expected_typeform:
+        italic: '+++   '
+
+# ---- capsletter vs nonumsign (cf. rw-rw-g1) -----------------------------
+table: |
+  display , 6
+  display # 3456
+  display ; 56
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  include tables/digits6Dots.uti
+  include tables/litdigits6Dots.uti
+  include tables/braille-patterns.cti
+  numsign 3456
+  capsletter 56       # capsletter first
+  nonumsign 56
+  numericnocontchars abcdefghij
+table: |
+  display , 6
+  display # 3456
+  display ; 56
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  include tables/digits6Dots.uti
+  include tables/litdigits6Dots.uti
+  include tables/braille-patterns.cti
+  numsign 3456
+  nonumsign 56        # nonumsign first
+  capsletter 56
+  numericnocontchars abcdefghij
+flags: {testmode: backward}
+tests:
+  - ["#a;abc", "1abc"]
+  - ["#a;;abc", "1Abc"]
+  - ["#ab;ab", "12ab"]
+  - [";abc", "Abc"]
+
+# ---- begcapsword == endcapsword (toggle, cf. is-chardefs6, ru-ru-g1) -----
+table: |
+  display , 6
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  include tables/braille-patterns.cti
+  capsletter 6
+  begcapsword 6-6
+  endcapsword 6-6
+flags: {testmode: backward}
+tests:
+  - [",,abc,,def", "ABCdef"]
+  - [",,abc def", "ABC def"]
+  - [",,abc,,def ,,ghi", "ABCdef GHI"]
+
+# ---- begemph == endemph (toggle, cf. es-g2, lt-6dot, no-no-g0) ----------
+table: |
+  display _ 456
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  include tables/braille-patterns.cti
+  emphclass italic
+  begemph italic 456
+  endemph italic 456
+flags: {testmode: backward}
+tests:
+  - - "_abc_def"
+    - "abcdef"
+    - expected_typeform:
+        italic: '+++   '
+
+# ---- real table: capsletter 46 is declared before nonumsign 46
+display: tables/unicode.dis
+table: tables/rw-rw-g1.utb
+flags: {testmode: backward}
+tests:
+  - ["⠠⠁⠨⠁⠃⠉", "1abc"]
+  - ["⠠⠁⠨⠨⠁⠃⠉", "1Abc"]
+
