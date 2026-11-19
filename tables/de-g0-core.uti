@@ -677,6 +677,10 @@ noback pass2 @46-ad-46 @45
 # such as 'kW', see de-g0-detailed-specs.yaml:216
 noback pass2 @ad-46 @45
 
+# Implementations that emit the capsletter only before the marker,
+# such as louis-rs, need this one
+noback pass2 @46-ad @45
+
 # --- Handling of virtual dots -------------------------------------------------
 
 # Kürzungsverbot entfernen
