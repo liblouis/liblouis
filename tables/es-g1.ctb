@@ -34,3 +34,70 @@ numsign 3456
 capsletter 46
 begcapsword 46-46
 numericmodechars .,
+
+# Literary emphasis (CBE B 2 V4 §9.1)
+emphclass italic
+emphclass underline
+emphclass bold
+noback begemph italic 35
+noback endemph italic 35
+noback begemph underline 35
+noback endemph underline 35
+noback begemph bold 35
+noback endemph bold 35
+
+# Catalan geminated L and double slashes (CBE B 2 V4 §§5.1, 6.2)
+capsmodechars \x00B7
+always // 6-26-2
+always \x005C\x005C 5-35-3
+
+# Lower-case letter prefix (dot 5) between digit and first-series letters a..j (CBE B 2 V4 §8.2)
+attribute firstseries abcdefghij
+swapcd adddotfive abcdefghij 5-1,5-12,5-14,5-145,5-15,5-124,5-1245,5-125,5-24,5-245
+noback context $d[%firstseries%firstseries%firstseries] %adddotfive
+noback context $d[%firstseries%firstseries] %adddotfive
+noback context $d[%firstseries] %adddotfive
+
+# Ordinal numbers written with lower digits (5th series) + o/a/r (CBE B 2 V4 §8.3)
+swapcd orddig 0123456789.\x00BA\x00AA 356,2,23,25,256,26,235,2356,236,35,8,135,1
+noback context `[$d".\x00BA"] @3456%orddig
+noback context !$d[$d".\x00BA"] @3456%orddig
+noback context `[$d$d".\x00BA"] @3456%orddig
+noback context !$d[$d$d".\x00BA"] @3456%orddig
+noback context `[$d$d$d".\x00BA"] @3456%orddig
+noback context !$d[$d$d$d".\x00BA"] @3456%orddig
+noback context `[$d"\x00BA"] @3456%orddig
+noback context !$d[$d"\x00BA"] @3456%orddig
+noback context `[$d$d"\x00BA"] @3456%orddig
+noback context !$d[$d$d"\x00BA"] @3456%orddig
+noback context `[$d$d$d"\x00BA"] @3456%orddig
+noback context !$d[$d$d$d"\x00BA"] @3456%orddig
+noback context `[$d".\x00AA"] @3456%orddig
+noback context !$d[$d".\x00AA"] @3456%orddig
+noback context `[$d$d".\x00AA"] @3456%orddig
+noback context !$d[$d$d".\x00AA"] @3456%orddig
+noback context `[$d$d$d".\x00AA"] @3456%orddig
+noback context !$d[$d$d$d".\x00AA"] @3456%orddig
+noback context `[$d"\x00AA"] @3456%orddig
+noback context !$d[$d"\x00AA"] @3456%orddig
+noback context `[$d$d"\x00AA"] @3456%orddig
+noback context !$d[$d$d"\x00AA"] @3456%orddig
+noback context `[$d$d$d"\x00AA"] @3456%orddig
+noback context !$d[$d$d$d"\x00AA"] @3456%orddig
+
+swapcd orderdig 0123456789.er 356,2,23,25,256,26,235,2356,236,35,8,8,1235
+noback context `[$d".er"]!$l @3456%orderdig
+noback context `[$d".er"]~ @3456%orderdig
+noback context !$d[$d".er"]!$l @3456%orderdig
+noback context !$d[$d".er"]~ @3456%orderdig
+noback context `[$d$d".er"]!$l @3456%orderdig
+noback context `[$d$d".er"]~ @3456%orderdig
+noback context !$d[$d$d".er"]!$l @3456%orderdig
+noback context !$d[$d$d".er"]~ @3456%orderdig
+noback context `[$d$d$d".er"]!$l @3456%orderdig
+noback context `[$d$d$d".er"]~ @3456%orderdig
+noback context !$d[$d$d$d".er"]!$l @3456%orderdig
+noback context !$d[$d$d$d".er"]~ @3456%orderdig
+
+noback pass2 @8 ?
+noback pass2 @3456-3456 @3456

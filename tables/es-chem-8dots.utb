@@ -1,0 +1,99 @@
+# liblouis: Spanish 8-dot Chemistry Braille Table (CBE B 14-2 V1)
+#
+# -----------
+#-index-name: Spanish, 8-dot chemistry
+#-display-name: Spanish 8-dot chemical braille (CBE B 14-2 V1)
+#
+#+language:es
+#+type:literary
+#+system:cbe-b14-2
+#+dots:8
+#+unicode-range: ucs4
+#+direction:forward
+# -----------
+#
+#  Copyright (C) 2026 Contributors to liblouis
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+# -------------------------------------------------------------------------------
+#  Spanish 8-dot Braille Chemical Code
+#  Based on Comisión Braille Española (CBE / ONCE):
+#  Documento técnico B 14-2: Código químico de ocho puntos, Versión 1
+#  (octubre de 2018).
+# -------------------------------------------------------------------------------
+
+# Chemistry-specific overrides (placed before base math definitions where
+# single characters differ from CBE B 14-1 V3, e.g. reaction arrows and ≡)
+
+# 1. Enlaces (B 14-2 V1 §1)
+math \x2500 178                 # ─ enlace sencillo estructural
+math \x2015 178                 # ― enlace sencillo estructural
+math \x2550 13678               # ═ enlace doble estructural
+math \x2261 1235678             # ≡ enlace triple
+math \x2504 278                 # ┄ puente de hidrógeno
+math \x22EF 278                 # ⋯ puente de hidrógeno
+math ~ 2467                     # ~ enlace de alta energía
+math \x2022 378                 # • punto de hidratación (CuSO₄•5H₂O)
+math \x22C5 378                 # ⋅ punto de hidratación
+math \x21A6 56-3                # ↦ enlace polar dativo derecha
+math \x21A4 6-23                # ↤ enlace polar dativo izquierda
+
+# 2. Reacciones (B 14-2 V1 §2)
+# Multi-character ASCII reaction arrows and Unicode arrows
+always <--> 3568-36-36-2367
+always <-> 3568-36-36-2367
+always --> 36-36-2367
+always <-- 3568-36-36
+always -> 36-36-2367
+always <- 3568-36-36
+math \x2192 36-36-2367          # → reacción directa
+math \x2190 3568-36-36          # ← reacción inversa
+math \x21CC 3568-36-36-2367     # ⇌ equilibrio químico
+math \x21C4 3568-36-36-2367     # ⇄ equilibrio químico
+math \x2194 3568-36-36-2367     # ↔ equilibrio químico
+math \x21C0 368-36-36-2367      # ⇀ desplazamiento a la derecha
+math \x21BD 3568-36-36-367      # ↽ desplazamiento a la izquierda
+math \x2191 357                 # ↑ desprendimiento gaseoso
+math \x2193 238                 # ↓ precipitación
+
+# Estados físicos y concentración (B 14-2 V1 §2)
+always (g) 68-1245
+always (l) 68-123
+always (s) 68-234
+always (aq) 68-1-12345
+always (ac) 68-1-12345
+always \x2225 123456          # ∥ puente salino (celda electroquímica)
+
+# 4. Configuraciones electrónicas (B 14-2 V1 §4)
+always \x2191\x2193 145678      # ↑↓ spin arriba-abajo
+math \x21C5 145678              # ⇅ spin arriba-abajo
+math \x21BF 14568               # ↿ spin arriba
+math \x21C3 45678               # ⇃ spin abajo
+
+# Base mathematical & Spanish 8-dot definitions (CBE B 14-1 V3 & B 15 V2)
+include es-math-8dots.utb
+
+# Ensure chemistry-specific always rules take priority over base math single chars
+noback always \x2261 1235678
+noback always \x2192 36-36-2367
+noback always \x2190 3568-36-36
+noback always \x2194 3568-36-36-2367
+noback always \x2191 357
+noback always \x2193 238
+noback always \x22C5 378
+noback always \x2225 123456

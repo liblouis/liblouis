@@ -122,15 +122,17 @@ tests:
     {xfail: {backward: "Unicode version is defined first"}}]
   - ['\x008d', '⡔']
   - ['\x008e', '⢉']
-  - ['\x008f', '⢐',
-    {xfail: {backward: "Same as \x0060"}}]
+  - ['\x008f', '⡂']
   - ['\x0090', '⢠']
   - ['\x0095', '⢙']
   - ['\x0096', '⢤']
   - ['\x0097', '⣤']
   - ['\x0098', '⢽']
   - ['\x0099', '⡪']
-  - ['\x009a', '⢼']
+  - ['\x009a', '⡳',
+    {xfail: {backward: "Unicode version is defined first"}}]
+  - ['\x009b', '⢼',
+    {xfail: {backward: "Unicode version is defined first"}}]
   - ['\x009c', '⢇',
     {xfail: {backward: "Unicode version is defined first"}}]
   - ['\x009d', '⣲']
@@ -161,7 +163,7 @@ tests:
   - ['µ', '⢭']
   - ['¶', '⡹']
   - ['·', '⣩']
-  - ['¸', '⣵']
+  - ['¸', '⡿']
   - ['¹', '⡆']
   - ['º', '⣰']
   - ['\x00bb', '⡰']
@@ -245,7 +247,7 @@ tests:
     {xfail: {backward: "Ansi version is defined first"}}]
   - ['ƒ', '⢋',
     {xfail: {backward: "Ansi version is defined first"}}]
-  - ['ˆ', '⢞',
+  - ['ˆ', '⢘',
     {xfail: {backward: "Ansi version is defined first"}}]
   - ['˜', '⢽',
     {xfail: {backward: "Ansi version is defined first"}}]
@@ -253,10 +255,8 @@ tests:
     {xfail: {backward: "Ansi version is defined first"}}]
   - ['—', '⣤',
     {xfail: {backward: "Ansi version is defined first"}}]
-  - ['‘', '⠈',
-    {xfail: {backward: "Ansi version is defined first"}}]
-  - ['’', '⠈',
-    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['‘', '⢅']
+  - ['’', '⣄']
   - ['‚', '⡄',
     {xfail: {backward: "Ansi version is defined first"}}]
   - ['„', '⣀',
@@ -275,8 +275,7 @@ tests:
     {xfail: {backward: "Ansi version is defined first"}}]
   - ['‹', '⢓',
     {xfail: {backward: "Ansi version is defined first"}}]
-  - ['›', '⢼',
-    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['›', '⢼']
   - ['€', '⢗']
   - ['™', '⡪',
     {xfail: {backward: "Ansi version is defined first"}}]
@@ -329,11 +328,9 @@ tests:
   - ['9', '⠼⠊']
   - [':', '⠒']
   - [';', '⠆']
-  - ['<', '⠐⠅',
-    {xfail: "Wrong def according to CBE"}]
+  - ['<', '⠐⠅']
   - ['=', '⠶']
-  - ['>', '⠨⠂',
-    {xfail: "Wrong def according to CBE"}]
+  - ['>', '⠨⠂']
   - ['?', '⠢']
   - ['@', '⠐']
   - ['A', '⠨⠁']
@@ -455,12 +452,12 @@ tests:
   - ['¦', '',
     {xfail: "Not defined in the table"}]
   - ['§', '⠬',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as ó"}}]
   - ['¨', '',
     {xfail: "Not defined in the table"}]
   - ['©', '⠣⠨⠉⠜']
-  - ['ª', '',
-    {xfail: "Not defined in the table"}]
+  - ['ª', '⠁',
+    {xfail: {backward: "Same as a"}}]
   - ['\x00ab', '⠦',
     {xfail: {backward: "Same as quote"}}]
   - ['\x00ac', '',
@@ -470,160 +467,138 @@ tests:
   - ['®', '⠣⠨⠗⠜']
   - ['¯', '⢺',
     {xfail: "Not defined in the table"}]
-  - ['°', '⠴',
-    {xfail: "Not defined in the table"}]
+  - ['°', '⠴']
   - ['±', '⠖⠒⠤']
   - ['²', '⠡⠼⠃']
   - ['³', '⠡⠼⠉']
   - ['´', '⡨',
     {xfail: "Not defined in the table"}]
   - ['µ', '⠈⠍']
-  - ['¶', '⠬',
-    {xfail: "Not defined in the table"}]
-  - ['·', '',
-    {xfail: "Not defined in the table"}]
+  - ['¶', '⠩']
+  - ['·', '⠐',
+    {xfail: {backward: "Same as @"}}]
   - ['¸', '',
     {xfail: "Not defined in the table"}]
-  - ['¹', '⠡⠼⠁',
-    {xfail: "Not defined in the table"}]
-  - ['º', '⠡⠼⠚',
-    {xfail: "Not defined in the table"}]
+  - ['¹', '⠡⠼⠁']
+  - ['º', '⠕',
+    {xfail: {backward: "Same as o"}}]
   - ['\x00bb', '⠦',
     {xfail: {backward: "Same as quote"}}]
-  - ['¼', '⠼⠂⠙']
-  - ['½', '⠼⠂⠃']
-  - ['¾', '⠼⠒⠙']
+  - ['¼', '⠼⠁⠲']
+  - ['½', '⠼⠁⠆']
+  - ['¾', '⠼⠉⠲']
   - ['¿', '⠢',
     {xfail: {backward: "Same as ?"}}]
-  - ['À', '⠨⠠⠁',
-    {xfail: "Not defined in the table"}]
+  - ['À', '⠨⠠⠁']
   - ['Á', '⠨⠷']
   - ['Â', '⠨⠠⠁',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as À"}}]
   - ['Ã', '⠨⠠⠁',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as À"}}]
   - ['Ä', '⠨⠠⠁',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as À"}}]
   - ['Å', '⠨⠠⠁',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as À"}}]
   - ['Æ', '⠨⠁⠑',
-    {xfail: "Not defined in the table, use noback"}]
-  - ['Ç', '⠨⠠⠉',
-    {xfail: "Not defined in the table"}]
-  - ['È', '⠨⠠⠑',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Use noback"}}]
+  - ['Ç', '⠨⠯']
+  - ['È', '⠨⠠⠑']
   - ['É', '⠨⠮']
   - ['Ê', '⠨⠠⠑',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as È"}}]
   - ['Ë', '⠨⠠⠑',
-    {xfail: "Not defined in the table"}]
-  - ['Ì', '⠨⠠⠊',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as È"}}]
+  - ['Ì', '⠨⠠⠊']
   - ['Í', '⠨⠌']
   - ['Î', '⠨⠠⠊',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as Ì"}}]
   - ['Ï', '⠨⠠⠊',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as Ì"}}]
   - ['Ð', '',
     {xfail: "Not defined in the table"}]
   - ['Ñ', '⠨⠻']
-  - ['Ò', '⢚⠨⠠⠕',
-    {xfail: "Not defined in the table"}]
+  - ['Ò', '⠨⠠⠕']
   - ['Ó', '⠨⠬']
   - ['Ô', '⠨⠠⠕',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as Ò"}}]
   - ['Õ', '⠨⠠⠕',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as Ò"}}]
   - ['Ö', '⠨⠠⠕',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as Ò"}}]
   - ['×', '⠦',
     {xfail: {backward: "Same as quote"}}]
   - ['Ø', '⠨⠠⠕',
-    {xfail: "Not defined in the table"}]
-  - ['Ù', '⠨⠠⠥',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as Ò"}}]
+  - ['Ù', '⠨⠠⠥']
   - ['Ú', '⠨⠾']
   - ['Û', '⠨⠠⠥',
-    {xfail: "Not defined in the table"}]
-  - ['Ü', '⠨⠠⠥',
-    {xfail: "Not defined in the table"}]
-  - ['Ý', '⠨⠠⠽',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as Ù"}}]
+  - ['Ü', '⠨⠳']
+  - ['Ý', '⠨⠠⠽']
   - ['Þ', '',
     {xfail: "Not defined in the table"}]
-  - ['ß', '⠠⠎',
-    {xfail: "Not defined in the table"}]
-  - ['à', '⠠⠁',
-    {xfail: "Not defined in the table"}]
+  - ['ß', '⠠⠎']
+  - ['à', '⠠⠁']
   - ['á', '⠷']
   - ['â', '⠠⠁',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as à"}}]
   - ['ã', '⠠⠁',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as à"}}]
   - ['ä', '⠠⠁',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as à"}}]
   - ['å', '⠠⠁',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as à"}}]
   - ['æ', '⠁⠑',
-    {xfail: "Not defined in the table"}]
-  - ['ç', '⠠⠉',
-    {xfail: "Not defined in the table"}]
-  - ['è', '⠠⠑',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Use noback"}}]
+  - ['ç', '⠯']
+  - ['è', '⠠⠑']
   - ['é', '⠮']
   - ['ê', '⠠⠑',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as è"}}]
   - ['ë', '⠠⠑',
-    {xfail: "Not defined in the table"}]
-  - ['ì', '⠠⠊',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as è"}}]
+  - ['ì', '⠠⠊']
   - ['í', '⠌']
   - ['î', '⠠⠊',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as ì"}}]
   - ['ï', '⠠⠊',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as ì"}}]
   - ['ð', '',
     {xfail: "Not defined in the table"}]
   - ['ñ', '⠻']
-  - ['ò', '⠠⠕',
-    {xfail: "Not defined in the table"}]
+  - ['ò', '⠠⠕']
   - ['ó', '⠬']
   - ['ô', '⠠⠕',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as ò"}}]
   - ['õ', '⠠⠕',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as ò"}}]
   - ['ö', '⠠⠕',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as ò"}}]
   - ['÷', '⠲']
   - ['ø', '⠠⠕',
-    {xfail: "Not defined in the table"}]
-  - ['ù', '⠠⠥',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as ò"}}]
+  - ['ù', '⠠⠥']
   - ['ú', '⠾']
   - ['û', '⠠⠥',
-    {xfail: "Not defined in the table"}]
-  - ['ü', '⠠⠥',
-    {xfail: "Not defined in the table"}]
-  - ['ý', '⠠⠽',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as ù"}}]
+  - ['ü', '⠳']
+  - ['ý', '⠠⠽']
   - ['þ', '',
     {xfail: "Not defined in the table"}]
   - ['ÿ', '⠠⠽',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as ý"}}]
   - ['Œ', '⠨⠕⠑',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Use noback"}}]
   - ['œ', '⠕⠑',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Use noback"}}]
   - ['Š', '⠨⠠⠎',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as ß"}}]
   - ['š', '⠠⠎',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as ß"}}]
   - ['Ÿ', '⠨⠠⠽',
-    {xfail: "Not defined in the table"}]
-  - ['Ž', '⠨⠠⠵',
-    {xfail: "Not defined in the table"}]
-  - ['ž', '⠠⠵',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Same as Ý"}}]
+  - ['Ž', '⠨⠠⠵']
+  - ['ž', '⠠⠵']
   - ['ƒ', '',
     {xfail: "Not defined in the table"}]
   - ['ˆ', '',
@@ -646,24 +621,21 @@ tests:
     {xfail: {backward: "Same as quote"}}]
   - ['\x201d', '⠦',
     {xfail: {backward: "Same as quote"}}]
-  - ['†', '',
-    {xfail: "Not defined in the table"}]
-  - ['‡', '',
-    {xfail: "Not defined in the table"}]
-  - ['•', '',
-    {xfail: "Not defined in the table"}]
+  - ['†', '⠐⠗']
+  - ['‡', '⠐⠗⠗']
+  - ['•', '⠤',
+    {xfail: {backward: "Same as -"}}]
   - ['…', '⠄⠄⠄',
     {xfail: {backward: "Ansi char is defined first"}}]
   - ['‰', '⠸⠴⠴',
-    {xfail: "Not defined in the table"}]
+    {xfail: {backward: "Ansi version defined first"}}]
   - ['‹', '',
     {xfail: "Not defined in the table"}]
   - ['›', '',
     {xfail: "Not defined in the table"}]
   - ['€', '⠸⠑',
     {xfail: {backward: "Ansi version defined first"}}]
-  - ['™', '⠣⠨⠞⠜',
-    {xfail: "Not defined in the table"}]
+  - ['™', '⠣⠨⠞⠨⠍⠜']
   - ['●', '',
     {xfail: "Not defined in the table"}]
 
@@ -674,3 +646,50 @@ tests:
 
   # Numbers with decimals
   - ['123.456,789', '⠼⠁⠃⠉⠄⠙⠑⠋⠂⠛⠓⠊']
+
+  # CBE B 2 V4 (2025-05-23) literary Grade 1 additions
+  - ['l·l', '⠇⠐⠇', {xfail: {backward: "5-123 collides with {"}}]
+  - ['L·l', '⠨⠇⠐⠇', {xfail: {backward: "5-123 collides with {"}}]
+  - ['L·L', '⠨⠨⠇⠐⠇', {xfail: {backward: "5-123 collides with {"}}]
+  - ['Col·legi', '⠨⠉⠕⠇⠐⠇⠑⠛⠊', {xfail: {backward: "5-123 collides with {"}}]
+  - ['COL·LEGI', '⠨⠨⠉⠕⠇⠐⠇⠑⠛⠊', {xfail: {backward: "5-123 collides with {"}}]
+  - ['//', '⠠⠢⠂']
+  - ['\\\\', '⠐⠔⠄']
+  - ['234a5', '⠼⠃⠉⠙⠐⠁⠑', {xfail: {backward: "noback rule"}}]
+  - ['1.ª', '⠼⠂⠁', {xfail: {backward: "noback ordinal rule"}}]
+  - ['2.º', '⠼⠆⠕', {xfail: {backward: "noback ordinal rule"}}]
+  - ['1.er', '⠼⠂⠗', {xfail: {backward: "noback ordinal rule"}}]
+  - ['‖', '⠸⠇']
+  - ['‒', '⠒⠒']
+  - ['′', '⠳', {xfail: {backward: "Same as ü"}}]
+  - ['″', '⠳⠳']
+  - ['℗', '⠣⠨⠏⠜']
+  - ['℠', '⠣⠨⠎⠨⠍⠜']
+  - ['Ƀ', '⠸⠃']
+  - ['₡', '⠸⠉']
+  - ['₿', '⠸⠃', {xfail: {backward: "Same as Ƀ"}}]
+
+flags: {testmode: forward}
+tests:
+  - ['hola', '⠔⠓⠕⠇⠁⠔', {typeform: {italic: '++++'}}]
+  - ['hola', '⠔⠓⠕⠇⠁⠔', {typeform: {bold: '++++'}}]
+  - ['hola', '⠔⠓⠕⠇⠁⠔', {typeform: {underline: '++++'}}]
+
+table:
+  language: gl
+  type: literary
+  grade: 1
+  __assert-match: gl.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['Galicia: l·l ç xoán', '⠨⠛⠁⠇⠊⠉⠊⠁⠒ ⠇⠐⠇ ⠯ ⠭⠕⠷⠝', {xfail: {backward: "5-123 collides with {"}}]
+  - ['coruña 12,5', '⠉⠕⠗⠥⠻⠁ ⠼⠁⠃⠂⠑']
+
+table:
+  language: eu
+  type: literary
+  grade: 1
+  __assert-match: eu.tbl
+tests:
+  - ['Euskara: txoria xagua', '⠨⠑⠥⠎⠅⠁⠗⠁⠒ ⠞⠭⠕⠗⠊⠁ ⠭⠁⠛⠥⠁']
+  - ['Donostia 2025', '⠨⠙⠕⠝⠕⠎⠞⠊⠁ ⠼⠃⠚⠃⠑']
