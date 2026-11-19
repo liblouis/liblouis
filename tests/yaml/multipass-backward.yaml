@@ -63,7 +63,7 @@ tests:
 - # swap
   - ⡪⠷⠣⠪
   - sqpaancu
-  - xfail: not fixed
+  - xfail: context rules are applied before correct rules in backward translation, so the nestcd rule never sees the output of the nestcc rule
 - # grouping
   - ⣹⣏
   - \x0001\x0002
@@ -212,3 +212,128 @@ tests:
   - - ⠃⠁⠗⠆
     - foobar2
 
+
+# Swap references in the test part of nofor multipass rules never matched
+# because back_swapTest read the minimum match count from the wrong operand.
+table: |
+  include tables/unicode.dis
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  swapdd myswap 1,12 1346,13456
+  nofor pass2 [@14]%myswap @1
+  nofor pass2 [@14]!%myswap @12
+  nofor pass2 %myswap[@14] @145
+  nofor pass2 !%myswap[@14] @15
+  nofor pass2 %myswap @124
+flags: {testmode: backward}
+tests:
+- # swap test matches after replace region
+  - ⠉⠁
+  - af
+- # negated swap test does not match after replace region
+  - ⠉⠚
+  - bj
+- # swap test matches before replace region
+  - ⠁⠉
+  - ad
+- # negated swap test matches before replace region
+  - ⠟⠉
+  - qb
+- # negated swap test matches at end of input
+  - ⠉
+  - b
+- # swap test matches a single character
+  - ⠁
+  - f
+- # swap test matches the other character of the swap set
+  - ⠃
+  - f
+- # swap test does not match a character outside the swap set
+  - ⠚
+  - j
+
+# Swap actions on swapdd rules picked the wrong replacement group in
+# back_swapReplace.
+table: |
+  include tables/unicode.dis
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  swapdd myswap 1,12 1346,13456
+  nofor pass2 [%myswap.] %myswap
+flags: {testmode: backward}
+tests:
+- # swapdd replaces each dot pattern with its counterpart
+  - ⠁⠃⠃⠁
+  - xyyx
+
+# Explicit match counts on swap tests.
+table: |
+  include tables/unicode.dis
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  swapdd myswap 1,12 1346,13456
+  nofor pass2 [%myswap2] @134
+  nofor pass2 [%myswap1] @124
+flags: {testmode: backward}
+tests:
+- # a single swap character
+  - ⠁
+  - f
+- # exactly two swap characters
+  - ⠁⠁
+  - m
+- # two then one
+  - ⠁⠃⠁
+  - mf
+
+# Ranges on swap tests.
+table: |
+  include tables/unicode.dis
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  swapdd myswap 1,12 1346,13456
+  nofor pass2 [%myswap2-3] @134
+flags: {testmode: backward}
+tests:
+- # not enough swap characters
+  - ⠁
+  - a
+- # minimum number of swap characters
+  - ⠁⠁
+  - m
+- # match is extended to at most three characters
+  - ⠁⠁⠁⠁
+  - ma
+- # match stops at a character outside the swap set
+  - ⠁⠃⠚
+  - mj
+
+# Unbounded ranges on swap tests.
+table: |
+  include tables/unicode.dis
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  swapdd myswap 1,12 1346,13456
+  nofor pass2 [%myswap.] @135
+flags: {testmode: backward}
+tests:
+- # unbounded range consumes a single swap character
+  - ⠁
+  - o
+- # unbounded range consumes the whole run and stops at a non-swap character
+  - ⠁⠃⠁⠚
+  - oj
+
+# Swap references also work in nofor correct rules, which operate on the
+# back-translated text.
+table: |
+  include tables/unicode.dis
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  swapcc myswapcc abc xyz
+  nofor correct [%myswapcc.] %myswapcc
+flags: {testmode: backward}
+tests:
+- # swapcc replaces each character with its counterpart
+  - ⠁⠃⠉⠙
+  - xyzd
