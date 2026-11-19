@@ -1,0 +1,152 @@
+# Tests for Kyrgyz uncontracted braille
+#
+# Copyright (C) 2026 Seeing Hands <kyrgyzbraille@seeinghands.org>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+display: unicode.dis
+table:
+  language: ky
+  grade: 1
+  __assert-match: ky-g1.utb
+
+flags:
+    testmode: bothDirections
+
+tests:
+    # Common Cyrillic letters from shared cyrillicLetterDef6Dots.uti
+    # lowercase
+    - ["а", ⠁]
+    - ["б", ⠃]
+    - ["в", ⠺]
+    - ["г", ⠛]
+    - ["д", ⠙]
+    - ["е", ⠑]
+    - ["ё", ⠡]
+    - ["ж", ⠚]
+    - ["з", ⠵]
+    - ["и", ⠊]
+    - ["к", ⠅]
+    - ["л", ⠇]
+    - ["м", ⠍]
+    - ["н", ⠝]
+    - ["о", ⠕]
+    - ["п", ⠏]
+    - ["р", ⠗]
+    - ["с", ⠎]
+    - ["т", ⠞]
+    - ["у", ⠥]
+    - ["ф", ⠋]
+    - ["х", ⠓]
+    - ["ц", ⠉]
+    - ["ч", ⠟]
+    - ["ш", ⠱]
+    - ["щ", ⠭]
+    - ["ъ", ⠷]
+    - ["ы", ⠮]
+    - ["ь", ⠾]
+    - ["э", ⠪]
+    - ["ю", ⠳]
+    - ["я", ⠫]
+
+    # uppercase (using Kyrgyz case sign, happens to be same as other Cyrillic tables, but not part of Cyrillic uti file)
+    - ["А", ⠨⠁]
+    - ["Б", ⠨⠃]
+    - ["В", ⠨⠺]
+    - ["Г", ⠨⠛]
+    - ["Д", ⠨⠙]
+    - ["Е", ⠨⠑]
+    - ["Ё", ⠨⠡]
+    - ["Ж", ⠨⠚]
+    - ["З", ⠨⠵]
+    - ["И", ⠨⠊]
+    - ["К", ⠨⠅]
+    - ["Л", ⠨⠇]
+    - ["М", ⠨⠍]
+    - ["Н", ⠨⠝]
+    - ["О", ⠨⠕]
+    - ["П", ⠨⠏]
+    - ["Р", ⠨⠗]
+    - ["С", ⠨⠎]
+    - ["Т", ⠨⠞]
+    - ["У", ⠨⠥]
+    - ["Ф", ⠨⠋]
+    - ["Х", ⠨⠓]
+    - ["Ц", ⠨⠉]
+    - ["Ч", ⠨⠟]
+    - ["Ш", ⠨⠱]
+    - ["Щ", ⠨⠭]
+    - ["Ъ", ⠨⠷]
+    - ["Ы", ⠨⠮]
+    - ["Ь", ⠨⠾]
+    - ["Э", ⠨⠪]
+    - ["Ю", ⠨⠳]
+    - ["Я", ⠨⠫]
+
+    # Letters specifically for Kyrgyz
+    - ["й", ⠯]
+    - ["Й", ⠨⠯]
+    - ["ң", ⠽]
+    - ["Ң", ⠨⠽]
+    - ["ө", ⠌]
+    - ["Ө", ⠨⠌]
+    - ["ү", ⠧]
+    - ["Ү", ⠨⠧]
+
+    # Common punctuation
+    - [".", ⠲]
+    - [",", ⠂]
+    - [";", ⠆]
+    - [":", ⠒]
+    - ["-", ⠤]
+    - ["'", ⠄]
+    - ["!", ⠖]
+    - ["_", ⠸]
+    - ["$", ⠈⠲]
+    - ["%", ⠒⠏]
+    - ["&", ⠈⠯]
+
+    # Other punctuation
+
+    - ["(Салам)", ⠶⠨⠎⠁⠇⠁⠍⠶]
+    - ["\"Салам\"", ⠦⠨⠎⠁⠇⠁⠍⠴]
+    - ["\"Кандайсың?\"", ⠦⠨⠅⠁⠝⠙⠁⠯⠎⠮⠽⠦⠴]
+    - ["[Салам]", ⠠⠶⠨⠎⠁⠇⠁⠍⠶⠄]
+
+
+    # Numbers
+    - ["0", ⠼⠚]
+    - ["1", ⠼⠁]
+    - ["2", ⠼⠃]
+    - ["3", ⠼⠉]
+    - ["4", ⠼⠙]
+    - ["5", ⠼⠑]
+    - ["6", ⠼⠋]
+    - ["7", ⠼⠛]
+    - ["8", ⠼⠓]
+    - ["9", ⠼⠊]
+    - ["13579", ⠼⠁⠉⠑⠛⠊]
+    - ["123.456,78", ⠼⠁⠃⠉⠲⠙⠑⠋⠂⠛⠓]
+    - ["123,456.78", ⠼⠁⠃⠉⠂⠙⠑⠋⠲⠛⠓]
+    - ["2+4 = 6", ⠼⠃⠰⠦⠼⠙⠀⠰⠶⠀⠼⠋]
+    - ["2-4 = -2", ⠼⠃⠤⠼⠙⠀⠰⠶⠀⠤⠼⠃]
+    - ["2*4 = 8", ⠼⠃⠔⠔⠼⠙⠀⠰⠶⠀⠼⠓]
+    - ["2/4 = 0.5", ⠼⠃⠰⠌⠼⠙⠀⠰⠶⠀⠼⠚⠲⠑]
+    - ["2+4=6", ⠼⠃⠰⠦⠼⠙⠰⠶⠼⠋]
+
+
+# Latin compatibility
+# Note: mixed Cyrillic and Latin text is not regular
+# Because it does exactly the same thing in Kyrgyz that other Cyrillic tables do and has only a starting symbol
+
+# Latin compatibility only works in forward translation due to a backward translation bug with custom attributes, at least as of Liblouis 3.39.0
+# See https://github.com/liblouis/liblouis/issues/2106 for more information
+flags:
+    testmode: forward
+
+tests:
+    - ["test", "⠠⠞⠑⠎⠞"]
+    - ["Салам hello", "⠨⠎⠁⠇⠁⠍⠀⠠⠓⠑⠇⠇⠕"]
