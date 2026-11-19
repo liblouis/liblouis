@@ -20,7 +20,32 @@ without any warranty. */
     if (!(test))      \
       result = 1;     \
   } while(0)          \
-    
+
+static char log_buffer[8192];
+static int log_buffer_pos = 0;
+
+static void
+log_to_buffer(logLevels level, const char *message)
+{
+  if (log_buffer_pos + strlen(message) + 2 > sizeof(log_buffer)) return;
+  log_buffer_pos += sprintf(&log_buffer[log_buffer_pos], "%s\n", message);
+}
+
+static void
+clear_log(void)
+{
+  log_buffer[0] = '\0';
+  log_buffer_pos = 0;
+}
+
+static int
+log_contains(const char *expected)
+{
+  if (strstr(log_buffer, expected)) return 1;
+  printf("Expected log to contain \"%s\" but got:\n%s", expected, log_buffer);
+  return 0;
+}
+
 int
 main(int argc, char **argv)
 {
@@ -61,8 +86,28 @@ main(int argc, char **argv)
   setenv ("LOUIS_TABLEPATH", "", 1);
   ASSERT (lou_getTable ("tables/resolve_table/table_1"));
   
-  // File name not on LOUIS_TABLEPATH
-  ASSERT (!lou_getTable ("table_1"));
+  // File name not on LOUIS_TABLEPATH: the error names the directory the
+  // relative path was resolved against (see issue #317)
+  {
+    char cwd[4096];
+    char expected[4096 + 64];
+    lou_registerLogCallback (log_to_buffer);
+    clear_log ();
+    ASSERT (!lou_getTable ("table_1"));
+    ASSERT (log_contains ("Cannot resolve table 'table_1'"));
+    ASSERT (getcwd (cwd, sizeof(cwd)));
+    sprintf (expected,
+	     "Relative table paths are resolved against the current directory: %s",
+	     cwd);
+    ASSERT (log_contains (expected));
+
+    // ... but not for an absolute path
+    clear_log ();
+    ASSERT (!lou_getTable ("/nonexistent/table_1"));
+    ASSERT (log_contains ("Cannot resolve table '/nonexistent/table_1'"));
+    ASSERT (!strstr (log_buffer, "Relative table paths"));
+    lou_registerLogCallback (NULL);
+  }
   
   // File name on LOUIS_TABLEPATH
   setenv ("LOUIS_TABLEPATH", "tables/resolve_table", 1);

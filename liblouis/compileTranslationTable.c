@@ -38,6 +38,11 @@
 #include <string.h>
 #include <ctype.h>
 #include <sys/stat.h>
+#ifdef _WIN32
+#include <direct.h>
+#else
+#include <unistd.h>
+#endif
 
 #include "internal.h"
 
@@ -4796,6 +4801,24 @@ _lou_getTablePath(void) {
 		return strdup(".");
 }
 
+static int
+isAbsolutePath(const char *path) {
+	if (path[0] == '/' || path[0] == '\\') return 1;
+#ifdef _WIN32
+	if (isalpha((unsigned char)path[0]) && path[1] == ':') return 1;
+#endif
+	return 0;
+}
+
+static char *
+currentDirectory(char *buffer, size_t size) {
+#ifdef _WIN32
+	return _getcwd(buffer, (int)size);
+#else
+	return getcwd(buffer, size);
+#endif
+}
+
 /**
  * The default table resolver
  *
@@ -4840,6 +4863,14 @@ _lou_defaultTableResolver(const char *tableList, const char *base) {
 		if (!(tableFiles[k++] = resolveSubtable(subTable, base, searchPath))) {
 			char *path;
 			_lou_logMessage(LOU_LOG_ERROR, "Cannot resolve table '%s'", subTable);
+			if (!isAbsolutePath(subTable)) {
+				char cwd[MAX_TABLEFILE_SIZE];
+				if (currentDirectory(cwd, sizeof(cwd)))
+					_lou_logMessage(LOU_LOG_ERROR,
+							"Relative table paths are resolved against the current "
+							"directory: %s",
+							cwd);
+			}
 			path = getenv("LOUIS_TABLEPATH");
 			if (path != NULL && path[0] != '\0')
 				_lou_logMessage(LOU_LOG_ERROR, "LOUIS_TABLEPATH=%s", path);
