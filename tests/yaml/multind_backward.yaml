@@ -1,0 +1,90 @@
+# Back-translation of "multind" rules: a multind rule declares that a sequence
+# of cells stands for a sequence of braille indicators. The indicators must
+# together consume exactly the cells matched by the multind rule, never more.
+# See https://github.com/liblouis/liblouis/pull/1968.
+
+# An indicator that spans more than one cell (the number of opcodes in the
+# multind rule is smaller than its number of cells).
+table: |
+  include tables/unicode.dis
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  letsign 56-56
+  capsletter 6
+  multind 56-56-6 letsign capsletter
+
+flags: {testmode: backward}
+tests:
+  - ["⠁⠰⠰⠠⠁", "aA"]
+
+# An indicator that is longer than what is left of the input at the end of the
+# string. The number sign is cut down to the one cell that is left; it used to
+# run past the end of the input.
+table: |
+  include tables/unicode.dis
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  letsign 56
+  numsign 3456-3456
+  multind 56-56 letsign numsign
+
+flags: {testmode: backward}
+tests:
+  - ["⠁⠰⠰", "a"]
+
+# A multind rule that names an indicator the table does not define can not be
+# applied. The rule chain must still be searched for other rules that match the
+# same cells, here the "always" rule.
+table: |
+  include tables/unicode.dis
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  punctuation ' 3
+  numsign 3456-3456
+  multind 56 letsign numsign
+  always ' 56
+
+flags: {testmode: backward}
+tests:
+  - ["⠰", "'"]
+  - ["⠰⠁", "'a"]
+
+# Two indicators that share a single cell (the number of opcodes in the multind
+# rule is larger than its number of cells), as in the Portuguese tables. Both
+# indicators must take effect and no further cell may be consumed.
+table: |
+  include tables/unicode.dis
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  include tables/digits6Dots.uti
+  include tables/litdigits6Dots.uti
+  numsign 3456
+  begcapsword 46-46
+  endcapsword 56
+  nonumsign 56
+  multind 56 nonumsign endcapsword
+  word but 1
+
+flags: {testmode: backward}
+tests:
+  - ["⠁", "but"]
+  # endcapsword ends the word in capitals
+  - ["⠨⠨⠁⠃⠉⠰⠙", "ABCd"]
+  # nonumsign ends the number and suppresses the whole-word contraction
+  - ["⠼⠁⠰⠁", "1a"]
+
+# An indicator that is longer than what is left of the cells matched by the
+# multind rule, in the middle of the input. The capital letter indicator is
+# cut down to the one cell that is left; the cells that follow the multind
+# rule must not be swallowed.
+table: |
+  include tables/unicode.dis
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  letsign 56
+  capsletter 6-6
+  multind 56-6 letsign capsletter
+
+flags: {testmode: backward}
+tests:
+  - ["⠰⠠⠁⠁", "Aa"]
