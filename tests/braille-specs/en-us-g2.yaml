@@ -20,6 +20,11 @@ flags: {testmode: bothDirections}
 tests:
   - ["but b can ", "⠃ ⠰⠃ ⠉ "]
 
+# Two largesign words written together get their space back (issue #805)
+  - ["of the dog.", "⠷⠮ ⠙⠕⠛⠲"]
+# Backward, the number ends at the midnum colon (issue #2135): 12:could
+  - ["12:34 of the dog.", "⠼⠁⠃⠒⠉⠙ ⠷⠮ ⠙⠕⠛⠲", {xfail: {backward: true}}]
+
 # Converted from inpos_compbrl.c
 tests:
   - - 'user@example.com'
