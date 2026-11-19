@@ -63,6 +63,8 @@ endif
 
 dist_braille_specs_TESTS =				  \
 	braille-specs/afr-za-g2.yaml			  \
+	braille-specs/akk-borger.yaml			  \
+	braille-specs/akk.yaml				  \
 	braille-specs/ar-ar-comp8.yaml			  \
 	braille-specs/ar-ar-g1.yaml			  \
 	braille-specs/ar-ar-g1_harness.yaml		  \
@@ -76,6 +78,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/critical-apparatus.yaml		  \
 	braille-specs/cs_harness.yaml			  \
 	braille-specs/cs-comp8_harness.yaml		  \
+	braille-specs/cuneiform-transliterated.yaml	  \
 	braille-specs/da-dk_1993.yaml			  \
 	braille-specs/da-dk-6dot.yaml			  \
 	braille-specs/da-dk-8dot.yaml			  \
@@ -139,8 +142,10 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/ga-g1_harness.yaml		  \
 	braille-specs/ga-g2_harness.yaml		  \
 	braille-specs/grc-international-common.yaml	  \
+	braille-specs/grc-international-composed.yaml	  \
 	braille-specs/grc-international-decomposed.yaml	  \
 	braille-specs/grc-international-es.yaml	  \
+	braille-specs/hbo.yaml				  \
 	braille-specs/he-IL.yaml			  \
 	braille-specs/hi_harness.yaml			  \
 	braille-specs/hr-8dots_harness.yaml		  \
@@ -157,6 +162,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/it.yaml				  \
 	braille-specs/iu-ca-g1_harness.yaml		  \
 	braille-specs/ja-kantenji.yaml			  \
+	braille-specs/ja-rokutenkanji.yaml		  \
 	braille-specs/ka.yaml				  \
 	braille-specs/kk.yaml				  \
 	braille-specs/kmr.yaml				  \
@@ -196,10 +202,12 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/sv.yaml				  \
 	braille-specs/sw-ke-dictionary.yaml		  \
 	braille-specs/sw-ke.yaml			  \
+	braille-specs/syc.yaml				  \
 	braille-specs/ta-ta-g1_harness.yaml		  \
 	braille-specs/th.yaml				  \
 	braille-specs/tr.yaml				  \
 	braille-specs/tt.yaml				  \
+	braille-specs/uga.yaml				  \
 	braille-specs/uk.yaml				  \
 	braille-specs/ur-pk-g2.yaml			  \
 	braille-specs/uz.yaml				  \
@@ -214,17 +222,11 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/zhcn-g2.yaml
 
 if HAVE_UCS4
-# These tests only work when configured with --enable-ucs4
+# This test only works when configured with --enable-ucs4. Tests whose
+# tables declare "unicode-range: ucs4" need not be listed here, because
+# lou_checkyaml skips them when liblouis is compiled for 16-bit Unicode.
 dist_braille_specs_TESTS +=				\
-	braille-specs/akk.yaml				\
-	braille-specs/akk-borger.yaml			\
-	braille-specs/cuneiform-transliterated.yaml	\
-	braille-specs/grc-international-composed.yaml	\
-	braille-specs/hbo.yaml				\
-	braille-specs/hu-hu-g1-hyph_harness.yaml	\
-	braille-specs/ja-rokutenkanji.yaml		\
-	braille-specs/syc.yaml				\
-	braille-specs/uga.yaml
+	braille-specs/hu-hu-g1-hyph_harness.yaml
 endif
 
 dist_yaml_TESTS =				\
