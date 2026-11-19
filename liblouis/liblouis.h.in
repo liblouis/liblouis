@@ -278,7 +278,12 @@ int EXPORT_CALL
 lou_checkTable(const char *tableList);
 
 /**
- * Register a new table resolver. Overrides the default resolver. */
+ * Register a new table resolver. Overrides the default resolver.
+ *
+ * The resolver must return a newly allocated NULL-terminated array of
+ * newly allocated strings.  Liblouis copies this data and then releases
+ * the resolver output with lou_freeTableFiles().
+ */
 LIBLOUIS_API
 void EXPORT_CALL
 lou_registerTableResolver(

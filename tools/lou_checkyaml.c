@@ -965,21 +965,18 @@ read_tests(
  */
 static char **
 customTableResolver(const char *tableList, const char *base) {
-	static char *dummy_table[1];
-	static char **ret;
 	char *p = (char *)tableList;
 	while (*p != '\0') {
-		if (strncmp(p, inline_table_prefix, strlen(inline_table_prefix)) == 0)
+		if (strncmp(p, inline_table_prefix, strlen(inline_table_prefix)) == 0) {
+			char **dummy_table = malloc(sizeof(char *));
+			if (!dummy_table) return NULL;
+			dummy_table[0] = NULL;
 			return dummy_table;
+		}
 		while (*p != '\0' && *p != ',') p++;
 		if (*p == ',') p++;
 	}
-	if (ret) {
-		for (int i = 0; ret[i]; i++) free(ret[i]);
-		free(ret);
-	}
-	ret = _lou_defaultTableResolver(tableList, base);
-	return ret;
+	return _lou_defaultTableResolver(tableList, base);
 }
 
 #endif	// HAVE_LIBYAML
