@@ -240,6 +240,22 @@ tests:
   - [G-F-N, ⠰⠠⠛⠤⠰⠠⠋⠤⠰⠠⠝]
   - [gd-format, ⠰⠛⠙⠤⠿⠍⠁⠞]
 
+# Issue #892: letters next to punctuation are only wordsigns when they stand alone
+# (seqdelimiter, seqbeforechars, seqafterchars, seqafterpattern), so the letters
+# in abbreviations are letters, while "'s" etc. may follow a wordsign.
+flags: {testmode: bothDirections}
+tests:
+  - [e.g., ⠑⠲⠛⠲]
+  - [i.e., ⠊⠲⠑⠲]
+  - [n.b., ⠝⠲⠃⠲]
+  - [C.S., ⠠⠉⠲⠠⠎⠲]
+  - [a.m., ⠁⠲⠍⠲]
+  - ['7:30 a.m.', '⠼⠛⠒⠼⠉⠚ ⠁⠲⠍⠲']
+  - [rather's, ⠗⠄⠎]
+  - [Rather's, ⠠⠗⠄⠎]
+  - [US's, ⠠⠠⠥⠄⠎]
+  - [people), ⠏⠐⠜]
+
 # Backtranslation emphasis detection tests
 # These verify that emphasis indicators in braille are correctly detected
 # and the typeform buffer is populated during backtranslation.

@@ -263,6 +263,7 @@ dist_yaml_TESTS =				\
 	yaml/nonumsign.yaml			\
 	yaml/numericmode.yaml			\
 	yaml/partialTrans.yaml			\
+	yaml/seqdelimiter_backward.yaml		\
 	yaml/pass0_typebuf.yaml			\
 	yaml/precedence.yaml			\
 	yaml/present_progressive.yaml		\

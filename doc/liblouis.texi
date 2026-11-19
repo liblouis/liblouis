@@ -970,7 +970,12 @@ All the characters listed with this opcode designate a valid beginning
 and ending to a letter sequence used to determine when a letter
 sequence is @emph{standing alone}. This again determines whether word
 contractions (@pxopref{word}) or nocontractsign
-(@pxopref{nocontractsign}) should be applied.
+(@pxopref{nocontractsign}) should be applied. Back-translation uses
+the same characters to decide whether a @code{word} rule applies: the
+text before the cells must end in a delimiter (possibly followed by
+@code{seqbeforechars} characters) and the cells after them must read
+as @code{seqafterchars} characters or @code{seqafterpattern} strings
+up to the next delimiter.
 
 Spaces do not need to be listed as
 they are automatically delimiters.
@@ -1025,7 +1030,9 @@ For example, in UEB (section 2.6.4, page 18), the @samp{'d},
 @samp{'s}, @samp{'ll}, @samp{'ve}, etc. can be after a letter sequence
 provided the overall sequence is @emph{standing alone}.
 
-This opcode may be used multiple times, once per pattern.
+This opcode may be used multiple times, once per pattern. The
+pattern is matched regardless of case, so @samp{'s} also matches the
+@samp{'S} of a word written in capitals.
 
 Example:
 @example

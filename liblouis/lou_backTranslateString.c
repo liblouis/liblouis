@@ -48,8 +48,9 @@ typedef struct {
  * approximate seqdelimiter behavior. Without it, begword rules could
  * e.g. not fire after a hyphen. In forward translation, the
  * equivalent scenario is handled by seqdelimiter (and seqbeforechars,
- * seqafterchars and seqafterpattern), but the backward translation
- * code does not take into account seqdelimiter yet.
+ * seqafterchars and seqafterpattern). The backward translation code
+ * only takes them into account for whole-word rules (see
+ * back_inSequence), not yet for the nocontractsign scope.
  */
 #define NO_CONTRACT_OFF 0	 /* not in nocontractsign scope */
 #define NO_CONTRACT_ACTIVE 1 /* after nocontractsign, contractions suppressed */
@@ -499,6 +500,160 @@ isEndWord(const TranslationTableHeader *table, int pos, int mode, const InString
 	}
 	return 1;
 }
+
+/* How back_selectRule would read the cells at pos when no word context applies.
+ * Used by back_inSequence to turn the cells that follow a candidate word back into
+ * the characters forward translation started from. */
+typedef enum {
+	READ_NONE,		/* no applicable rule: back_selectRule would print dot numbers */
+	READ_INDICATOR, /* a braille indicator (capsletter, numsign, emphasis, ...) */
+	READ_CHARS,		/* a rule with characters */
+} CellReading;
+
+static CellReading
+readCells(const TranslationTableHeader *table, int pos, const InString *input,
+		TranslationTableCharacterAttributes beforeAttributes, int hasTypebuf,
+		const TranslationTableRule **rule) {
+	int length = input->length - pos;
+	const TranslationTableRule *fallback = NULL;
+	int tryThis;
+	/* The chains are walked in the same order as in back_selectRule: longest rules
+	 * first (see addBackwardRuleWithMultipleCells and addBackwardRuleWithSingleCell
+	 * in compileTranslationTable.c). _lou_stringHash gives the same bucket as the
+	 * arithmetic on dots->value in back_selectRule because an undefined cell has
+	 * value == cell. */
+	for (tryThis = 0; tryThis < 2; tryThis++) {
+		TranslationTableOffset ruleOffset;
+		if (tryThis == 0) {
+			if (length < 2) continue;
+			ruleOffset = table->backRules[_lou_stringHash(&input->chars[pos], 0, NULL)];
+		} else
+			ruleOffset = getDots(input->chars[pos], table)->otherRules;
+		while (ruleOffset) {
+			const TranslationTableRule *r =
+					(const TranslationTableRule *)&table->ruleArea[ruleOffset];
+			TranslationTableCharacterAttributes afterAttributes;
+			ruleOffset = r->dotsnext;
+			/* Pass rules depend on a test that is not run here (only no-no-g1.ctb
+			 * has one in a table that uses sequences). */
+			if (r->opcode == CTO_Context) continue;
+			if (r->dotslen > length ||
+					!compareDots(
+							&input->chars[pos], &r->charsdots[r->charslen], r->dotslen))
+				continue;
+			/* class conditions (before/after), as in back_selectRule */
+			back_setAfter(r->dotslen, table, pos, input, &afterAttributes);
+			if ((r->after & ~CTC_EmpMatch) && !(beforeAttributes & r->after)) continue;
+			if ((r->before & ~CTC_EmpMatch) && !(afterAttributes & r->before)) continue;
+			/* Indicators produce no text. A multind rule has charslen > 0 (opcode
+			 * numbers), so the opcode range is the test. Some indicators are only
+			 * selected by back_selectRule under a condition; the same conditions
+			 * apply here, and an indicator that does not apply is passed over like
+			 * any other rule (e.g. Norwegian "emphletter sub 16" and "lowercase å
+			 * 16" share a cell). */
+			if (r->opcode >= CTO_CapsLetter && r->opcode <= CTO_MultInd) {
+				switch (r->opcode) {
+				case CTO_EmphLetter:
+				case CTO_BegEmphWord:
+				case CTO_EndEmphWord:
+				case CTO_BegEmphPhrase:
+				case CTO_EndEmphPhrase:
+					if (!hasTypebuf) continue;
+					break;
+				case CTO_NoContractSign:
+					if (!(afterAttributes & (CTC_Letter | CTC_Sign))) continue;
+					break;
+				case CTO_LetterSign:
+				case CTO_NoNumberSign:
+					if ((beforeAttributes & CTC_Letter) ||
+							!(afterAttributes & (CTC_Letter | CTC_Sign)))
+						continue;
+					break;
+				default:
+					break;
+				}
+				*rule = r;
+				return READ_INDICATOR;
+			}
+			if (r->charslen == 0) continue; /* e.g. undefined: never selected */
+			switch (r->opcode) {
+			case CTO_Always:
+				if ((beforeAttributes & CTC_LitDigit) &&
+						(afterAttributes & CTC_LitDigit) && r->charslen > 1)
+					break;
+				/* fall through */
+			case CTO_ExactDots:
+			case CTO_Repeated:
+			case CTO_Hyphen:
+			case CTO_PrePunc:
+			case CTO_PostPunc:
+				*rule = r;
+				return READ_CHARS;
+			default:
+				if (r->opcode >= CTO_Space && r->opcode < CTO_UpLow) {
+					*rule = r;
+					return READ_CHARS;
+				}
+				/* A rule that depends on word context (word, begword, litdigit,
+				 * ...). Its characters are the best guess if nothing unconditional
+				 * matches. */
+				if (!fallback) fallback = r;
+				break;
+			}
+		}
+	}
+	if (fallback) {
+		*rule = fallback;
+		return READ_CHARS;
+	}
+	return READ_NONE;
+}
+
+/* The longest run of cells after a candidate word that is examined to see whether
+ * the word stands alone. A longer run without a space is taken not to stand alone
+ * (it would have to consist of punctuation only). */
+#define SEQ_LOOKAHEAD 64
+
+/* Sequence-aware "standing alone" test for a whole-word rule, the counterpart of
+ * inSequence in lou_translateString.c for tables that define seqdelimiter. The
+ * sequence attributes (seqdelimiter, seqbeforechars, seqafterchars,
+ * seqafterpattern) are set on characters, not on cells, so the test is done on
+ * text: the text already produced for what precedes the word, and for what follows
+ * it the characters that the following cells would be read as. */
+static int
+back_inSequence(const TranslationTableHeader *table, int pos, const InString *input,
+		const OutString *output, const TranslationTableRule *rule, int hasTypebuf) {
+	widechar after[SEQ_LOOKAHEAD];
+	int length = 0;
+	int k = pos + rule->dotslen;
+	TranslationTableCharacterAttributes beforeAttributes =
+			getChar(rule->charsdots[rule->charslen - 1], table)->attributes;
+	if (!_lou_inSequenceBefore(table, output->chars, output->length)) return 0;
+	while (k < input->length) {
+		const TranslationTableRule *r;
+		/* A space ends the run. So does an undefined cell: getDots gives it
+		 * CTC_Space, like getChar gives an undefined character in forward
+		 * translation. */
+		if (getDots(input->chars[k], table)->attributes & CTC_Space) break;
+		switch (readCells(table, k, input, beforeAttributes, hasTypebuf, &r)) {
+		case READ_NONE:
+			goto done;
+		case READ_INDICATOR:
+			k += r->dotslen;
+			continue;
+		case READ_CHARS:
+			if (length + r->charslen > SEQ_LOOKAHEAD) return 0;
+			memcpy(&after[length], &r->charsdots[0], CHARSIZE * r->charslen);
+			length += r->charslen;
+			beforeAttributes = getChar(after[length - 1], table)->attributes;
+			k += r->dotslen;
+			break;
+		}
+	}
+done:
+	return _lou_inSequenceAfter(table, after, 0, length);
+}
+
 static int
 findBrailleIndicatorRule(TranslationTableOffset offset,
 		const TranslationTableHeader *table, int *currentDotslen,
@@ -810,6 +965,12 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_WholeWord:
 						if (mode & partialTrans) break;
 						if (ctx.noContractMode || ctx.itsANumber) break;
+						if (table->usesSequences) {
+							if (back_inSequence(table, pos, input, output, *currentRule,
+										hasTypebuf))
+								return;
+							break;
+						}
 						if ((beforeAttributes & (CTC_Space | CTC_Punctuation)) &&
 								((afterAttributes & CTC_Space) ||
 										isEndWord(table, pos, mode, input,

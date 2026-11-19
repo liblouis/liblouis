@@ -1882,75 +1882,9 @@ isRepeatedWord(const TranslationTableHeader *table, int pos, const InString *inp
 static int
 inSequence(const TranslationTableHeader *table, int pos, const InString *input,
 		const TranslationTableRule *transRule) {
-	int i, j, s, match;
-	// TODO: all caps words
-	// const TranslationTableCharacter *c = NULL;
-
-	/* check before sequence */
-	for (i = pos - 1; i >= 0; i--) {
-		if (checkCharAttr(input->chars[i], CTC_SeqBefore, table)) continue;
-		if (!(checkCharAttr(input->chars[i], CTC_Space | CTC_SeqDelimiter, table)))
-			return 0;
-		break;
-	}
-
-	/* check after sequence */
-	for (i = pos + transRule->charslen; i < input->length; i++) {
-		/* check sequence after patterns */
-		if (table->seqPatternsCount) {
-			match = 0;
-			for (j = i, s = 0; j <= input->length && s < table->seqPatternsCount;
-					j++, s++) {
-				/* matching */
-				if (match == 1) {
-					if (table->seqPatterns[s]) {
-						if (input->chars[j] == table->seqPatterns[s])
-							match = 1;
-						else {
-							match = -1;
-							j = i - 1;
-						}
-					}
-
-					/* found match */
-					else {
-						/* pattern at end of input */
-						if (j >= input->length) return 1;
-
-						i = j;
-						break;
-					}
-				}
-
-				/* looking for match */
-				else if (match == 0) {
-					if (table->seqPatterns[s]) {
-						if (input->chars[j] == table->seqPatterns[s])
-							match = 1;
-						else {
-							match = -1;
-							j = i - 1;
-						}
-					}
-				}
-
-				/* next pattarn */
-				else if (match == -1) {
-					if (!table->seqPatterns[s]) {
-						match = 0;
-						j = i - 1;
-					}
-				}
-			}
-		}
-
-		if (checkCharAttr(input->chars[i], CTC_SeqAfter, table)) continue;
-		if (!(checkCharAttr(input->chars[i], CTC_Space | CTC_SeqDelimiter, table)))
-			return 0;
-		break;
-	}
-
-	return 1;
+	return _lou_inSequenceBefore(table, input->chars, pos) &&
+			_lou_inSequenceAfter(
+					table, input->chars, pos + transRule->charslen, input->length);
 }
 
 static void

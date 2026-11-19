@@ -39,6 +39,7 @@ EXTRA_DIST =					\
 	nonumsign.yaml				\
 	numericmode.yaml			\
 	pass0_typebuf.yaml			\
+	seqdelimiter_backward.yaml		\
 	precedence.yaml				\
 	present_progressive.yaml		\
 	repword.yaml				\
