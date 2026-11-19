@@ -2621,6 +2621,12 @@ isEmphSpace(
 	 * the isEmphasizable function. */
 	const int word_enabled = table->emphRules[emphClass->rule][begWordOffset];
 	if (emphClass->mode == CTC_UpperCase) {
+		/* capsmodebreakchars characters always count as a word boundary for
+		 * capitalisation purposes, even though they are not CTC_Space. This lets a table
+		 * mark a character (e.g. UEB's "/", rule 8.6.3) as ending a capitalised
+		 * word/passage without making it an inter-word space for other purposes, such as
+		 * the standing-alone rules that govern wordsign/contraction eligibility. */
+		if (checkCharAttr(c, CTC_CapsModeBreak, table)) return 1;
 		/* The old behavior was that words are determined by spaces. However for some
 		 * tables it is a requirement that words are determined based on letters and
 		 * capsmodechars. While the latter probably makes most sense, we don't want to
@@ -2923,6 +2929,14 @@ resolveEmphasisPassages(EmphasisInfo *buffer, const EmphasisClass *class,
 	int in_pass = 0, last_pass_word_start = -1, last_pass_word_end = -1, pass_start = -1;
 	unsigned int pass_word_cnt = 0;
 	int endphraseafter_defined = emphRule[endPhraseAfterOffset] || emphRule[endOffset];
+	/* whether a word boundary that is not solely due to capsmodebreakchars has been seen
+	 * since the last word counted towards pass_word_cnt (a real space, or any other
+	 * pre-existing reason isEmphSpace() considers a character a boundary). Per rule 8.5.2 a
+	 * passage is a run of three or more space-separated symbols-sequences, so words joined
+	 * only by a capsmodebreakchars character (e.g. UEB's "/") are part of the same
+	 * symbols-sequence and must not inflate the word count; other tables that already rely
+	 * on non-space characters as word boundaries (e.g. via capsmodechars) are unaffected */
+	int pass_real_boundary = 0;
 
 	for (int i = 0; i < input->length; i++) {
 
@@ -2937,6 +2951,10 @@ resolveEmphasisPassages(EmphasisInfo *buffer, const EmphasisClass *class,
 				last_word_end = i;
 			}
 		}
+
+		if (!(wordBuffer[i] & WORD_CHAR) &&
+				!checkCharAttr(input->chars[i], CTC_CapsModeBreak, table))
+			pass_real_boundary = 1;
 
 		/* check for symbol or word indicator */
 		if (!in_emph_word &&
@@ -2954,7 +2972,8 @@ resolveEmphasisPassages(EmphasisInfo *buffer, const EmphasisClass *class,
 				 * if the next word with letters is a whole word) */
 				if (!class->mode || (wordBuffer[i] & WORD_WHOLE)) {
 					last_pass_word_start = i;
-					pass_word_cnt++;
+					if (pass_real_boundary) pass_word_cnt++;
+					pass_real_boundary = 0;
 				} else
 					goto end_passage;
 			}
@@ -2980,6 +2999,7 @@ resolveEmphasisPassages(EmphasisInfo *buffer, const EmphasisClass *class,
 				last_pass_word_start = i;
 				last_pass_word_end = -1;
 				pass_word_cnt = 1;
+				pass_real_boundary = 0;
 			}
 		} else { /* check if at end of passage */
 			if (in_pass) {
