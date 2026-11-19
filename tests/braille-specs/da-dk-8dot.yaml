@@ -916,10 +916,13 @@ tests:
   - ["at!", "⠁⠖"]
   - ["bliver!", "⠃⠖"]
   - ["og!", "⠉⠖"]
-  - ['Han/hun', '⡽⢌⠥']
-  - ['han/hun', '⠽⢌⠥']
-  - ['Over/under', '⡭⢌⠟']
-  - ['over/under', '⠭⢌⠟']
+  # han/hun and over/under pass only when "begword han" is misapplied across
+  # the slash; the "word han" rule can not apply because the standing-alone
+  # check does not treat "/" as a delimiter. See issues #2033 and #2155.
+  - ['Han/hun', '⡽⢌⠥', {xfail: {backward: true}}]
+  - ['han/hun', '⠽⢌⠥', {xfail: {backward: true}}]
+  - ['Over/under', '⡭⢌⠟', {xfail: {backward: true}}]
+  - ['over/under', '⠭⢌⠟', {xfail: {backward: true}}]
   - ['Til/fra', '⡞⢌⠖']
   - ['til/fra', '⠞⢌⠖']
 

@@ -104,11 +104,20 @@ tests:
   - ["it's", ⠭⠄⠎]
   - ["x's", ⠰⠭⠄⠎]
 
-  # According to issue #434 ':)' should be translated as ⠒⠐⠜ (which
-  # works) and backtranslation should translate it back to ':)' (which
-  # doesn't work). See https://github.com/liblouis/liblouis/issues/434
-  # and https://github.com/nvaccess/nvda/issues/7678
-  - [":)", ⠒⠐⠜, xfail: {backward: true}]
+  # Issues #434 and #1606: a contraction followed by two-cell punctuation
+  # such as ")" (5-345) or "/" (456-34). The second cell must not be
+  # mistaken for a letter or contraction ("ar", "st") that continues the
+  # word. See also https://github.com/nvaccess/nvda/issues/7678
+  - [":)", ⠒⠐⠜]
+  - [":(", ⠒⠐⠣]
+  - [":]", ⠒⠨⠜]
+  - ["paid)", ⠏⠙⠐⠜]
+  - ["(paid)", ⠐⠣⠏⠙⠐⠜]
+  # from issue #892
+  - ["people)", ⠏⠐⠜]
+  - ["(\"go,\")", ⠐⠣⠦⠛⠂⠴⠐⠜]
+  - ["(\"people,\")", ⠐⠣⠦⠏⠂⠴⠐⠜]
+  - ["https://", ⠓⠞⠞⠏⠎⠒⠸⠌⠸⠌]
 
   # Issue #1018: contraction of "there"
   - [there, ⠐⠮]
@@ -266,3 +275,35 @@ tests:
     - expected_typeform:
         italic: '++++'
         bold: '++++'
+
+# Issue #2155: begword and midword contractions must not fire across punctuation
+# inside a token. Letters have to follow immediately; otherwise "midword cc 25"
+# fires on the colon of https://example.com and "con" on ":)abc".
+flags: {testmode: bothDirections}
+tests:
+  - ['https://example.com/cat', ⠓⠞⠞⠏⠎⠒⠸⠌⠸⠌⠑⠭⠁⠍⠏⠇⠑⠲⠉⠕⠍⠸⠌⠉⠁⠞]
+  - ['https://example.com/about/the-world', ⠓⠞⠞⠏⠎⠒⠸⠌⠸⠌⠑⠭⠁⠍⠏⠇⠑⠲⠉⠕⠍⠸⠌⠁⠃⠳⠞⠸⠌⠮⠤⠸⠺]
+  - ['file:///tmp/x', ⠋⠊⠇⠑⠒⠸⠌⠸⠌⠸⠌⠞⠍⠏⠸⠌⠭]
+  - ['rdp://host', ⠗⠙⠏⠒⠸⠌⠸⠌⠓⠕⠌]
+  - ['host.example.org:8080/path', ⠓⠕⠌⠲⠑⠭⠁⠍⠏⠇⠑⠲⠕⠗⠛⠒⠼⠓⠚⠓⠚⠸⠌⠏⠁⠞⠓]
+  - ['ftp://user:pass@host.example.org:8080/path/to/file.txt', ⠋⠞⠏⠒⠸⠌⠸⠌⠥⠎⠻⠰⠒⠏⠁⠎⠎⠈⠁⠓⠕⠌⠲⠑⠭⠁⠍⠏⠇⠑⠲⠕⠗⠛⠒⠼⠓⠚⠓⠚⠸⠌⠏⠁⠞⠓⠸⠌⠞⠕⠸⠌⠋⠊⠇⠑⠲⠞⠭⠞]
+  - ['https://example.com/cat?name=Pinky&breed=Short%20Haired%20Tabby', ⠓⠞⠞⠏⠎⠒⠸⠌⠸⠌⠑⠭⠁⠍⠏⠇⠑⠲⠉⠕⠍⠸⠌⠉⠁⠞⠰⠦⠐⠝⠐⠶⠠⠏⠔⠅⠽⠈⠯⠃⠗⠑⠫⠐⠶⠠⠩⠕⠗⠞⠨⠴⠼⠃⠚⠠⠓⠁⠊⠗⠑⠙⠨⠴⠼⠃⠚⠠⠞⠁⠃⠃⠽]
+  - ['see https://liblouis.io/for/more-info.html for more', '⠎⠑⠑ ⠓⠞⠞⠏⠎⠒⠸⠌⠸⠌⠇⠊⠃⠇⠳⠊⠎⠲⠊⠕⠸⠌⠿⠸⠌⠍⠕⠗⠑⠤⠔⠋⠕⠲⠓⠞⠍⠇ ⠿ ⠍']
+  - [':)abc', ⠒⠐⠜⠁⠃⠉]
+  - ['braille_it_better@learn.org', ⠃⠗⠁⠊⠇⠇⠑⠨⠤⠊⠞⠨⠤⠃⠑⠞⠞⠻⠈⠁⠇⠑⠜⠝⠲⠕⠗⠛]
+  - ['children-do-great@teach.net', ⠡⠝⠤⠙⠤⠛⠗⠂⠞⠈⠁⠞⠂⠡⠲⠝⠑⠞]
+  - ['world@large.com', ⠸⠺⠈⠁⠇⠜⠛⠑⠲⠉⠕⠍]
+  - ['www.rubberchicken.com/menus', ⠺⠺⠺⠲⠗⠥⠆⠻⠡⠊⠉⠅⠢⠲⠉⠕⠍⠸⠌⠍⠢⠥⠎]
+  - ['www.one.in.a.hundred.org', ⠺⠺⠺⠲⠐⠕⠲⠔⠲⠁⠲⠓⠥⠝⠙⠗⠫⠲⠕⠗⠛]
+  - ['http://www.99chances.com', ⠓⠞⠞⠏⠒⠸⠌⠸⠌⠺⠺⠺⠲⠼⠊⠊⠰⠡⠨⠑⠎⠲⠉⠕⠍]
+  - ['c:\\brailledocuments\\letters.txt', ⠉⠒⠸⠡⠃⠗⠁⠊⠇⠇⠫⠕⠉⠥⠰⠞⠎⠸⠡⠇⠑⠞⠞⠻⠎⠲⠞⠭⠞]
+  - ['c:\\contractions\\wordsigns.doc', ⠉⠒⠸⠡⠉⠕⠝⠞⠗⠁⠉⠰⠝⠎⠸⠡⠘⠺⠎⠊⠛⠝⠎⠲⠙⠕⠉]
+  - ['c:\\InfoForSteven\\PhoneNumbers.xls', ⠉⠒⠸⠡⠠⠔⠋⠕⠠⠿⠠⠌⠑⠧⠢⠸⠡⠠⠏⠓⠐⠕⠠⠝⠥⠍⠃⠻⠎⠲⠭⠇⠎]
+  - ['c:\\ideas\\child-of-the-sea.doc', ⠉⠒⠸⠡⠊⠙⠂⠎⠸⠡⠡⠊⠇⠙⠤⠷⠤⠮⠤⠎⠑⠁⠲⠙⠕⠉]
+  - ['c:\\2010DIARY\\March.txt', ⠉⠒⠸⠡⠼⠃⠚⠁⠚⠠⠠⠙⠊⠁⠗⠽⠸⠡⠠⠍⠁⠗⠉⠓⠲⠞⠭⠞]
+
+# Examples from the Rules of Unified English Braille 2024, section 10.12.3,
+# whose forward translation differs from the rulebook.
+flags: {testmode: backward}
+tests:
+  - [⠉⠒⠸⠡⠃⠗⠁⠊⠇⠇⠑⠙⠕⠉⠥⠰⠞⠎⠸⠡⠇⠑⠞⠞⠻⠎⠲⠞⠭⠞, 'c:\\brailledocuments\\letters.txt']
