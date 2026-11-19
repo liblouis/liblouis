@@ -1,0 +1,3 @@
+# A table that includes itself. Compiling it must fail with an error instead
+# of recursing until the stack overflows (issue #509).
+include recursive-include-self.ctb
