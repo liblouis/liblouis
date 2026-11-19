@@ -1063,6 +1063,9 @@ addRule(const FileInfo *file, TranslationTableOpcode opcode, const CharsString *
 		} else if (dotslen > 1)
 			addBackwardRuleWithMultipleCells(cells, dotslen, offset, r, *table);
 	}
+	// putChar/putDots above may have moved the table, so make sure the
+	// caller's pointer is still valid
+	if (rule) *rule = r;
 	return 1;
 }
 
