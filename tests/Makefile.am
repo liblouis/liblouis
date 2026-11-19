@@ -240,6 +240,7 @@ dist_yaml_TESTS =				\
 	yaml/case-sensitivity.yaml		\
 	yaml/compbrlAtCursor_with_equals.yaml	\
 	yaml/computer_braille.yaml		\
+	yaml/dopasssearch-bounds.yaml		\
 	yaml/emphasis.yaml			\
 	yaml/example_test.yaml			\
 	yaml/face-with-tears-of-joy.yaml        \
