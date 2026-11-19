@@ -15,6 +15,8 @@ EXTRA_DIST =					\
 	example_test.yaml			\
 	face-with-tears-of-joy.yaml             \
 	face-with-tears-of-joy-ucs4.yaml        \
+	hyphenation-long-pattern.dic		\
+	hyphenation-long-pattern.yaml		\
 	hyphenation.dic				\
 	hyphenation.yaml			\
 	hyphenation_nocross_harness.yaml	\

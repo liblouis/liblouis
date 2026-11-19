@@ -1,0 +1,11 @@
+# A hyphenation pattern longer than the word it applies to used to make
+# hyphenateWord() read before the start of the hyphens buffer (negative
+# pattern offset).
+table: |
+  letter c 14
+  letter h 125
+  include hyphenation-long-pattern.dic
+flags: {testmode: hyphenate}
+tests:
+  - - ch
+    - ch
