@@ -267,6 +267,7 @@ dist_yaml_TESTS =				\
 	yaml/precedence.yaml			\
 	yaml/present_progressive.yaml		\
 	yaml/repword.yaml			\
+	yaml/singlecapsword.yaml		\
 	yaml/squash_space.yaml			\
 	yaml/sufword_prfword.yaml		\
 	yaml/syllable.yaml			\

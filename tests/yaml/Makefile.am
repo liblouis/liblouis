@@ -42,6 +42,7 @@ EXTRA_DIST =					\
 	precedence.yaml				\
 	present_progressive.yaml		\
 	repword.yaml				\
+	singlecapsword.yaml			\
 	squash_space.yaml			\
 	syllable.yaml				\
 	undefined.yaml				\
