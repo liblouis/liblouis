@@ -25,7 +25,7 @@ tests:
   - - radio
     - ⠗⠹⠊⠕
   - - ciudad
-    - ⠉⠊⠥⠙⠹
+    - ⠉⠊⠥⠹
   - - alba
     - ⠅⠃⠁
   - - falda
@@ -53,7 +53,7 @@ tests:
   - - bravo
     - ⠆⠁⠧⠕
   - - cobre
-    - ⠉⠕⠆⠑
+    - ⠉⠕⠆
   - - crisol
     - ⠒⠊⠎⠕⠇
   - - sacro
@@ -61,7 +61,7 @@ tests:
   - - drama
     - ⠲⠁⠍⠁
   - - ladrillo
-    - ⠇⠁⠲⠊⠇⠇⠕
+    - ⠇⠁⠲⠊⠿⠕
   - - embudo
     - ⠣⠃⠥⠙⠕
   - - gema
@@ -71,7 +71,7 @@ tests:
   - - enchufe
     - ⠢⠉⠓⠥⠋⠑
   - - gente
-    - ⠛⠢⠞⠑
+    - ⠛⠢⠞
   - - pisen
     - ⠏⠊⠎⠢
   - - era
@@ -121,7 +121,7 @@ tests:
   - - don
     - ⠙⠭
   - - orgullo
-    - ⠱⠛⠥⠇⠇⠕
+    - ⠱⠛⠥⠿⠕
   - - tortuga
     - ⠞⠱⠞⠥⠛⠁
   - - dolor
@@ -133,13 +133,13 @@ tests:
   - - cocos
     - ⠉⠕⠉⠪
   - - probeta
-    - ⠖⠕⠃⠑⠞⠁
+    - ⠏⠃⠑⠞⠁
   - - aprisa
     - ⠁⠖⠊⠎⠁
   - - quieto
     - ⠟⠊⠑⠞⠕
   - - paquete
-    - ⠏⠁⠟⠑⠞⠑
+    - ⠏⠁⠟⠞
   - - truco
     - ⠴⠥⠉⠕
   - - cuatro
@@ -149,7 +149,7 @@ tests:
   - - tenue
     - ⠞⠢⠳
   - - mayab
-    - ⠍⠁⠽⠁⠃
+    - ⠍⠁⠽⠂
 
   # intersyllabic tests where a contraction might be a syllable itself or part syllable
   - - abdica
@@ -221,7 +221,7 @@ tests:
   - - cono
     - ⠉⠭⠕
   - - corte
-    - ⠉⠱⠞⠑
+    - ⠉⠱⠞
   - - mora
     - ⠍⠱⠁
   - - mostaza
@@ -299,7 +299,7 @@ tests:
   - - osos
     - ⠪⠪
   - - principales
-    - ⠖⠔⠉⠊⠏⠅⠫
+    - ⠖⠉⠇⠫
   - - quinqué
     - ⠟⠔⠟⠮
   - - rueden
@@ -311,20 +311,20 @@ tests:
   - - trompos
     - ⠴⠺⠏⠪
 
-  # lower sign exceptions: when a word consists of lowered signs only, first contraction is
-  # destroyed to avoid confussion with punctuation signs
+  # multiple lower-sign contractions (§3.4.2.2): words formed by more than one lower-sign
+  # contraction are fully contracted under CBE B 16-1 V2 (single lower-sign words still uncontract)
   - - tren
-    - ⠞⠗⠢
+    - ⠴⠢
   - - trinen
-    - ⠞⠗⠔⠢
+    - ⠴⠔⠢
   - - entrenen
-    - ⠑⠝⠴⠢⠢
+    - ⠴⠝⠢
   - - crin
-    - ⠉⠗⠔
+    - ⠒⠔
   - - graben
-    - ⠛⠗⠂⠢
+    - ⠶⠂⠢
   - - drenen
-    - ⠙⠗⠢⠢
+    - ⠲⠢⠢
 
   # lang realization: contractions may not abbreviate accented (acute) vowels
   - - ábside
@@ -362,7 +362,7 @@ tests:
   - - cóselos
     - ⠉⠬⠎⠑⠇⠪
   - - Cuéllar
-    - ⠨⠉⠥⠮⠇⠇⠡
+    - ⠨⠉⠥⠮⠿⠡
 
   # word endings tests
   - - filas
@@ -372,7 +372,7 @@ tests:
   - - pasión
     - ⠏⠯⠼
   - - reacción
-    - ⠗⠑⠁⠼
+    - ⠗⠁⠼
   - - lección
     - ⠇⠑⠼
   - - aflicción
@@ -392,11 +392,9 @@ tests:
 
   # an ending may never be replaced by other partword contractions
   - - hablando
-    - ⠓⠂⠇⠩⠙⠕
-    - xfail: the correct form does not have an extra o at end
+    - ⠓⠂⠇⠩⠙
   - - sufriendo
-    - ⠎⠥⠋⠗⠊⠢⠙⠕
-    - xfail: the correct form employs the word ending, see above
+    - ⠎⠥⠋⠗⠲⠙
 
   # lang realization: accented vowels are never part of word endings
   - - mandó
@@ -435,19 +433,19 @@ tests:
   - - amígdala
     - ⠁⠍⠌⠛⠙⠅⠁
   - - occidente
-    - ⠕⠉⠉⠊⠙⠢⠞⠑
+    - ⠕⠉⠉⠊⠙⠢⠞
   - - cercamente
-    - ⠉⠉⠍
+    - ⠉⠦⠉⠁⠍
   - - ignoro
     - ⠊⠛⠝⠱⠕
   
-  # wheneever a word can be contracted with two contractions which overlap like ad or dr, the later one is preferred.
+  # whenever a word can be contracted with two contractions which overlap like ad or dr, the later one is preferred.
   - - cuento
     - ⠉⠥⠢⠞⠕
   - - ladra
     - ⠇⠁⠲⠁
   - - esquema
-    - ⠫⠟⠣⠁
+    - ⠫⠟⠍⠁
   - - fueron
     - ⠋⠥⠦⠭
   - - hueso
@@ -455,8 +453,8 @@ tests:
   - - sígueme
     - ⠎⠌⠛⠥⠣⠑
   
-  # word beginnings may not be followed by vowels (to avoid confussion with punctuation signs), including accented ones.
-  # also, word beginnings might not be followed by a contraction which abbreviates a consonant.
+  # CBE B 16-1 V2 (§3.1 & Apéndice A): repealed 1964 Montevideo rules restricting contractions
+  # after word beginnings (principios may now precede consonant contractions and vowels).
   - - comunicar
     - ⠉⠺⠥⠝⠊⠉⠡
   - - comando
@@ -466,56 +464,55 @@ tests:
   - - conato
     - ⠉⠭⠁⠞⠕
   - - contrato
-    - ⠒⠞⠗⠁⠞⠕
+    - ⠒⠴⠁⠞⠕
   - - consumo
     - ⠒⠎⠥⠍⠕
   - - congruente
-    - ⠒⠛⠗⠥⠢⠞⠑
+    - ⠒⠶⠥⠢⠞
   - - ingrato
     - ⠔⠶⠁⠞⠕
   - - distrae
-    - ⠲⠞⠗⠁⠑
+    - ⠲⠴⠁⠑
   - - concreto
-    - ⠒⠉⠗⠑⠞⠕
+    - ⠒⠒⠞
   - - comprar
-    - ⠤⠏⠗⠡
+    - ⠤⠖⠡
 
   - - expresar
-    - ⠭⠏⠗⠫⠡
+    - ⠭⠖⠎⠡
   - - interpretar
-    - ⠽⠏⠗⠑⠞⠡
+    - ⠽⠖⠞⠡
   - - pregrabar
-    - ⠖⠛⠗⠂⠡
+    - ⠖⠶⠂⠡
   - - pregrado
-    - ⠖⠛⠗⠹⠕
+    - ⠖⠶
   - - pregrados
-    - ⠖⠛⠗⠹⠪
+    - ⠖⠶⠪
   - - condrioma
-    - ⠒⠙⠗⠊⠺⠁
+    - ⠒⠲⠊⠺⠁
   - - reprende
-    - ⠗⠏⠗⠢⠙⠑
+    - ⠗⠖⠝⠙⠑
   - - ingresaron
     - ⠔⠶⠫⠡⠭
   - - retraso
-    - ⠗⠞⠗⠯⠕
+    - ⠗⠴⠯⠕
   - - extraño
-    - ⠭⠞⠗⠁⠻⠕
+    - ⠭⠴⠁⠻⠕
   - - entrecruzar
-    - ⠴⠉⠗⠥⠵⠡
+    - ⠴⠒⠥⠵⠡
   - - intergrupal
-    - ⠽⠛⠗⠥⠏⠅
+    - ⠽⠶⠥⠏⠅
   - - sobreproducido
-    - ⠆⠏⠗⠕⠙⠥⠉⠊⠙⠕
+    - ⠆⠏⠙⠥⠉⠊⠙⠕
 
-  # stenographic interruption: whenever x, w or k is anywhere in a word, the entire word is
-  # uncontracted and dot 5 prefixes the word.
-  # most are african based or arabic derived words in the language.
+  # stenographic interruption: whenever w or k is anywhere in a word, the entire word is
+  # uncontracted and dot 5 prefixes the word (§4.2.1.1; x no longer interrupts).
   - - kiosco
     - ⠐⠅⠊⠕⠎⠉⠕
   - - wagner
     - ⠐⠺⠁⠛⠝⠑⠗
   - - xalapa
-    - ⠐⠭⠁⠇⠁⠏⠁
+    - ⠭⠅⠁⠏⠁
   - - hardware
     - ⠐⠓⠁⠗⠙⠺⠁⠗⠑
   - - hawaiano
@@ -549,47 +546,384 @@ tests:
   - - folklórica
     - ⠐⠋⠕⠇⠅⠇⠬⠗⠊⠉⠁
   - - anexar
-    - ⠐⠁⠝⠑⠭⠁⠗
+    - ⠩⠑⠭⠡
   - - anorexia
-    - ⠐⠁⠝⠕⠗⠑⠭⠊⠁
+    - ⠩⠱⠑⠭⠊⠁
   - - aproximación
-    - ⠐⠁⠏⠗⠕⠭⠊⠍⠁⠉⠊⠬⠝
+    - ⠁⠖⠕⠭⠜⠁⠉⠼
   - - aproximadamente
-    - ⠐⠁⠏⠗⠕⠭⠊⠍⠁⠙⠁⠍⠑⠝⠞⠑
+    - ⠁⠖⠕⠭⠜⠹⠁⠍
   - - auxiliador
-    - ⠐⠁⠥⠭⠊⠇⠊⠁⠙⠕⠗
+    - ⠁⠥⠭⠊⠇⠊⠹⠱
   - - xilófono
-    - ⠐⠭⠊⠇⠬⠋⠕⠝⠕
+    - ⠭⠊⠇⠬⠋⠭⠕
   - - exponer
-    - ⠐⠑⠭⠏⠕⠝⠑⠗
-    - xfail: the exception to the interruption rule is applied correctly here
+    - ⠭⠏⠭⠦
     
   # testing to check if dot 5 is also added before closing quotation or question mark symbols
   - - no quieres que hablen?
     - ⠝ ⠟⠊⠦⠫ ⠟ ⠓⠂⠇⠢⠐⠢
   - - la tienda se llama "el retén"
-    - ⠄ ⠞⠊⠢⠙⠁ ⠎ ⠇⠇⠁⠍⠁ ⠦⠑ ⠗⠞⠮⠝⠐⠦
+    - ⠄ ⠞⠊⠢⠙⠁ ⠎ ⠿⠁⠍⠁ ⠐⠦⠑ ⠗⠞⠮⠝⠐⠦
 
   # test lower sign exceptions and stenographic interruption with capitalization
   - - toma un Tren
-    - ⠞⠺⠁ ⠥ ⠨⠞⠗⠢
+    - ⠞⠺⠁ ⠥ ⠨⠴⠢
   - - fueron con Walter
     - ⠋⠥⠦⠭ ⠉ ⠐⠨⠺⠁⠇⠞⠑⠗
   - - es el señor Kraller
-    - ⠫ ⠑ ⠎⠑⠻⠱ ⠐⠨⠅⠗⠁⠇⠇⠑⠗
+    - ⠫ ⠑ ⠎⠗ ⠐⠨⠅⠗⠁⠇⠇⠑⠗
   - - es para MAXWELL
     - ⠫ ⠡ ⠐⠨⠨⠍⠁⠭⠺⠑⠇⠇
 
-  # testing these with punctuation
+  # testing these with punctuation (§§4.2.2-4.2.3)
   - - no "drenen" el lago
-    - ⠝ ⠦⠙⠗⠢⠢⠐⠦ ⠑ ⠇⠁⠛⠕
-    - xfail: unresolved multipass situation
+    - ⠝ ⠐⠦⠲⠢⠢⠐⠦ ⠑ ⠇⠁⠛⠕
   - - toma un "tren"
-    - ⠞⠺⠁ ⠥ ⠦⠞⠗⠢⠐⠦
-    - xfail: unresolved multipass situation
+    - ⠞⠺⠁ ⠥ ⠐⠦⠴⠢⠐⠦
   - - toma un ¿tren?
-    - ⠞⠺⠁ ⠥ ⠢⠞⠗⠢⠐⠢
-    - xfail: unresolved multipass situation
+    - ⠞⠺⠁ ⠥ ⠐⠢⠴⠢⠐⠢
   - - es su ¿bikini?
     - ⠫ ⠜ ⠢⠐⠃⠊⠅⠊⠝⠊⠐⠢
-    - xfail: unresolved multipass situation
+
+  # CBE B 16-1 V3 (2026-01-23) compliance tests
+  # Apéndice B & C: 2018/2025-2026 short forms and accepted variants
+  - - ente
+    - ⠢⠞⠑
+  - - entes
+    - ⠢⠞⠫
+  - - concreto
+    - ⠒⠒⠞
+  - - señor
+    - ⠎⠗
+  - - señores
+    - ⠎⠗⠑⠎
+  - - doctor
+    - ⠙⠗
+  - - doctores
+    - ⠙⠗⠑⠎
+  - - sordo
+    - ⠎⠱
+  - - sorda
+    - ⠎⠱⠁
+  - - sordos
+    - ⠎⠱⠪
+  - - sordas
+    - ⠎⠱⠯
+  - - sordamente
+    - ⠎⠱⠍
+  - - ceguera
+    - ⠉⠛⠗
+  - - cegueras
+    - ⠉⠛⠗⠯
+  - - sordera
+    - ⠎⠱⠗
+  - - sordoceguera
+    - ⠎⠉⠗
+  - - sordociego
+    - ⠎⠉⠛
+  - - braille
+    - ⠆⠿
+  - - país
+    - ⠏⠌
+  - - países
+    - ⠏⠌⠎
+  - - usted
+    - ⠥⠙
+  - - ustedes
+    - ⠥⠙⠎
+  - - había
+    - ⠓⠃
+  - - habido
+    - ⠓⠃⠙
+  - - haber
+    - ⠓⠗
+  - - buenas
+    - ⠃⠯
+  - - buenos
+    - ⠃⠪
+  - - favorable
+    - ⠋⠧⠃
+  - - histórico
+    - ⠓⠞⠉
+  - - numeroso
+    - ⠼⠎
+  - - oficina
+    - ⠕⠋⠝
+  - - razonable
+    - ⠗⠵⠃
+
+  # 21 Ibero-American country names (case-sensitive, dot 456 prefix) & negative checks
+  - - Argentina
+    - ⠸⠁⠗
+  - - Bolivia
+    - ⠸⠃⠕
+  - - Brasil
+    - ⠸⠃⠗
+  - - Chile
+    - ⠸⠉⠇
+  - - Colombia
+    - ⠸⠉⠕
+  - - Costa Rica
+    - ⠸⠉⠗
+  - - Cuba
+    - ⠸⠉⠥
+  - - Ecuador
+    - ⠸⠑⠉
+  - - El Salvador
+    - ⠸⠎⠧
+  - - España
+    - ⠸⠑⠎
+  - - Guatemala
+    - ⠸⠛⠞
+  - - Honduras
+    - ⠸⠓⠝
+  - - México
+    - ⠸⠍⠭
+  - - Nicaragua
+    - ⠸⠝⠊
+  - - Panamá
+    - ⠸⠏⠁
+  - - Paraguay
+    - ⠸⠏⠽
+  - - Perú
+    - ⠸⠏⠑
+  - - Portugal
+    - ⠸⠏⠞
+  - - República Dominicana
+    - ⠸⠙⠕
+  - - Uruguay
+    - ⠸⠥⠽
+  - - Venezuela
+    - ⠸⠧⠑
+  - - argentina
+    - ⠡⠛⠢⠞⠔⠁
+  - - Las dos Españas
+    - ⠨⠯ ⠙⠪ ⠨⠫⠏⠁⠻⠯
+
+  # §3.1.1 Concatenated word beginnings (principios)
+  - - reproducción
+    - ⠗⠏⠙⠥⠼
+  - - sobreproducción
+    - ⠆⠏⠙⠥⠼
+  - - recompremos
+    - ⠗⠤⠖⠍⠪
+  - - recompre
+    - ⠗⠤⠖⠑
+  - - sobreinterpretar
+    - ⠆⠽⠖⠞⠡
+  - - reinterpretación
+    - ⠗⠽⠖⠞⠁⠉⠼
+
+  # §3.2 Terminaciones (Tablas 12-14) and concatenated terminaciones
+  - - posible
+    - ⠏⠪⠊⠃
+  - - posibles
+    - ⠏⠪⠊⠃⠎
+  - - hombre
+    - ⠓⠺
+  - - hombres
+    - ⠓⠺⠫
+  - - paciencia
+    - ⠏⠁⠉⠊⠢⠉
+  - - paciencias
+    - ⠏⠁⠉⠊⠢⠉⠎
+  - - amante
+    - ⠁⠍⠩⠞
+  - - amantes
+    - ⠁⠍⠩⠞⠎
+  - - soledad
+    - ⠎⠇⠹
+  - - soledades
+    - ⠎⠇⠹⠫
+  - - nulidad
+    - ⠝⠥⠇⠊⠹
+  - - ansiedad
+    - ⠩⠎⠊⠑⠹
+  - - cultura
+    - ⠉⠥⠇⠞⠗
+  - - culturas
+    - ⠉⠥⠇⠞⠗⠎
+  - - sentimiento
+    - ⠎⠢⠞⠜⠲⠞
+  - - sentimientos
+    - ⠎⠢⠞⠜⠲⠞⠪
+  - - hambrientas
+    - ⠓⠁⠍⠆⠲⠞⠯
+  - - elementos
+    - ⠑⠇⠣⠢⠞⠪
+  - - tristemente
+    - ⠴⠊⠎⠞⠍
+  - - pateando
+    - ⠏⠁⠞⠩⠙
+  - - licenciatura
+    - ⠇⠊⠉⠢⠉⠞⠗
+  - - apreciablemente
+    - ⠁⠖⠑⠉⠃⠍
+
+  # §3.3 Secuencias (Tabla 15)
+  - - anteojos
+    - ⠸⠩⠕⠚⠪
+  - - constante
+    - ⠒⠎⠞⠩⠞
+  - - paraguas
+    - ⠸⠡⠛⠥⠯
+  - - imparable
+    - ⠜⠸⠡⠃
+  - - prepara
+    - ⠖⠸⠡
+  - - estadio
+    - ⠵⠙⠊⠕
+  - - condestable
+    - ⠒⠙⠵⠃
+  - - floresta
+    - ⠋⠇⠱⠵
+  - - cuesta
+    - ⠉⠥⠫⠞⠁
+  - - requemar
+    - ⠗⠟⠍⠡
+  - - bosquimano
+    - ⠃⠪⠟⠜⠩⠕
+
+  # §3.4 Contiguous contractions, g+ue, and lower-sign/compre verb rules
+  - - labrar
+    - ⠇⠁⠆⠡
+  - - mallazo
+    - ⠍⠁⠿⠁⠵⠕
+  - - roguemos
+    - ⠗⠕⠛⠥⠣⠪
+  - - sigue
+    - ⠎⠊⠛⠥⠑
+  - - compren
+    - ⠤⠖⠢
+  - - compre
+    - ⠤⠖⠑
+  - - compres
+    - ⠤⠖⠫
+  - - red
+    - ⠗⠑⠙
+
+  # §4.1 & §4.2.1.2 Tabla 20: accented monosyllables, interrogatives/exclamatives, e/u
+  - - dé
+    - ⠙⠮
+  - - sé
+    - ⠎⠮
+  - - té
+    - ⠞⠮
+  - - cómo
+    - ⠐⠺
+  - - cuál
+    - ⠐⠉⠇
+  - - cuándo
+    - ⠐⠉⠙
+  - - cuánto
+    - ⠐⠉⠥
+  - - dónde
+    - ⠐⠙⠙
+  - - porqué
+    - ⠐⠏⠟
+  - - qué
+    - ⠐⠟
+  - - quién
+    - ⠐⠟⠝
+  - - perros e hijos
+    - ⠏⠦⠗⠪ ⠐⠑ ⠓⠚⠪
+  - - siete u ocho
+    - ⠎⠊⠑⠞ ⠐⠥ ⠕⠉⠓⠕
+
+  # §§4.2.2-4.2.3 Dot-5 punctuation disambiguation
+  - - (Manuel)
+    - ⠣⠨⠍⠩⠳⠇⠜
+  - - (casa)
+    - ⠐⠣⠉⠯⠁⠜
+  - - (2023-2024)
+    - ⠣⠼⠃⠚⠃⠉⠤⠼⠃⠚⠃⠙⠜
+  - - octubre;
+    - ⠕⠉⠞⠥⠆⠐⠆
+  - - '*cocretas'
+    - ⠐⠔⠉⠕⠒⠑⠞⠯
+  - - «¡cuidado!»
+    - ⠦⠐⠖⠉⠥⠊⠙⠹⠕⠐⠖⠦
+  - - “¿¡ahora!?”
+    - ⠦⠢⠐⠖⠈⠓⠐⠖⠢⠦
+  - - «Ven a comer».
+    - ⠦⠨⠧⠢ ⠁ ⠉⠺⠦⠐⠦⠄
+  - - ¿Cómo estás?
+    - ⠢⠨⠐⠺ ⠫⠞⠎⠐⠢
+  - - ¡Qué bien!
+    - ⠖⠨⠐⠟ ⠃⠖
+
+  # CBE B 16-1 V3 (octubre de 2025, rev. 2026-01-23) updates
+  - - baobab
+    - ⠃⠁⠕⠃⠂
+  - - baobab,
+    - ⠃⠁⠕⠃⠂⠐⠂
+  - - El Dr. Sancho no podrá atenderla hoy.
+    - ⠨⠑ ⠨⠙⠗⠄ ⠨⠎⠩⠉⠓⠕ ⠝ ⠏⠕⠲⠷ ⠁⠞⠢⠙⠦⠇⠁ ⠓⠕⠽⠄
+  - - recomponer
+    - ⠗⠤⠏⠭⠦
+  - - recomenzar
+    - ⠗⠉⠺⠢⠵⠡
+  - - ¿dónde vas de vacaciones?
+    - ⠢⠐⠙⠙ ⠧⠯ ⠙ ⠧⠁⠉⠁⠉⠼⠫⠐⠢
+  - - brailles
+    - ⠆⠿⠫
+  - - contras
+    - ⠒⠴⠯
+  - - haberes
+    - ⠓⠗⠫
+  - - rehacer
+    - ⠗⠦⠗
+  - - personalidad
+    - ⠏⠝⠇⠹
+  - - personalidades
+    - ⠏⠝⠇⠹⠫
+  - - porqués
+    - ⠐⠏⠟⠫
+  - - relacionable
+    - ⠗⠇⠃
+  - - relacionables
+    - ⠗⠇⠃⠫
+
+  # B 16-1 V3, 4.1: dot 5 before the accented sólo, éste and aquél and their variants.
+  # Ése has no abbreviation and follows the general rules.
+  - - sólo
+    - ⠐⠎⠇
+  - - Sólo
+    - ⠨⠐⠎⠇
+  - - éste
+    - ⠐⠵
+  - - ésta
+    - ⠐⠵⠁
+  - - éstos
+    - ⠐⠵⠪
+  - - éstas
+    - ⠐⠵⠯
+  - - aquél
+    - ⠐⠬
+  - - aquélla
+    - ⠐⠬⠁
+  - - aquéllos
+    - ⠐⠬⠪
+  - - aquéllas
+    - ⠐⠬⠯
+  - - ése
+    - ⠮⠎⠑
+
+  # B 16-1 V3, 3.2.1: the ending -ble takes priority over the contraction ab.
+  - - amable
+    - ⠁⠍⠁⠃
+  - - amables
+    - ⠁⠍⠁⠃⠎
+
+  # B 16-1 V3, 4.2.2: the dash of an aside (36) gets a dot 5 when it opens in front of a word
+  # in lower case, never when it closes or in front of a capital letter. The dash of a
+  # dialogue (36-36) needs none.
+  - - —Mejor déjalo –dijo– y vete.
+    - ⠤⠤⠨⠍⠚ ⠙⠮⠚⠅⠕ ⠐⠤⠙⠚⠤ ⠽ ⠧⠑⠞⠄
+  - - —Pasado mañana (sábado) –dijo ella– te voy a buscar. Comemos y luego... ¡al cine!
+    - ⠤⠤⠨⠏⠯⠹⠕ ⠍⠁⠻⠩⠁ ⠐⠣⠎⠷⠃⠹⠕⠜ ⠐⠤⠙⠚ ⠿⠤ ⠞ ⠧⠕⠽ ⠁ ⠃⠥⠎⠉⠡⠄ ⠨⠉⠺⠣⠪ ⠽ ⠇⠳⠄⠄⠄ ⠐⠖⠅ ⠉⠔⠑⠖
+  - - –Hola –dijo.
+    - ⠤⠨⠓⠕⠇⠁ ⠐⠤⠙⠚⠄
+  - - dijo – y
+    - ⠙⠚ ⠤ ⠽
