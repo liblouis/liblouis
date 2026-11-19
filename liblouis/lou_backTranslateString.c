@@ -777,11 +777,29 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 						return;
 					case CTO_EmphLetter:
 					case CTO_BegEmphWord:
-					case CTO_EndEmphWord:
 					case CTO_BegEmphPhrase:
+						/* Without the typeform an indicator is still taken where its
+						 * cells can't be text, or they fall through to whatever else
+						 * they are, such as EBAE's decimal point for its italic sign,
+						 * or to undefined dots. They can be text when they are a
+						 * letter, as Norwegian's å is, right after a digit, where
+						 * EBAE's italic sign is its decimal point, and when no word
+						 * follows one that opens emphasis or comes before one that
+						 * closes it. */
+						if (hasTypebuf) return;
+						if ((dots->attributes & CTC_Letter) ||
+								(beforeAttributes & (CTC_Digit | CTC_LitDigit)) ||
+								(afterAttributes & CTC_Space))
+							break;
+						return;
+					case CTO_EndEmphWord:
 					case CTO_EndEmphPhrase:
 						if (hasTypebuf) return;
-						break;
+						if ((dots->attributes & CTC_Letter) ||
+								(beforeAttributes &
+										(CTC_Digit | CTC_LitDigit | CTC_Space)))
+							break;
+						return;
 					case CTO_NoContractSign:
 						/* This is just a heuristic test. During forward translation, the
 						   nocontractsign is inserted when the following character is a
@@ -886,6 +904,12 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 						if (ctx.itsANumber && !(afterAttributes & CTC_LitDigit)) return;
 						break;
 					case CTO_DecPoint:
+						/* Not at the start of a word outside a number: there, in front
+						 * of a word starting a-j, which are also digits, EBAE's 46 is
+						 * its italic sign. */
+						if (!ctx.itsANumber &&
+								(beforeAttributes & (CTC_Space | CTC_Punctuation)))
+							break;
 						if (afterAttributes & (CTC_Digit | CTC_LitDigit)) return;
 						break;
 					case CTO_PrePunc:

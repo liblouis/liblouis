@@ -351,3 +351,33 @@ tests:
     - "hi my name"
     - expected_typeform:
         bold: '++        '
+
+  # Without the typeform asked for, an indicator is still not read as
+  # text: these used to give "\46/,word and".
+  - # word italic, no typeform
+    - "⠨⠂⠺⠕⠗⠙ ⠁⠝⠙"
+    - "word and"
+
+  - # word italic with explicit terminator, no typeform
+    - "⠨⠂⠺⠕⠗⠙⠨⠄"
+    - "word"
+
+# EBAE's italic sign, 46, is also its decimal point, which it used to be
+# read as: ".SILVIO .A. .BEDINI".
+table: tables/en-us-g2.ctb
+
+flags:
+  testmode: backward
+
+tests:
+  - # italic word
+    - "⠨⠎⠊⠇⠧⠊⠕ ⠁⠝⠙"
+    - "silvio and"
+
+  - # italic words in capitals
+    - "⠨⠠⠠⠎⠊⠇⠧⠊⠕ ⠨⠠⠁⠲ ⠨⠠⠠⠃⠫⠔⠊"
+    - "SILVIO A. BEDINI"
+
+  - # the decimal point after a digit
+    - "⠼⠁⠨⠼⠃"
+    - "1.2"
