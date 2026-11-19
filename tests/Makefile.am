@@ -24,6 +24,7 @@ hash_collision_SOURCES = hash_collision.c
 hyphenate_xxx_SOURCES = hyphenate_xxx.c
 logging_SOURCES = logging.c
 malformedTables_SOURCES = malformedTables.c
+matchLongInput_SOURCES = matchLongInput.c
 resolve_table_SOURCES = resolve_table.c
 typeform_SOURCES = typeform.c
 typeform_for_emphclass_SOURCES = typeform_for_emphclass.c
@@ -43,6 +44,7 @@ program_TESTS =					\
 	hyphenate_xxx				\
 	logging					\
 	malformedTables				\
+	matchLongInput				\
 	resolve_table				\
 	typeform				\
 	typeform_for_emphclass			\

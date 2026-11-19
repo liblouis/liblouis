@@ -1,0 +1,8 @@
+# A match rule whose before and after patterns loop over letters. Each
+# loop iteration recurses once in the pattern matcher, so a long run of
+# letters on either side of the full stop used to overflow the stack.
+include tables/text_nabcc.dis
+include tables/latinLetterDef8Dots.uti
+space \s 0
+punctuation . 256
+match %a* . %a* 3

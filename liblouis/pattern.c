@@ -29,6 +29,13 @@
 
 // #define CHECK_OUTPUT_DEFINED
 
+/* Maximum recursion depth of pattern_check_expression. Each level uses in the
+ * order of 160 bytes of stack with optimisation and several times that in
+ * debug or sanitizer builds; the limit keeps the matcher well inside a 1 MB
+ * stack (the default on Windows) while still allowing loops over far longer
+ * runs of characters than occur in real text. */
+#define PATTERN_MAX_DEPTH 2000
+
 /////
 
 // TODO: these functions are static and copied serveral times
@@ -1313,9 +1320,25 @@ pattern_check_expression(const widechar *const input, int *input_crs,
 		const int input_minmax, const int input_dir, const widechar *const expr_data,
 		int (*hook)(const widechar input, const int data_len), widechar *hook_data,
 		const int hook_max, int expr_crs, int notOperator, int loop_crs, int *loop_cnts,
-		const TranslationTableHeader *table) {
+		const TranslationTableHeader *table, int depth) {
 	int input_crs_prv, input_start, attrs, ret, i;
 	const widechar *data;
+
+	/* Every loop iteration, optional expression and alternative is evaluated in
+	 * a nested call, so the recursion depth grows with the length of the input
+	 * that a loop consumes. Give up (treat the pattern as not matching) before
+	 * the stack is exhausted. */
+	if (depth > PATTERN_MAX_DEPTH) {
+		static int warned = 0;
+		if (!warned) {
+			warned = 1;
+			_lou_logMessage(LOU_LOG_WARN,
+					"match pattern too complex for the input (recursion depth limit of "
+					"%d exceeded): the pattern is treated as not matching",
+					PATTERN_MAX_DEPTH);
+		}
+		return 0;
+	}
 
 	data = NULL;
 
@@ -1422,7 +1445,7 @@ pattern_check_expression(const widechar *const input, int *input_crs,
 			input_crs_prv = *input_crs;
 			ret = pattern_check_expression(input, input_crs, input_minmax, input_dir,
 					expr_data, hook, hook_data, hook_max, EXPR_DATA_0(expr_crs),
-					notOperator, loop_crs, loop_cnts, table);
+					notOperator, loop_crs, loop_cnts, table, depth + 1);
 			if (ret) {
 				CHECK_OUTPUT(RETURN, 1, __LINE__, "loop passed")
 				return 1;
@@ -1455,7 +1478,7 @@ pattern_check_expression(const widechar *const input, int *input_crs,
 			CHECK_OUTPUT(CALL, 0, __LINE__, "option start")
 			if (pattern_check_expression(input, input_crs, input_minmax, input_dir,
 						expr_data, hook, hook_data, hook_max, EXPR_DATA_0(expr_crs),
-						notOperator, loop_crs, loop_cnts, table)) {
+						notOperator, loop_crs, loop_cnts, table, depth + 1)) {
 				CHECK_OUTPUT(RETURN, 1, __LINE__, "option passed")
 				return 1;
 			}
@@ -1476,7 +1499,7 @@ pattern_check_expression(const widechar *const input, int *input_crs,
 			CHECK_OUTPUT(CALL, 0, __LINE__, "or 1 start")
 			if (pattern_check_expression(input, input_crs, input_minmax, input_dir,
 						expr_data, hook, hook_data, hook_max, EXPR_DATA_0(expr_crs),
-						notOperator, loop_crs, loop_cnts, table)) {
+						notOperator, loop_crs, loop_cnts, table, depth + 1)) {
 				CHECK_OUTPUT(RETURN, 1, __LINE__, "or 1 passed")
 				return 1;
 			}
@@ -1613,7 +1636,7 @@ pattern_check_hook(const widechar *input, const int input_start, const int input
 	loop_cnts = malloc(expr_data[1] * sizeof(int));
 	memset(loop_cnts, 0, expr_data[1] * sizeof(int));
 	ret = pattern_check_expression(input, &input_crs, input_minmax, input_dir, expr_data,
-			hook, hook_data, hook_max, 2, 0, 0, loop_cnts, table);
+			hook, hook_data, hook_max, 2, 0, 0, loop_cnts, table, 0);
 	free(loop_cnts);
 	return ret;
 }
