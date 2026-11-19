@@ -1719,10 +1719,13 @@ insertLetterSign(const TranslationTableHeader *table, int pos, const InString *i
 			if (!for_updatePositions(&letterSign->charsdots[0], 0, letterSign->dotslen, 0,
 						pos, input, output, posMapping, cursorPosition, cursorStatus))
 				return 0;
-		} else if ((checkCharAttr_safe(input, pos, CTC_Letter, table) &&
-						   !(beforeAttributes & CTC_Letter)) &&
+		} else if (transOpcode != CTO_EndNum &&
+				(checkCharAttr_safe(input, pos, CTC_Letter, table) &&
+						!(beforeAttributes & CTC_Letter)) &&
 				(!checkCharAttr_safe(input, pos + 1, CTC_Letter, table) ||
 						(beforeAttributes & CTC_Digit))) {
+			/* endnum rules carry their own letter sign if one is wanted, so none is
+			 * inserted here */
 			if (pos > 0 && isNoLetsignBefore(input->chars[pos - 1], table)) return 1;
 			if (isNoLetsign(input->chars[pos], table)) return 1;
 			if (pos + 1 < input->length && isNoLetsignAfter(input->chars[pos + 1], table))
@@ -3803,11 +3806,6 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 			dontContract = 0;
 
 		switch (transOpcode) {
-		case CTO_EndNum:
-			if (table->letterSign && output->length > 0 &&
-					checkCharAttr(input->chars[pos], CTC_Letter, table))
-				output->length--;
-			break;
 		case CTO_Repeated:
 		case CTO_Space:
 			dontContract = 0;
