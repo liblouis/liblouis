@@ -3045,6 +3045,13 @@ doOpcode:
 						if (subst < m->substitution_count) {
 							CharsString arg =
 									arguments[m->substitutions[2 * subst + 1] - 1];
+							if (arg.length > MAXSTRING - tmpFile.linelen) {
+								compileError(file,
+										"Line exceeds %d characters (post macro "
+										"expansion)",
+										MAXSTRING);
+								return 0;
+							}
 							for (int j = 0; j < arg.length; j++)
 								tmpFile.line[tmpFile.linelen++] = arg.chars[j];
 							subst++;
