@@ -5302,15 +5302,16 @@ _lou_allocMem(AllocBuf buffer, int index, int srcmax, int destmax) {
 	if (srcmax < 1024) srcmax = 1024;
 	if (destmax < 1024) destmax = 1024;
 	switch (buffer) {
-	case alloc_typebuf:
-		if (destmax > sizeTypebuf) {
+	case alloc_typebuf: {
+		int maxLen = srcmax > destmax ? srcmax : destmax;
+		if (maxLen > sizeTypebuf) {
 			if (typebuf != NULL) free(typebuf);
-			// TODO: should this be srcmax?
-			typebuf = malloc((destmax + 4) * sizeof(formtype));
+			typebuf = malloc((maxLen + 4) * sizeof(formtype));
 			if (!typebuf) _lou_outOfMemory();
-			sizeTypebuf = destmax;
+			sizeTypebuf = maxLen;
 		}
 		return typebuf;
+	}
 
 	case alloc_wordBuffer:
 

@@ -32,6 +32,7 @@ suggestChunks_SOURCES = suggestChunks.c
 charToFallbackDots_SOURCES = charToFallbackDots.c
 
 program_TESTS =					\
+	allocTypebufBounds			\
 	backtranslation_emphasis		\
 	checkTable				\
 	check_metadata				\
