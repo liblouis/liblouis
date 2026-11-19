@@ -238,8 +238,7 @@ dist_yaml_TESTS =				\
 	yaml/capsnocont.yaml			\
 	yaml/capsword.yaml			\
 	yaml/case-sensitivity.yaml		\
-	yaml/compbrlAtCursor_cursorPos.yaml	\
-	yaml/compbrlAtCursor_with_equals.yaml	\
+	yaml/compbrlAtCursor.yaml		\
 	yaml/computer_braille.yaml		\
 	yaml/emphasis.yaml			\
 	yaml/example_test.yaml			\
