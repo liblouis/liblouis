@@ -92,6 +92,7 @@ punctuation \x0021 235c
 punctuation \x0022 236c
 punctuation \x0028 126c
 punctuation \x0029 345c
+punctuation \x2013 36c
 sign \x002A 35c
 punctuation \x003B 23c
 punctuation \x003F 26c
@@ -286,6 +287,7 @@ punctuation \x0021 235c
 punctuation \x0022 236c
 punctuation \x0028 126c
 punctuation \x0029 345c
+punctuation \x2013 36c
 sign \x002A 35c
 punctuation \x003B 23c
 punctuation \x003F 26c
@@ -307,13 +309,14 @@ sign \xe02b 345c
 sign \xe02c 23c
 sign \xe02d 26c
 sign \xe02e 35c
-attribute punctc \xe028\xe029\xe02a\xe02b\xe02c\xe02d\xe02e
-attribute openablec \xe028\xe029\xe02a\xe02d
+sign \xe02f 36c
+attribute punctc \xe028\xe029\xe02a\xe02b\xe02c\xe02d\xe02e\xe02f
+attribute openablec \xe028\xe029\xe02a\xe02d\xe02f
 attribute closethreec \xe029\xe02d
 attribute closeallc \xe028\xe029\xe02b\xe02d
 attribute notbeforeclose \xe028\xe029\xe02a\xe02b\xe02d\x0020
 attribute kwbound \xe028\xe029\xe02a\xe02b\xe02c\xe02d\xe02e\x0020KWkw
-swapdd punctc 235c,236c,126c,345c,23c,26c,35c 235,236,126,345,23,26,35
+swapdd punctc 235c,236c,126c,345c,23c,26c,35c,36c 235,236,126,345,23,26,35,36
 
 # Step A (pass2): Place dot 5 on k/w words. If opening punctuation precedes the word
 # (e.g. ¿bikini?), dot 5 goes AFTER opening punctuation per §4.2.3.1a.
@@ -386,6 +389,18 @@ noback pass3 [@235c]@23c @235c
 noback pass3 [@236c]@23c @236c
 noback pass3 [@126c]@23c @126c
 noback pass3 [@26c]@23c @26c
+# The dash of an aside (single cell 36) is an opening sign only in front of a lower case
+# letter: no dot 5 in front of a capital letter, a number or punctuation (§4.2.2). A
+# closing dash never gets one.
+noback pass3 [@36c]%openablec @36c
+noback pass3 [@36c]@46 @36c
+noback pass3 [@36c]@3456 @36c
+noback pass3 [@36c]@5 @36c
+noback pass3 [@36c]~ @36c
+noback pass3 [@36c]@2 @36c
+noback pass3 [@36c]@3 @36c
+noback pass3 [@36c]@25 @36c
+noback pass3 [@36c]@23c @36c
 noback pass3 _$s[@235c]!$s @5-235c
 noback pass3 _$s[@236c]!$s @5-236c
 noback pass3 _$s[@126c]!$s @5-126c
@@ -398,6 +413,9 @@ noback pass3 _%openablec[@235c]!$s @5-235c
 noback pass3 _%openablec[@236c]!$s @5-236c
 noback pass3 _%openablec[@126c]!$s @5-126c
 noback pass3 _%openablec[@26c]!$s @5-26c
+noback pass3 _$s[@36c]!$s @5-36c
+noback pass3 `[@36c]!$s @5-36c
+noback pass3 _%openablec[@36c]!$s @5-36c
 
 # Step D (pass3): Tabla 23 — ';' after '-bre' (dots 23) and '*' before word
 noback pass3 _@23[@23c] @5-23c
