@@ -563,6 +563,26 @@ findEmphasisClass(const TranslationTableHeader *table, const TranslationTableRul
 	return -1;
 }
 
+/* Return true if the given rule has the same cells as one of the table's
+ * end-of-capitals-passage indicators ("endcapsphrase" or "endcaps"). */
+static int
+isEndCapsPhrase(const TranslationTableHeader *table, const TranslationTableRule *rule) {
+	static const EmphCodeOffset offsets[] = { endPhraseAfterOffset, endPhraseBeforeOffset,
+		endOffset };
+	unsigned int i;
+	for (i = 0; i < sizeof(offsets) / sizeof(offsets[0]); i++) {
+		const TranslationTableRule *endRule;
+		TranslationTableOffset offset = table->emphRules[MAX_EMPH_CLASSES][offsets[i]];
+		if (!offset) continue;
+		endRule = (TranslationTableRule *)&table->ruleArea[offset];
+		if (endRule->dotslen == rule->dotslen &&
+				compareDots(&endRule->charsdots[endRule->charslen],
+						&rule->charsdots[rule->charslen], rule->dotslen))
+			return 1;
+	}
+	return 0;
+}
+
 /* Return the indicator rule that a multind opcode stands for, or 0 if the
  * indicator is not defined in the table. */
 static TranslationTableOffset
@@ -582,6 +602,8 @@ multindIndicator(const TranslationTableHeader *table, widechar opcode) {
 		return table->emphRules[MAX_EMPH_CLASSES][begWordOffset];
 	case CTO_EndCapsWord:
 		return table->emphRules[MAX_EMPH_CLASSES][endWordOffset];
+	case CTO_BegCapsPhrase:
+		return table->emphRules[MAX_EMPH_CLASSES][begPhraseOffset];
 	case CTO_LetterSign:
 		return table->letterSign;
 	case CTO_NoContractSign:
@@ -764,17 +786,30 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_LitDigit:
 						if (ctx.itsANumber) return;
 						break;
+					case CTO_EndCapsWord:
+						/* Inside a capitals passage, prefer the end-of-passage
+						 * indicator when it has the same cells. */
+						if (ctx.allUpperPhrase && isEndCapsPhrase(table, *currentRule))
+							break;
+						return;
 					case CTO_CapsLetter:
 					case CTO_BegCaps:
 					case CTO_EndCaps:
 					case CTO_BegCapsWord:
-					case CTO_EndCapsWord:
 					case CTO_BegEmph:
 					case CTO_EndEmph:
 					case CTO_NumberSign:
 					case CTO_BegComp:
 					case CTO_EndComp:
+					case CTO_BegCapsPhrase:
 						return;
+					case CTO_EndCapsPhraseBefore:
+					case CTO_EndCapsPhraseAfter:
+						/* Only meaningful inside a capitals passage. Some tables use
+						 * the same cells for other indicators (e.g. the capital
+						 * letter sign). */
+						if (ctx.allUpperPhrase) return;
+						break;
 					case CTO_EmphLetter:
 					case CTO_BegEmphWord:
 					case CTO_EndEmphWord:
@@ -1271,6 +1306,29 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			break;
 		case CTO_EndCaps:
 			ctx.allUpperPhrase = 0;
+			ctx.itsANumber = 0;
+			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
+			continue;
+			break;
+		case CTO_BegCapsPhrase:
+			ctx.allUpperPhrase = 1;
+			ctx.allUpper = 0;
+			ctx.itsANumber = 0;
+			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
+			continue;
+			break;
+		case CTO_EndCapsPhraseAfter:
+			ctx.allUpperPhrase = 0;
+			ctx.allUpper = 0;
+			ctx.itsANumber = 0;
+			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
+			continue;
+			break;
+		case CTO_EndCapsPhraseBefore:
+			/* The indicator precedes the last word of the passage, so that word
+			 * is still capitalized: continue it as a capitalized word. */
+			ctx.allUpperPhrase = 0;
+			ctx.allUpper = 1;
 			ctx.itsANumber = 0;
 			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
