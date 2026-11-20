@@ -29,6 +29,7 @@ EXTRA_DIST =					\
 	macro.yaml				\
 	macro.utb				\
 	match-vs-always.yaml			\
+	multind.yaml				\
 	multipass-backward.yaml			\
 	multipass-forward.yaml			\
 	multipass.yaml				\
