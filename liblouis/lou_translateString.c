@@ -2372,7 +2372,7 @@ doCompbrl(const TranslationTableHeader *table, int *pos, const InString *input,
 	/* Handle strings containing substrings defined by the compbrl opcode */
 	int stringStart, stringEnd;
 	if (checkCharAttr(input->chars[*pos], CTC_Space, table)) return 1;
-	stringStart = lastWord->outPos ? lastWord->inPos : 0;
+	stringStart = lastWord->inPos;
 	stringEnd = *pos;
 	while (stringEnd < input->length &&
 			!checkCharAttr(input->chars[stringEnd], CTC_Space, table))
@@ -2440,13 +2440,8 @@ doNocont(const TranslationTableHeader *table, int *pos, OutString *output, int m
 	if (checkCharAttr(input->chars[*pos], CTC_Space, table) || *dontContract ||
 			(mode & noContractions))
 		return 1;
-	if (lastWord->outPos) {
-		*pos = lastWord->inPos;
-		output->length = lastWord->outPos;
-	} else {
-		*pos = 0;
-		output->length = 0;
-	}
+	*pos = lastWord->inPos;
+	output->length = lastWord->outPos;
 	*insertEmphasesFrom = lastWord->emphasisInPos;
 	*dontContract = 1;
 	return 1;
