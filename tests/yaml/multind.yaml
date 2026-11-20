@@ -1,0 +1,37 @@
+# Back-translation of multind rules
+
+# A multind rule whose cells outnumber its opcodes: the indicators together
+# consume exactly the cells of the multind rule, each taking the width of its
+# own indicator rule.
+table: |
+  include tables/spaces.uti
+  include tables/text_nabcc.dis
+  lowercase a 1
+  lowercase b 12
+  base uppercase A a
+  base uppercase B b
+  nocontractsign 56
+  capsletter 6
+  begcapsword 6-6
+  multind 56-6 nocontractsign capsletter
+  multind 56-6-6 nocontractsign begcapsword
+flags: {testmode: backward}
+tests:
+  - [";,a", "A"]
+  - [";,ab", "Ab"]
+  - [";,,ab", "AB"]
+  - [";,,ab ab", "AB ab"]
+
+# An opcode whose indicator is not defined in the table is skipped, and the
+# remaining indicators consume the cells of the multind rule.
+table: |
+  include tables/spaces.uti
+  include tables/text_nabcc.dis
+  lowercase a 1
+  base uppercase A a
+  capsletter 46
+  multind 56 letsign capsletter
+flags: {testmode: backward}
+tests:
+  - [";a", "A"]
+  - [";aa", "Aa"]
