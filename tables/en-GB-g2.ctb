@@ -24,6 +24,13 @@
 
 include en-gb-g1.utb
 
+# Letter sign after a number (see issue #1113). "word i" below is implicitly
+# noletsign and single-character rules are tried in definition order, so this
+# context rule must come before it. The rules for a, A and I are inherited
+# from en-gb-g1.utb. Only the letters a-j can be confused with digits, so
+# word O needs no such rule.
+noback context _$d["i"] @56-24
+
 # the letter a
 largesign a 1
 word about 1-12
