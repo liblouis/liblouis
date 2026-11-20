@@ -187,9 +187,21 @@ tests:
     - foobar0
   - - ⠃⠁⠗⠂
     - foobar1
-    - xfail: context rule can still cause endless loop
   - - ⠃⠁⠗⠆
     - foobar2
+
+# A context rule that consumes nothing is not tried again at the same
+# position, also when no other rule matches there
+table: |
+  include tables/unicode.dis
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  nofor context []@123 "x"
+flags: {testmode: backward}
+tests:
+  - [⠇, xl]
+  - [⠇⠇, xlxl]
+  - [⠁⠇⠁, axla]
 
 table: |
   include tables/unicode.dis
