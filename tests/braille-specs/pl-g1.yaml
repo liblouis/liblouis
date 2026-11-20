@@ -35,8 +35,11 @@ tests:
   - ["22$","⠼⠃⠃⠈⠙"]
   # percent sign
   - ["22%","⠼⠃⠃⠼⠚⠴"]
+  - [euro, ⠑⠥⠗⠕]
+  - ["...", ⠄⠄⠄]
 flags: {testmode: forward}
 tests:
+  - [". . .", "⠄ ⠄ ⠄"]
   # apostrophe
   - ["Tomorrow is John's birthday", "⠨⠞⠕⠍⠕⠗⠗⠕⠺ ⠊⠎ ⠨⠚⠕⠓⠝⠄⠎ ⠃⠊⠗⠞⠓⠙⠁⠽"]
   # mathematical operators and signs between numbers
