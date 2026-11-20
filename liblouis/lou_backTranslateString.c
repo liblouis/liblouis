@@ -563,18 +563,13 @@ findEmphasisClass(const TranslationTableHeader *table, const TranslationTableRul
 	return -1;
 }
 
-static int
-handleMultind(const TranslationTableHeader *table, int *currentDotslen,
-		TranslationTableOpcode *currentOpcode, const TranslationTableRule **currentRule,
-		int *doingMultind, const TranslationTableRule *multindRule) {
-	/* Handle multille braille indicators */
-	int found = 0;
-	if (!*doingMultind) return 0;
-	switch (multindRule->charsdots[multindRule->charslen - *doingMultind]) {
+/* Return the indicator rule that a multind opcode stands for, or 0 if the
+ * indicator is not defined in the table. */
+static TranslationTableOffset
+multindIndicator(const TranslationTableHeader *table, widechar opcode) {
+	switch (opcode) {
 	case CTO_CapsLetter:  // FIXME: make sure this works
-		found = findBrailleIndicatorRule(table->emphRules[MAX_EMPH_CLASSES][letterOffset],
-				table, currentDotslen, currentOpcode, currentRule);
-		break;
+		return table->emphRules[MAX_EMPH_CLASSES][letterOffset];
 	// NOTE:  following fixme is based on the names at the time of
 	//        commit f22f91eb510cb4eef33dfb4950a297235dd2f9f1.
 	// FIXME: the next two opcodes were begcaps/endcaps,
@@ -584,45 +579,50 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 	//        These are actually compiled with firstlettercaps/lastlettercaps.
 	//        Which to use here?
 	case CTO_BegCapsWord:
-		found = findBrailleIndicatorRule(
-				table->emphRules[MAX_EMPH_CLASSES][begWordOffset], table, currentDotslen,
-				currentOpcode, currentRule);
-		break;
+		return table->emphRules[MAX_EMPH_CLASSES][begWordOffset];
 	case CTO_EndCapsWord:
-		found = findBrailleIndicatorRule(
-				table->emphRules[MAX_EMPH_CLASSES][endWordOffset], table, currentDotslen,
-				currentOpcode, currentRule);
-		break;
+		return table->emphRules[MAX_EMPH_CLASSES][endWordOffset];
 	case CTO_LetterSign:
-		found = findBrailleIndicatorRule(
-				table->letterSign, table, currentDotslen, currentOpcode, currentRule);
-		break;
+		return table->letterSign;
 	case CTO_NoContractSign:
-		found = findBrailleIndicatorRule(
-				table->noContractSign, table, currentDotslen, currentOpcode, currentRule);
-		break;
+		return table->noContractSign;
 	case CTO_NumberSign:
-		found = findBrailleIndicatorRule(
-				table->numberSign, table, currentDotslen, currentOpcode, currentRule);
-		break;
+		return table->numberSign;
 	case CTO_NoNumberSign:
-		found = findBrailleIndicatorRule(
-				table->noNumberSign, table, currentDotslen, currentOpcode, currentRule);
-		break;
+		return table->noNumberSign;
 	case CTO_BegComp:
-		found = findBrailleIndicatorRule(
-				table->begComp, table, currentDotslen, currentOpcode, currentRule);
-		break;
+		return table->begComp;
 	case CTO_EndComp:
-		found = findBrailleIndicatorRule(
-				table->endComp, table, currentDotslen, currentOpcode, currentRule);
-		break;
+		return table->endComp;
 	default:
-		found = 0;
-		break;
+		return 0;
 	}
-	(*doingMultind)--;
-	return found;
+}
+
+static int
+handleMultind(const TranslationTableHeader *table, int *currentDotslen,
+		TranslationTableOpcode *currentOpcode, const TranslationTableRule **currentRule,
+		int *doingMultind, const TranslationTableRule *multindRule) {
+	/* Handle multiple braille indicators. The opcodes of the multind rule are
+	 * applied one at a time, in order, skipping any whose indicator is not defined
+	 * in the table. The cells of the multind rule are consumed all at once, by the
+	 * last indicator, so that every indicator is applied before the position
+	 * moves on. */
+	while (*doingMultind) {
+		const widechar *opcodes = multindRule->charsdots;
+		int count = multindRule->charslen;
+		TranslationTableOffset offset =
+				multindIndicator(table, opcodes[count - *doingMultind]);
+		(*doingMultind)--;
+		if (!findBrailleIndicatorRule(
+					offset, table, currentDotslen, currentOpcode, currentRule))
+			continue;
+		while (*doingMultind && !multindIndicator(table, opcodes[count - *doingMultind]))
+			(*doingMultind)--;
+		*currentDotslen = *doingMultind ? 0 : multindRule->dotslen;
+		return 1;
+	}
+	return 0;
 }
 
 static int
@@ -799,7 +799,7 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 							return;
 						break;
 					case CTO_MultInd:
-						*doingMultind = *currentDotslen;
+						*doingMultind = (*currentRule)->charslen;
 						*multindRule = *currentRule;
 						if (handleMultind(table, currentDotslen, currentOpcode,
 									currentRule, doingMultind, *multindRule))

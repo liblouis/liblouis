@@ -1,0 +1,83 @@
+# Back-translation of multind rules
+
+# A multind rule whose cells outnumber its opcodes: the indicators together
+# consume exactly the cells of the multind rule.
+table: |
+  include tables/spaces.uti
+  include tables/text_nabcc.dis
+  lowercase a 1
+  lowercase b 12
+  base uppercase A a
+  base uppercase B b
+  nocontractsign 56
+  capsletter 6
+  begcapsword 6-6
+  multind 56-6 nocontractsign capsletter
+  multind 56-6-6 nocontractsign begcapsword
+flags: {testmode: backward}
+tests:
+  - [";,a", "A"]
+  - [";,ab", "Ab"]
+  - [";,,ab", "AB"]
+  - [";,,ab ab", "AB ab"]
+
+# An opcode whose indicator is not defined in the table is skipped, and the
+# remaining indicators consume the cells of the multind rule, whether the
+# undefined opcode comes first or last.
+table: |
+  include tables/spaces.uti
+  include tables/text_nabcc.dis
+  lowercase a 1
+  base uppercase A a
+  capsletter 46
+  multind 56 letsign capsletter
+flags: {testmode: backward}
+tests:
+  - [";a", "A"]
+  - [";aa", "Aa"]
+
+table: |
+  include tables/spaces.uti
+  include tables/text_nabcc.dis
+  lowercase a 1
+  base uppercase A a
+  capsletter 46
+  multind 56-3 capsletter letsign
+flags: {testmode: backward}
+tests:
+  - [";'a", "A"]
+  - [";'aa", "Aa"]
+
+# A multind rule whose cells are fewer than its opcodes: the indicators share
+# the cells of the multind rule, and all of them are applied. Without
+# nocontractsign, "b" would be read as "but"; without capsletter, it would not
+# be capitalized.
+table: |
+  include tables/spaces.uti
+  include tables/text_nabcc.dis
+  lowercase a 1
+  lowercase b 12
+  base uppercase A a
+  base uppercase B b
+  nocontractsign 56
+  capsletter 6
+  word but 12
+  multind 5 nocontractsign capsletter
+flags: {testmode: backward}
+tests:
+  - ["b", "but"]
+  - ["\"b", "B"]
+  - ["\"b ab", "B ab"]
+
+# A multind rule at the end of the input
+table: |
+  include tables/spaces.uti
+  include tables/text_nabcc.dis
+  lowercase a 1
+  base uppercase A a
+  nocontractsign 56
+  begcapsword 6-6
+  multind 56-6-6 nocontractsign begcapsword
+flags: {testmode: backward}
+tests:
+  - ["a ;,,", "a "]
