@@ -709,7 +709,7 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 		int *doingMultind, const TranslationTableRule **multindRule,
 		TranslationTableCharacterAttributes beforeAttributes,
 		const widechar **passInstructions, int *passIC, PassRuleMatch *patternMatch,
-		int hasTypebuf) {
+		int hasTypebuf, int posIncremented) {
 	/* check for valid back-translations */
 	int length = input->length - pos;
 	TranslationTableOffset ruleOffset = 0;
@@ -767,8 +767,11 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 								(afterAttributes & (*currentRule)->before))) {
 					switch (*currentOpcode) { /* check validity of this Translation */
 					case CTO_Context:
-						if (back_passDoTest(table, pos, input, *currentOpcode,
-									*currentRule, passInstructions, passIC, patternMatch))
+						// check posIncremented to avoid endless loop
+						if (posIncremented &&
+								back_passDoTest(table, pos, input, *currentOpcode,
+										*currentRule, passInstructions, passIC,
+										patternMatch))
 							return;
 						break;
 					case CTO_Space:
@@ -1242,6 +1245,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 	translation_direction = 0;
 	previousOpcode = CTO_None;
 	pos = output->length = 0;
+	int prevPos = -1;
 	while (pos < input->length) {
 		/* the main translation loop */
 		int currentDotslen; /* length of current find string */
@@ -1252,6 +1256,11 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		int passIC; /* Instruction counter */
 		PassRuleMatch patternMatch;
 		int prevOutputLength = output->length; /* track output for typeform population */
+		/* If the previous iteration did not advance the position (because a
+		 * context rule consumed nothing), don't try context rules again at this
+		 * position, to avoid an endless loop. */
+		int posIncremented = pos > prevPos;
+		prevPos = pos;
 		back_setBefore(table, output, &beforeAttributes);
 		if ((ctx.allUpper == 1) && (beforeAttributes & CTC_UpperCase))
 			// Capsword in progress
@@ -1268,7 +1277,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		back_selectRule(table, pos, mode, input, output, ctx, &currentDotslen,
 				&currentOpcode, &currentRule, previousOpcode, &doingMultind, &multindRule,
 				beforeAttributes, &passInstructions, &passIC, &patternMatch,
-				typebuf != NULL);
+				typebuf != NULL, posIncremented);
 		if (appliedRules != NULL && *appliedRulesCount < maxAppliedRules)
 			appliedRules[(*appliedRulesCount)++] = currentRule;
 		/* processing before replacement */
