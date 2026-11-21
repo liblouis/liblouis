@@ -473,7 +473,7 @@ tests:
 # Letter sign after a number for letters that are also single-letter words
 # (largesign a, word i, plus those inherited from en-gb-g1.utb),
 # see issue #1113
-flags: {testmode: forward}
+flags: {testmode: bothDirections}
 tests:
   - [1a, ⠼⠁⠰⠁]
   - [1A, ⠼⠁⠰⠠⠁]
