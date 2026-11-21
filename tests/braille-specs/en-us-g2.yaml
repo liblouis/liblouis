@@ -43,7 +43,7 @@ tests:
 
 # Letter sign after a number for letters that are also single-letter words
 # (largesign a, word I), see issue #1113
-flags: {testmode: forward}
+flags: {testmode: bothDirections}
 tests:
   - [1a, ⠼⠁⠰⠁]
   - [1A, ⠼⠁⠰⠠⠁]
@@ -56,4 +56,9 @@ tests:
   # standalone single-letter words are still not preceded by a letter sign
   - [a, ⠁]
   - [1 a, ⠼⠁ ⠁]
+
+# "a the" does not round-trip: backward, ⠁⠮ matches "always athe"
+# (there so that "lathe" back-translates correctly) instead of largesign a
+flags: {testmode: forward}
+tests:
   - [and a the, ⠯⠁⠮]
