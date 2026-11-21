@@ -13,16 +13,11 @@
 #-license: LGPLv2.1
 #-maintainer: Sergiy Moskalets <www.trosti.com.ua>
 #-copyright: Sergiy Moskalets
-#-copyright: Igor B. Poretsky
-#-copyright: Andrey Yakuboy
-#-copyright: Bert Frees
 
 #  Copyright (C) 2026 Sergiy Moskalets <www.trosti.com.ua>
 #
-#  Based on the core structure by:
-#  Copyright (C) 2013 Igor B. Poretsky
-#  Copyright (C) 2020-2022, 2025 Andrey Yakuboy
-#  Copyright (C) 2020 Bert Frees
+#  Developed after studying the braille tables of many European
+#  languages and Ukrainian braille practice.
 #
 #  This file is part of liblouis.
 #
@@ -233,7 +228,7 @@ noback punctuation } 135         # 125
 nofor punctuation } 4-135        # 125
 noback sign ~ 26                 # 126 tilde
 
-# Quotation marks, dashes, typography (values as in ru-litbrl.ctb)
+# Quotation marks, dashes, typography
 punctuation \x00ab 236           # « left guillemet
 punctuation \x00bb 356           # » right guillemet
 noback punctuation \x201e 236    # „ double low-9 quotation mark
@@ -568,7 +563,7 @@ noback math \x2192 25-135        # →
 noback math \x2193 45-16         # ↓
 
 # =====================================================================
-#  GREEK ALPHABET (dots as in ru-litbrl.ctb; tonos = stress sign 4)
+#  GREEK ALPHABET (tonos = stress sign 4)
 # =====================================================================
 
 noback lowercase \x03b1 1        # α
@@ -715,72 +710,116 @@ noback always \x042e\x0301 45-4-1256  # Ю́
 noback always \x042f\x0301 45-4-1246  # Я́
 
 # =====================================================================
-#  LATIN INPUT ON A PERKINS KEYBOARD (back-translation only)
-#  Dot 6 before a word: lowercase Latin letters until the end of the word.
-#  Dots 46: the next letter is a capital Latin letter, then lowercase.
+#  TYPING LATIN LETTERS ON A PERKINS KEYBOARD (back-translation only)
 #  Needed for passwords, e-mail and web addresses, logins.
+#  Dot 6 before a word: the word is typed in small Latin letters.
+#  Dots 46 before a word: the word starts with a capital Latin letter.
+#  The Latin word ends at a space or at a sign other than a Latin letter
+#  or one of . @ - _ / : ' & (so a whole e-mail or web address needs one dot 6).
+#  Variable #1: 0 = Ukrainian letters, 1 = Latin word, 2 = capital Latin letter next.
 # =====================================================================
 
-nofor context [@6] #5=1             # start of Latin lowercase input
-nofor context #5=1@1 "a"
-nofor context #5=1@12 "b"
-nofor context #5=1@14 "c"
-nofor context #5=1@145 "d"
-nofor context #5=1@15 "e"
-nofor context #5=1@124 "f"
-nofor context #5=1@1245 "g"
-nofor context #5=1@125 "h"
-nofor context #5=1@24 "i"
-nofor context #5=1@245 "j"
-nofor context #5=1@13 "k"
-nofor context #5=1@123 "l"
-nofor context #5=1@134 "m"
-nofor context #5=1@1345 "n"
-nofor context #5=1@135 "o"
-nofor context #5=1@1234 "p"
-nofor context #5=1@12345 "q"
-nofor context #5=1@1235 "r"
-nofor context #5=1@234 "s"
-nofor context #5=1@2345 "t"
-nofor context #5=1@136 "u"
-nofor context #5=1@1236 "v"
-nofor context #5=1@2456 "w"
-nofor context #5=1@1346 "x"
-nofor context #5=1@13456 "y"
-nofor context #5=1@1356 "z"
+attribute uklatin abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.@-_/:'&
 
-nofor context [@46] #5=2            # Latin capital letter
-nofor context #5=2@1 "A"#5=1
-nofor context #5=2@12 "B"#5=1
-nofor context #5=2@14 "C"#5=1
-nofor context #5=2@145 "D"#5=1
-nofor context #5=2@15 "E"#5=1
-nofor context #5=2@124 "F"#5=1
-nofor context #5=2@1245 "G"#5=1
-nofor context #5=2@125 "H"#5=1
-nofor context #5=2@24 "I"#5=1
-nofor context #5=2@245 "J"#5=1
-nofor context #5=2@13 "K"#5=1
-nofor context #5=2@123 "L"#5=1
-nofor context #5=2@134 "M"#5=1
-nofor context #5=2@1345 "N"#5=1
-nofor context #5=2@135 "O"#5=1
-nofor context #5=2@1234 "P"#5=1
-nofor context #5=2@12345 "Q"#5=1
-nofor context #5=2@1235 "R"#5=1
-nofor context #5=2@234 "S"#5=1
-nofor context #5=2@2345 "T"#5=1
-nofor context #5=2@136 "U"#5=1
-nofor context #5=2@1236 "V"#5=1
-nofor context #5=2@2456 "W"#5=1
-nofor context #5=2@1346 "X"#5=1
-nofor context #5=2@13456 "Y"#5=1
-nofor context #5=2@1356 "Z"#5=1
+nofor context [@6] #1=1
+nofor context [@46] #1=2
 
-# Latin mode ends at a space or at any character that is not a Latin letter
-attribute allowLatinMode ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'&`
-nofor context !#5=0@0 "\s"#5=0
-nofor context !#5=0[!%allowLatinMode] *#5=0
+nofor context #1=2@1 "A"#1=1
+nofor context #1=1@1 "a"
+nofor context #1=2@12 "B"#1=1
+nofor context #1=1@12 "b"
+nofor context #1=2@14 "C"#1=1
+nofor context #1=1@14 "c"
+nofor context #1=2@145 "D"#1=1
+nofor context #1=1@145 "d"
+nofor context #1=2@15 "E"#1=1
+nofor context #1=1@15 "e"
+nofor context #1=2@124 "F"#1=1
+nofor context #1=1@124 "f"
+nofor context #1=2@1245 "G"#1=1
+nofor context #1=1@1245 "g"
+nofor context #1=2@125 "H"#1=1
+nofor context #1=1@125 "h"
+nofor context #1=2@24 "I"#1=1
+nofor context #1=1@24 "i"
+nofor context #1=2@245 "J"#1=1
+nofor context #1=1@245 "j"
+nofor context #1=2@13 "K"#1=1
+nofor context #1=1@13 "k"
+nofor context #1=2@123 "L"#1=1
+nofor context #1=1@123 "l"
+nofor context #1=2@134 "M"#1=1
+nofor context #1=1@134 "m"
+nofor context #1=2@1345 "N"#1=1
+nofor context #1=1@1345 "n"
+nofor context #1=2@135 "O"#1=1
+nofor context #1=1@135 "o"
+nofor context #1=2@1234 "P"#1=1
+nofor context #1=1@1234 "p"
+nofor context #1=2@12345 "Q"#1=1
+nofor context #1=1@12345 "q"
+nofor context #1=2@1235 "R"#1=1
+nofor context #1=1@1235 "r"
+nofor context #1=2@234 "S"#1=1
+nofor context #1=1@234 "s"
+nofor context #1=2@2345 "T"#1=1
+nofor context #1=1@2345 "t"
+nofor context #1=2@136 "U"#1=1
+nofor context #1=1@136 "u"
+nofor context #1=2@1236 "V"#1=1
+nofor context #1=1@1236 "v"
+nofor context #1=2@2456 "W"#1=1
+nofor context #1=1@2456 "w"
+nofor context #1=2@1346 "X"#1=1
+nofor context #1=1@1346 "x"
+nofor context #1=2@13456 "Y"#1=1
+nofor context #1=1@13456 "y"
+nofor context #1=2@1356 "Z"#1=1
+nofor context #1=1@1356 "z"
+
+nofor context !#1=0[!%uklatin] *#1=0
+
+# =====================================================================
+#  CELLS WITHOUT A UKRAINIAN LETTER (back-translation only)
+#  Russian letters that people taught Russian braille may type out of
+#  habit give the Ukrainian equivalent: э -> е, ы -> и, ъ -> apostrophe,
+#  ё -> йо (at the start of a word or after a vowel) or ьо (after a
+#  consonant). Other cells without a meaning produce nothing instead of
+#  escape sequences like \246/.
+# =====================================================================
+
+nofor always \x0435 246              # э typed out of habit -> е
+nofor always \x0438 2346             # ы -> и
+nofor always ' 12356                 # ъ -> apostrophe
+nofor always \x0439\x043e 16         # ё -> йо
+nofor always б\x044c\x043e 12-16
+nofor always в\x044c\x043e 2456-16
+nofor always г\x044c\x043e 1245-16
+nofor always ґ\x044c\x043e 12456-16
+nofor always д\x044c\x043e 145-16
+nofor always ж\x044c\x043e 245-16
+nofor always з\x044c\x043e 1356-16
+nofor always к\x044c\x043e 13-16
+nofor always л\x044c\x043e 123-16
+nofor always м\x044c\x043e 134-16
+nofor always н\x044c\x043e 1345-16
+nofor always п\x044c\x043e 1234-16
+nofor always р\x044c\x043e 1235-16
+nofor always с\x044c\x043e 234-16
+nofor always т\x044c\x043e 2345-16
+nofor always ф\x044c\x043e 124-16
+nofor always х\x044c\x043e 125-16
+nofor always ц\x044c\x043e 14-16
+nofor always ч\x044c\x043e 12345-16
+nofor always ш\x044c\x043e 156-16
+nofor always щ\x044c\x043e 1346-16
+nofor always = 2356                  # equals sign, as in forward translation
+
+nofor pass2 @34 ?
+nofor pass2 @56 ?
+nofor pass2 @346 ?
+nofor pass2 @123456 ?
+
 
 # Standard tables at the end
 include braille-patterns.cti

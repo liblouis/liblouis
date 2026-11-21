@@ -140,6 +140,21 @@ tests:
     - "Word і привіт"
   - - "⠠⠏⠁⠎⠎⠺⠕⠗⠙⠼⠁⠃⠉"
     - "password123"
+  # One dot 6 is enough for a whole e-mail address
+  - - "⠠⠊⠝⠋⠕⠩⠞⠗⠕⠎⠞⠊⠲⠉⠕⠍⠲⠥⠁"
+    - "info@trosti.com.ua"
+  - - "⠠⠙⠕⠝⠄⠞ ⠁⠃"
+    - "don't аб"
   # Brackets typed with dot 6 still work
   - - "⠠⠷"
     - "["
+  # Russian letters typed out of habit give the Ukrainian equivalent
+  - - "⠏⠕⠪⠞ ⠍⠮"
+    - "поет ми"
+  - - "⠏⠕⠙⠷⠑⠵⠙"
+    - "под'езд"
+  - - "⠡⠇⠅⠁ ⠇⠡⠝ ⠏⠗⠊⠡⠍"
+    - "йолка льон прийом"
+  # Other cells without a meaning produce nothing
+  - - "⠁⠬⠁"
+    - "аа"
