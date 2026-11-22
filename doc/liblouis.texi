@@ -3546,27 +3546,44 @@ points.
 
 Wherever liblouis accepts a table, be it the @code{tableList}
 parameter of the translation functions, the argument of
-@code{lou_getTable}, @code{lou_checkTable} or @code{lou_indexTables},
-or an @opcoderef{include} inside a table, the name given is turned
-into a file by a @dfn{table resolver}. An application can install its
-own resolver with
-@ref{lou_registerTableResolver,@code{lou_registerTableResolver}}.
-This section describes the default resolver.
+@code{lou_getTable}, @code{lou_checkTable} or @code{lou_getTableInfo},
+an entry of the array passed to @code{lou_indexTables}, or the
+argument of an @opcoderef{include} inside a table file, what is given
+is a @dfn{table name}: a string. A @dfn{table resolver} turns the
+table name into one or more @dfn{table files}, the files on disk that
+are then compiled, in order, into a single translation table in
+memory.
+
+What a table name looks like is up to the resolver. An application
+can install its own with
+@ref{lou_registerTableResolver,@code{lou_registerTableResolver}}, and
+that resolver may accept, for instance, URIs. This section describes
+the default resolver.
+
+A metadata query, as passed to @code{lou_findTable}, is a different
+kind of string. It is not resolved but matched against the indexed
+tables, and the result is a table name, one of those that were passed
+to @code{lou_indexTables}.
 
 @subsection The default resolver
 
-For each name in a table list the default resolver tries the following
-locations, in this order, and uses the first one that exists and is a
-regular file:
+For the default resolver a table name is a file name or file path,
+for example @file{en-us-g2.ctb} or @file{/opt/app/tables/my.ctb}, or
+several of these separated by commas, for example
+@file{tables/unicode.dis,tables/en-us-g2.ctb}. The comma is specific
+to the default resolver. An @code{include} must name a single file.
+
+Each file name is looked for in the following locations, in this
+order, and the first one that exists and is a regular file is used:
 
 @enumerate
 @item
-The directory of the @dfn{base} table. For the second and following
-tables in a list, the base is the first name in the list as it was
-written, so its directory part, if any, is used. For a table pulled
-in with the @opcoderef{include}, the base is the resolved path of the
-table that contains the @code{include} line. The first table in a
-list has no base, so this step is skipped for it.
+The directory of the @dfn{base}. For a file named in an
+@code{include}, the base is the table file that contains the
+@code{include}. For the second and following file names in a table
+name, the base is the first file name, as it was written, so its
+directory part, if any, is used. The first file name in a table name
+passed to a function has no base, so this step is skipped for it.
 @item
 The name as given, that is, as an absolute path or as a path relative
 to the current working directory.
@@ -3576,17 +3593,18 @@ every directory @var{dir} both @file{@var{dir}/@var{name}} and
 @file{@var{dir}/liblouis/tables/@var{name}} are tried.
 @end enumerate
 
-Because of the first step, only the first table has to be located:
-the tables it includes are looked for next to where it was found, and
-the following tables in the same list are looked for in the directory
-named in the first entry, before anything else. A self-contained
-directory of tables therefore works wherever it is placed, without any
-configuration, as long as the first table is given with a path.
+Because of the first step, only the first file has to be located: the
+files it includes are looked for next to where it was found, and the
+other files in the same table name are looked for in the directory
+written in the first one, before anything else. A self-contained
+directory of table files therefore works wherever it is placed,
+without any configuration, as long as the first file is given with a
+path.
 
-Resolution happens the first time a table list is compiled. The
-compiled table is cached under the name of the list, so the file
-system is not consulted again for the same list until @code{lou_free}
-is called.
+Resolution happens the first time a table is compiled. The compiled
+table is cached under its table name, so the file system is not
+consulted again for the same table name until @code{lou_free} is
+called.
 
 @subsection The table search path
 
@@ -3641,9 +3659,9 @@ can be combined.
 
 @table @asis
 @item Absolute paths
-Give the first table of every list as an absolute path (or a path
-relative to the working directory). The tables it includes and the
-other tables in the list are found next to it, so no further
+Give the first file of every table name as an absolute path (or a path
+relative to the working directory). The files it includes and the
+other files in the same table name are found next to it, so no further
 configuration is needed. This is sufficient for an application that
 controls where all its tables are. It is not sufficient when a table
 in one directory includes a table in another directory, for example a
@@ -3661,21 +3679,24 @@ above. It also disables the installed table directory.
 @item A custom table resolver
 Register a function with
 @ref{lou_registerTableResolver,@code{lou_registerTableResolver}}. The
-function receives every name liblouis needs to resolve, together with
-the base table, and returns the file or files to use. This gives the
-application full control, including over how includes are resolved,
-and does not depend on the environment. The liblouis Java bindings use
-this to load tables that are packed inside a JAR file.
+function receives every table name liblouis needs to resolve, together
+with the base, and returns the table files to use. The base is always
+a file path: the table file that contains the @code{include} being
+resolved, which is one of the files the resolver itself returned
+earlier. This gives the application full control, including over how
+includes are resolved, and does not depend on the environment. The
+liblouis Java bindings use this to load tables that are packed inside
+a JAR file.
 
 @item Metadata queries
-Call @ref{lou_indexTables,@code{lou_indexTables}} with the files that
+Call @ref{lou_indexTables,@code{lou_indexTables}} with the tables that
 should be discoverable, then use
 @ref{lou_findTable,@code{lou_findTable}} or
 @ref{lou_findTables,@code{lou_findTables}} to pick a table by its
-@ref{Table Metadata,metadata} rather than by file name. The names
-passed to @code{lou_indexTables} are the names that the query
-functions return, so pass absolute paths if the result will be used
-from a different working directory. Indexing only affects how a table
+@ref{Table Metadata,metadata} rather than by name. The query functions
+return the table names exactly as they were passed to
+@code{lou_indexTables}, and those names go through the resolver again
+when the table is used. Indexing only affects how a table
 is @emph{found}. Once found, the table and everything it includes is
 compiled through the table resolver, so the remarks about includes
 across directories still apply.
@@ -3765,21 +3786,22 @@ is indicated by the character-definition and display opcodes in the
 translation table.
 
 @anchor{translation-tables}
-The @code{tableList} parameter points to a list of translation tables
-separated by commas. @xref{How tables are found}, for a description on
-how the tables are located in the file system. If only one table is
-given, no comma should be used after it. It is these tables which
-control just how the translation is made, whether in Grade 2, Grade 1,
-or something else.
+The @code{tableList} parameter is the name of the table to use.
+@xref{How tables are found}, for a description of how a table name is
+turned into files. With the default table resolver it is a file name
+or path, or several separated by commas, for example
+@code{unicode.dis,en-us-g2.ctb}; no comma should follow the last one.
+It is this table which controls just how the translation is made,
+whether in Grade 2, Grade 1, or something else.
 
-The tables in a list are all compiled into the same internal table.
-The list is then regarded as the name of this table. As explained in
-@ref{How to Write Translation Tables}, each table is a file which may
-be plain text, big-endian Unicode or little-endian Unicode. A table
-(or list of tables) is compiled into an internal representation the
-first time it is used. Liblouis keeps track of which tables have been
-compiled. For this reason, it is essential to call the @code{lou_free}
-function at the end of your application to avoid memory leaks. Do
+All the files are compiled into the same internal table, and the table
+name is regarded as the name of this table. As explained in @ref{How
+to Write Translation Tables}, each table file may be plain text,
+big-endian Unicode or little-endian Unicode. A table is compiled into
+an internal representation the first time it is used. Liblouis keeps
+track of which tables have been compiled. For this reason, it is
+essential to call the @code{lou_free} function at the end of your
+application to avoid memory leaks. Do
 @emph{NOT} call @code{lou_free} after each translation. This will
 force liblouis to compile the translation tables each time they are
 used, leading to great inefficiency.
@@ -4272,7 +4294,7 @@ table search path (@pxref{How tables are found}) are indexed first
 and a warning is logged. Only the files directly inside those
 directories are considered, not their subdirectories.
 
-Returns the name of the best match, as it was passed to
+Returns the table name of the best match, as it was passed to
 @code{lou_indexTables}. The returned string must be freed with
 @code{lou_freeTableFile}. Returns @code{NULL} if the query is invalid
 or if no match can be found.
@@ -4349,7 +4371,7 @@ char *lou_getTableInfo (
 Reads the @ref{Table Metadata,metadata} of a single table, which does
 not have to be indexed. @code{table} is a table name, resolved as
 described in @ref{How tables are found}; it must resolve to exactly
-one file. Returns the value of the first metadata field named
+one table file. Returns the value of the first metadata field named
 @code{key} (compared case-insensitively), or @code{NULL} if the table
 cannot be resolved or has no such field. Unlike the index, this
 function also sees fields that have been deactivated by writing
@@ -4370,13 +4392,13 @@ functions @ref{lou_findTable,@code{lou_findTable}},
 @ref{lou_listTables,@code{lou_listTables}} should consider. It parses
 and indexes the @ref{Table Metadata,metadata} of every table given.
 
-@code{tables} must be a @code{NULL}-terminated array of table names,
-not directories. Each name is resolved as described in @ref{How
-tables are found} and must resolve to exactly one file. A table that
-cannot be resolved, that resolves to more than one file, or whose
-metadata is invalid is reported through the log callback and left
-out of the index. Calling the function again replaces the previous
-index.
+@code{tables} is a list of tables: a @code{NULL}-terminated array of
+table names, not directories. Each table name is resolved as described
+in @ref{How tables are found} and must resolve to exactly one table
+file. A table that cannot be resolved, that resolves to more than one
+file, or whose metadata is invalid is reported through the log
+callback and left out of the index. Calling the function again
+replaces the previous index.
 
 If a query function is called without a preceding call to
 @code{lou_indexTables}, it indexes the files directly inside the
@@ -4390,31 +4412,33 @@ discoverable.
 
 @example
 void lou_registerTableResolver (
-  char **(*resolver) (const char *tableList, const char *base));
+  char **(*resolver) (const char *table, const char *base));
 @end example
 
 Replaces the default table resolver (@pxref{How tables are found})
 with @code{resolver}. From then on, every table name that liblouis
-needs to turn into a file is passed to this function, whether it
-comes from a @code{tableList} parameter, from @code{lou_indexTables}
-or @code{lou_getTableInfo}, or from an @opcoderef{include} inside a
-table.
+needs to turn into a file or list of files is passed to this function,
+whether it was passed to a function such as @code{lou_translate},
+@code{lou_indexTables} or @code{lou_getTableInfo}, or comes from an
+@opcoderef{include} inside a table file.
 
-@code{tableList} is the name to resolve. For a @code{tableList}
-parameter it is the complete comma-separated list; for an include it
-is the single name written in the table. @code{base} is the file path
-of the table from which the name is being resolved, that is, the
-table that contains the include, or @code{NULL} when there is none.
+@code{table} is the table name, exactly as it was given. @code{base}
+is @code{NULL} when the table name was passed to a function. When it
+comes from an @code{include}, @code{base} is the path of the table
+file that contains the @code{include}, that is, one of the paths the
+resolver returned earlier. @code{base} is therefore always either
+@code{NULL} or a file path, and a resolver can use the paths it
+returns to carry information from one call to the next.
 
-The resolver must return a @code{NULL}-terminated array of file
-paths, one for each name in @code{tableList} and in the same order,
-or @code{NULL} if any of them cannot be resolved. The paths must be
-openable by liblouis with @code{fopen}. The path returned for a table
-is also the @code{base} passed when the includes of that table are
-resolved, so a resolver can use it to carry information between
-calls. liblouis copies the array and its strings as soon as the call
-returns and never frees them, so the resolver keeps ownership of the
-memory it returns and may free or reuse it on its next invocation.
+The resolver must return a @code{NULL}-terminated array of file paths,
+the table files that make up the table in the order in which they are
+to be compiled, or @code{NULL} if the table cannot be resolved. A
+table named in an @code{include}, passed to @code{lou_indexTables} or
+passed to @code{lou_getTableInfo} must resolve to exactly one file.
+The paths must be openable by liblouis with @code{fopen}. liblouis
+copies the array and its strings as soon as the call returns and never
+frees them, so the resolver keeps ownership of the memory it returns
+and may free or reuse it on its next invocation.
 
 Passing @code{NULL} is rejected with an error message and leaves the
 current resolver in place. There is no function to restore the
