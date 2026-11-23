@@ -1699,6 +1699,18 @@ tests:
   - typeform:
       bold: ' ++++++++++++++++      '
 
+# from https://github.com/liblouis/louis-rs/issues/76: emphasis over several
+# words, followed by punctuation that isn't emphasized: a word indicator for each
+# of two words, the passage indicator for three or more
+- - Escherichia coli.
+  - .1,es*}i*ia .1coli.'4
+  - typeform:
+      italic: '++++++++++++++++ '
+- - The Fundamental Theorem of Linear Algebra.
+  - .7,! ,funda;tal ,!orem ( ,l9e> ,algebra.'4
+  - typeform:
+      italic: '+++++++++++++++++++++++++++++++++++++++++ '
+
 # ------------------------
 # Section 10: Contractions
 # ------------------------
@@ -2219,6 +2231,10 @@ tests:
   - ',9goldsby'
 - - ingredients
   - 9gr$i5ts
+# from https://github.com/liblouis/louis-rs/issues/79: no ing groupsign at the
+# start of a word, also when the word isn't the first in the text
+- - main ingredient
+  - ma9 9gr$i5t
 - - ingrown
   - 9gr{n
 - - to-ing and fro-ing
@@ -2481,6 +2497,14 @@ tests:
   - ',o'',connor'
 - - MetroDisco
   - ',metro,disco'
+# from https://github.com/liblouis/louis-rs/issues/78: no contraction across a
+# change from lowercase to a capital
+- - GitHub
+  - ',git,hub'
+- - HelloWorld
+  - ',hello,_w'
+- - frameResize
+  - frame,resize
 - - be'ave
   - be'ave
 - - be-stow
