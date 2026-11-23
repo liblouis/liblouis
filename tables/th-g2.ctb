@@ -49,7 +49,7 @@ include th-g1.uti
 
 #Add 456 points in front of the mark
 noback match %1 , - 456-2
-noback context [$y]":" *@456-25
+noback context [%thaiSign]":" *@456-25
 noback match %1 ; - 456-23
 noback match %1%1%1%1%1 . %[_^] 456-256
 noback match - ! - 456-235
