@@ -1561,7 +1561,7 @@ tests:
   - - Cuba,
     - ⠸⠉⠥⠂
   - - '"Cuba"'
-    - ⠦⠸⠉⠥⠐⠦
+    - ⠐⠦⠸⠉⠥⠐⠦
   - - Cuba;
     - ⠨⠉⠥⠃⠁⠆
   - - (Cuba)
@@ -1644,3 +1644,14 @@ tests:
     - ⠏⠩⠁⠍⠷
   - - Argentina
     - ⠸⠁⠗
+
+  # The sign 456 of a country does not separate an opening sign from it as the capital sign does,
+  # so the opening sign takes dot 5 (B 16-1 v3, 4.2.2.1, Portugal).
+  - - «Cuba»
+    - ⠐⠦⠸⠉⠥⠐⠦
+  - - '"Costa Rica"'
+    - ⠐⠦⠸⠉⠗⠐⠦
+  - - (Cuba y
+    - ⠐⠣⠸⠉⠥ ⠽
+  - - «Manuel»
+    - ⠦⠨⠍⠩⠳⠇⠐⠦

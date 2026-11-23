@@ -176,6 +176,35 @@ noback context $s["–"]$u @5-36
 noback context `["–"]$u @5-36
 noback context $s["\""]$u @5-236
 noback context `["\""]$u @5-236
+# An opening sign before the name of a country: the sign 456 stands for the capital sign, so
+# the opening sign is separated with dot 5 (4.2.2.1: «Portugal»).
+noback pass2 @236@46@7 @5@236
+noback pass2 @236@46@46@7 @5@236
+noback pass2 @26@46@7 @5@26
+noback pass2 @26@46@46@7 @5@26
+noback pass2 @235@46@7 @5@235
+noback pass2 @235@46@46@7 @5@235
+noback pass2 @126@46@7 @5@126
+noback pass2 @126@46@46@7 @5@126
+noback pass2 @0@36@46@7 @0@5@36
+noback pass2 @0@36@46@46@7 @0@5@36
+
+# The same for the names made of several words, once the second pass has written their sign.
+noback pass3 @236@456@14@1235 @5@236@456@14@1235
+noback pass3 @236@456@234@1236 @5@236@456@234@1236
+noback pass3 @236@456@145@135 @5@236@456@145@135
+noback pass3 @26@456@14@1235 @5@26@456@14@1235
+noback pass3 @26@456@234@1236 @5@26@456@234@1236
+noback pass3 @26@456@145@135 @5@26@456@145@135
+noback pass3 @235@456@14@1235 @5@235@456@14@1235
+noback pass3 @235@456@234@1236 @5@235@456@234@1236
+noback pass3 @235@456@145@135 @5@235@456@145@135
+noback pass3 @126@456@14@1235 @5@126@456@14@1235
+noback pass3 @126@456@234@1236 @5@126@456@234@1236
+noback pass3 @126@456@145@135 @5@126@456@145@135
+noback pass3 @0@36@456@14@1235 @0@5@36@456@14@1235
+noback pass3 @0@36@456@234@1236 @0@5@36@456@234@1236
+noback pass3 @0@36@456@145@135 @0@5@36@456@145@135
 
 # One dot 5 is enough when the word has its own (qué, kilómetro).
 noback pass2 @5@26@5 @26@5
