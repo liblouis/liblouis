@@ -176,6 +176,11 @@ noback context $s["–"]$u @5-36
 noback context `["–"]$u @5-36
 noback context $s["\""]$u @5-236
 noback context `["\""]$u @5-236
+
+# The asterisk of an erroneous expression (Table 23, rule 1) is written 256 like the beginning
+# dis-, so it takes dot 5 before it: *cocretas, *distrezas.
+noback context ["*"]$u @5-256
+
 # An opening sign before the name of a country: the sign 456 stands for the capital sign, so
 # the opening sign is separated with dot 5 (4.2.2.1: «Portugal»).
 noback pass2 @236@46@7 @5@236
