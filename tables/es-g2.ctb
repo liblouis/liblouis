@@ -772,15 +772,13 @@ word quién 5-12345-1345
 
 # general syllabic contractions
 
-# Some rules to some contractions, starting with the x (contraction for on) should always
-# go after consonants, not vowels.  For this a class definition is used to group all
-# consonants. Potential back translation issue here.
+# The contractions on and ion have no position restrictions (they may follow a vowel or start
+# a word), but they are not used when the vowel is accented (león, iónico: those letters
+# are different characters here) nor for the whole word ion.
 
 attribute consonants BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZzÑñ
-after consonants always on 1346
-before consonants begword on 1346
-# same applies to ion
-after consonants always ion 3456
+always on 1346
+always ion 3456
 # The u e contraction may never be used after the letter g, avoids confussion with u
 # diaeresis which is part of many words. More classes.
 attribute euvowels Gg
