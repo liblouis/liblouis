@@ -780,10 +780,13 @@ attribute consonants BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZzÑñ
 always on 1346
 always ion 3456
 # The u e contraction may never be used after the letter g, avoids confussion with u
-# diaeresis which is part of many words. More classes.
+# diaeresis which is part of many words (B 16-1 v3, 3.4.2 rule 3: sigue, not sig + ue).
 attribute euvowels Gg
 after euvowels always eu 15-136
 after euvowels always EU 15-136
+after euvowels always ue 136-15
+after euvowels always UE 136-15
+after euvowels endword ue 136-15
 
 # only exception to this contraction, avoids confussion with the Spanish comma at end of words
 
@@ -1464,6 +1467,10 @@ word entrenen 26-356-26-26
 word as 1-234
 word os 135-234
 word ion 24-135-1345
+
+# B 16-1 v3, 3.4.2 rule 4: dr is not contracted in the abbreviation Dr. (Dra., Dres., Dras.)
+# when the text already has it abbreviated.
+match (^|!%a) dr ([.]|a[.]|es[.]|as[.]) 145-1235
 
 # Whenever some partword contractions overlap, such as ad and dr, in a single word
 # (ladrillo) the dr contraction is preferred (B 16-1 v3, 3.4.1, Table 19). Setting the seven
