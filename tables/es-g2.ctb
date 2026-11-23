@@ -924,6 +924,9 @@ endword able 1-12
 endword ables 1-12-234
 endword abre 1-23
 endword abres 1-23-234
+# endword does not match the whole word; a + -bre as well (3.2: the ending has priority)
+word abre 1-23
+word abres 1-23-234
 endword emente 15-134
 endword imente 24-134
 endword omente 135-134
