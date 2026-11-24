@@ -40,3 +40,29 @@ tests:
   - - 'This…is…a…test'
     - '⠠⠹⠄⠄⠄⠊⠎⠄⠄⠄⠁⠄⠄⠄⠞⠑⠌'
 
+
+# Large signs that only spaces separate are written together, but not
+# across punctuation, another word or a capital sign
+flags: {testmode: forward}
+tests:
+  - ["of the", "⠷⠮"]
+  - ["and for the", "⠯⠿⠮"]
+  - ["of  the", "⠷⠮"]
+  - ["of the.", "⠷⠮⠲"]
+  - ["of The", "⠷ ⠠⠮"]
+  - ["of, the", "⠷⠂ ⠮"]
+  - ["of x the", "⠷ ⠰⠭ ⠮"]
+  - ["the then", "⠮ ⠮⠝"]
+
+# A lowword after a joinword is spelled out
+  - ["to be", "⠖⠃⠑"]
+  - ["to his", "⠖⠓⠊⠎"]
+  - ["into his", "⠔⠖⠓⠊⠎"]
+  - ["by was", "⠴⠺⠁⠎"]
+  - ["he was to be", "⠓⠑ ⠴ ⠖⠃⠑"]
+
+# A letter standing alone gets the letter sign after a space too, and
+# a letter after a digit gets it even with letters after it
+  - ["x y", "⠰⠭ ⠰⠽"]
+  - ["plan b now", "⠏⠇⠁⠝ ⠰⠃ ⠝⠪"]
+  - ["2bc", "⠼⠃⠰⠃⠉"]

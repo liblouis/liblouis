@@ -469,3 +469,13 @@ tests:
   - [littlest, ⠇⠇⠌]
   - [llst, ⠰⠇⠇⠎⠞, xfail: both forward and backward translation fails]
   - [infrared, ⠔⠋⠗⠁⠗⠫]
+
+# No letter sign before an endnum
+flags: {testmode: forward}
+tests:
+  - ["1st", "⠼⠁⠌"]
+  - ["24th", "⠼⠃⠙⠹"]
+
+# U+2010 is a hyphen
+  - ["co‐operation", "⠉⠕⠤⠕⠏⠻⠠⠝"]
+  - ["x‐y", "⠰⠭⠤⠰⠽"]
