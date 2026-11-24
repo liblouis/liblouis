@@ -25,6 +25,7 @@ EXTRA_DIST =					\
 	issue-479.yaml				\
 	issue-615.yaml				\
 	issue-963.yaml				\
+	issue-1168.yaml				\
 	letterDefTest_harness.yaml		\
 	macro.yaml				\
 	macro.utb				\
