@@ -563,6 +563,20 @@ findEmphasisClass(const TranslationTableHeader *table, const TranslationTableRul
 	return -1;
 }
 
+/* Return the user-defined mode (1 to MAX_MODES - 1) that the given indicator rule
+ * belongs to, or 0 if none. Mode 0 is uppercase, which is handled separately. */
+static int
+findUserMode(const TranslationTableHeader *table, const TranslationTableRule *rule) {
+	TranslationTableOffset ruleOffset =
+			(TranslationTableOffset)(((char *)rule - (char *)&table->ruleArea[0]) /
+					sizeof(TranslationTableData));
+	int i, j;
+	for (i = 1; i < MAX_MODES && table->modes[i].value; i++)
+		for (j = 0; j < 9; j++)
+			if (table->emphRules[MAX_EMPH_CLASSES + i][j] == ruleOffset) return i;
+	return 0;
+}
+
 static int
 handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 		TranslationTableOpcode *currentOpcode, const TranslationTableRule **currentRule,
@@ -775,6 +789,31 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_BegComp:
 					case CTO_EndComp:
 						return;
+					case CTO_ModeLetter:
+					case CTO_BegModeWord:
+					case CTO_EndModeWord:
+					case CTO_BegMode:
+					case CTO_EndMode:
+					case CTO_BegModePhrase:
+					case CTO_EndModePhrase: {
+						/* Indicators of user-defined modes are recognized but
+						 * dropped (see below). To avoid swallowing cells that mean
+						 * something else, require an adjacent cell that can
+						 * represent a character of the mode. The cells are checked
+						 * rather than the output, because mode characters usually
+						 * share their cells with other characters. */
+						int m = findUserMode(table, *currentRule);
+						if (m) {
+							TranslationTableCharacterAttributes prevCellAttributes =
+									pos > 0
+									? getDots(input->chars[pos - 1], table)->attributes
+									: 0;
+							if ((prevCellAttributes | afterAttributes) &
+									table->modes[m].mode)
+								return;
+						}
+						break;
+					}
 					case CTO_EmphLetter:
 					case CTO_BegEmphWord:
 					case CTO_EndEmphWord:
@@ -1298,6 +1337,19 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			continue;
 			break;
 		case CTO_EndComp:
+			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
+			continue;
+			break;
+		case CTO_ModeLetter:
+		case CTO_BegModeWord:
+		case CTO_EndModeWord:
+		case CTO_BegMode:
+		case CTO_EndMode:
+		case CTO_BegModePhrase:
+		case CTO_EndModePhrase:
+			/* Mode indicators other than caps are recognized but otherwise ignored:
+			 * the back-translator does not (yet) select characters based on the
+			 * active mode. */
 			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
 			break;
