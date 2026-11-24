@@ -727,10 +727,23 @@ of user-defined modes.
 The dot pattern which indicates that a certain mode is entered for the
 following word or remainder of the current word. The mode is
 automatically terminated by the first character that is not a letter.
-A letter also terminates the mode when a @opcoderef{base} links it to
-a character of the class. A letter that does not belong to the class
-and is not linked to it does not terminate the mode; the word is then
-still marked with a single indicator.
+
+For uppercase mode, you can define a list of characters that can
+appear within a word in capitals without terminating the block. Do
+this by using the @opcoderef{capsmodechars}.
+
+Example:
+
+@example
+begcapsword 6-6
+@end example
+
+A mode that was entered with @code{begmodeword} will be terminated
+explicitly with a @opcoderef{endmodeword} indicator before a letter
+that is not in the class but is linked to a letter of the class via a
+@opcoderef{base} rule. A letter that does not belong to the class and
+is not linked to it, does not require termination; the word will then
+still be marked with a single indicator.
 
 The following two tables define the Greek letter @samp{α} in a
 class named @code{foreign} with a letter and a word indicator:
@@ -757,15 +770,6 @@ them apart, so @samp{a} does terminate the mode, in the same way that
 a lowercase letter terminates uppercase mode; each @samp{α} in
 such a word is marked separately with the letter indicator.
 
-For uppercase mode, you can define a list of characters that can
-appear within a word in capitals without terminating the block. Do
-this by using the @opcoderef{capsmodechars}.
-
-Example:
-
-@example
-begcapsword 6-6
-@end example
 
 @code{begemphword} (@pxopref{begemphword}) is the counterpart of
 @code{begmodeword} for indication of emphasis.
