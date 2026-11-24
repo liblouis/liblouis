@@ -164,6 +164,15 @@ endword ? 5-26
 endword » 5-236
 endword ” 5-236
 
+# The rules above do not apply inside a word with k or w (it is not contracted, see above), so
+# the closing question mark gets its dot 5 here. The pattern needs a letter before the sign and
+# a space, a closing sign or the end of the text after it.
+noback context $l["?"]$s @5-26
+noback context $l["?"]~ @5-26
+noback context $l["?"]"\"" @5-26
+noback context $l["?"]"»" @5-26
+noback context $l["?"]"”" @5-26
+
 # An opening sign in front of a word in lower case: dot 5 before the sign. In front of a
 # capital letter or a number the sign for those separates it. With several opening signs the
 # dot 5 goes before the last one.

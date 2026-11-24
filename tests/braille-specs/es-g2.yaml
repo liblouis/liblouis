@@ -597,7 +597,10 @@ tests:
     - ⠞⠺⠁ ⠥ ⠐⠢⠴⠢⠐⠢
   - - es su ¿bikini?
     - ⠫ ⠜ ⠢⠐⠃⠊⠅⠊⠝⠊⠐⠢
-    - xfail: the closing question mark after a word with k or w does not get its dot 5
+  - - ¿whisky?
+    - ⠢⠐⠺⠓⠊⠎⠅⠽⠐⠢
+  - - ¿kilo?"
+    - ⠢⠐⠅⠊⠇⠕⠐⠢⠦
 
   # Spanish grade 2 word list, Documento técnico B 16-1 (CBE), version 3, Apéndice C.
   # Word and its listed variants with their prefixed abbreviation.
@@ -1622,6 +1625,15 @@ tests:
     - ⠨⠑ ⠨⠙⠗⠄ ⠨⠎⠩⠉⠓⠕
   - - la Dra. Vega
     - ⠄ ⠨⠙⠗⠁⠄ ⠨⠧⠑⠛⠁
+
+  # Chained principles com- + pre- followed by the final consonant; compre is com- + pr + e, never
+  # three principles (B 16-1 v3, 3.1.1).
+  - - compre
+    - ⠤⠖⠑
+  - - compren
+    - ⠤⠖⠝
+  - - compres
+    - ⠤⠖⠎
 
   # An ending takes priority over a contraction (B 16-1 v3, 3.2): the whole word -bre is a + -bre.
   - - abre
