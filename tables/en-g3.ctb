@@ -853,6 +853,7 @@ joinword are 39-256-139
 word are 39-256-59
 after letter endword \sare 39-256-59
 after letter before letter midword \sare\s 39-256-139
+noback match %a \sare\s %[#] 39-256-139
 after digit endword \sare 0-39-256-59
 after digit before letter midword \sare\s 0-39-256-59-0
 noback match (^|%[_.~<>]) as %_+%[#] 9-1356-19
@@ -869,6 +870,7 @@ joinword be 39-23-139
 word be 39-23-59
 after letter endword \sbe 39-23-59
 after letter before letter midword \sbe\s 39-23-139
+noback match %a \sbe\s %[#] 39-23-139
 after digit endword \sbe 0-39-23-59
 after digit before letter midword \sbe\s 0-39-23-59-0
 joinword been 39-235-139
@@ -899,6 +901,7 @@ joinword his 39-236-139
 word his 39-236-59
 after letter endword \shis 39-236-59
 after letter before letter midword \shis\s 39-236-139
+noback match %a \shis\s %[#] 39-236-139
 after digit endword \shis 0-39-236-59
 after digit before letter midword \shis\s 0-39-236-59-0
 word i 9-24-19
@@ -915,6 +918,7 @@ joinword into 49-35-235-149
 word into 35-235
 after letter endword \sis 39-25-59
 after letter before letter midword \sis\s 39-25-139
+noback match %a \sis\s %[#] 39-25-139
 after digit endword \sis 0-39-25-59
 after digit before letter midword \sis\s 0-39-25-59-0
 noback match (^|%[_.~<>]) it %_+%[#] 9-1346-19
@@ -959,6 +963,7 @@ joinword was 39-356-139
 word was 39-356-59
 after letter endword \swas 39-356-59
 after letter before letter midword \swas\s 39-356-139
+noback match %a \swas\s %[#] 39-356-139
 after digit endword \swas 0-39-356-59
 after digit before letter midword \swas\s 0-39-356-59-0
 word we 9-12456-19
@@ -966,6 +971,7 @@ joinword were 39-2356-139
 word were 39-2356-59
 after letter endword \swere 39-2356-59
 after letter before letter midword \swere\s 39-2356-139
+noback match %a \swere\s %[#] 39-2356-139
 after digit endword \swere 0-39-2356-59
 after digit before letter midword \swere\s 0-39-2356-59-0
 always were? 2456-12456-15-236
