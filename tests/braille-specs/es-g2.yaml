@@ -1559,8 +1559,8 @@ tests:
   - - Costa Ricas
     - ⠨⠉⠪⠞⠁ ⠨⠗⠊⠉⠯
 
-  # The names of countries are only abbreviated as whole words followed by a space, comma, full stop,
-  # double quote or the end of the text.
+  # The names of countries are only abbreviated as whole words; the punctuation around them does not
+  # matter, a following letter makes it another word.
   - - Cuba.
     - ⠸⠉⠥⠄
   - - Cuba,
@@ -1568,17 +1568,25 @@ tests:
   - - '"Cuba"'
     - ⠐⠦⠸⠉⠥⠐⠦
   - - Cuba;
-    - ⠨⠉⠥⠃⠁⠆
+    - ⠸⠉⠥⠆
   - - (Cuba)
-    - ⠣⠨⠉⠥⠃⠁⠜
+    - ⠐⠣⠸⠉⠥⠜
+  - - 'Cuba: sí'
+    - ⠸⠉⠥⠒ ⠌
+  - - Cuba!
+    - ⠸⠉⠥⠖
   - - Cubano
     - ⠨⠉⠥⠃⠩⠕
   - - Perú-Chile
-    - ⠨⠏⠦⠾⠤⠸⠉⠇
+    - ⠸⠏⠑⠤⠸⠉⠇
   - - Costa Rica.
     - ⠸⠉⠗⠄
   - - Costa Rica;
-    - ⠨⠉⠪⠞⠁ ⠨⠗⠊⠉⠁⠆
+    - ⠸⠉⠗⠆
+  - - (Costa Rica)
+    - ⠐⠣⠸⠉⠗⠜
+  - - Costa Rica-Perú
+    - ⠸⠉⠗⠤⠸⠏⠑
   - - Costa Rican
     - ⠨⠉⠪⠞⠁ ⠨⠗⠊⠉⠩
   - - El Salvador de la patria
@@ -1596,7 +1604,7 @@ tests:
   - - Cuba”
     - ⠸⠉⠥⠐⠦
   - - Cuba“
-    - ⠨⠉⠥⠃⠁⠦
+    - ⠸⠉⠥⠦
   - - Costa Rica»
     - ⠸⠉⠗⠐⠦
   - - El Salvador”

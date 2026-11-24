@@ -1317,83 +1317,83 @@ word aquéllas 5-346-12346
 
 # Names of countries (Apendice C of Documento tecnico B 16-1, version 3): the sign 456 takes
 # the place of the capital sign, so the capital sign is removed in a second pass. The name is
-# only abbreviated as a whole word, followed by a space, a comma, a full stop, a double quote or
-# the end of the text; with anything else after it (a letter, a semicolon, a parenthesis, a
-# hyphen) it is written out. The rules use the match opcode, whose pattern can look at what
-# follows; the characters of the name are compared without regard to case.
+# only abbreviated as a whole word: whatever punctuation follows is irrelevant, but a following
+# letter means it is another word (Cubano, Costa Ricas). The rules use the match opcode, whose
+# pattern can look at what follows; the characters of the name are compared without regard to
+# case.
 # The match rule puts a marker (dot 7) before the sign. The second pass removes the capital sign
 # after it. In lower case the name is another word (cuba, a container; chile, a pepper; 2.2.2.1
 # rule 1): the marker and the sign are replaced by the normal spelling of the word.
 
-match (^|!%a) argentina (%_|[,."»”]|^) 7-456-1-1235
+match (^|!%a) argentina (!%a|^) 7-456-1-1235
 noback pass2 @46@7@456@1@1235 @456@1@1235
 noback pass2 @46@46@7@456@1@1235 @456@1@1235
 noback pass2 @7@456@1@1235 @16@1245@26@2345@35@1
-match (^|!%a) bolivia (%_|[,."»”]|^) 7-456-12-135
+match (^|!%a) bolivia (!%a|^) 7-456-12-135
 noback pass2 @46@7@456@12@135 @456@12@135
 noback pass2 @46@46@7@456@12@135 @456@12@135
 noback pass2 @7@456@12@135 @12@135@123@24@1236@24@1
-match (^|!%a) brasil (%_|[,."»”]|^) 7-456-12-1235
+match (^|!%a) brasil (!%a|^) 7-456-12-1235
 noback pass2 @46@7@456@12@1235 @456@12@1235
 noback pass2 @46@46@7@456@12@1235 @456@12@1235
 noback pass2 @7@456@12@1235 @23@12346@24@123
-match (^|!%a) chile (%_|[,."»”]|^) 7-456-14-123
+match (^|!%a) chile (!%a|^) 7-456-14-123
 noback pass2 @46@7@456@14@123 @456@14@123
 noback pass2 @46@46@7@456@14@123 @456@14@123
 noback pass2 @7@456@14@123 @14@125@24@123@15
-match (^|!%a) colombia (%_|[,."»”]|^) 7-456-14-135
+match (^|!%a) colombia (!%a|^) 7-456-14-135
 noback pass2 @46@7@456@14@135 @456@14@135
 noback pass2 @46@46@7@456@14@135 @456@14@135
 noback pass2 @7@456@14@135 @14@135@123@2456@12@24@1
-match (^|!%a) cuba (%_|[,."»”]|^) 7-456-14-136
+match (^|!%a) cuba (!%a|^) 7-456-14-136
 noback pass2 @46@7@456@14@136 @456@14@136
 noback pass2 @46@46@7@456@14@136 @456@14@136
 noback pass2 @7@456@14@136 @14@136@12@1
-match (^|!%a) ecuador (%_|[,."»”]|^) 7-456-15-14
+match (^|!%a) ecuador (!%a|^) 7-456-15-14
 noback pass2 @46@7@456@15@14 @456@15@14
 noback pass2 @46@46@7@456@15@14 @456@15@14
 noback pass2 @7@456@15@14 @15@14@136@1456@156
-match (^|!%a) españa (%_|[,."»”]|^) 7-456-15-234
+match (^|!%a) españa (!%a|^) 7-456-15-234
 noback pass2 @46@7@456@15@234 @456@15@234
 noback pass2 @46@46@7@456@15@234 @456@15@234
 noback pass2 @7@456@15@234 @1246@1234@1@12456@1
-match (^|!%a) guatemala (%_|[,."»”]|^) 7-456-1245-2345
+match (^|!%a) guatemala (!%a|^) 7-456-1245-2345
 noback pass2 @46@7@456@1245@2345 @456@1245@2345
 noback pass2 @46@46@7@456@1245@2345 @456@1245@2345
 noback pass2 @7@456@1245@2345 @1245@136@1@2345@126@13@1
-match (^|!%a) honduras (%_|[,."»”]|^) 7-456-125-1345
+match (^|!%a) honduras (!%a|^) 7-456-125-1345
 noback pass2 @46@7@456@125@1345 @456@125@1345
 noback pass2 @46@46@7@456@125@1345 @456@125@1345
 noback pass2 @7@456@125@1345 @125@1346@145@136@1235@12346
-match (^|!%a) méxico (%_|[,."»”]|^) 7-456-134-1346
+match (^|!%a) méxico (!%a|^) 7-456-134-1346
 noback pass2 @46@7@456@134@1346 @456@134@1346
 noback pass2 @46@46@7@456@134@1346 @456@134@1346
 noback pass2 @7@456@134@1346 @134@2346@1346@24@14@135
-match (^|!%a) nicaragua (%_|[,."»”]|^) 7-456-1345-24
+match (^|!%a) nicaragua (!%a|^) 7-456-1345-24
 noback pass2 @46@7@456@1345@24 @456@1345@24
 noback pass2 @46@46@7@456@1345@24 @456@1345@24
 noback pass2 @7@456@1345@24 @1345@24@14@16@1@1245@136@1
-match (^|!%a) panamá (%_|[,."»”]|^) 7-456-1234-1
+match (^|!%a) panamá (!%a|^) 7-456-1234-1
 noback pass2 @46@7@456@1234@1 @456@1234@1
 noback pass2 @46@46@7@456@1234@1 @456@1234@1
 noback pass2 @7@456@1234@1 @1234@146@1@134@12356
-match (^|!%a) paraguay (%_|[,."»”]|^) 7-456-1234-13456
+match (^|!%a) paraguay (!%a|^) 7-456-1234-13456
 noback pass2 @46@7@456@1234@13456 @456@1234@13456
 noback pass2 @46@46@7@456@1234@13456 @456@1234@13456
 noback pass2 @7@456@1234@13456 @456@16@1245@136@1@13456
-match (^|!%a) perú (%_|[,."»”]|^) 7-456-1234-15
+match (^|!%a) perú (!%a|^) 7-456-1234-15
 noback pass2 @46@7@456@1234@15 @456@1234@15
 noback pass2 @46@46@7@456@1234@15 @456@1234@15
 noback pass2 @7@456@1234@15 @1234@236@23456
-match (^|!%a) portugal (%_|[,."»”]|^) 7-456-1234-2345
+match (^|!%a) portugal (!%a|^) 7-456-1234-2345
 noback pass2 @46@7@456@1234@2345 @456@1234@2345
 noback pass2 @46@46@7@456@1234@2345 @456@1234@2345
 noback pass2 @7@456@1234@2345 @1234@156@2345@136@1245@13
-match (^|!%a) uruguay (%_|[,."»”]|^) 7-456-136-13456
+match (^|!%a) uruguay (!%a|^) 7-456-136-13456
 noback pass2 @46@7@456@136@13456 @456@136@13456
 noback pass2 @46@46@7@456@136@13456 @456@136@13456
 noback pass2 @7@456@136@13456 @136@1235@136@1245@136@1@13456
-match (^|!%a) venezuela (%_|[,."»”]|^) 7-456-1236-15
+match (^|!%a) venezuela (!%a|^) 7-456-1236-15
 noback pass2 @46@7@456@1236@15 @456@1236@15
 noback pass2 @46@46@7@456@1236@15 @456@1236@15
 noback pass2 @7@456@1236@15 @1236@26@15@1356@1256@123@1
@@ -1402,40 +1402,22 @@ noback pass2 @7@456@1236@15 @1236@26@15@1356@1256@123@1
 # Names of countries made of several words: Costa Rica 456-14-1235, El Salvador 456-234-1236,
 # Republica Dominicana 456-145-135. A rule cannot contain a space, so each word is translated on
 # its own (with its capital sign) and the second pass replaces the whole expression, space
-# included, by the sign of the name. Only when what follows is a space, a comma, a full stop,
-# a double quote (dot 5 and 236) or the end of the text, as for the other countries. The cells
+# included, by the sign of the name. Only when what follows is not a letter, as for the other
+# countries. The cells
 # are the ones the words have in the first pass (costa = c + os + t + a, salvador = s + al + v +
 # ad + or).
 
-noback pass2 [@46@14@246@2345@1@0@46@1235@24@14@1]$s @456@14@1235
-noback pass2 [@46@14@246@2345@1@0@46@1235@24@14@1]@2 @456@14@1235
-noback pass2 [@46@14@246@2345@1@0@46@1235@24@14@1]@3 @456@14@1235
-noback pass2 [@46@14@246@2345@1@0@46@1235@24@14@1]@5@236 @456@14@1235
+noback pass2 [@46@14@246@2345@1@0@46@1235@24@14@1]!$l @456@14@1235
 noback pass2 [@46@14@246@2345@1@0@46@1235@24@14@1]~ @456@14@1235
-noback pass2 [@46@46@14@246@2345@1@0@46@46@1235@24@14@1]$s @456@14@1235
-noback pass2 [@46@46@14@246@2345@1@0@46@46@1235@24@14@1]@2 @456@14@1235
-noback pass2 [@46@46@14@246@2345@1@0@46@46@1235@24@14@1]@3 @456@14@1235
-noback pass2 [@46@46@14@246@2345@1@0@46@46@1235@24@14@1]@5@236 @456@14@1235
+noback pass2 [@46@46@14@246@2345@1@0@46@46@1235@24@14@1]!$l @456@14@1235
 noback pass2 [@46@46@14@246@2345@1@0@46@46@1235@24@14@1]~ @456@14@1235
-noback pass2 [@46@15@0@46@234@13@1236@1456@156]$s @456@234@1236
-noback pass2 [@46@15@0@46@234@13@1236@1456@156]@2 @456@234@1236
-noback pass2 [@46@15@0@46@234@13@1236@1456@156]@3 @456@234@1236
-noback pass2 [@46@15@0@46@234@13@1236@1456@156]@5@236 @456@234@1236
+noback pass2 [@46@15@0@46@234@13@1236@1456@156]!$l @456@234@1236
 noback pass2 [@46@15@0@46@234@13@1236@1456@156]~ @456@234@1236
-noback pass2 [@46@46@15@0@46@46@234@13@1236@1456@156]$s @456@234@1236
-noback pass2 [@46@46@15@0@46@46@234@13@1236@1456@156]@2 @456@234@1236
-noback pass2 [@46@46@15@0@46@46@234@13@1236@1456@156]@3 @456@234@1236
-noback pass2 [@46@46@15@0@46@46@234@13@1236@1456@156]@5@236 @456@234@1236
+noback pass2 [@46@46@15@0@46@46@234@13@1236@1456@156]!$l @456@234@1236
 noback pass2 [@46@46@15@0@46@46@234@13@1236@1456@156]~ @456@234@1236
-noback pass2 [@46@1235@1234@23456@12@123@24@14@1@0@46@145@2456@35@24@14@146@1]$s @456@145@135
-noback pass2 [@46@1235@1234@23456@12@123@24@14@1@0@46@145@2456@35@24@14@146@1]@2 @456@145@135
-noback pass2 [@46@1235@1234@23456@12@123@24@14@1@0@46@145@2456@35@24@14@146@1]@3 @456@145@135
-noback pass2 [@46@1235@1234@23456@12@123@24@14@1@0@46@145@2456@35@24@14@146@1]@5@236 @456@145@135
+noback pass2 [@46@1235@1234@23456@12@123@24@14@1@0@46@145@2456@35@24@14@146@1]!$l @456@145@135
 noback pass2 [@46@1235@1234@23456@12@123@24@14@1@0@46@145@2456@35@24@14@146@1]~ @456@145@135
-noback pass2 [@46@46@1235@1234@23456@12@123@24@14@1@0@46@46@145@2456@35@24@14@146@1]$s @456@145@135
-noback pass2 [@46@46@1235@1234@23456@12@123@24@14@1@0@46@46@145@2456@35@24@14@146@1]@2 @456@145@135
-noback pass2 [@46@46@1235@1234@23456@12@123@24@14@1@0@46@46@145@2456@35@24@14@146@1]@3 @456@145@135
-noback pass2 [@46@46@1235@1234@23456@12@123@24@14@1@0@46@46@145@2456@35@24@14@146@1]@5@236 @456@145@135
+noback pass2 [@46@46@1235@1234@23456@12@123@24@14@1@0@46@46@145@2456@35@24@14@146@1]!$l @456@145@135
 noback pass2 [@46@46@1235@1234@23456@12@123@24@14@1@0@46@46@145@2456@35@24@14@146@1]~ @456@145@135
 
 # Word beginnings (principles) are only used before a consonant (Documento tecnico B 16-1,
