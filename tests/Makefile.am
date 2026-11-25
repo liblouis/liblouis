@@ -287,6 +287,7 @@ endif
 
 # Tests for macros
 if ENABLE_MACROS
+program_TESTS += macroZeroArg
 dist_yaml_TESTS +=				\
 	yaml/macro.yaml
 endif
