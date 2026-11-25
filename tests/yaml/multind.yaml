@@ -2,9 +2,9 @@
 
 # A multind rule whose cells outnumber its opcodes: the indicators together
 # consume exactly the cells of the multind rule.
+display: tables/text_nabcc.dis
 table: |
   include tables/spaces.uti
-  include tables/text_nabcc.dis
   lowercase a 1
   lowercase b 12
   base uppercase A a
@@ -24,9 +24,9 @@ tests:
 # An opcode whose indicator is not defined in the table is skipped, and the
 # remaining indicators consume the cells of the multind rule, whether the
 # undefined opcode comes first or last.
+display: tables/text_nabcc.dis
 table: |
   include tables/spaces.uti
-  include tables/text_nabcc.dis
   lowercase a 1
   base uppercase A a
   capsletter 46
@@ -36,9 +36,9 @@ tests:
   - [";a", "A"]
   - [";aa", "Aa"]
 
+display: tables/text_nabcc.dis
 table: |
   include tables/spaces.uti
-  include tables/text_nabcc.dis
   lowercase a 1
   base uppercase A a
   capsletter 46
@@ -52,9 +52,9 @@ tests:
 # the cells of the multind rule, and all of them are applied. Without
 # nocontractsign, "b" would be read as "but"; without capsletter, it would not
 # be capitalized.
+display: tables/text_nabcc.dis
 table: |
   include tables/spaces.uti
-  include tables/text_nabcc.dis
   lowercase a 1
   lowercase b 12
   base uppercase A a
@@ -70,9 +70,9 @@ tests:
   - ["\"b ab", "B ab"]
 
 # A multind rule at the end of the input
+display: tables/text_nabcc.dis
 table: |
   include tables/spaces.uti
-  include tables/text_nabcc.dis
   lowercase a 1
   base uppercase A a
   nocontractsign 56
