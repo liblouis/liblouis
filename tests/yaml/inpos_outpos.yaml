@@ -1,6 +1,6 @@
 # Simple replacement with context
+display: tables/unicode-without-blank.dis
 table: |
-  include tables/unicode-without-blank.dis
   include tables/latinLetterDef8Dots.uti
   punctuation - 36
   noback context "oo"["b"] @36-12
@@ -15,8 +15,8 @@ tests:
     - outputPos: [0,1,2,3,5,6]
       inputPos: [0,1,2,3,3,4,5]
 
+display: tables/unicode-without-blank.dis
 table: |
-  include tables/unicode-without-blank.dis
   include tables/latinLetterDef8Dots.uti
   include tables/loweredDigits6Dots.uti
   space \s 0
@@ -175,6 +175,9 @@ tests:
       outputPos: [0,1,1,2,3,3,4,5,5,6,7,7,8,9,9,10]
 
 # Insertion at the start of a string: prepend to next
+display: |
+  display . 123456
+  include tables/text_nabcc.dis
 table: |
   include tables/latinLetterDef6Dots.uti
   sign . 123456
@@ -191,6 +194,9 @@ tests:
       outputPos: [0,2,3,4,5,6]
 
 # Insertion at the end of a string: append to previous
+display: |
+  display . 123456
+  include tables/text_nabcc.dis
 table: |
   include tables/latinLetterDef6Dots.uti
   sign . 123456
@@ -211,6 +217,7 @@ tests:
       outputPos: [0,1,2,3,4,5]
 
 # Deletion at the start of a string: append to previous from pov of output (braille), prepend to next from pov of input
+display: tables/text_nabcc.dis
 table: |
   include tables/latinLetterDef6Dots.uti
   noback correct `[$a] ?
@@ -226,6 +233,7 @@ tests:
       outputPos: [0,0,1,2,3,4]
 
 # Deletion at the end of a string: append to previous
+display: tables/text_nabcc.dis
 table: |
   include tables/latinLetterDef6Dots.uti
   noback correct [$a]~ ?
@@ -244,6 +252,7 @@ tests:
       outputPos: [0,1,2,3,4,4]
 
 # Deletion of all characters: append to (missing) previous
+display: tables/text_nabcc.dis
 table: |
   include tables/latinLetterDef6Dots.uti
   noback correct [$a]~ ?
@@ -257,8 +266,8 @@ tests:
       outputPos: [-1]
 
 # Deletion with replace rule: append to previous
+display: tables/unicode-without-blank.dis
 table: |
-  include tables/unicode-without-blank.dis
   include tables/latinLetterDef8Dots.uti
   punctuation . 46
   punctuation , 6
@@ -273,8 +282,8 @@ tests:
       outputPos: [0,1,1,2,3,4,5,6]
 
 # Deletion of undefined character: append to previous
+display: tables/unicode-without-blank.dis
 table: |
-  include tables/unicode-without-blank.dis
   include tables/latinLetterDef8Dots.uti
   punctuation , 6
 flags: {testmode: forward}
@@ -288,8 +297,8 @@ tests:
       mode: [noUndefined]
 
 # Deletion of undefined dots: prepend to next
+display: tables/unicode-without-blank.dis
 table: |
-  include tables/unicode-without-blank.dis
   include tables/latinLetterDef8Dots.uti
   punctuation , 6
 flags: {testmode: backward}
@@ -317,6 +326,18 @@ tests:
 #     pass3      zy    deeeg
 #                00    56668
                 
+display: |
+  display a 1
+  display b 2
+  display c 3
+  display d 4
+  display e 5
+  display f 6
+  display g 7
+  display w 13
+  display x 12
+  display y 34
+  display z 56
 table: |
   sign a 1
   sign b 2
@@ -403,7 +424,7 @@ tests:
     - inputPos: [0,0,5,6,6,6,8]
 
 # Converted from inpos_match_replace.c
-table: |
+display: |
   display A 1
   display B 12
   display E 15
@@ -419,6 +440,7 @@ table: |
   display 7 12456
   display - 36
   display - 36a
+table: |
   lowercase a 1
   lowercase b 12
   lowercase e 15
@@ -454,6 +476,9 @@ tests:
     - inputPos: [0,1,2,3,4,5,6,7,8,9,9,12,13,14,15,16,17,18,19]
 
 # Converted from pass2_inpos.c
+display: |
+  display ' 6
+  include tables/text_nabcc.dis
 table: |
   lowercase e 15
   lowercase n 1345
