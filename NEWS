@@ -1,5 +1,19 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
+* Noteworthy changes in release 3.40.0 (2026-11-30)
+** Transition to louis-rs
+[[https://github.com/liblouis/louis-rs][louis-rs]], a reimplementation of liblouis in Rust, is nearing feature
+parity with liblouis. It uses the same braille tables, so table
+authors and braille readers will see no change. From now on liblouis
+will be in maintenance mode: it will get four more regular releases,
+the last one planned for November 2027, after which only louis-rs will
+be maintained. Table changes and fixes for serious bugs will be
+handled as before during this transition period. liblouis and louis-rs
+must stay in step: new features and behavior changes go into liblouis
+only once they are also accepted in louis-rs. See ~CONTRIBUTING.md~
+for details. Application developers: please try louis-rs now and tell
+us what you need to switch.
+
 * Noteworthy changes in release 3.39.0 (2026-08-31)
 A lot of dedicated work by Bue, Tiago, Clive, Leonard, Anthony,
 Andrey, Dimitar, Danil Kostenkov, Dmitriy Lazarev, Christian Comaschi

@@ -18,7 +18,7 @@ development, make it possible to review changes reliably, guard
 against regressions, allow for refactoring and rewrites while ensuring
 stability, and preserve knowledge over time. -->
 
-- [ ] I have read [the contribution guidelines](https://github.com/liblouis/liblouis/wiki/Contribution-guidelines#tests) and understand why tests are important
+- [ ] I have read [the contribution guidelines](https://github.com/liblouis/liblouis/blob/master/CONTRIBUTING.md#tests-show-us-what-your-change-does) and understand why tests are important
 - [ ] I added or updated tests covering all intended functional changes (including bug fixes)
 
 **If this pull request contains changes that are not covered by tests,
@@ -32,7 +32,7 @@ revision of the braille code, metadata and documentation must be
 included or updated accordingly. Table metadata and documentation are
 required for identification and discoverability of tables. -->
 
-- [ ] I have read about Liblouis' metadata syntax, standard metadata tags and minimal required metadata in [the contribution guidelines](https://github.com/liblouis/liblouis/wiki/Contribution-guidelines#table-metadata)
+- [ ] I have read about Liblouis' metadata syntax, standard metadata tags and minimal required metadata in [the contribution guidelines](https://github.com/liblouis/liblouis/blob/master/CONTRIBUTING.md#table-metadata-say-what-your-table-is)
 - [ ] Table metadata and documentation is complete and up to date
 - [ ] Strongly recommended: the table has links to the official specification of the implemented braille code, if available
 
