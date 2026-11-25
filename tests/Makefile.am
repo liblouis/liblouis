@@ -37,6 +37,7 @@ program_TESTS =					\
 	backtranslation_emphasis		\
 	checkTable				\
 	check_metadata				\
+	cursorEndBounds				\
 	emphclass				\
 	attributeNames				\
 	swapOperands				\
