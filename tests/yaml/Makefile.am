@@ -8,7 +8,7 @@ EXTRA_DIST =					\
 	capsnocont.yaml				\
 	capsword.yaml				\
 	case-sensitivity.yaml			\
-	compbrlAtCursor_with_equals.yaml	\
+	compbrlAtCursor.yaml			\
 	computer_braille.yaml			\
 	broken_equals_operand.yaml		\
 	emphasis.yaml				\
@@ -29,6 +29,7 @@ EXTRA_DIST =					\
 	macro.yaml				\
 	macro.utb				\
 	match-vs-always.yaml			\
+	multind.yaml				\
 	multipass-backward.yaml			\
 	multipass-forward.yaml			\
 	multipass.yaml				\

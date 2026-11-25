@@ -402,8 +402,7 @@ tests:
   - ['}', '⠸⠂']
   - ['~', '',
     {xfail: "Not defined in table"}]
-  - ['_', '',
-    {xfail: "Not defined in table"}]
+  - ['_', '⠠']
   - ['\x0082', '⠂',
     {xfail: {backward: "Same as ,"}}]
   - ['\x0083', '',
@@ -669,8 +668,11 @@ tests:
 
   # Pangrama
   - ['Jovencillo emponzoñado de whisky: ¡qué figurota exhibe!',
-    '⠨⠚⠕⠧⠑⠝⠉⠊⠇⠇⠕ ⠑⠍⠏⠕⠝⠵⠕⠻⠁⠙⠕ ⠙⠑ ⠺⠓⠊⠎⠅⠽⠒ ⠖⠟⠥⠮ ⠋⠊⠛⠥⠗⠕⠞⠁ ⠑⠭⠓⠊⠃⠑⠖',
-    {xfail: {backward: "Inv ecxl. is backtranslated as !"}}]
+    '⠨⠚⠕⠧⠑⠝⠉⠊⠇⠇⠕ ⠑⠍⠏⠕⠝⠵⠕⠻⠁⠙⠕ ⠙⠑ ⠺⠓⠊⠎⠅⠽⠒ ⠖⠟⠥⠮ ⠋⠊⠛⠥⠗⠕⠞⠁ ⠑⠭⠓⠊⠃⠑⠖']
+
+  # Inverted punctuation at the start of a word, closing form elsewhere
+  - ['¡hola! ¿qué?', '⠖⠓⠕⠇⠁⠖ ⠢⠟⠥⠮⠢']
+  - ['abc! ¿de?', '⠁⠃⠉⠖ ⠢⠙⠑⠢']
 
   # Numbers with decimals
   - ['123.456,789', '⠼⠁⠃⠉⠄⠙⠑⠋⠂⠛⠓⠊']

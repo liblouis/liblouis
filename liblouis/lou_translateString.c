@@ -398,6 +398,7 @@ swapTest(int swapIC, int *pos, const TranslationTableHeader *table, const InStri
 	TranslationTableOffset swapRuleOffset;
 	TranslationTableRule *swapRule;
 	swapRuleOffset = (passInstructions[swapIC + 1] << 16) | passInstructions[swapIC + 2];
+	if (swapRuleOffset * OFFSETSIZE >= table->bytesUsed) return 0;
 	swapRule = (TranslationTableRule *)&table->ruleArea[swapRuleOffset];
 	while (p - *pos < passInstructions[swapIC + 3]) {
 		int test;
@@ -452,6 +453,7 @@ swapReplace(int start, int end, const TranslationTableHeader *table,
 	widechar *replacements;
 	int p;
 	swapRuleOffset = (passInstructions[passIC + 1] << 16) | passInstructions[passIC + 2];
+	if (swapRuleOffset * OFFSETSIZE >= table->bytesUsed) return 0;
 	swapRule = (TranslationTableRule *)&table->ruleArea[swapRuleOffset];
 	replacements = &swapRule->charsdots[swapRule->charslen];
 	for (p = start; p < end; p++) {
@@ -890,6 +892,7 @@ passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 			if ((!notOperator && !itsTrue) || (notOperator && itsTrue)) return 0;
 			*passIC = searchIC;
 			pos = searchPos;
+			break;
 		case pass_endTest:
 			(*passIC)++;
 			endMatch = pos;
@@ -1532,8 +1535,10 @@ for_updatePositions(const widechar *outChars, int inLength, int outLength, int s
 			*cursorPosition = output->length + outLength / 2 + 1;
 			*cursorStatus = 1;
 		}
-	} else if (*cursorStatus == 2 && *cursorPosition == pos)
+	} else if (*cursorStatus == 2 && *cursorPosition == pos) {
 		*cursorPosition = output->length;
+		*cursorStatus = 1;
+	}
 	for (k = 0; k < outLength; k++) posMapping[output->length + k] = pos + shift;
 	output->length += outLength;
 	return 1;
@@ -2392,7 +2397,8 @@ doCompTrans(int start, int end, const TranslationTableHeader *table, int *pos,
 	const TranslationTableRule *indicRule;
 	int k;
 	int haveEndsegment = 0;
-	if (*cursorStatus != 2 && brailleIndicatorDefined(table->begComp, table, &indicRule))
+	int atCursor = *cursorStatus == 2;
+	if (!atCursor && brailleIndicatorDefined(table->begComp, table, &indicRule))
 		if (!for_updatePositions(&indicRule->charsdots[0], 0, indicRule->dotslen, 0, *pos,
 					input, output, posMapping, cursorPosition, cursorStatus))
 			return 0;
@@ -2418,7 +2424,7 @@ doCompTrans(int start, int end, const TranslationTableHeader *table, int *pos,
 						   cursorPosition, cursorStatus, mode))
 			return 0;
 	}
-	if (*cursorStatus != 2 && brailleIndicatorDefined(table->endComp, table, &indicRule))
+	if (!atCursor && brailleIndicatorDefined(table->endComp, table, &indicRule))
 		if (!for_updatePositions(&indicRule->charsdots[0], 0, indicRule->dotslen, 0, *pos,
 					input, output, posMapping, cursorPosition, cursorStatus))
 			return 0;
@@ -3663,6 +3669,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 			if (!doCompTrans(pos, compbrlEnd, table, &pos, input, output, posMapping,
 						emphasisBuffer, &transRule, cursorPosition, &cs, mode))
 				goto failure;
+			if (cs == 1) *cursorStatus = 1;
 			continue;
 		}
 		TranslationTableCharacterAttributes beforeAttributes;

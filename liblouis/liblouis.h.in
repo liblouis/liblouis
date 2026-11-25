@@ -135,7 +135,9 @@ lou_charSize(void);
  *
  * @warning BUFFER OVERFLOW RISK: Caller must ensure that:
  *          - `inlen` does not exceed actual size of `inbuf`
- *          - `typeform` array is NULL or at least `inlen` elements long
+ *          - `typeform` is NULL or holds at least max(`inlen`, `outlen`) elements:
+ *            it is read for each input character and on return holds one entry
+ *            per output cell (see the manual)
  *          - `outbuf` can hold at least `outlen` elements
  *          Passing incorrect lengths will cause buffer overflows
  *
@@ -156,7 +158,9 @@ lou_translateString(const char *tableList, const widechar *inbuf, int *inlen,
  *
  * @warning BUFFER OVERFLOW RISK: Caller must ensure that:
  *          - `inlen` does not exceed actual size of `inbuf`
- *          - `typeform` array is NULL or at least `inlen` elements long
+ *          - `typeform` is NULL or holds at least max(`inlen`, `outlen`) elements:
+ *            it is read for each input character and on return holds one entry
+ *            per output cell (see the manual)
  *          - `outbuf` can hold at least `outlen` elements
  *          - `outputPos` array is at least `inlen` elements long
  *          - `inputPos` array is at least `outlen` elements long
@@ -202,11 +206,50 @@ LIBLOUIS_API
 int EXPORT_CALL
 lou_charToDots(const char *tableList, const widechar *inbuf, widechar *outbuf, int length,
 		int mode);
+/**
+ * Back-translates a string of braille according to the given translation table(s)
+ *
+ * The opposite of [lou_translateString](#lou_translateString). For detailed
+ * documentation check the chapter on [Programming with
+ * liblouis](https://liblouis.io/documentation/liblouis.html#Programming-with-liblouis)
+ * of the liblouis manual.
+ *
+ * @return 1 on success, 0 on failure
+ *
+ * @warning BUFFER OVERFLOW RISK: Caller must ensure that:
+ *          - `inlen` does not exceed actual size of `inbuf`
+ *          - `typeform` is NULL or holds at least `outlen` elements: on return it
+ *            holds the emphasis of each output character
+ *          - `outbuf` can hold at least `outlen` elements
+ *          Passing incorrect lengths will cause buffer overflows
+ *
+ * @note `typeform` may be NULL if emphasis information is not needed
+ * @note `spacing` is deprecated and must be NULL; any other value is
+ * ignored and a warning is logged
+ */
 LIBLOUIS_API
 int EXPORT_CALL
 lou_backTranslateString(const char *tableList, const widechar *inbuf, int *inlen,
 		widechar *outbuf, int *outlen, formtype *typeform, char *spacing, int mode);
 
+/**
+ * Basically the same as [lou_backTranslateString](#lou_backTranslateString) providing
+ * additional cursor position tracking information
+ *
+ * @return 1 on success, 0 on failure
+ *
+ * @warning BUFFER OVERFLOW RISK: Caller must ensure that:
+ *          - `inlen` does not exceed actual size of `inbuf`
+ *          - `typeform` is NULL or holds at least `outlen` elements: on return it
+ *            holds the emphasis of each output character
+ *          - `outbuf` can hold at least `outlen` elements
+ *          - `outputPos` array is at least `inlen` elements long
+ *          - `inputPos` array is at least `outlen` elements long
+ *          Passing incorrect lengths will cause buffer overflows
+ *
+ * @note `outputPos`, `inputPos`, and `cursorPos` may be NULL if position tracking is not
+ * needed
+ */
 LIBLOUIS_API
 int EXPORT_CALL
 lou_backTranslate(const char *tableList, const widechar *inbuf, int *inlen,

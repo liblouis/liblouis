@@ -874,8 +874,9 @@ analyzeTable(const char *table, int activeOnly) {
 									_lou_logMessage(LOU_LOG_ERROR,
 											"Not a valid language tag: %s (line %d)", v,
 											info.lineNumber);
-									list_free(features);
-									return NULL;
+									free(k);
+									free(v);
+									goto error;
 								}
 								if (strcasecmp(k, "locale") == 0) {
 									FeatureWithLineNumber *f1 = memcpy(
@@ -984,6 +985,8 @@ compile_error:
 				info.line[info.linepos], info.lineNumber, info.linepos);
 	else
 		_lou_logMessage(LOU_LOG_ERROR, "Unexpected newline on line %d", info.lineNumber);
+error:
+	fclose(info.in);
 	list_free(features);
 	return NULL;
 }

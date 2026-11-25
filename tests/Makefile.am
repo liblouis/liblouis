@@ -18,6 +18,7 @@ backtranslation_emphasis_SOURCES = backtranslation_emphasis.c
 checkTable_SOURCES = checkTable.c
 emphclass_SOURCES = emphclass.c
 attributeNames_SOURCES = attributeNames.c
+swapOperands_SOURCES = swapOperands.c
 findTable_SOURCES = findTable.c
 getTable_SOURCES = getTable.c
 hash_collision_SOURCES = hash_collision.c
@@ -29,6 +30,7 @@ typeform_SOURCES = typeform.c
 typeform_for_emphclass_SOURCES = typeform_for_emphclass.c
 check_metadata_SOURCES = check_metadata.c
 suggestChunks_SOURCES = suggestChunks.c
+swapdd_SOURCES = swapdd.c
 charToFallbackDots_SOURCES = charToFallbackDots.c
 
 program_TESTS =					\
@@ -37,6 +39,7 @@ program_TESTS =					\
 	check_metadata				\
 	emphclass				\
 	attributeNames				\
+	swapOperands				\
 	findTable				\
 	getTable				\
 	hash_collision				\
@@ -47,6 +50,7 @@ program_TESTS =					\
 	typeform				\
 	typeform_for_emphclass			\
 	suggestChunks				\
+	swapdd					\
 	charToFallbackDots
 
 check_PROGRAMS = $(program_TESTS)
@@ -57,6 +61,7 @@ dist_check_SCRIPTS =
 if !CROSS_COMPILING
 dist_check_SCRIPTS +=	 			\
 	check_all_tables.pl			\
+	check_deep_include.pl			\
 	check_endless_loop.pl			\
 	multiple_table_path.pl
 endif
@@ -238,7 +243,7 @@ dist_yaml_TESTS =				\
 	yaml/capsnocont.yaml			\
 	yaml/capsword.yaml			\
 	yaml/case-sensitivity.yaml		\
-	yaml/compbrlAtCursor_with_equals.yaml	\
+	yaml/compbrlAtCursor.yaml		\
 	yaml/computer_braille.yaml		\
 	yaml/emphasis.yaml			\
 	yaml/example_test.yaml			\
@@ -254,6 +259,7 @@ dist_yaml_TESTS =				\
 	yaml/issue-963.yaml			\
 	yaml/letterDefTest_harness.yaml		\
 	yaml/match-vs-always.yaml		\
+	yaml/multind.yaml			\
 	yaml/multipass-backward.yaml		\
 	yaml/multipass-forward.yaml		\
 	yaml/multipass.yaml			\
