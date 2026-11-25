@@ -193,7 +193,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/rw-rw-g1.yaml			  \
 	braille-specs/sah.yaml				  \
 	braille-specs/sk-g1_harness.yaml		  \
-	braille-specs/sl-g1.yaml			  \
+	braille-specs/sl.yaml				  \
 	braille-specs/smi.yaml				  \
 	braille-specs/spaces.yaml			  \
 	braille-specs/sr.yaml				  \

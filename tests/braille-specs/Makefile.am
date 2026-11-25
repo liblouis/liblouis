@@ -131,7 +131,7 @@ EXTRA_DIST =					\
 	rw-rw-g1.yaml			  	\
 	sah.yaml				\
 	sk-g1_harness.yaml			\
-	sl-g1.yaml				\
+	sl.yaml				\
 	smi.yaml				\
 	spaces.yaml				\
 	sr.yaml					\
