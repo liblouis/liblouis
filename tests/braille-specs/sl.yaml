@@ -185,3 +185,31 @@ tests:
   - [Ψ, ⠰⠨⠽]
   - [Ω, ⠰⠨⠺]
   - [ΑΒΓΔ, ⠰⠸⠁⠃⠛⠙]
+
+# White space, moved from spaces.yaml
+display: |
+  include unicode-without-blank.dis
+  display 9 9
+  display a a
+table: sl-si-comp8.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x00a0', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+table: sl.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
