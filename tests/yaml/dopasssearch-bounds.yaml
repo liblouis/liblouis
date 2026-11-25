@@ -1,0 +1,37 @@
+# doPassSearch() must not read past the end of the input when the search
+# operand of a context rule does not fit in the remaining input.
+table: |
+  letter a 1
+  letter b 12
+  letter c 14
+  letter d 145
+  letter l 123
+  noback context "a"/"bc" @123
+flags: {testmode: forward}
+tests:
+  - # the "bc" search operand does not fit in the remaining input;
+    # the rule must not apply
+    - ab
+    - ab
+  - # the "bc" search operand matches, so the rule applies and replaces
+    # "abc" with dots 123
+    - abcd
+    - ld
+
+table: |
+  letter a 1
+  letter b 12
+  letter c 14
+  letter d 145
+  letter l 123
+  noback context "a"/$a2 @123
+flags: {testmode: forward}
+tests:
+  - # the two-character attribute search operand does not fit in the
+    # remaining input; the rule must not apply
+    - ab
+    - ab
+  - # the attribute search operand matches, so the rule applies and
+    # replaces "abc" with dots 123
+    - abcd
+    - ld
