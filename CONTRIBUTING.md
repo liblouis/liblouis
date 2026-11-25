@@ -35,8 +35,10 @@ there too.
 ### The tables work in both
 
 The braille tables are shared, so until liblouis is retired every table
-must work in both liblouis and louis-rs. A table can use a new feature
-only when both support it.
+must work in both liblouis and louis-rs: a table can use a feature only
+when both support it. The tests that come with the tables must pass in
+liblouis. louis-rs does not pass all of them yet; closing that gap is
+part of the transition.
 
 ### If you develop an application that uses liblouis
 
