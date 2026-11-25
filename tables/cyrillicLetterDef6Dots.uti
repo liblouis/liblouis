@@ -1,0 +1,94 @@
+# liblouis: sub table for Cyrillic letter definition, 6 dot codes
+#
+#  Copyright (C) 2026 Seeing Hands <kyrgyzbraille@seeinghands.org>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+# Cyrillic letters table, includes А-Я letters and their common translations across most Cyrillic Braille codes
+# Note: This table includes only letters that are commonly used in multiple languages. Other letters have not been defined. If any of the following are used in your language, you must define them in your language's table:
+# й (commonly used, but multiple different standards for encoding)
+# і, ѝ, ў, ѣ, ѫ, ғ, қ, ң, ү, ұ, ҳ, һ, ә, ӡ, ө
+
+lowercase а 1
+lowercase б 12
+lowercase в 2456
+lowercase г 1245
+lowercase д 145
+lowercase е 15
+lowercase ё 16
+lowercase ж 245
+lowercase з 1356
+lowercase и 24
+lowercase к 13
+lowercase л 123
+lowercase м 134
+lowercase н 1345
+lowercase о 135
+lowercase п 1234
+lowercase р 1235
+lowercase с 234
+lowercase т 2345
+lowercase у 136
+lowercase ф 124
+lowercase х 125
+lowercase ц 14
+lowercase ч 12345
+lowercase ш 156
+lowercase щ 1346
+lowercase ъ 12356
+lowercase ы 2346
+lowercase ь 23456
+lowercase э 246
+lowercase ю 1256
+lowercase я 1246
+
+base uppercase А а
+base uppercase Б б
+base uppercase В в
+base uppercase Г г
+base uppercase Д д
+base uppercase Е е
+base uppercase Ё ё
+base uppercase Ж ж
+base uppercase З з
+base uppercase И и
+base uppercase К к
+base uppercase Л л
+base uppercase М м
+base uppercase Н н
+base uppercase О о
+base uppercase П п
+base uppercase Р р
+base uppercase С с
+base uppercase Т т
+base uppercase У у
+base uppercase Ф ф
+base uppercase Х х
+base uppercase Ц ц
+base uppercase Ч ч
+base uppercase Ш ш
+base uppercase Щ щ
+base uppercase Ъ ъ
+base uppercase Ы ы
+base uppercase Ь ь
+base uppercase Э э
+base uppercase Ю ю
+base uppercase Я я
+
+# Cyrillic case attributes are used in some tables for multi-alphabet support
+attribute lowercyrillic абвгдеёжзиклмнопрстуфхцчшщъыьэюя
+attribute uppercyrillic АБВГДЕЁЖЗИКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ
