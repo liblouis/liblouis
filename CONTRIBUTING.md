@@ -3,7 +3,7 @@
 ## liblouis is moving to louis-rs
 
 [louis-rs](https://github.com/liblouis/louis-rs) is a reimplementation of
-liblouis in Rust. It uses the same braille tables and passes the liblouis
+liblouis in Rust. It uses the same braille tables and runs the liblouis
 test suite. We are moving development from liblouis to louis-rs.
 
 liblouis is now in maintenance mode. It will get four more regular
@@ -15,17 +15,33 @@ louis-rs will be maintained.
 - **Braille tables and their tests.** Table work goes on here as before.
   louis-rs uses the same tables, so every table improvement benefits both.
 - **Fixes for serious bugs**, such as crashes and security issues.
+- **Features and behavior changes that are also accepted in louis-rs**
+  (see below).
 
-### What goes to louis-rs
+### Features and behavior changes go into both
 
-- **New features**: new opcodes, new API functions, changes to translation
-  behavior. Please open these against louis-rs. We will not add new
-  features to liblouis.
+During the transition, liblouis and louis-rs must stay in step. A new
+feature or behavior change (a new opcode, a new API function, a change
+to how existing rules translate) goes into liblouis only once it has
+also been accepted in louis-rs, with the same tests. You can start in
+either project; please open an issue in the other one early, so the
+change can be discussed for both.
+
+A bug fix that changes how existing tables translate is a behavior
+change too. It is welcome when liblouis and louis-rs then agree on the
+correct result. If louis-rs gets the case wrong as well, please report it
+there too.
+
+### The tables work in both
+
+The braille tables are shared, so until liblouis is retired every table
+must work in both liblouis and louis-rs. A table can use a new feature
+only when both support it.
 
 ### If you develop an application that uses liblouis
 
 Please try louis-rs now. If something you need is missing, open an issue
-on louis-rs while there is still time to add it.
+on louis-rs.
 
 ## Security issues
 
