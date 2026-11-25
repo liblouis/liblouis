@@ -104,7 +104,9 @@ typedef enum {
 	CTC_Sign = 0x80,
 	CTC_LitDigit = 0x100,
 	CTC_CapsMode = 0x200,
-	// bit 0x400 used to be taken by CTC_EmphMode
+	/* characters that terminate a capitalised word or passage the same way a space would,
+	 * without being CTC_Space themselves (see capsmodebreakchars) */
+	CTC_CapsModeBreak = 0x400,
 	CTC_NumericMode = 0x800,
 	CTC_NumericNoContract = 0x1000,
 	CTC_SeqDelimiter = 0x2000,
@@ -275,6 +277,7 @@ typedef enum { /* Op codes */
 	/* End of ordered opcodes */
 
 	CTO_CapsModeChars,
+	CTO_CapsModeBreakChars,
 	CTO_EmphModeChars,
 	CTO_NoEmphChars,
 	CTO_BegComp,
