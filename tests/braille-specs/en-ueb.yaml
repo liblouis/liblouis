@@ -1699,6 +1699,21 @@ tests:
   - typeform:
       bold: ' ++++++++++++++++      '
 
+# from https://github.com/liblouis/louis-rs/issues/76: emphasis over several
+# words, followed by punctuation that isn't emphasized: a word indicator for each
+# of two words, the passage indicator for three or more. With word indicators
+# the change of typeform for the closing period is ignored (9.7.3), so no
+# terminator; a passage is terminated before the period (9.7.3, reading list)
+- - Escherichia coli.
+  - .1,es*}i*ia .1coli4
+  - typeform:
+      italic: '++++++++++++++++ '
+    xfail: got ".1,es*}i*ia .1coli.'4"
+- - The Fundamental Theorem of Linear Algebra.
+  - .7,! ,funda;tal ,!orem ( ,l9e> ,algebra.'4
+  - typeform:
+      italic: '+++++++++++++++++++++++++++++++++++++++++ '
+
 # ------------------------
 # Section 10: Contractions
 # ------------------------
@@ -2219,6 +2234,10 @@ tests:
   - ',9goldsby'
 - - ingredients
   - 9gr$i5ts
+# from https://github.com/liblouis/louis-rs/issues/79: no ing groupsign at the
+# start of a word, also when the word isn't the first in the text
+- - main ingredient
+  - ma9 9gr$i5t
 - - ingrown
   - 9gr{n
 - - to-ing and fro-ing
@@ -2729,6 +2748,16 @@ tests:
   - ',sea,_w'
 - - TEAspoon
   - ',,tea,''spoon'
+# from https://github.com/liblouis/louis-rs/issues/78: no contraction across a
+# change from lowercase to a capital (8.3.1, 8.3.3)
+- - GitHub
+  - ',git,hub'
+- - HelloWorld
+  - ',hello,_w'
+- - frameResize
+  - frame,resize
+- - DiffEq's
+  - ',diff,eq''s'
 
 # 10.6.7 page 121
 
