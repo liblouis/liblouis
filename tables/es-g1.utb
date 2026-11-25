@@ -1,0 +1,126 @@
+# liblouis: Spanish Grade 1 (Uncontracted) Braille Table
+#
+# -----------
+#-index-name: Spanish, uncontracted
+#-display-name: Spanish uncontracted braille
+#
+#+language:es
+#+type:literary
+#+contraction:no
+#+grade:1
+# -----------
+#
+#  Copyright (C) 2010, 2011 by DocArch <http://www.docarch.be>
+#  Copyright (C) 2026 by ultraleetj <ultraleetj@gmail.com>
+#  Copyright (C) 2026 by guiador <https://github.com/guiador>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+# -------------------------------------------------------------------------------
+#
+#  Spanish Braille
+#     Created and maintained by Bert Frees <bertfrees@gmail.com>
+#     with the assistance of Carles Sadurní Anguita <http://www.transcriptor.net/>
+#
+#  Conforms to Comisión Braille Española (CBE / ONCE) technical documents:
+#    - B 2 V4: Signografía básica de las lenguas cooficiales españolas (rev. 2026-01-22)
+#    - B 3-2 V4: Normas para la transcripción de idiomas con alfabetos latinos (2024-04-19)
+#
+# -------------------------------------------------------------------------------
+
+include es-chardefs.cti
+include braille-patterns.cti
+include litdigits6Dots.uti
+include digits6Dots.uti
+
+numsign 3456
+capsletter 46
+begcapsword 46-46
+numericmodechars .,
+
+# ¡ and ! share dots 235, and ¿ and ? share dots 26. When back-translating,
+# read the cell as the inverted (opening) form at the start of a word and as
+# the closing form everywhere else.
+nofor begword \x00A1 235
+nofor begword \x00BF 26
+
+# Literary emphasis (CBE B 2 V4 §9.1)
+emphclass italic
+emphclass underline
+emphclass bold
+noback begemph italic 35
+noback endemph italic 35
+noback begemph underline 35
+noback endemph underline 35
+noback begemph bold 35
+noback endemph bold 35
+
+# Catalan geminated L and double slashes (CBE B 2 V4 §§5.1, 6.2)
+capsmodechars \x00B7
+always // 6-26-2
+always \x005C\x005C 5-35-3
+
+# Lower-case letter prefix (dot 5) between digit and first-series letters a..j (CBE B 2 V4 §8.2)
+attribute firstseries abcdefghij
+swapcd adddotfive abcdefghij 5-1,5-12,5-14,5-145,5-15,5-124,5-1245,5-125,5-24,5-245
+noback context $d[%firstseries%firstseries%firstseries] %adddotfive
+noback context $d[%firstseries%firstseries] %adddotfive
+noback context $d[%firstseries] %adddotfive
+
+# Ordinal numbers written with lower digits (5th series) + o/a/r (CBE B 2 V4 §8.3)
+swapcd orddig 0123456789.\x00BA\x00AA 356,2,23,25,256,26,235,2356,236,35,8,135,1
+noback context `[$d".\x00BA"] @3456%orddig
+noback context !$d[$d".\x00BA"] @3456%orddig
+noback context `[$d$d".\x00BA"] @3456%orddig
+noback context !$d[$d$d".\x00BA"] @3456%orddig
+noback context `[$d$d$d".\x00BA"] @3456%orddig
+noback context !$d[$d$d$d".\x00BA"] @3456%orddig
+noback context `[$d"\x00BA"] @3456%orddig
+noback context !$d[$d"\x00BA"] @3456%orddig
+noback context `[$d$d"\x00BA"] @3456%orddig
+noback context !$d[$d$d"\x00BA"] @3456%orddig
+noback context `[$d$d$d"\x00BA"] @3456%orddig
+noback context !$d[$d$d$d"\x00BA"] @3456%orddig
+noback context `[$d".\x00AA"] @3456%orddig
+noback context !$d[$d".\x00AA"] @3456%orddig
+noback context `[$d$d".\x00AA"] @3456%orddig
+noback context !$d[$d$d".\x00AA"] @3456%orddig
+noback context `[$d$d$d".\x00AA"] @3456%orddig
+noback context !$d[$d$d$d".\x00AA"] @3456%orddig
+noback context `[$d"\x00AA"] @3456%orddig
+noback context !$d[$d"\x00AA"] @3456%orddig
+noback context `[$d$d"\x00AA"] @3456%orddig
+noback context !$d[$d$d"\x00AA"] @3456%orddig
+noback context `[$d$d$d"\x00AA"] @3456%orddig
+noback context !$d[$d$d$d"\x00AA"] @3456%orddig
+
+swapcd orderdig 0123456789.er 356,2,23,25,256,26,235,2356,236,35,8,8,1235
+noback context `[$d".er"]!$l @3456%orderdig
+noback context `[$d".er"]~ @3456%orderdig
+noback context !$d[$d".er"]!$l @3456%orderdig
+noback context !$d[$d".er"]~ @3456%orderdig
+noback context `[$d$d".er"]!$l @3456%orderdig
+noback context `[$d$d".er"]~ @3456%orderdig
+noback context !$d[$d$d".er"]!$l @3456%orderdig
+noback context !$d[$d$d".er"]~ @3456%orderdig
+noback context `[$d$d$d".er"]!$l @3456%orderdig
+noback context `[$d$d$d".er"]~ @3456%orderdig
+noback context !$d[$d$d$d".er"]!$l @3456%orderdig
+noback context !$d[$d$d$d".er"]~ @3456%orderdig
+
+noback pass2 @8 ?
+noback pass2 @3456-3456 @3456

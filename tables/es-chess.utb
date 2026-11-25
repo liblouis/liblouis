@@ -1,0 +1,239 @@
+# liblouis: Spanish Chess Braille Table (CBE B 8 V2)
+#
+# -----------
+#-index-name: Spanish, chess
+#-display-name: Spanish chess braille
+#
+#+language:zxx
+#+region:es
+#+type:chess
+#+system:cbe-b8
+#+dots:6
+#+direction:forward
+# -----------
+#
+#  Copyright (C) 2026 by guiador <https://github.com/guiador>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+# -------------------------------------------------------------------------------
+#  Spanish 6-dot Braille for Chess Notation
+#  Based on Comisión Braille Española (CBE / ONCE):
+#  Documento técnico B 8: Signografía braille para la notación de partidas de
+#  ajedrez, Versión 2 (septiembre de 2016).
+# -------------------------------------------------------------------------------
+
+include es-chardefs.cti
+include braille-patterns.cti
+include litdigits6Dots.uti
+include digits6Dots.uti
+
+numsign 3456
+capsletter 46
+begcapsword 46-46
+numericmodechars .,
+
+# Literary emphasis (CBE B 2 V4 §9.1)
+emphclass italic
+emphclass underline
+emphclass bold
+noback begemph italic 35
+noback endemph italic 35
+noback begemph underline 35
+noback endemph underline 35
+noback begemph bold 35
+noback endemph bold 35
+
+# Map Figurine Algebraic Notation (Unicode U+2654..U+265F) to Spanish piece initials (§2.1)
+noback correct "\x2654" "R"
+noback correct "\x2655" "D"
+noback correct "\x2656" "T"
+noback correct "\x2657" "A"
+noback correct "\x2658" "C"
+noback correct "\x2659" "P"
+noback correct "\x265A" "R"
+noback correct "\x265B" "D"
+noback correct "\x265C" "T"
+noback correct "\x265D" "A"
+noback correct "\x265E" "C"
+noback correct "\x265F" "P"
+noback correct "1/2-1/2" "\x00BD-\x00BD"
+noback correct "O-O-O" "0-0-0"
+noback correct "O-O" "0-0"
+
+# Define '#' (not in es-chardefs.cti) and keep '+' distinct from '!' via dot 'a'
+sign \x0023 3456a
+noback always + 235a
+sign \x2212 36a
+always +:= 235a-25-2356
+always =:+ 2356-25-235a
+always +:- 235a-25-36a
+always -:+ 36a-25-235a
+always +- 235a-36a
+always +\x2212 235a-36a
+always -+ 36a-235a
+always \x2212+ 36a-235a
+
+# Basic results and evaluation / Chess Informant symbols (CBE B 8 V2 §§4.2-4.3)
+# First cell carries virtual dot 'a' when attachable after a move so pass2 can insert 34 (í)
+always \x00BD 3456-2-12
+always \x2A72 235a-25-2356      # += ligera ventaja blanca
+always \x2A71 2356a-25-235      # =+ ligera ventaja negra
+always \x00B1 235a-25-36        # ± clara ventaja blanca
+always \x2213 36a-25-235        # ∓ clara ventaja negra
+always \x221E 3456a-1256        # ∞ juego confuso
+always =\x221E 2356a-25-3456-1256
+always =/\x221E 2356a-25-3456-1256
+always \x27F3 135a-25           # ⟳ ventaja de desarrollo
+always \x21BB 135a-25           # ↻ ventaja de desarrollo
+always \x25CB 135a-3            # ○ ventaja de espacio
+always \x25EF 135a-3            # ◯ ventaja de espacio
+always \x2192 25a-2             # → con ataque
+always \x2191 456a              # ↑ con iniciativa
+always \x21C4 4a-1346-3         # ⇄ con contrajuego
+always \x21C6 4a-1346-3         # ⇆ con contrajuego
+always \x2299 246a-2            # ⊙ zugzwang
+always \x2206 246a              # ∆ con idea de...
+always \x25B3 246a              # △ con idea de...
+always \x25A1 456a-13456        # □ jugada única
+always \x25AB 456a-13456        # ▫ jugada única
+always \x2313 456a-135          # ⌓ mejor era...
+always \x2194 2456a-1235        # ↔ fila o columna
+always \x21D4 2456a-1235        # ⇔ fila o columna
+always \x2197 456a-1            # ↗ diagonal
+always \x21D7 456a-1            # ⇗ diagonal
+always \x229E 12346a-235        # ⊞ predominio en el centro
+always \x2295 246a-235          # ⊕ con apuros de tiempo
+always \x22A5 3456a-3           # ⊥ final
+
+# Virtual cells for move numbers (dot b) and algebraic square ranks / castling (dot c)
+sign \xe040 356b
+sign \xe041 2b
+sign \xe042 23b
+sign \xe043 25b
+sign \xe044 256b
+sign \xe045 26b
+sign \xe046 235b
+sign \xe047 2356b
+sign \xe048 236b
+sign \xe049 35b
+sign \xe04a 245b
+
+sign \xe050 356c
+sign \xe051 2c
+sign \xe052 23c
+sign \xe053 25c
+sign \xe054 256c
+sign \xe055 26c
+sign \xe056 235c
+sign \xe057 2356c
+sign \xe058 236c
+sign \xe059 35c
+sign \xe05a 245c
+
+# Virtual dot-a characters for pass2 separator detection
+sign \xe060 235a
+sign \xe061 36a
+sign \xe062 2356a
+sign \xe063 3456a
+sign \xe064 135a
+sign \xe065 25a
+sign \xe066 456a
+sign \xe067 4a
+sign \xe068 246a
+sign \xe069 2456a
+sign \xe06a 12346a
+
+attribute chessfile abcdefgh
+attribute chesspiece RDTACPQBNK
+attribute chessrank 12345678
+attribute movenumb \xe040\xe041\xe042\xe043\xe044\xe045\xe046\xe047\xe048\xe049\xe04a
+attribute chessmovend \xe051\xe052\xe053\xe054\xe055\xe056\xe057\xe058\xe05a
+attribute chessadot \xe060\xe061\xe062\xe063\xe064\xe065\xe066\xe067\xe068\xe069\xe06a
+
+swapcd movenumdot 0123456789 356b,2b,23b,25b,256b,26b,235b,2356b,236b,35b
+swapcd chessrankdot 0123456789 356c,2c,23c,25c,256c,26c,235c,2356c,236c,35c
+swapdd stripchessc 356b,2b,23b,25b,256b,26b,235b,2356b,236b,35b,245b,356c,2c,23c,25c,256c,26c,235c,2356c,236c,35c,245c,235a,36a,2356a,3456a,135a,25a,456a,4a,246a,2456a,12346a 356,2,23,25,256,26,235,2356,236,35,245,356,2,23,25,256,26,235,2356,236,35,245,235,36,2356,3456,135,25,456,4,246,2456,12346
+
+# Move numbers: lower digits without number sign or period (CBE B 8 V2 §§3.2-3.3)
+noback context `[$d]"."$s %movenumdot
+noback context `[$d$d]"."$s %movenumdot
+noback context `[$d$d$d]"."$s %movenumdot
+noback context $s[$d]"."$s %movenumdot
+noback context $s[$d$d]"."$s %movenumdot
+noback context $s[$d$d$d]"."$s %movenumdot
+noback context `[$d]"..." %movenumdot
+noback context `[$d$d]"..." %movenumdot
+noback context `[$d$d$d]"..." %movenumdot
+noback context $s[$d]"..." %movenumdot
+noback context $s[$d$d]"..." %movenumdot
+noback context $s[$d$d$d]"..." %movenumdot
+
+# Algebraic square ranks (file a..h + rank 1..8) and disambiguation ranks (e.g. T1e1)
+noback context %chessfile[%chessrank] %chessrankdot
+noback context %chesspiece[%chessrank]%chessfile %chessrankdot
+
+# Castling (enroque corto / largo, §4.2)
+noback context "0-0-0" @245b-36-245-36-245c
+noback context "O-O-O" @245b-36-245-36-245c
+noback context "0-0" @245b-36-245c
+noback context "O-O" @245b-36-245c
+
+# Pass 2: strip numsign (3456) emitted by digit scanner before move numbers and 0-0/0-0-0,
+# remove move-number dots (keep space), handle 1... indicator (- 36),
+# and insert braille separator (34) before check (+), mate (#/++), and annotations (§4.1-4.3).
+noback pass2 [@3456-356b] @356b
+noback pass2 [@3456-2b] @2b
+noback pass2 [@3456-23b] @23b
+noback pass2 [@3456-25b] @25b
+noback pass2 [@3456-256b] @256b
+noback pass2 [@3456-26b] @26b
+noback pass2 [@3456-235b] @235b
+noback pass2 [@3456-2356b] @2356b
+noback pass2 [@3456-236b] @236b
+noback pass2 [@3456-35b] @35b
+noback pass2 [@3456-245b] @245b
+
+noback pass2 _%movenumb[@3-0] @0
+noback pass2 _%movenumb[@3-3-3]$s @0-36
+noback pass2 _%movenumb[@3-3-3]!$s @0-36-0
+
+# Double '++' mate vs decisive white advantage vs single '+' check
+noback pass2 _%chessmovend[@235a-235a] @34-16-134
+noback pass2 _%chessmovend[@235a-36a] @34-235-36
+noback pass2 _%chessmovend[@235a-25-2356] @34-235-25-2356
+noback pass2 _%chessmovend[@235a-25-36] @34-235-25-36
+noback pass2 _%chessmovend[@235a] @34-16
+
+# Checkmate '#'
+noback pass2 _%chessmovend[@3456a] @34-16-134
+
+# Exclamation / question annotations (!, !!, ?, ??, !?, ?!) attached to a move
+noback pass2 _%chessmovend[@235] @34-235
+noback pass2 _%chessmovend[@26] @34-26
+
+# Equality '=' attached to a move (skip e8=D pawn promotion where dot 46 follows =)
+noback pass2 _%chessmovend[@2356]$s @34-2356
+noback pass2 _%chessmovend[@2356]~ @34-2356
+
+# Valuation / Chess Informant signs attached directly to a move (tagged with dot a)
+noback pass2 _%chessmovend[%chessadot] @34*
+
+# Pass 3: strip all virtual marker dots (a, b, c)
+noback pass3 %movenumb %stripchessc
+noback pass3 %chessmovend %stripchessc
+noback pass3 %chessadot %stripchessc

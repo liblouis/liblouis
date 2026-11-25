@@ -1,0 +1,74 @@
+# Copyright © 2026 by guiador <https://github.com/guiador>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# Spanish 8-dot Scientific Codes:
+# 1) CBE Documento técnico B 14-1 V3 (marzo de 2019): Código matemático de ocho puntos
+# 2) CBE Documento técnico B 14-2 V1 (octubre de 2018): Código químico de ocho puntos
+
+display: unicode-without-blank.dis
+table:
+  language: es
+  type: math
+  system: cbe-b14-1
+  dots: 8
+  __assert-match: es-math-8dots.utb
+
+flags: {testmode: forward}
+tests:
+
+  # §1 Digits and §2 Latin + Spanish characters
+  - ['1234567890', '⠡⠣⠩⠹⠱⠫⠻⠳⠪⣬']
+  - ['a + b = c', '⠁ ⠖ ⠃ ⠶ ⠉']
+  - ['Ángel ñ', '⡷⠝⠛⠑⠇ ⢻']
+  - ['3,14 × 2 = 6,28', '⠩⠂⠡⠹ ⠦ ⠣ ⠶ ⠫⠂⠣⠳']
+
+  # §3 Greek letters (lowercase, uppercase, and variants)
+  - ['α β γ δ ε θ λ μ π σ φ χ ψ ω', '⠈⠁ ⠈⠃ ⠈⠛ ⠈⠙ ⠈⠑ ⠈⠹ ⠈⠇ ⠈⠍ ⠈⠏ ⠈⠎ ⠈⠋ ⠈⠯ ⠈⠽ ⠈⠺']
+  - ['Α Δ Θ Λ Π Σ Φ Ψ Ω', '⠈⡁ ⠈⡙ ⠈⡹ ⠈⡇ ⠈⡏ ⠈⡎ ⠈⡋ ⠈⡽ ⠈⡺']
+  - ['ϑ ϵ ϕ ϱ', '⠈⣝⠹ ⠈⣝⠑ ⠈⣝⠋ ⠈⣝⠗']
+
+  # §4 Indices, primes, and superscripts/subscripts
+  - ['α² + β² = γ²', '⠈⠁⠘⠣ ⠖ ⠈⠃⠘⠣ ⠶ ⠈⠛⠘⠣']
+  - ['x′ y″', '⠭⠜ ⠽⠜⠜']
+  - ['∫ₐ', '⠈⢯⡈⠁']
+  - ['aₙ + a₁', '⠁⡈⠝ ⠖ ⠁⡈⠡']
+
+  # §5 Delimiters and §6-9 Sets, arithmetic, relations, and logic
+  - ['(a + b) [c] {d}', '⢣⠁ ⠖ ⠃⡜ ⣦⠉⣴ ⢇⠙⡸']
+  - ['∀x ∈ ℝ, ∃y ∈ ℕ : x < y ≤ z ≠ 0', '⢂⠭ ⢆ ⢰⡗⠂ ⢢⠽ ⢆ ⢰⡝ ⠒ ⠭ ⢔ ⠽ ⣔ ⠵ ⢘⠶ ⣬']
+  - ['A ∪ B ∩ C ⊆ ℝ', '⡁ ⢰⡰ ⡃ ⢰⢢ ⡉ ⣣ ⢰⡗']
+  - ['√2 ∉ ℚ', '⢫⠣ ⢘⢆ ⢰⡟']
+  - ['A ⇒ B ⇔ C ∴ ⊤ ∄ ≮', '⡁ ⠤⡦ ⡃ ⢴⠤⡦ ⡉ ⢀⢂ ⡷ ⢘⢢ ⢘⢦']
+
+  # §10-17 Calculus, geometry, arrows, and units
+  - ['∬', '⠈⢯⢯']
+  - ['∂f ∇ ∆', '⠈⢹⠋ ⡪ ⢪']
+  - ['∥ ⟂ ∦', '⠿ ⢺ ⢘⠿']
+  - ['35° 12′', '⠩⠱⠴ ⠡⠣⠜']
+  - ['25 °C', '⠣⠱ ⠠⠴⡉']
+  - ['→ ← ↔ ↑ ↓', '⢀⡢ ⢔⡀ ⢔⠤⡢ ⡘ ⢃']
+
+table:
+  language: zxx
+  region: es
+  type: chemistry
+  system: cbe-b14-2
+  dots: 8
+  __assert-match: es-chem-8dots.utb
+
+flags: {testmode: forward}
+tests:
+
+  # CBE B 14-2 V1 (§§1-4): Chemical bonds, reactions, states, salt bridge, and electron spins
+  - ['2H₂ + O₂ → 2H₂O', '⠣⡓⡈⠣ ⠖ ⡕⡈⠣ ⠤⠤⡦ ⠣⡓⡈⠣⡕']
+  - ['N₂(g) + 3H₂(g) ⇌ 2NH₃(g)', '⡝⡈⠣⢠⠛ ⠖ ⠩⡓⡈⠣⢠⠛ ⢴⠤⠤⡦ ⠣⡝⡓⡈⠩⢠⠛']
+  - ['Ag⁺(aq) + Cl⁻(aq) → AgCl(s) ↓', '⡁⠛⠘⠖⢠⠁⠟ ⠖ ⡉⠇⠘⠤⢠⠁⠟ ⠤⠤⡦ ⡁⠛⡉⠇⢠⠎ ⢆']
+  - ['CaCO₃(s) → CaO(s) + CO₂(g) ↑', '⡉⠁⡉⡕⡈⠩⢠⠎ ⠤⠤⡦ ⡉⠁⡕⢠⠎ ⠖ ⡉⡕⡈⠣⢠⠛ ⡔']
+  - ['HC≡CH', '⡓⡉⣷⡉⡓']
+  - ['CuSO₄•5H₂O', '⡉⠥⡎⡕⡈⠹⣄⠱⡓⡈⠣⡕']
+  - ['Zn(s) ∥ Cu²⁺(aq)', '⡵⠝⢠⠎ ⠿ ⡉⠥⠘⠣⠘⠖⢠⠁⠟']
+  - ['↑↓ ↿ ⇃', '⣹ ⢹ ⣸']
