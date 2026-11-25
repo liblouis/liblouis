@@ -19,6 +19,9 @@ tests:
   # computer braille triggered by compbrl
   - - www.abc
     - ⠸⠬⠺⠺⠺⠄⠂⠆⠒⠸⠱
+  # the word joiner before the word produces no output and is not part of the word
+  - - "\u2060www.abc"
+    - ⠸⠬⠺⠺⠺⠄⠂⠆⠒⠸⠱
   # computer braille triggered by typeform
   # currently fails: see issue https://github.com/liblouis/liblouis/issues/622
   - - abc abc abc

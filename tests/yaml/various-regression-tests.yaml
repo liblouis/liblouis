@@ -195,3 +195,16 @@ tests:
     - typeform:
         super: '++    '
       inputPos: [0, 0, 0, 1, 1, 2, 2, 3, 4, 5]
+
+# ----------------------
+# A nocont rule makes the translator go back to the start of the word. When
+# everything before the word produced no output (here a word joiner or a BOM),
+# it went back to the start of the input instead and never finished.
+display: tables/unicode.dis
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  nocont w
+tests:
+  - ["\u2060w", "⠺"]
+  - ["\uFEFFwww", "⠺⠺⠺"]
