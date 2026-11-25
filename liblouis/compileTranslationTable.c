@@ -1200,24 +1200,6 @@ getOpcode(const FileInfo *file, const CharsString *token) {
 	return CTO_None;
 }
 
-TranslationTableOpcode EXPORT_CALL
-_lou_findOpcodeNumber(const char *toFind) {
-	/* Used by tools such as lou_debug */
-	static TranslationTableOpcode lastOpcode = 0;
-	TranslationTableOpcode opcode = lastOpcode;
-	int length = (int)strlen(toFind);
-	do {
-		if (length == opcodeLengths[opcode] &&
-				strcasecmp(toFind, opcodeNames[opcode]) == 0) {
-			lastOpcode = opcode;
-			return opcode;
-		}
-		opcode++;
-		if (opcode >= CTO_None) opcode = 0;
-	} while (opcode != lastOpcode);
-	return CTO_None;
-}
-
 const char *EXPORT_CALL
 _lou_findOpcodeName(TranslationTableOpcode opcode) {
 	static char scratchBuf[MAXSTRING];
@@ -1629,7 +1611,8 @@ deallocateRuleNames(TranslationTableHeader *table) {
 }
 
 static int
-compileSwapDots(const FileInfo *file, CharsString *source, CharsString *dest) {
+compileSwapDots(
+		const FileInfo *file, CharsString *source, CharsString *dest, int singleCell) {
 	int k = 0;
 	int kk = 0;
 	CharsString dotsSource;
@@ -1641,6 +1624,11 @@ compileSwapDots(const FileInfo *file, CharsString *source, CharsString *dest) {
 			dotsSource.chars[dotsSource.length++] = source->chars[k];
 		else {
 			if (!parseDots(file, &dotsDest, &dotsSource)) return 0;
+			if (singleCell && dotsDest.length != 1) {
+				compileError(file,
+						"The second operand of swapdd must contain only single cells");
+				return 0;
+			}
 			dest->chars[dest->length++] = dotsDest.length + 1;
 			for (kk = 0; kk < dotsDest.length; kk++)
 				dest->chars[dest->length++] = dotsDest.chars[kk];
@@ -1649,6 +1637,19 @@ compileSwapDots(const FileInfo *file, CharsString *source, CharsString *dest) {
 		k++;
 	}
 	return 1;
+}
+
+/* Count the dot patterns in an operand compiled by `compileSwapDots'. Each
+ * pattern is stored as its cell count plus one, followed by that many cells. */
+static int
+countSwapDots(const CharsString *dots) {
+	int k = 0;
+	int count = 0;
+	while (k < dots->length) {
+		k += dots->chars[k];
+		count++;
+	}
+	return count;
 }
 
 static int
@@ -1660,18 +1661,32 @@ compileSwap(FileInfo *file, TranslationTableOpcode opcode, int noback, int nofor
 	CharsString matches;
 	CharsString replacements;
 	TranslationTableOffset ruleOffset;
+	int matchCount;
+	int swapCount;
 	if (!getToken(file, &name, "name operand")) return 0;
 	if (!getToken(file, &matches, "matches operand")) return 0;
 	if (!getToken(file, &replacements, "replacements operand")) return 0;
 	if (opcode == CTO_SwapCc || opcode == CTO_SwapCd) {
 		if (!parseChars(file, &ruleChars, &matches)) return 0;
 	} else {
-		if (!compileSwapDots(file, &matches, &ruleChars)) return 0;
+		if (!compileSwapDots(file, &matches, &ruleChars, 1)) return 0;
 	}
 	if (opcode == CTO_SwapCc) {
 		if (!parseChars(file, &ruleDots, &replacements)) return 0;
 	} else {
-		if (!compileSwapDots(file, &replacements, &ruleDots)) return 0;
+		if (!compileSwapDots(file, &replacements, &ruleDots, 0)) return 0;
+	}
+	/* A swap opcode substitutes each item of its second operand for the item in
+	 * the corresponding place in its third operand, so the two operands must
+	 * contain the same number of items. */
+	matchCount = (opcode == CTO_SwapDd) ? countSwapDots(&ruleChars) : ruleChars.length;
+	swapCount = (opcode == CTO_SwapCc) ? ruleDots.length : countSwapDots(&ruleDots);
+	if (matchCount != swapCount) {
+		compileError(file,
+				"%d items in the second operand but %d in the third: the operands of a "
+				"swap opcode must contain the same number of items",
+				matchCount, swapCount);
+		return 0;
 	}
 	if (!addRule(file, opcode, &ruleChars, &ruleDots, 0, 0, &ruleOffset, NULL, noback,
 				nofor, table))
@@ -2872,9 +2887,21 @@ compileMacro(FileInfo *file, const Macro **macro) {
 	return 0;
 }
 
+/* Compile one rule (line) of a table.
+ *
+ * If deferredInclude is not NULL and the rule is an include statement, the included file
+ * is not compiled by this function. Instead, the name of the included file is stored in
+ * *deferredInclude (allocated with malloc, to be freed by the caller) and it is the
+ * responsibility of the caller to compile it after this function has returned. This keeps
+ * the stack usage of nested includes small: the stack frame of this function is large
+ * (it holds several CharsString buffers) and it would otherwise be kept alive for every
+ * level of nested includes. Deeply nested includes could then overflow the stack in
+ * applications that call liblouis from a thread with a small stack, such as the JVM (see
+ * https://github.com/liblouis/liblouis/issues/1288). */
 static int
 compileRule(FileInfo *file, TranslationTableHeader **table,
-		DisplayTableHeader **displayTable, const MacroList **inScopeMacros) {
+		DisplayTableHeader **displayTable, const MacroList **inScopeMacros,
+		CharsString **deferredInclude) {
 	CharsString token;
 	TranslationTableOpcode opcode;
 	CharsString ruleChars;
@@ -2927,6 +2954,13 @@ doOpcode:
 		CharsString includedFile;
 		if (!getToken(file, &token, "include file name")) return 0;
 		if (!parseChars(file, &includedFile, &token)) return 0;
+		if (deferredInclude) {
+			// let the caller compile the included file (see above)
+			*deferredInclude = malloc(sizeof(CharsString));
+			if (!*deferredInclude) _lou_outOfMemory();
+			**deferredInclude = includedFile;
+			return 1;
+		}
 		return includeFile(file, &includedFile, table, displayTable);
 	}
 	case CTO_NoBack:
@@ -3024,7 +3058,7 @@ doOpcode:
 							widechar c = m->definition[i++];
 							if (c == '\n') {
 								if (!compileRule(&tmpFile, table, displayTable,
-											inScopeMacros)) {
+											inScopeMacros, NULL)) {
 									_lou_logMessage(LOU_LOG_ERROR,
 											"result of macro expansion was: %s",
 											_lou_showString(
@@ -3052,8 +3086,8 @@ doOpcode:
 									? m->substitutions[2 * subst]
 									: m->definition_length;
 						} else {
-							if (!compileRule(
-										&tmpFile, table, displayTable, inScopeMacros)) {
+							if (!compileRule(&tmpFile, table, displayTable, inScopeMacros,
+										NULL)) {
 								_lou_logMessage(LOU_LOG_ERROR,
 										"result of macro expansion was: %s",
 										_lou_showString(
@@ -4596,7 +4630,7 @@ compileString(const char *inString, TranslationTableHeader **table,
 		compileError(&file, "Table is finalized");
 		return 0;
 	}
-	return compileRule(&file, table, displayTable, NULL);
+	return compileRule(&file, table, displayTable, NULL, NULL);
 }
 
 static int
@@ -4933,11 +4967,20 @@ compileFile(const char *fileName, TranslationTableHeader **table,
 	if ((file.in = fopen(file.fileName, "rb"))) {
 		// the scope of a macro is the current file (after the macro definition)
 		const MacroList *inscopeMacros = NULL;
-		while (_lou_getALine(&file))
-			if (!compileRule(&file, table, displayTable, &inscopeMacros)) {
+		while (_lou_getALine(&file)) {
+			// included files are compiled from here rather than from within compileRule
+			// in order to keep the stack usage of nested includes small (see compileRule)
+			CharsString *includedFile = NULL;
+			int ok = compileRule(
+					&file, table, displayTable, &inscopeMacros, &includedFile);
+			if (ok && includedFile)
+				ok = includeFile(&file, includedFile, table, displayTable);
+			free(includedFile);
+			if (!ok) {
 				if (!errorCount) compileError(&file, "Rule could not be compiled");
 				break;
 			}
+		}
 		fclose(file.in);
 		free_macro_list(inscopeMacros);
 	} else {

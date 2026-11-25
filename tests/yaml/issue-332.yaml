@@ -5,11 +5,20 @@
 
 # A cell in a multi-cell character definition does not need to be defined in its own character definition.
 # It works as long as there is a display rule to display the cell in the output...
-table: |
+display: |
+  display a 1
   display x 2
+table: |
   sign a 1
   sign b 1-2
+flags: {testmode: bothDirections}
+tests:
+  - - b
+    - ax
 # ... or as long as the cell does not end up in output.
+display: |
+  display a 1
+  display x 3
 table: |
   sign x 3
   sign a 1
@@ -32,12 +41,21 @@ tests:
 
 # A braille cell used in a begcapsword rule does not need to be previously defined in a character definition rule.
 # It works as long as there is a display rule to display the cell in the output...
-table: |
+display: |
+  display a 1
   display x 2
+table: |
   lowercase a 1
   base uppercase A a
   begcapsword 2
+flags: {testmode: bothDirections}
+tests:
+  - - AA
+    - xaa
 # ... or as long as the cell does not end up in output.
+display: |
+  display a 1
+  display x 3
 table: |
   sign x 3
   lowercase a 1
@@ -61,8 +79,9 @@ tests:
 #     - " aa"
 
 # Characters or braille cells used in a context rule do not need to be previously defined in character definition rules.
-table: |
+display: |
   display x 1
+table: |
   noback context "a" @1
   nofor context @1 "a"
 flags: {testmode: bothDirections}
@@ -71,6 +90,10 @@ tests:
     - x
 
 # A character used in a class or swap name does not need to be previously defined in a character definition rule.
+display: |
+  display a 1
+  display b 2
+  display c 3
 table: |
   sign a 1
   sign b 2
@@ -87,8 +110,9 @@ tests:
     - c
 
 # A character that is assigned to a class does not need to be previously defined in a character definition rule.
-table: |
+display: |
   display x 1
+table: |
   attribute foo a
   noback context %foo @1
 flags: {testmode: forward}
@@ -108,10 +132,17 @@ tests:
 
 # Characters or braille cells used in a always rule do not need to be previously defined in character definition rules.
 # It works as long as there is a display rule to display the cell in the output...
-table: |
+display: |
   display x 2
+table: |
   always abc 2
+flags: {testmode: bothDirections}
+tests:
+  - - abc
+    - x
 # ... or as long as the cell does not end up in output.
+display: |
+  display x 3
 table: |
   sign x 3
   always abc 2
@@ -131,8 +162,9 @@ tests:
 #     - " "
 
 # It does not matter whether the first character of the always rule is given an attribute or not (regression test for #1116)
-table: |
+display: |
   display x 2
+table: |
   attribute foo a
   always abc 2
 flags: {testmode: bothDirections}

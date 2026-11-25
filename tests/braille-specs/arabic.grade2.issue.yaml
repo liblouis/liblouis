@@ -13,8 +13,8 @@
 # contraction as well and automatically expand it. An example if the
 # "word" upcode is used:
 
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/ar-ar-g1.utb
   word ربما 1235
   partword ربما 36-1235
@@ -54,8 +54,8 @@ tests:
 # of all these abbreviations if they come connected with punctuation
 # marks, which is not desirable.
 
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/ar-ar-g1.utb
   lowword ربما 1235
   partword ربما 36-1235
