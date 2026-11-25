@@ -21,6 +21,7 @@ attributeNames_SOURCES = attributeNames.c
 swapOperands_SOURCES = swapOperands.c
 findTable_SOURCES = findTable.c
 getTable_SOURCES = getTable.c
+getTableInfo_SOURCES = getTableInfo.c
 hash_collision_SOURCES = hash_collision.c
 hyphenate_xxx_SOURCES = hyphenate_xxx.c
 logging_SOURCES = logging.c
@@ -42,6 +43,7 @@ program_TESTS =					\
 	swapOperands				\
 	findTable				\
 	getTable				\
+	getTableInfo				\
 	hash_collision				\
 	hyphenate_xxx				\
 	logging					\
