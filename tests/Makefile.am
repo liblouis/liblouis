@@ -241,6 +241,7 @@ dist_yaml_TESTS =				\
 	yaml/broken_equals_operand.yaml		\
 	yaml/capitalization.yaml		\
 	yaml/capsnocont.yaml			\
+	yaml/capsphrase.yaml			\
 	yaml/capsword.yaml			\
 	yaml/case-sensitivity.yaml		\
 	yaml/compbrlAtCursor.yaml		\
