@@ -756,6 +756,8 @@ nofor context #4=2@1246 "Я"
 nofor context !#4=0[!%uppercyrillic] *#4=0
 
 # Latin letters
+# #5: 0 = off / 1 = lowercase Latin / 2 = one uppercase Latin letter /
+#     3 = uppercase Latin sequence
 nofor context [@6] #5=1			# Input a Latin lowercase letter
 
 nofor context #5=1@1 "a"
@@ -788,6 +790,7 @@ nofor context #5=1@345 "\x00e4"
 nofor context #5=1@246 "\x00f6"
 nofor context #5=1@1256 "\x00fc"
 
+nofor context [@46-46] #5=3          # Input several uppercase Latin letters
 nofor context [@46] #5=2			# Input an uppercase Latin letter
 
 nofor context #5=2@1 "A"#5=1
@@ -819,6 +822,38 @@ nofor context #5=2@1356 "Z"#5=1
 nofor context #5=2@345 "\x00c4"#5=1
 nofor context #5=2@246 "\x00d6"#5=1
 nofor context #5=2@1256 "\x00dc"#5=1
+
+nofor context #5=3@1 "A"
+nofor context #5=3@12 "B"
+nofor context #5=3@14 "C"
+nofor context #5=3@145 "D"
+nofor context #5=3@15 "E"
+nofor context #5=3@124 "F"
+nofor context #5=3@1245 "G"
+nofor context #5=3@125 "H"
+nofor context #5=3@24 "I"
+nofor context #5=3@245 "J"
+nofor context #5=3@13 "K"
+nofor context #5=3@123 "L"
+nofor context #5=3@134 "M"
+nofor context #5=3@1345 "N"
+nofor context #5=3@135 "O"
+nofor context #5=3@1234 "P"
+nofor context #5=3@12345 "Q"
+nofor context #5=3@1235 "R"
+nofor context #5=3@234 "S"
+nofor context #5=3@2345 "T"
+nofor context #5=3@136 "U"
+nofor context #5=3@1236 "V"
+nofor context #5=3@2456 "W"
+nofor context #5=3@1346 "X"
+nofor context #5=3@13456 "Y"
+nofor context #5=3@1356 "Z"
+nofor context #5=3@345 "\x00c4"
+nofor context #5=3@246 "\x00d6"
+nofor context #5=3@1256 "\x00dc"
+
+nofor context #5=3[!%upperlatin] *#5=0
 
 attribute allowLatinMode ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\x00c4\x00d6\x00dc\x00e4\x00f6\x00fc'&`
 nofor context !#5=0@0 "\s"#5=0
