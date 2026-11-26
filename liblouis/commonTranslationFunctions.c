@@ -85,7 +85,8 @@ _lou_handlePassVariableAction(const widechar *instructions, int *IC) {
 		return 1;
 
 	case pass_plus:
-		passVariables[instructions[*IC + 1]] += 1;
+		if (passVariables[instructions[*IC + 1]] < MAXVARVALUE)
+			passVariables[instructions[*IC + 1]] += 1;
 		*IC += 2;
 		return 1;
 

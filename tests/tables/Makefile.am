@@ -1,6 +1,7 @@
 SUBDIRS = moreTables resolve_table emphclass attribute
 
 EXTRA_DIST =					\
+	bad-pass-variable.ctb			\
 	bad-replace-source.ctb			\
 	bad-replace.ctb				\
 	bad.ctb					\
