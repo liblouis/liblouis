@@ -1,0 +1,1018 @@
+#  liblouis: Indonesian contracted braille (Tusing)
+#
+#  Copyright (C) 2026 Muhammad <muha.aku@gmail.com>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+#+language:id
+#+type:literary
+#+contraction:full
+#+grade:2
+#+dots:6
+#+direction:forward
+#+version:2000
+#-index-name: Indonesian, contracted
+#-display-name: Indonesian contracted braille
+#-author: Muhammad <muha.aku@gmail.com>
+#-license: LGPLv2.1
+#-updated: 2026-11-26
+
+# Notes
+# -----
+# This table implements Tusing (Sistem Tulisan Singkat Braille
+# Indonesia), the contracted Indonesian braille of Sistem Simbol Braille
+# Indonesia Bidang Bahasa Indonesia, Keputusan Menteri Pendidikan
+# Nasional Nomor 053/U/2000 (Departemen Pendidikan Nasional, Jakarta,
+# 2000).
+#
+# The signs and rules were taken from Didi Tarsidi, Belajar Braille
+# dalam 6 Modul (Universitas Pendidikan Indonesia, 2010): Modul 5,
+# Tusing (Bagian I): Tanda Kata, and Modul 6, Tusing (Bagian II): Tanda
+# Bagian Kata dan Sibra, with the lists of Appendix 1 to 3. The comment
+# before each group of rules gives its section. The signs were checked
+# against the Tusing help of Mitranetra Braille Converter 5 (Yayasan
+# Mitra Netra), whose translator Modul 6.5 recommends for producing
+# Tusing, and the output was compared with it.
+#
+# Letters, numbers, capitals, emphasis, punctuation and symbols are
+# those of the uncontracted table, id-id-g1.utb.
+#
+# When a word can be contracted in several ways, the course prefers the
+# contraction that makes a syllable, the earlier syllable, and the
+# shortest result (Modul 6.4.3). liblouis takes the longest contraction
+# at each position from left to right, which mostly gives the same
+# result. The rules below add the checks that the course states
+# explicitly. Some choices that need the whole word are not made the
+# way the course prefers, for example kemasan (ke-mas-an, the course
+# prefers k-emas-an) and Drupada (D-rupa-da, the course prefers
+# Dru-pada).
+#
+# Not done: the letter sign before a group of letters that could be
+# read as a contraction (only single letters get it), lower-case Roman
+# numerals (ii, iii), and abbreviations written in capitals (SMU), which
+# the course writes without contractions. Back-translation is not
+# supported.
+
+# Repetition (Modul 6.1.2, tanda ulang dots 1-2-6). The repeat sign
+# follows the word, which may be contracted: ibu-ibu, mobil-mobil. A
+# prefix is followed by a hyphen and a suffix follows the repeat sign:
+# berlari-lari, sedalam-dalamnya. These rules come before the hyphen
+# of id-id-g1.utb.
+# liblouis takes any part at the end of the first word that equals the
+# start of the second as the repeated root, even a single letter. A
+# hyphen between the same two letters is therefore kept as a hyphen when
+# the second word starts with a capital (Jakarta-Ambon), or after the
+# prefixes anti, non, pra, pasca and the like (anti-imperialis).
+match [aA] \x002d A 36
+match [bB] \x002d B 36
+match [cC] \x002d C 36
+match [dD] \x002d D 36
+match [eE] \x002d E 36
+match [fF] \x002d F 36
+match [gG] \x002d G 36
+match [hH] \x002d H 36
+match [iI] \x002d I 36
+match [jJ] \x002d J 36
+match [kK] \x002d K 36
+match [lL] \x002d L 36
+match [mM] \x002d M 36
+match [nN] \x002d N 36
+match [oO] \x002d O 36
+match [pP] \x002d P 36
+match [qQ] \x002d Q 36
+match [rR] \x002d R 36
+match [sS] \x002d S 36
+match [tT] \x002d T 36
+match [uU] \x002d U 36
+match [vV] \x002d V 36
+match [wW] \x002d W 36
+match [xX] \x002d X 36
+match [yY] \x002d Y 36
+match [zZ] \x002d Z 36
+match %[_.^][aA][nN][tT][iI] \x002d [iI] 36
+match %[_.^][nN][oO][nN] \x002d [nN] 36
+match %[_.^][pP][rR][aA] \x002d [aA] 36
+match %[_.^][pP][aA][sS][cC][aA] \x002d [aA] 36
+match %[_.^][pP][rR][oO] \x002d [oO] 36
+match %[_.^][sS][eE][mM][iI] \x002d [iI] 36
+match %[_.^][mM][uU][lL][tT][iI] \x002d [iI] 36
+match %[_.^][uU][lL][tT][rR][aA] \x002d [aA] 36
+match %[_.^][iI][nN][tT][eE][rR] \x002d [rR] 36
+match %[_.^][iI][nN][tT][rR][aA] \x002d [aA] 36
+match %[_.^][sS][uU][pP][rR][aA] \x002d [aA] 36
+match %[_.^][mM][iI][nN][iI] \x002d [iI] 36
+repword - 126
+rependword - 36,126
+
+include id-id-g1.utb
+
+# No capital sign before the repeat sign (Guru-Guru).
+noback pass2 @6-126 @126
+noback pass2 @6-6-126 @126
+
+# Tanda pugar, dots 5-6 (Modul 6.4.2), before a letter standing alone,
+# which would otherwise be read as a word sign: Pilihlah a, b atau c;
+# sinar X. Before a capital it comes first, as in id-id-g1.utb. It is
+# used next to a period (a.n., A.H. Nasution) or an apostrophe, nor
+# before a hyphen (e-mail).
+letsign 56
+noletsignafter -.\x0027\x2019
+noletsignbefore .\x0027\x2019
+# A letter with a period at the end of the text is a letter, not an
+# abbreviation, and keeps the sign: Pilihlah a, b atau c.
+match %[_.^] a [.]^ 56-1
+match %[_.^] b [.]^ 56-12
+match %[_.^] c [.]^ 56-14
+match %[_.^] d [.]^ 56-145
+match %[_.^] e [.]^ 56-15
+match %[_.^] f [.]^ 56-124
+match %[_.^] g [.]^ 56-1245
+match %[_.^] h [.]^ 56-125
+match %[_.^] i [.]^ 56-24
+match %[_.^] j [.]^ 56-245
+match %[_.^] k [.]^ 56-13
+match %[_.^] l [.]^ 56-123
+match %[_.^] m [.]^ 56-134
+match %[_.^] n [.]^ 56-1345
+match %[_.^] o [.]^ 56-135
+match %[_.^] p [.]^ 56-1234
+match %[_.^] q [.]^ 56-12345
+match %[_.^] r [.]^ 56-1235
+match %[_.^] s [.]^ 56-234
+match %[_.^] t [.]^ 56-2345
+match %[_.^] u [.]^ 56-136
+match %[_.^] v [.]^ 56-1236
+match %[_.^] w [.]^ 56-2456
+match %[_.^] x [.]^ 56-1346
+match %[_.^] y [.]^ 56-13456
+match %[_.^] z [.]^ 56-1356
+
+# Character classes for the match rules below. A match rule gives
+# the text before and after the contracted letters; see the liblouis
+# manual. %[_.^] is a space, a punctuation mark or the edge of the text.
+attribute 0 abcdefghjklmopqrstvwxyzABCDEFGHJKLMOPQRSTVWXYZ # letters that may follow a sign ending in a (not i, n or u)
+attribute 1 .,;:?!\x0027\x2018\x2019"\x201c\x201d()[]{}/\x2026 # punctuation other than the hyphen
+attribute 2 abcdefghijklmnopqstuvwxyzABCDEFGHIJKLMNOPQSTUVWXYZ # letters other than r
+attribute 4 abcdefhijklmnopqrstuvwxyzABCDEFHIJKLMNOPQRSTUVWXYZ # letters other than g
+attribute 3 abcdefhijklmnopqrstuvwxzABCDEFHIJKLMNOPQRSTUVWXZ # letters that may follow a sign ending in n (not g, not y)
+attribute 5 abcdfghijklmnopqrstuvwxyzABCDFGHIJKLMNOPQRSTUVWXYZ # letters that may follow st (not e)
+attribute 6 bcdefghijklmnopqrstvwxyzBCDEFGHIJKLMNOPQRSTVWXYZ # letters that may follow tak (not a or u)
+attribute 7 abcdefghjklmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ # letters that may follow nya (not i)
+
+# Several contractions must not be used where they would split a
+# diphthong or a consonant pair, or where a better one starts on their
+# last letter (Modul 6.4.3, "Berbagai kemungkinan penusingan"):
+# - ng and ny are never split: a sign ending in n is not used before
+#   g or y (bangun is ba-ng-un, hanyut is ha-ny-ut).
+# - ai is never split: a sign ending in a is not used before i
+#   (landai is l-an-d-ai, not l-anda-i).
+# - an is preferred: a sign ending in a is not used before an n that
+#   begins an (tanah is t-an-ah, makan is ma-kan, penelitian is
+#   pe-neliti-an). The n of ng and ny may follow (sayang is saya-ng).
+#   nya, a syllable by itself, may come before n (dinyana).
+# - au is not split either: a sign ending in a is not used before u
+#   (galau is gal-au, not g-ala-u).
+# - tak is not used before u or an, where ku and kan make a syllable
+#   (terletak, taksi, but ta-ku-t and ceta-kan).
+# The rules that need these checks are written with match.
+
+# A single-cell word sign that is repeated takes dots 4-5-6 first:
+# lagi-lagi, jangan-jangan, satu-satunya, seakan-akan (Modul 6.1.2).
+# A repeated lower sign is spelled out: agar-agar (Modul 5.1.3).
+match - aksi -[aA][kK][sS][iI] 456-1346
+match - anda -[aA][nN][dD][aA] 456-1
+match - bagi -[bB][aA][gG][iI] 456-12
+match - cara -[cC][aA][rR][aA] 456-14
+match - dari -[dD][aA][rR][iI] 456-145
+match - emas -[eE][mM][aA][sS] 456-15
+match - faktor -[fF][aA][kK][tT][oO][rR] 456-124
+match - harus -[hH][aA][rR][uU][sS] 456-125
+match - ini -[iI][nN][iI] 456-1345
+match - itu -[iI][tT][uU] 456-24
+match - jadi -[jJ][aA][dD][iI] 456-245
+match - karena -[kK][aA][rR][eE][nN][aA] 456-1235
+match - kita -[kK][iI][tT][aA] 456-13
+match - kualitas -[kK][uU][aA][lL][iI][tT][aA][sS] 456-12345
+match - lagi -[lL][aA][gG][iI] 456-1245
+match - lalu -[lL][aA][lL][uU] 456-123
+match - mereka -[mM][eE][rR][eE][kK][aA] 456-134
+match - oleh -[oO][lL][eE][hH] 456-135
+match - pada -[pP][aA][dD][aA] 456-1234
+match - saya -[sS][aA][yY][aA] 456-234
+match - tak -[tT][aA][kK] 456-2345
+match - untuk -[uU][nN][tT][uU][kK] 456-136
+match - vitamin -[vV][iI][tT][aA][mM][iI][nN] 456-1236
+match - waktu -[wW][aA][kK][tT][uU] 456-2456
+match - yang -[yY][aA][nN][gG] 456-13456
+match - zat -[zZ][aA][tT] 456-1356
+match - atau -[aA][tT][aA][uU] 456-246
+match - buat -[bB][uU][aA][tT] 456-346
+match - bukan -[bB][uU][kK][aA][nN] 456-1246
+match - jangan -[jJ][aA][nN][gG][aA][nN] 456-12456
+match - kamu -[kK][aA][mM][uU] 456-146
+match - nyata -[nN][yY][aA][tT][aA] 456-2346
+match - satu -[sS][aA][tT][uU] 456-156
+match - sebagai -[sS][eE][bB][aA][gG][aA][iI] 456-3456
+match - serta -[sS][eE][rR][tT][aA] 456-12346
+match - telah -[tT][eE][lL][aA][hH] 456-1256
+match - agar -[aA][gG][aA][rR] 1-1245-1-1235
+match - bahwa -[bB][aA][hH][wW][aA] 12-1-125-2456-1
+match - dengan -[dD][eE][nN][gG][aA][nN] 145-15-1345-1245-1-1345
+match - maka -[mM][aA][kK][aA] 134-1-13-1
+match - masih -[mM][aA][sS][iI][hH] 134-1-234-24-125
+match - memang -[mM][eE][mM][aA][nN][gG] 134-15-134-1-1345-1245
+match - supaya -[sS][uU][pP][aA][yY][aA] 234-136-1234-1-13456-1
+match - akan -[aA][kK][aA][nN] 456-12356
+match - aku -[aA][kK][uU] 456-23456
+match - dan -[dD][aA][nN] 456-345
+match - hingga -[hH][iI][nN][gG][gG][aA] 456-123456
+match - sampai -[sS][aA][mM][pP][aA][iI] 456-16
+
+# Word signs (Modul 5.1). A single cell stands for a whole word. It may
+# carry punctuation, the capital sign and the italic sign.
+# Modul 5.1.1: letters
+word aksi 1346
+word anda 1
+word bagi 12
+word cara 14
+word dari 145
+word emas 15
+word faktor 124
+word harus 125
+word ini 1345
+word itu 24
+word jadi 245
+word karena 1235
+word kita 13
+word kualitas 12345
+word lagi 1245
+word lalu 123
+word mereka 134
+word oleh 135
+word pada 1234
+word saya 234
+word tak 2345
+word untuk 136
+word vitamin 1236
+word waktu 2456
+word yang 13456
+word zat 1356
+# Modul 5.1.2: reversed letters
+word atau 246
+word buat 346
+word bukan 1246
+word jangan 12456
+word kamu 146
+word ke 1456
+word nyata 2346
+word satu 156
+word sebagai 3456
+word serta 12346
+word telah 1256
+# Modul 5.1.3: lower signs
+# The lower signs are used only between spaces, never next to a
+# punctuation mark (Modul 5.1.3, rule 1): "Ia masih lemas." is
+# written with the letters of Ia.
+lowword agar 2356
+lowword bahwa 23
+lowword dengan 256
+lowword ia 35
+lowword maka 235
+lowword masih 236
+lowword memang 26
+lowword supaya 356
+# Modul 5.1.4: other signs
+word akan 12356
+word aku 23456
+word dan 345
+word di 34
+word hingga 123456
+word sampai 16
+
+# Allah is not contracted: its lah is not the particle lah.
+word allah 1-123-123-1-125
+
+# Word signs with dot 5, dots 4-5, dot 4 and dots 3-4-5-6 (Modul 5.2,
+# 5.3 and 5.4). They are word signs and part-word signs, anywhere in a
+# word: dalam, sedalam, Wiguna, diganggu.
+# Modul 5.2.1
+word baik 5-12
+always baik 5-12
+word orang 5-135
+always orang 5-135
+word capai 5-14
+always capai 5-14
+word pakai 5-1234
+always pakai 5-1234
+word dalam 5-145
+always dalam 5-145
+word kuantitas 5-12345
+always kuantitas 5-12345
+word erat 5-15
+always erat 5-15
+word rakyat 5-1235
+always rakyat 5-1235
+word fakta 5-124
+match - fakta (%[_.^]|%0|[nN][gGyY]) 5-124
+word sangat 5-234
+always sangat 5-234
+word ganti 5-1245
+always ganti 5-1245
+word tahu 5-2345
+always tahu 5-2345
+word hari 5-125
+always hari 5-125
+word ubah 5-136
+always ubah 5-136
+word ikat 5-24
+always ikat 5-24
+word variasi 5-1236
+always variasi 5-1236
+word jalan 5-245
+match - jalan (%[_.^]|%3) 5-245
+word walau 5-2456
+always walau 5-2456
+word kali 5-13
+always kali 5-13
+word laksana 5-1346
+match - laksana (%[_.^]|%0|[nN][gGyY]) 5-1346
+word lain 5-123
+match - lain (%[_.^]|%3) 5-123
+word yakin 5-13456
+match - yakin (%[_.^]|%3) 5-13456
+word mana 5-134
+match - mana (%[_.^]|%0|[nN][gGyY]) 5-134
+word zakat 5-1356
+always zakat 5-1356
+word naik 5-1345
+always naik 5-1345
+# Modul 5.2.2
+word diri 5-34
+always diri 5-34
+word muka 5-146
+match - muka (%[_.^]|%0|[nN][gGyY]) 5-146
+word suara 5-346
+match - suara (%[_.^]|%0|[nN][gGyY]) 5-346
+word sama 5-156
+match - sama (%[_.^]|%0|[nN][gGyY]) 5-156
+word antara 5-345
+match - antara (%[_.^]|%0|[nN][gGyY]) 5-345
+word terang 5-1256
+always terang 5-1256
+word kerja 5-1456
+match - kerja (%[_.^]|%0|[nN][gGyY]) 5-1456
+word nyanyi 5-1246
+always nyanyi 5-1246
+match %a sebab (%[_.^]|%a) 5-12346
+match - sebab ((%[_^]|%1)|%a) 5-12346
+word kuasa 5-23456
+match - kuasa (%[_.^]|%0|[nN][gGyY]) 5-23456
+word tinggal 5-123456
+always tinggal 5-123456
+# Modul 5.3.1
+word atur 45-1
+always atur 45-1
+word mungkin 45-134
+match - mungkin (%[_.^]|%3) 45-134
+word buka 45-12
+match - buka (%[_.^]|%0|[nN][gGyY]) 45-12
+word nurani 45-1345
+always nurani 45-1345
+word cukup 45-14
+always cukup 45-14
+word punya 45-1234
+match - punya (%[_.^]|%0|[nN][gGyY]) 45-1234
+word duduk 45-145
+always duduk 45-145
+word khusus 45-12345
+always khusus 45-12345
+word engkau 45-15
+always engkau 45-15
+word rupa 45-1235
+match - rupa (%[_.^]|%0|[nN][gGyY]) 45-1235
+word fungsi 45-124
+always fungsi 45-124
+word sudah 45-234
+always sudah 45-234
+word guna 45-1245
+match - guna (%[_.^]|%0|[nN][gGyY]) 45-1245
+word tuju 45-2345
+always tuju 45-2345
+word hubung 45-125
+always hubung 45-125
+word umum 45-136
+always umum 45-136
+word ikut 45-24
+always ikut 45-24
+word volume 45-1236
+always volume 45-1236
+word juru 45-245
+always juru 45-245
+word wujud 45-2456
+always wujud 45-2456
+word kurang 45-13
+always kurang 45-13
+word maksud 45-1346
+always maksud 45-1346
+word luar 45-123
+always luar 45-123
+# Modul 5.3.2
+word kemudian 45-1456
+match - kemudian (%[_.^]|%3) 45-1456
+word tunanetra 45-156
+match - tunanetra (%[_.^]|%0|[nN][gGyY]) 45-156
+word terus 45-1256
+always terus 45-1256
+match %a seluruh (%[_.^]|%a) 45-12346
+match - seluruh ((%[_^]|%1)|%a) 45-12346
+word ganggu 45-123456
+always ganggu 45-123456
+word anjur 45-345
+always anjur 45-345
+word suatu 45-346
+always suatu 45-346
+word kuitansi 45-23456
+always kuitansi 45-23456
+# Modul 5.4.1
+word atas 4-1
+always atas 4-1
+word aneh 4-15
+always aneh 4-15
+word arti 4-24
+always arti 4-24
+word abnormal 4-135
+always abnormal 4-135
+word arus 4-136
+always arus 4-136
+# Modul 5.4.2
+match %a sekali (%[_.^]|%a) 3456-13
+match - sekali ((%[_^]|%1)|%a) 3456-13
+match %a selalu (%[_.^]|%a) 3456-123
+match - selalu ((%[_^]|%1)|%a) 3456-123
+match %a sebelum (%[_.^]|%a) 3456-134
+match - sebelum ((%[_^]|%1)|%a) 3456-134
+match %a senang (%[_.^]|%a) 3456-1345
+match - senang ((%[_^]|%1)|%a) 3456-1345
+match %a seperti (%[_.^]|%a) 3456-1234
+match - seperti ((%[_^]|%1)|%a) 3456-1234
+match %a sekarang (%[_.^]|%a) 3456-1235
+match - sekarang ((%[_^]|%1)|%a) 3456-1235
+match %a sesuai (%[_.^]|%a) 3456-234
+match - sesuai ((%[_^]|%1)|%a) 3456-234
+match %a sedang (%[_.^]|%a) 3456-12456
+match - sedang ((%[_^]|%1)|%a) 3456-12456
+match %a sedangkan (%[_.^]|%3) 3456-12356
+match - sedangkan ((%[_^]|%1)|%3) 3456-12356
+match %a sendiri (%[_.^]|%a) 3456-34
+match - sendiri ((%[_^]|%1)|%a) 3456-34
+match %a semua (%[_.^]|%0|[nN][gGyY]) 3456-346
+match - semua ((%[_^]|%1)|%0|[nN][gGyY]) 3456-346
+match %a setelah (%[_.^]|%a) 3456-1256
+match - setelah ((%[_^]|%1)|%a) 3456-1256
+match %a selesai (%[_.^]|%a) 3456-16
+match - selesai ((%[_^]|%1)|%a) 3456-16
+match %a sehingga (%[_.^]|%0|[nN][gGyY]) 3456-123456
+match - sehingga ((%[_^]|%1)|%0|[nN][gGyY]) 3456-123456
+match %a sekunder (%[_.^]|%a) 3456-23456
+match - sekunder ((%[_^]|%1)|%a) 3456-23456
+# A word that starts with one of the signs for se... is not written with
+# it before a hyphen, so that the root can be repeated: sekali-kali is
+# se-kali<, semua-muanya is se-mua<nya, but bersenang-senang is
+# ber-senang<.
+
+# Single-cell word signs as part of a word (Modul 5.1, rule 3): dots
+# 4-5-6 come first, as in kamus, melalui, sebagian, bayangan. The
+# lower signs are not used at the end of a word (Modul 5.1.3, rule 2).
+# ke, di and ia are part-word signs without dots 4-5-6 (see below).
+# dan, aku and akan are left out: an, ku and kan are as short.
+# ini is used only at the start of a word; elsewhere in-i is as short
+# (sini is s-in-i; Modul 5.1.4 writes s-ini because in is taught only
+# in Modul 6).
+partword aksi 456-1346
+match %a anda (%[_.^]|%0|[nN][gGyY]) 456-1
+match - anda (%0|[nN][gGyY]) 456-1
+partword bagi 456-12
+match %a cara (%[_.^]|%0|[nN][gGyY]) 456-14
+match - cara (%0|[nN][gGyY]) 456-14
+partword dari 456-145
+partword emas 456-15
+partword faktor 456-124
+partword harus 456-125
+match %[_.^] ini %a 456-1345
+partword itu 456-24
+partword jadi 456-245
+match %a karena (%[_.^]|%0|[nN][gGyY]) 456-1235
+match - karena (%0|[nN][gGyY]) 456-1235
+match %a kita (%[_.^]|%0|[nN][gGyY]) 456-13
+match - kita (%0|[nN][gGyY]) 456-13
+partword kualitas 456-12345
+partword lagi 456-1245
+partword lalu 456-123
+match %a mereka (%[_.^]|%0|[nN][gGyY]) 456-134
+match - mereka (%0|[nN][gGyY]) 456-134
+partword oleh 456-135
+match %a pada (%[_.^]|%0|[nN][gGyY]) 456-1234
+match - pada (%0|[nN][gGyY]) 456-1234
+match %a saya (%[_.^]|%0|[nN][gGyY]) 456-234
+match - saya (%0|[nN][gGyY]) 456-234
+match %a tak (%[_.^]|%6|[aA](%[_.^]|%0|[iIuU]|[nN][gGyY])) 456-2345
+match - tak (%6|[aA](%[_.^]|%0|[iIuU]|[nN][gGyY])) 456-2345
+partword untuk 456-136
+match %a vitamin (%[_.^]|%3) 456-1236
+match - vitamin %3 456-1236
+partword waktu 456-2456
+partword yang 456-13456
+partword zat 456-1356
+partword atau 456-246
+partword buat 456-346
+match %a bukan (%[_.^]|%3) 456-1246
+match - bukan %3 456-1246
+match %a jangan (%[_.^]|%3) 456-12456
+match - jangan %3 456-12456
+partword kamu 456-146
+match %a nyata (%[_.^]|%0|[nN][gGyY]) 456-2346
+match - nyata (%0|[nN][gGyY]) 456-2346
+partword satu 456-156
+partword sebagai 456-3456
+match %a serta (%[_.^]|%0|[nN][gGyY]) 456-12346
+match - serta (%0|[nN][gGyY]) 456-12346
+partword telah 456-1256
+begmidword agar 456-2356
+match - bahwa (%0|[nN][gGyY]) 456-23
+match - dengan %3 456-256
+match - maka (%0|[nN][gGyY]) 456-235
+begmidword masih 456-236
+begmidword memang 456-26
+match - supaya (%0|[nN][gGyY]) 456-356
+match %a hingga (%[_.^]|%0|[nN][gGyY]) 456-123456
+match - hingga (%0|[nN][gGyY]) 456-123456
+partword sampai 456-16
+
+# A word sign that starts with a consonant and a is preferred to the
+# tanda apit that would take its first letters, when it saves a cell
+# (Modul 6.4.3, rule 5): acara is a-cara, not aca-ra; bidadari,
+# sadari, bayangan, diakali.
+match - abagi (%[_.^]|%a) 1-456-12
+match - acara (%[_.^]|%0|[nN][gGyY]) 1-456-14
+match - adari (%[_.^]|%a) 1-456-145
+match - afaktor (%[_.^]|%a) 1-456-124
+match - aharus (%[_.^]|%a) 1-456-125
+match - ajadi (%[_.^]|%a) 1-456-245
+match - akarena (%[_.^]|%0|[nN][gGyY]) 1-456-1235
+match - alagi (%[_.^]|%a) 1-456-1245
+match - alalu (%[_.^]|%a) 1-456-123
+match - apada (%[_.^]|%0|[nN][gGyY]) 1-456-1234
+match - asaya (%[_.^]|%0|[nN][gGyY]) 1-456-234
+match - awaktu (%[_.^]|%a) 1-456-2456
+match - ayang (%[_.^]|%a) 1-456-13456
+match - ajangan (%[_.^]|%3) 1-456-12456
+match - akamu (%[_.^]|%a) 1-456-146
+match - asatu (%[_.^]|%a) 1-456-156
+match - abahwa (%0|[nN][gGyY]) 1-456-23
+match - amaka (%0|[nN][gGyY]) 1-456-235
+match - amasih %a 1-456-236
+match - asampai (%[_.^]|%a) 1-456-16
+match - abaik (%[_.^]|%a) 1-5-12
+match - acapai (%[_.^]|%a) 1-5-14
+match - apakai (%[_.^]|%a) 1-5-1234
+match - adalam (%[_.^]|%a) 1-5-145
+match - arakyat (%[_.^]|%a) 1-5-1235
+match - afakta (%[_.^]|%0|[nN][gGyY]) 1-5-124
+match - asangat (%[_.^]|%a) 1-5-234
+match - aganti (%[_.^]|%a) 1-5-1245
+match - atahu (%[_.^]|%a) 1-5-2345
+match - ahari (%[_.^]|%a) 1-5-125
+match - avariasi (%[_.^]|%a) 1-5-1236
+match - ajalan (%[_.^]|%3) 1-5-245
+match - awalau (%[_.^]|%a) 1-5-2456
+match - akali (%[_.^]|%a) 1-5-13
+match - alaksana (%[_.^]|%0|[nN][gGyY]) 1-5-1346
+match - alain (%[_.^]|%3) 1-5-123
+match - ayakin (%[_.^]|%3) 1-5-13456
+match - amana (%[_.^]|%0|[nN][gGyY]) 1-5-134
+match - azakat (%[_.^]|%a) 1-5-1356
+match - anaik (%[_.^]|%a) 1-5-1345
+match - asama (%[_.^]|%0|[nN][gGyY]) 1-5-156
+match - amaksud (%[_.^]|%a) 1-45-1346
+match - aganggu (%[_.^]|%a) 1-45-123456
+# ng before a word sign that starts with g: menggunakan is me-ng-guna-kan
+# (Tes formatif 6), not me-ngg-un-a-kan.
+match %a ngganti ((%[_^]|%1)|%a) 12456-5-1245
+match %a ngguna ((%[_^]|%1)|%0|[nN][gGyY]) 12456-45-1245
+match %a ngganggu ((%[_^]|%1)|%a) 12456-45-123456
+
+# Free part-word signs (Modul 6.1.1): at the start, in the middle or at
+# the end of a word, but never a word by themselves. an and kan are am
+# and kam before b or p.
+match %a ua (%[_.^]|%0|[nN][gGyY]) 346
+match - ua (%0|[nN][gGyY]) 346
+match %a kan (%[_.^]|%3) 12356
+match - kan %3 12356
+match - kam [bBpP] 12356
+partword mu 146
+partword au 246
+partword ke 1456
+# st is not used before e, where te or ter makes a syllable
+# (suster is sus-te-r, Modul 6.2.1).
+match %a st (%[_.^]|%5) 156
+match %[_.^] st %a 156
+partword te 1256
+partword se 12346
+match %a nya (%[_.^]|%7) 2346
+match - nya %7 2346
+partword me 26
+match %a ia (%[_.^]|%0|[nN][gGyY]) 35
+match - ia (%0|[nN][gGyY]) 35
+partword ai 16
+match %a an (%[_.^]|%3) 345
+match - an %3 345
+match - am [bBpP] 345
+partword di 34
+partword ng 12456
+partword ny 1246
+partword ku 23456
+
+# Signs for the start and the middle of a word (Modul 6.2.1). At the end
+# of a word ber, per and ter are written be-r, pe-r and te-r.
+# ber, ter and per are not used before a reduplicated root that starts
+# with r, so that the root can be repeated: beramai-ramai is be-ramai<.
+begmidword be 23
+begmidword pe 25
+match - ter %a+(%[_^]|%1|[-]%2|[-]%[_.^]) 356
+match - ber %a+(%[_^]|%1|[-]%2|[-]%[_.^]) 235
+match - per %a+(%[_^]|%1|[-]%2|[-]%[_.^]) 256
+
+# Signs for the middle of a word (Modul 6.2.2). in and un are im and um
+# before b or p.
+# ngg is not used before a reduplicated root that starts with g:
+# menggebu-gebu is me-ng-gebu<.
+match %a aa (%0|[nN][gGyY]) 2
+match %a in %3 2356
+match %a im [bBpP] 2356
+match %a un %3 236
+match %a um [bBpP] 236
+match %a ngg %a+(%[_^]|%1|[-]%4|[-]%[_.^]) 123456
+
+# Signs for the end of a word (Modul 6.2.3).
+endword kah 46
+endword lah 456
+endword pun 45
+# lah and kah after a are preferred to the tanda apit that would take
+# their first letter: bersalah, dialah, bisakah.
+endword alah 1-456
+endword akah 1-46
+
+# Tanda apit, dot 4 (Modul 6.2.4): two letters a around one consonant
+# or around the sign for ng, st or ngg: apa, kapal, hangat, kasta,
+# mangga. It is not used with n, because an is preferred (tanah is
+# t-an-ah), nor with ny, because nya is as short (hanya is ha-nya).
+match - aba (%[_.^]|%0|[nN][gGyY]) 4-12
+match - aca (%[_.^]|%0|[nN][gGyY]) 4-14
+match - ada (%[_.^]|%0|[nN][gGyY]) 4-145
+match - afa (%[_.^]|%0|[nN][gGyY]) 4-124
+match - aga (%[_.^]|%0|[nN][gGyY]) 4-1245
+match - aha (%[_.^]|%0|[nN][gGyY]) 4-125
+match - aja (%[_.^]|%0|[nN][gGyY]) 4-245
+match - aka (%[_.^]|%0|[nN][gGyY]) 4-13
+match - ala (%[_.^]|%0|[nN][gGyY]) 4-123
+match - ama (%[_.^]|%0|[nN][gGyY]) 4-134
+match - apa (%[_.^]|%0|[nN][gGyY]) 4-1234
+match - aqa (%[_.^]|%0|[nN][gGyY]) 4-12345
+match - ara (%[_.^]|%0|[nN][gGyY]) 4-1235
+match - asa (%[_.^]|%0|[nN][gGyY]) 4-234
+match - ata (%[_.^]|%0|[nN][gGyY]) 4-2345
+match - ava (%[_.^]|%0|[nN][gGyY]) 4-1236
+match - awa (%[_.^]|%0|[nN][gGyY]) 4-2456
+match - axa (%[_.^]|%0|[nN][gGyY]) 4-1346
+match - aya (%[_.^]|%0|[nN][gGyY]) 4-13456
+match - aza (%[_.^]|%0|[nN][gGyY]) 4-1356
+match - anga (%[_.^]|%0|[nN][gGyY]) 4-12456
+match - asta (%[_.^]|%0|[nN][gGyY]) 4-156
+match - angga (%[_.^]|%0|[nN][gGyY]) 4-123456
+
+# Sibra (Modul 6.3): abbreviated words. A Sibra may take a prefix
+# (di, ke, se, be, ber, ter, per, pe, pem, pen, peng, penge, me, mem, men, meng, menge, memper, diper, keber, keter, kese, keper, kepe, kepem, kepen, kepeng, berke, berpe, berpen, berpeng, berse, terse, seper, sepe, antar)
+# and suffixes (an, kan, i; then nya, ku, mu; then lah, kah, pun),
+# but only when its word is the root (rule 1): bahasaku, kebahasaan,
+# penglihatan, but not bahasan or pembahasan, whose root is bahas.
+# balik and masuk do not take -an, where kan is used: kebalikan is
+# ke-bali-kan (Tes formatif 6), masukan is masu-kan.
+word akhir 1-13-125
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? akhir ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1-13-125
+word bagaimana 12-1245-134
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? bagaimana ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 12-1245-134
+word bagus 12-1245-234
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? bagus ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 12-1245-234
+word bahasa 12-125-234
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? bahasa ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 12-125-234
+word balik 12-123-13
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? balik ([kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 12-123-13
+word bangun 12-12456-1345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? bangun ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 12-12456-1345
+word baris 12-1235-234
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? baris ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 12-1235-234
+word baru 12-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? baru ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 12-1235
+word belum 23-123-134
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? belum ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 23-123-134
+word bila 12-123
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? bila ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 12-123
+word bilang 12-123-12456
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? bilang ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 12-123-12456
+word bodoh 12-145-125
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? bodoh ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 12-145-125
+word bohong 12-125-12456
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? bohong ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 12-125-12456
+word braille 12-1235-123
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? braille ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 12-1235-123
+word bulat 12-123-2345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? bulat ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 12-123-2345
+word buta 12-2345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? buta ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 12-2345
+word butir 12-2345-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? butir ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 12-2345-1235
+word butuh 12-2345-125
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? butuh ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 12-2345-125
+word calon 14-123-1345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? calon ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 14-123-1345
+word cepat 14-1234-2345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? cepat ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 14-1234-2345
+word cerita 14-1235-2345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? cerita ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 14-1235-2345
+word contoh 14-2345-125
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? contoh ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 14-2345-125
+word daerah 145-1235-125
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? daerah ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 145-1235-125
+word dahulu 145-125-123
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? dahulu ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 145-125-123
+word dulu 145-123
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? dulu ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 145-123
+word dapat 145-1234-2345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? dapat ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 145-1234-2345
+word dekat 145-13-2345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? dekat ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 145-13-2345
+word demikian 145-134-13
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? demikian ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 145-134-13
+word dengar 145-12456-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? dengar ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 145-12456-1235
+word daripada 145-1234
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? daripada ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 145-1234
+word garis 1245-1235-234
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? garis ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1245-1235-234
+word gedung 1245-145-12456
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? gedung ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1245-145-12456
+word gejala 1245-245-123
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? gejala ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1245-245-123
+word gelap 1245-123-1234
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? gelap ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1245-123-1234
+word gelas 1245-123-234
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? gelas ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1245-123-234
+word gerak 1245-1235-13
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? gerak ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1245-1235-13
+word getar 1245-2345-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? getar ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1245-2345-1235
+word gilir 1245-123-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? gilir ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1245-123-1235
+word golong 1245-123-12456
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? golong ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1245-123-12456
+word guru 1245-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? guru ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1245-1235
+word habis 125-12-234
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? habis ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 125-12-234
+word harga 125-1235-1245
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? harga ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 125-1235-1245
+word hasil 125-234-123
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? hasil ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 125-234-123
+word hati 125-2345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? hati ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 125-2345
+word hidup 125-145-1234
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? hidup ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 125-145-1234
+word hilang 125-123-12456
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? hilang ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 125-123-12456
+word hitam 125-2345-134
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? hitam ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 125-2345-134
+word huruf 125-1235-124
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? huruf ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 125-1235-124
+word indonesia 24-1345-145
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? indonesia ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 24-1345-145
+word jelek 245-123-13
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? jelek ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 245-123-13
+word jika 245-13
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? jika ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 245-13
+word judul 245-145-123
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? judul ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 245-145-123
+word juga 245-1245
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? juga ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 245-1245
+word jujur 245-245-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? jujur ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 245-245-1235
+word juta 245-2345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? juta ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 245-2345
+word kalau 13-123
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? kalau ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 13-123
+word kami 13-134
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? kami ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 13-134
+word kelompok 1456-123-1234-13
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? kelompok ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1456-123-1234-13
+word kembali 1456-12-123
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? kembali ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1456-12-123
+word kepada 13-1234-145
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? kepada ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 13-1234-145
+word kira 13-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? kira ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 13-1235
+word kirim 13-1235-134
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? kirim ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 13-1235-134
+word kotor 13-2345-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? kotor ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 13-2345-1235
+word lagu 123-1245
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? lagu ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 123-1245
+word lahir 123-125-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? lahir ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 123-125-1235
+word lapor 123-1234-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? lapor ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 123-1234-1235
+word lebih 123-12-125
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? lebih ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 123-12-125
+word lebar 123-12-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? lebar ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 123-12-1235
+word lemah 123-134-125
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? lemah ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 123-134-125
+word lepas 123-1234-234
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? lepas ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 123-1234-234
+word jatuh 245-2345-125
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? jatuh ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 245-2345-125
+word lihat 123-125-2345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? lihat ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 123-125-2345
+word lipat 123-1234-2345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? lipat ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 123-1234-2345
+word maju 134-245
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? maju ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 134-245
+word masuk 134-234-13
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? masuk ([kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 134-234-13
+word masyarakat 134-234-13456
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? masyarakat ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 134-234-13456
+word milik 134-123-13
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? milik ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 134-123-13
+word mobil 134-12-123
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? mobil ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 134-12-123
+word mempunyai 26-45-1234
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? mempunyai ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 26-45-1234
+word mengerti 26-12456-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? mengerti ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 26-12456-1235
+word modal 134-145-123
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? modal ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 134-145-123
+word mohon 134-125-1345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? mohon ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 134-125-1345
+word motor 134-2345-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? motor ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 134-2345-1235
+word negara 1345-1245-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? negara ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1345-1245-1235
+word nomor 1345-134-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? nomor ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1345-134-1235
+word organisasi 135-1235-1245
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? organisasi ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 135-1235-1245
+word pagi 1234-1245
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? pagi ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1234-1245
+word panjang 1234-245-12456
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? panjang ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1234-245-12456
+word pengertian 25-12456-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? pengertian ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 25-12456-1235
+word pijat 1234-245-2345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? pijat ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1234-245-2345
+word pikir 1234-13-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? pikir ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1234-13-1235
+word pilih 1234-123-125
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? pilih ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1234-123-125
+word piring 1234-1235-12456
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? piring ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1234-1235-12456
+word pisah 1234-234-125
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? pisah ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1234-234-125
+word potong 1234-2345-12456
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? potong ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1234-2345-12456
+word pula 1234-123
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? pula ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1234-123
+word pulang 1234-123-12456
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? pulang ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1234-123-12456
+word pusat 1234-234-2345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? pusat ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1234-234-2345
+word putih 1234-2345-125
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? putih ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1234-2345-125
+word putus 1234-2345-234
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? putus ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1234-2345-234
+word rahasia 1235-125-234
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? rahasia ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1235-125-234
+word ratus 1235-2345-234
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? ratus ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1235-2345-234
+word rendah 1235-145-125
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? rendah ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1235-145-125
+word ribu 1235-12
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? ribu ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1235-12
+word rusak 1235-234-13
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? rusak ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1235-234-13
+word sakit 234-13-2345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? sakit ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 234-13-2345
+word saudara 234-145-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? saudara ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 234-145-1235
+word segala 12346-1245-123
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? segala ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 12346-1245-123
+word segera 12346-1245-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? segera ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 12346-1245-1235
+word sibuk 234-12-13
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? sibuk ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 234-12-13
+word sidang 234-145-12456
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? sidang ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 234-145-12456
+word sifat 234-124-2345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? sifat ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 234-124-2345
+word sikap 234-13-1234
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? sikap ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 234-13-1234
+word sistem 234-2345-134
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? sistem ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 234-2345-134
+word siswa 234-2456
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? siswa ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 234-2456
+word sudut 234-145-2345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? sudut ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 234-145-2345
+word suka 234-13
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? suka ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 234-13
+word sukar 234-13-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? sukar ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 234-13-1235
+word sulit 234-123-2345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? sulit ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 234-123-2345
+word sungguh 234-123456-125
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? sungguh ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 234-123456-125
+word surat 234-1235-2345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? surat ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 234-1235-2345
+word tanpa 2345-1234
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? tanpa ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 2345-1234
+word telepon 1256-123-1234
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? telepon ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1256-123-1234
+word terutama 356-2345-134
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? terutama ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 356-2345-134
+word tetapi 1256-2345
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? tetapi ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 1256-2345
+word tiba 2345-12
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? tiba ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 2345-12
+word tidak 2345-145-13
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? tidak ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 2345-145-13
+word tidur 2345-145-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? tidur ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 2345-145-1235
+word tubuh 2345-12-125
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? tubuh ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 2345-12-125
+word tukar 2345-13-1235
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? tukar ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 2345-13-1235
+word tulang 2345-123-12456
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? tulang ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 2345-123-12456
+word tulis 2345-123-234
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? tulis ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 2345-123-234
+word titik 2345-2345-13
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? titik ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 2345-2345-13
+word tutup 2345-2345-1234
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? tutup ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 2345-2345-1234
+word wajib 2456-245-12
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? wajib ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 2456-245-12
+word wakil 2456-13-123
+match %[_.^]([bB][eE][rR][pP][eE][nN][gG]|[mM][eE][mM][pP][eE][rR]|[kK][eE][pP][eE][nN][gG]|[bB][eE][rR][pP][eE][nN]|[pP][eE][nN][gG][eE]|[mM][eE][nN][gG][eE]|[dD][iI][pP][eE][rR]|[kK][eE][bB][eE][rR]|[kK][eE][tT][eE][rR]|[kK][eE][pP][eE][rR]|[kK][eE][pP][eE][mM]|[kK][eE][pP][eE][nN]|[bB][eE][rR][kK][eE]|[bB][eE][rR][pP][eE]|[bB][eE][rR][sS][eE]|[tT][eE][rR][sS][eE]|[sS][eE][pP][eE][rR]|[aA][nN][tT][aA][rR]|[pP][eE][nN][gG]|[mM][eE][nN][gG]|[kK][eE][sS][eE]|[kK][eE][pP][eE]|[sS][eE][pP][eE]|[bB][eE][rR]|[tT][eE][rR]|[pP][eE][rR]|[pP][eE][mM]|[pP][eE][nN]|[mM][eE][mM]|[mM][eE][nN]|[dD][iI]|[kK][eE]|[sS][eE]|[bB][eE]|[pP][eE]|[mM][eE])? wakil ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 2456-13-123
+word laki-laki 123-13-126
+word masing-masing 134-234-12456-126
+# sebagaimana is se-bagaimana, not sebagai-mana.
+match %[_.^] sebagaimana ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?%[_.^] 12346-12-1245-134
+# tidak also in nouns formed with ke-tidak-...-an: ketidakadilan,
+# kebertidakpengalamanan.
+match %[_.^][kK][eE]([bB][eE][rR])? tidak %a 2345-145-13
+
+# ber-, ter- and per- lose their r before a root that starts with r:
+# berupa is be-rupa, not ber-upa. Before a hyphen be is left alone
+# so that the root can be repeated: beribu-ribu is be-ribu<.
+match %[_.^] berakyat ((%[_^]|%1)|%a) 23-5-1235
+match %[_.^] berupa ((%[_^]|%1)|%0|[nN][gGyY]) 23-45-1235
+match %[_.^] berahasia ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?(%[_^]|%1) 23-1235-125-234
+match %[_.^] beratus ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?(%[_^]|%1) 23-1235-2345-234
+match %[_.^] berendah ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?(%[_^]|%1) 23-1235-145-125
+match %[_.^] beribu ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?(%[_^]|%1) 23-1235-12
+match %[_.^] berusak ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?(%[_^]|%1) 23-1235-234-13
+match %[_.^] terakyat ((%[_^]|%1)|%a) 1256-5-1235
+match %[_.^] terupa ((%[_^]|%1)|%0|[nN][gGyY]) 1256-45-1235
+match %[_.^] terahasia ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?(%[_^]|%1) 1256-1235-125-234
+match %[_.^] teratus ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?(%[_^]|%1) 1256-1235-2345-234
+match %[_.^] terendah ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?(%[_^]|%1) 1256-1235-145-125
+match %[_.^] teribu ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?(%[_^]|%1) 1256-1235-12
+match %[_.^] terusak ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?(%[_^]|%1) 1256-1235-234-13
+match %[_.^] perakyat ((%[_^]|%1)|%a) 25-5-1235
+match %[_.^] perupa ((%[_^]|%1)|%0|[nN][gGyY]) 25-45-1235
+match %[_.^] perahasia ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?(%[_^]|%1) 25-1235-125-234
+match %[_.^] peratus ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?(%[_^]|%1) 25-1235-2345-234
+match %[_.^] perendah ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?(%[_^]|%1) 25-1235-145-125
+match %[_.^] peribu ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?(%[_^]|%1) 25-1235-12
+match %[_.^] perusak ([aA][nN]|[kK][aA][nN]|[iI])?([nN][yY][aA]|[kK][uU]|[mM][uU])?([lL][aA][hH]|[kK][aA][hH]|[pP][uU][nN])?(%[_^]|%1) 25-1235-234-13
+

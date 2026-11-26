@@ -96,6 +96,7 @@ EXTRA_DIST =					\
 	hu-hu-g2_harness.yaml			\
 	hu-hu-g2_dictionary_numbers.yaml			\
 	id-id-g1.yaml			\
+	id-id-g2.yaml			\
 	ipa.yaml				\
 	it.yaml				\
 	iu-ca-g1_harness.yaml			\
