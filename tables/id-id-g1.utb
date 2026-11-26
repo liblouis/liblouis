@@ -140,6 +140,9 @@ postpunc " 356
 # an ellipsis followed by a period, as in Mitranetra Braille Converter 5.
 always ... 3-3-3
 always .... 3-3-3-256
+# An ellipsis between two numbers ends the first number, so the number
+# sign is written again before the second, as in 5...10.
+midnum ... 3-3-3-3456
 
 # Signs of arithmetic, from Modul 4 of the course (Tabel 4.1). The
 # minus sign (dots 3-5) and the brackets of mathematics (dots 2-4-6 and
@@ -163,9 +166,10 @@ sign $ 1246
 noback sign % 1234-234 # the letters "ps", as in Modul 4
 sign & 4-12346
 sign \\ 4-1256
-# The underscore has the dots of the italic sign and the decimal comma.
-# A word such as nama_file is read back with a comma.
-noback sign _ 46
+# The underscore is dots 4-5-6, as on the iOS braille keyboard and in
+# Braille ASCII. Mitranetra Braille Converter uses dots 4-6, but those
+# are the decimal comma and the italic sign.
+sign _ 456
 sign ` 6-3
 punctuation [ 246
 punctuation ] 12456

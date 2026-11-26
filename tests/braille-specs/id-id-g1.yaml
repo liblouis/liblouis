@@ -124,6 +124,14 @@ tests:
   # and before a letter k-z
   - - "#saya"
     - "⠼⠎⠁⠽⠁"
+  # Underscore: dots 4-5-6, as on the iOS braille keyboard
+  - - "nama_file"
+    - "⠝⠁⠍⠁⠸⠋⠊⠇⠑"
+  - - "Nama_file"
+    - "⠠⠝⠁⠍⠁⠸⠋⠊⠇⠑"
+  # An ellipsis between numbers ends the first number
+  - - "5...10"
+    - "⠼⠑⠄⠄⠄⠼⠁⠚"
   # The greater-than sign has a space on both sides
   - - "a > b"
     - "⠁⠀⠴⠀⠃"
@@ -185,9 +193,6 @@ tests:
   # Superscript two: dots 1-2-6, the same as the less-than sign
   - - "m²"
     - "⠍⠣"
-  # Underscore: dots 4-6, the same as the italic sign
-  - - "nama_file"
-    - "⠝⠁⠍⠁⠨⠋⠊⠇⠑"
 
 flags: {testmode: backward}
 tests:
@@ -195,9 +200,6 @@ tests:
   - - "⠼⠊⠝⠙⠕⠝⠑⠎⠊⠁"
     - "#indonesia"
     - xfail: "The number sign before a letter a-j starts a number, so this reads 9ndonesia."
-  - - "⠝⠁⠍⠁⠨⠋⠊⠇⠑"
-    - "nama_file"
-    - xfail: "Dots 4-6 are also the decimal comma, so this reads nama,file."
   - - "⠍⠣"
     - "m²"
     - xfail: "Dots 1-2-6 are also the less-than sign, so this reads m<."
