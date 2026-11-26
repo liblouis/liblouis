@@ -59,3 +59,9 @@ tests:
   # "a the" does not round-trip: backward, ⠁⠮ matches "always athe"
   # (there so that "lathe" back-translates correctly) instead of largesign a
   - [and a the, ⠯⠁⠮, xfail: {backward: "⠁⠮ back-translates to 'athe'"}]
+
+# An opening single quotation mark comes back as an apostrophe, not a backtick
+flags: {testmode: backward}
+tests:
+  - ["⠠⠦⠞⠊⠎ ⠃⠑⠌", "'tis best"]
+  - ["⠠⠦⠓⠑⠇⠇⠕⠴⠄", "'hello'"]
