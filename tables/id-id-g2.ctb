@@ -75,10 +75,11 @@
 # 3-4-5 before b or p are read as am (sembilanbelas comes back as
 # sembilambelas), but as an before pun (kapanpun); dots 3-4 between
 # letters are di (siang/malam comes back as siangdimalam); a Sibra after
-# a prefix wins over letters (meski comes back as mesukai); a capital
-# before the repeat sign is not repeated (Guru-Guru comes back as
-# Guru-guru); and a single letter with a period is a word sign (P. comes
-# back as Pada.).
+# a prefix wins over letters (membran comes back as membaruan); a Sibra
+# wins at the start of a word (ski comes back as sukai); a capital
+# before the repeat sign is not repeated (Guru-guru; Guru-Guru is
+# written in full); and a single letter with a period is a word sign
+# (P. comes back as Pada.).
 
 # Repetition (Modul 6.1.2, tanda ulang dots 1-2-6). The repeat sign
 # follows the word, which may be contracted: ibu-ibu, mobil-mobil. A
@@ -87,35 +88,14 @@
 # of id-id-g1.utb.
 # liblouis takes any part at the end of the first word that equals the
 # start of the second as the repeated root, even a single letter. A
-# hyphen between the same two letters is therefore kept as a hyphen when
-# the second word starts with a capital (Jakarta-Ambon), or after the
-# prefixes anti, non, pra, pasca and the like (anti-imperialis).
-match [aA] \x002d A 36
-match [bB] \x002d B 36
-match [cC] \x002d C 36
-match [dD] \x002d D 36
-match [eE] \x002d E 36
-match [fF] \x002d F 36
-match [gG] \x002d G 36
-match [hH] \x002d H 36
-match [iI] \x002d I 36
-match [jJ] \x002d J 36
-match [kK] \x002d K 36
-match [lL] \x002d L 36
-match [mM] \x002d M 36
-match [nN] \x002d N 36
-match [oO] \x002d O 36
-match [pP] \x002d P 36
-match [qQ] \x002d Q 36
-match [rR] \x002d R 36
-match [sS] \x002d S 36
-match [tT] \x002d T 36
-match [uU] \x002d U 36
-match [vV] \x002d V 36
-match [wW] \x002d W 36
-match [xX] \x002d X 36
-match [yY] \x002d Y 36
-match [zZ] \x002d Z 36
+# hyphen before a capital is therefore kept as a hyphen (Jakarta-Ambon),
+# and a word repeated with a capital is written twice, as Mitranetra
+# Braille Converter does (Bangsa-Bangsa), so that it is read back with
+# the capital. The hyphen is also kept after the prefixes anti, non,
+# pra, pasca and the like (anti-imperialis).
+match %a \x002d %u 36
+# mereka-reka is me- and the repeated root reka, not the word sign mereka.
+match - mereka-reka - 26-36-1235-15-13-1-126
 match %[_.^][aA][nN][tT][iI] \x002d [iI] 36
 match %[_.^][nN][oO][nN] \x002d [nN] 36
 match %[_.^][pP][rR][aA] \x002d [aA] 36
@@ -3405,8 +3385,6 @@ nofor word ribuan 1235-12-345
 nofor after prefixend prfword ribuan 1235-12-345
 nofor word ribukan 1235-12-12356
 nofor after prefixend prfword ribukan 1235-12-12356
-nofor word ribui 1235-12-24
-nofor after prefixend prfword ribui 1235-12-24
 nofor word ribunya 1235-12-2346
 nofor after prefixend prfword ribunya 1235-12-2346
 nofor word ribuku 1235-12-23456
@@ -3423,21 +3401,17 @@ nofor word ribuannya 1235-12-345-2346
 nofor after prefixend prfword ribuannya 1235-12-345-2346
 nofor word ribukannya 1235-12-12356-2346
 nofor after prefixend prfword ribukannya 1235-12-12356-2346
-nofor word ribuinya 1235-12-24-2346
-nofor after prefixend prfword ribuinya 1235-12-24-2346
 nofor word ribukanlah 1235-12-12356-456
 nofor after prefixend prfword ribukanlah 1235-12-12356-456
 nofor word ribunyalah 1235-12-2346-456
 nofor after prefixend prfword ribunyalah 1235-12-2346-456
 nofor prfword diribu 34-1235-12
 nofor prfword diribukan 34-1235-12-12356
-nofor prfword diribui 34-1235-12-24
 nofor prfword diribunya 34-1235-12-2346
 nofor prfword diribulah 34-1235-12-456
 nofor prfword diribukah 34-1235-12-46
 nofor prfword diribupun 34-1235-12-45
 nofor prfword diribukannya 34-1235-12-12356-2346
-nofor prfword diribuinya 34-1235-12-24-2346
 nofor prfword diribukanlah 34-1235-12-12356-456
 nofor always ribu< 1235-12-126
 nofor prfword rusak 1235-234-13
@@ -3664,7 +3638,6 @@ nofor after prefixend prfword sukaan 234-13-345
 nofor word sukakan 234-13-12356
 nofor after prefixend prfword sukakan 234-13-12356
 nofor word sukai 234-13-24
-nofor after prefixend prfword sukai 234-13-24
 nofor word sukanya 234-13-2346
 nofor after prefixend prfword sukanya 234-13-2346
 nofor word sukaku 234-13-23456
@@ -3682,7 +3655,6 @@ nofor after prefixend prfword sukaannya 234-13-345-2346
 nofor word sukakannya 234-13-12356-2346
 nofor after prefixend prfword sukakannya 234-13-12356-2346
 nofor word sukainya 234-13-24-2346
-nofor after prefixend prfword sukainya 234-13-24-2346
 nofor word sukakanlah 234-13-12356-456
 nofor after prefixend prfword sukakanlah 234-13-12356-456
 nofor word sukanyalah 234-13-2346-456
@@ -4340,3 +4312,6 @@ nofor correct _$p"Z"[$u.]"<" "Z"*"-z"*
 nofor correct `[$l.]"<" *"-"*
 nofor correct _$s[$l.]"<" *"-"*
 nofor correct _$p[$l.]"<" *"-"*
+# masih that is the whole text, which id-id-g1.utb reads as the
+# opening quotation mark.
+nofor correct `"\""~ "masih"
