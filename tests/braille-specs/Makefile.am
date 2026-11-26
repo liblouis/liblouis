@@ -69,6 +69,7 @@ EXTRA_DIST =					\
 	ethio-g1_harness.yaml			\
 	fa-ir-comp8-harness.yaml		\
 	fa-ir-g1-harness.yaml			\
+	fa-ir-shortwriting-1393.yaml		\
 	fi_harness.yaml				\
 	fil.yaml				\
 	fr-bfu-comp6.yaml			\
