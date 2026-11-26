@@ -621,6 +621,26 @@ multindIndicator(const TranslationTableHeader *table, widechar opcode) {
 	}
 }
 
+/* A multind rule can only be applied if at least one of its indicators is
+ * defined, and none of the defined indicators is longer than the cells the
+ * multind rule matched. */
+static int
+multindApplies(
+		const TranslationTableHeader *table, const TranslationTableRule *multindRule) {
+	int found = 0;
+	int k;
+	for (k = 0; k < multindRule->charslen; k++) {
+		TranslationTableOffset offset =
+				multindIndicator(table, multindRule->charsdots[k]);
+		if (!offset) continue;
+		if (((TranslationTableRule *)&table->ruleArea[offset])->dotslen >
+				multindRule->dotslen)
+			return 0;
+		found = 1;
+	}
+	return found;
+}
+
 static int
 handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 		TranslationTableOpcode *currentOpcode, const TranslationTableRule **currentRule,
@@ -837,6 +857,7 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 							return;
 						break;
 					case CTO_MultInd:
+						if (!multindApplies(table, *currentRule)) break;
 						*doingMultind = (*currentRule)->charslen;
 						*multindRule = *currentRule;
 						if (handleMultind(table, currentDotslen, currentOpcode,
