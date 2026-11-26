@@ -199,6 +199,7 @@ static const char *opcodeNames[CTO_None] = {
 	"endemphphrase",
 	"lenemphphrase",
 	"capsmodechars",
+	"singlecapsword",
 	"emphmodechars",
 	"noemphchars",
 	"begcomp",
@@ -3906,6 +3907,10 @@ doOpcode:
 				c->attributes |= CTC_CapsMode;
 				(*table)->hasCapsModeChars = 1;
 			}
+			return 1;
+
+		case CTO_SingleCapsWord:
+			(*table)->singleCapsWord = 1;
 			return 1;
 
 		case CTO_BegComp: {

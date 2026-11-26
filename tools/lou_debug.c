@@ -344,6 +344,7 @@ show_misc(void) {
 	printf("'correct' opcodes: %s\n", pickYN(table->corrections));
 	printf("'syllable' opcodes: %s\n", pickYN(table->syllables));
 	printf("'capsnocont' opcode: %s\n", pickYN(table->capsNoCont));
+	printf("'singlecapsword' opcode: %s\n", pickYN(table->singleCapsWord));
 	printf("Hyphenation table: %s\n", pickYN(table->hyphenStatesArray));
 	printf("noletsignbefore %s\n",
 			print_chars(&table->noLetsignBefore[0], table->noLetsignBeforeCount));

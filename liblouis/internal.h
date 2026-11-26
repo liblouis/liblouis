@@ -275,6 +275,7 @@ typedef enum { /* Op codes */
 	/* End of ordered opcodes */
 
 	CTO_CapsModeChars,
+	CTO_SingleCapsWord,
 	CTO_EmphModeChars,
 	CTO_NoEmphChars,
 	CTO_BegComp,
@@ -455,6 +456,7 @@ typedef struct { /* translation table */
 	int usesSequences;
 	int usesNumericMode;
 	int hasCapsModeChars;
+	int singleCapsWord;
 	TranslationTableOffset undefined;
 	TranslationTableOffset letterSign;
 	TranslationTableOffset numberSign;

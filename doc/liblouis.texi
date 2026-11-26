@@ -751,6 +751,30 @@ Example:
 capsmodechars -
 @end example
 
+@opcode{singlecapsword,}
+This opcode has no operands. Normally a single capital letter is
+marked with the @code{capsletter} indicator. If this opcode is
+specified, a single capital letter is treated as a capitalized word of
+one letter and marked with the @code{begcapsword} indicator. This
+applies to a capital that stands alone, ends a word, or is followed by
+a digit or punctuation. The @code{capsletter} indicator is then only
+used for a capital letter that is directly followed by a lowercase
+letter, i.e.@: where the word indicator would need to be terminated
+again right away. This is needed for German, where @samp{A} and the
+@samp{W} in @samp{kW} are written with the word indicator, but the
+@samp{H} in @samp{Haus} with the letter indicator.
+
+The opcode has no effect if @code{begcapsword} is not defined.
+
+Example:
+
+@example
+capsletter 46
+begcapsword 45
+endcapsword 6
+singlecapsword
+@end example
+
 @opcode{begmode, attribute dots}
 @opcode{begcaps, dots}
 The dot pattern which indicates that a mode is entered until it is
