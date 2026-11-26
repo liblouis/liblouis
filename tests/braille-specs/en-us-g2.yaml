@@ -15,6 +15,12 @@ tests:
   - [⠇⠢, len]
   - [⠞⠢, ten]
 
+# A lone o comes back lowercase, and capitalised only with its capital sign
+flags: {testmode: backward}
+tests:
+  - ["⠁ ⠍⠁⠞⠞⠻ ⠕⠴⠄ ⠞⠺⠕", "a matter o' two"]
+  - ["⠠⠕⠂ ⠠⠊ ⠎⠑⠑", "O, I see"]
+
 # Converted from backtranslate_with_letsign.c
 flags: {testmode: bothDirections}
 tests:
