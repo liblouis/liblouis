@@ -127,9 +127,12 @@ noback pass2 @6-6-126 @126
 # Tanda pugar, dots 5-6 (Modul 6.4.2), before a letter standing alone,
 # which would otherwise be read as a word sign: Pilihlah a, b atau c;
 # sinar X. Before a capital it comes first, as in id-id-g1.utb. It is
-# used next to a period (a.n., A.H. Nasution) or an apostrophe, nor
+# not used next to a period (a.n., A.H. Nasution) or an apostrophe, nor
 # before a hyphen (e-mail).
 letsign 56
+# After a number the uncontracted table already writes tanda pugar
+# before a letter a-j, so it is written only once, as in kelas 3A.
+noback pass3 @56-56 @56
 noletsignafter -.\x0027\x2019
 noletsignbefore .\x0027\x2019
 # A letter with a period at the end of the text is a letter, not an
