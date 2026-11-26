@@ -22,6 +22,7 @@ table:
   contraction: full
   __assert-match: id-id-g2.ctb
 
+flags: {testmode: bothDirections}
 tests:
   # Word signs: letters (Modul 5.1.1). They stand alone and may carry
   # punctuation and the capital sign.
@@ -95,7 +96,7 @@ tests:
     - "⠠⠗⠔⠀⠅⠔⠞⠀⠞⠔⠏⠀⠯⠞⠔⠀⠁⠛⠗⠁⠗⠔"
   - - "pekan ikan kantor kantong kampak kambuh"
     - "⠏⠑⠷⠀⠊⠷⠀⠷⠞⠕⠗⠀⠷⠞⠕⠻⠀⠷⠏⠁⠅⠀⠷⠃⠥⠓"
-    - xfail: "The course writes the p and e of pekan as letters; the table uses the sign for pe."
+    - xfail: {forward: "The course writes the p and e of pekan as letters; the table uses the sign for pe."}
   - - "akui saku kuku Kudus"
     - "⠁⠾⠊⠀⠎⠁⠾⠀⠾⠾⠀⠠⠾⠙⠥⠎"
   - - "Danti Wildan antar andong amplop ambil uban keran Sultan"
@@ -125,7 +126,7 @@ tests:
     - "⠠⠚⠈⠅⠗⠞⠁⠤⠠⠜⠃⠕⠝"
   - - "kasak-kusuk"
     - "⠅⠈⠎⠅⠤⠾⠎⠥⠅"
-    - xfail: "liblouis takes the k before the hyphen as a repeated root."
+    - xfail: {forward: "liblouis takes the k before the hyphen as a repeated root."}
   # Part-word signs for the start and the middle of a word (Modul 6.2.1).
   # At the end ber, per and ter are written be-r, pe-r and te-r.
   - - "Suster, ambilkan air bersih dari ember!"
@@ -171,7 +172,7 @@ tests:
     - "⠈⠏⠀⠅⠈⠏⠇⠀⠓⠈⠻⠞⠀⠅⠈⠱⠀⠍⠈⠿"
   - - "Krakatau"
     - "⠠⠅⠗⠁⠅⠸⠪"
-    - xfail: "The course writes krak-atau; liblouis takes the earliest contraction, the apit of aka."
+    - xfail: {forward: "The course writes krak-atau; liblouis takes the earliest contraction, the apit of aka."}
   # Sibra (Modul 6.3): with affixes only when the Sibra is the root
   - - "sedemikian demikianlah"
     - "⠯⠙⠍⠅⠀⠙⠍⠅⠸"
@@ -203,15 +204,16 @@ tests:
     - "⠠⠠⠙⠏⠗⠀⠠⠠⠍⠏⠗"
   - - "siang/malam dan/atau lentera/dian"
     - "⠎⠔⠻⠌⠍⠈⠇⠍⠀⠜⠌⠪⠀⠇⠑⠝⠴⠁⠌⠌⠜"
+    - xfail: {backward: "Dots 3-4 between letters are read as di; only dan/atau is read with the slash."}
   - - "SMU"
     - "⠠⠠⠎⠍⠥"
-    - xfail: "Abbreviations in capitals are not recognised, so mu is contracted."
+    - xfail: {forward: "Abbreviations in capitals are not recognised, so mu is contracted."}
   - - "I II III"
     - "⠠⠊⠀⠠⠠⠊⠊⠀⠠⠠⠊⠊⠊"
-    - xfail: "A single capital I is taken as a letter and gets the letter sign."
+    - xfail: {forward: "A single capital I is taken as a letter and gets the letter sign.", backward: "Without the letter sign, I is the word sign itu."}
   - - "i ii iii"
     - "⠰⠊⠀⠰⠊⠊⠀⠰⠊⠊⠊"
-    - xfail: "Only a single letter gets the letter sign, not ii or iii."
+    - xfail: {forward: "Only a single letter gets the letter sign, not ii or iii."}
   # Choosing between contractions (Modul 6.4.3, rules and Latihan 6.4)
   - - "makan kunci cahaya tanah tanda"
     - "⠍⠁⠷⠀⠾⠝⠉⠊⠀⠉⠈⠓⠽⠁⠀⠞⠜⠁⠓⠀⠞⠸⠁"
@@ -229,10 +231,10 @@ tests:
     - "⠒⠝⠑⠇⠊⠞⠊⠜⠀⠲⠆⠙⠁⠜"
   - - "kemasan"
     - "⠅⠸⠑⠜"
-    - xfail: "The course prefers k-emas-an; liblouis takes ke first."
+    - xfail: {forward: "The course prefers k-emas-an; liblouis takes ke first."}
   - - "Drupada"
     - "⠠⠙⠗⠥⠸⠏"
-    - xfail: "The course prefers Dru-pada; liblouis takes rupa first."
+    - xfail: {forward: "The course prefers Dru-pada; liblouis takes rupa first."}
   # Tes formatif 6
   - - "Telah diungkap oleh berbagai penelitian bahwa membaca melalui saluran penglihatan lebih cepat daripada membaca melalui saluran perabaan."
     - "⠠⠳⠀⠌⠥⠻⠅⠁⠏⠀⠕⠀⠖⠃⠁⠛⠡⠀⠒⠝⠑⠇⠊⠞⠊⠜⠀⠆⠀⠢⠍⠃⠈⠉⠀⠢⠸⠇⠊⠀⠎⠁⠇⠥⠗⠜⠀⠒⠻⠇⠓⠞⠜⠀⠇⠃⠓⠀⠉⠏⠞⠀⠙⠏⠀⠢⠍⠃⠈⠉⠀⠢⠸⠇⠊⠀⠎⠁⠇⠥⠗⠜⠀⠲⠈⠃⠜⠲"
@@ -244,3 +246,58 @@ tests:
     - "⠢⠻⠘⠛⠷⠀⠳⠅⠝⠊⠅⠀⠢⠍⠃⠈⠉⠀⠲⠀⠙⠬⠀⠞⠁⠻⠜"
   - - "menunjukkan kemampuan membaca huruf-huruf dengan cepat dan tidak dibingungkan oleh huruf-huruf yang merupakan bayangan cermin dari huruf-huruf lain."
     - "⠢⠝⠦⠚⠥⠅⠷⠀⠹⠍⠜⠏⠥⠜⠀⠢⠍⠃⠈⠉⠀⠓⠗⠋⠣⠀⠲⠀⠉⠏⠞⠀⠜⠀⠞⠙⠅⠀⠌⠃⠊⠻⠥⠻⠷⠀⠕⠀⠓⠗⠋⠣⠀⠽⠀⠢⠘⠗⠷⠀⠃⠁⠸⠽⠜⠀⠉⠑⠗⠍⠊⠝⠀⠙⠀⠓⠗⠋⠣⠀⠐⠇⠲"
+
+flags: {testmode: backward}
+tests:
+  # Sentences with capitals, punctuation, numbers and the repeat sign
+  - - "⠠⠏⠀⠐⠞⠝⠀⠼⠃⠚⠁⠚⠂⠀⠈⠙⠀⠼⠃⠑⠀⠎⠺⠀⠌⠀⠹⠇⠁⠎⠀⠼⠉⠰⠠⠁⠲"
+    - "Pada tahun 2010, ada 25 siswa di kelas 3A."
+  - - "⠠⠜⠁⠅⠣⠀⠖⠍⠡⠝⠀⠌⠀⠓⠈⠇⠍⠜⠆⠀⠍⠀⠼⠝⠀⠼⠅⠖"
+    - "Anak-anak bermain di halaman; mereka senang sekali!"
+  - - "⠦⠠⠎⠀⠞⠙⠅⠀⠐⠞⠂⠴⠀⠅⠈⠞⠮⠲"
+    - "\"Saya tidak tahu,\" katanya."
+  - - "⠠⠔⠀⠖⠅⠈⠞⠒⠀⠶⠇⠓⠞⠀⠓⠈⠇⠍⠜⠀⠼⠁⠃⠶⠲"
+    - "Ia berkata: (lihat halaman 12)."
+  - - "⠠⠍⠀⠖⠤⠇⠁⠗⠊⠣⠀⠜⠀⠴⠤⠞⠈⠺⠣⠲"
+    - "Mereka berlari-lari dan tertawa-tawa."
+  - - "⠠⠃⠈⠏⠅⠀⠜⠀⠠⠊⠃⠥⠀⠲⠛⠊⠀⠹⠀⠠⠚⠈⠅⠗⠞⠁⠀⠏⠀⠐⠓⠀⠠⠯⠝⠊⠝⠂⠀⠼⠑⠀⠠⠢⠊⠀⠼⠃⠚⠃⠑⠲"
+    - "Bapak dan Ibu pergi ke Jakarta pada hari Senin, 5 Mei 2025."
+  - - "⠠⠒⠢⠗⠶⠞⠁⠓⠀⠢⠍⠲⠓⠞⠷⠀⠹⠯⠚⠁⠓⠴⠁⠜⠀⠐⠗⠲"
+    - "Pemerintah memperhatikan kesejahteraan rakyat."
+  - - "⠠⠦⠀⠈⠙⠀⠺⠀⠥⠀⠢⠍⠲⠐⠃⠊⠀⠹⠎⠈⠇⠓⠜⠲"
+    - "Masih ada waktu untuk memperbaiki kesalahan."
+  - - "⠠⠴⠀⠞⠙⠅⠀⠴⠇⠜⠃⠁⠞⠂⠀⠔⠀⠖⠁⠻⠅⠁⠞⠀⠏⠥⠾⠇⠀⠼⠚⠋⠂⠉⠚⠲"
+    - "Supaya tidak terlambat, ia berangkat pukul 06.30."
+  - - "⠠⠃⠥⠾⠣⠀⠊⠀⠘⠎⠀⠌⠃⠈⠉⠀⠕⠀⠏⠈⠗⠀⠎⠺⠲"
+    - "Buku-buku itu sudah dibaca oleh para siswa."
+  - - "⠠⠙⠏⠞⠨⠀⠠⠁⠀⠢⠍⠃⠜⠞⠥⠀⠎⠦"
+    - "Dapatkah Anda membantu saya?"
+  - - "⠠⠯⠤⠐⠃⠣⠮⠀⠍⠜⠥⠎⠔⠀⠈⠙⠸⠀⠽⠀⠖⠍⠜⠋⠂⠞⠲"
+    - "Sebaik-baiknya manusia adalah yang bermanfaat."
+  # Ambiguous braille: the reading chosen
+  - - "⠠⠛⠗⠣"
+    - "Guru-guru"
+  - - "⠅⠁⠏⠜⠘"
+    - "kapanpun"
+  - - "⠒⠻⠜⠘"
+    - "pengampun"
+    - xfail: "Before pun, dots 3-4-5 are read as an (kapanpun); only the word ampun has am."
+  - - "⠊⠅⠇⠜"
+    - "iklan"
+  - - "⠢⠎⠅⠊"
+    - "meski"
+    - xfail: "Read as me-suka-i: a Sibra of two letters may follow the prefix me."
+  - - "⠢⠍⠃⠗⠜"
+    - "membran"
+    - xfail: "Read as mem-baru-an, as in pembaruan."
+  - - "⠑⠤⠍⠡⠇"
+    - "e-mail"
+  - - "⠍⠤⠗⠑⠅⠁"
+    - "mereka-reka"
+    - xfail: "A letter before a hyphen is read as a letter, as in e-mail."
+  - - "⠦"
+    - "masih"
+    - xfail: "masih that is the whole text is read as the quotation mark."
+  - - "⠠⠏⠲⠀⠠⠞⠲"
+    - "P. T."
+    - xfail: "A letter with a period is read as a word sign: Pada. Tak."
