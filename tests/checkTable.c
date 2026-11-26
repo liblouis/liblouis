@@ -20,6 +20,7 @@ main(int argc, char **argv)
 {
   const char *goodTable = "tables/en-us-g1.ctb";
   const char *badTable = "tests/tables/bad.ctb";
+  const char *badPassVariable = "tests/tables/bad-pass-variable.ctb";
   int result = 0;
 
   if (lou_checkTable(goodTable) == 0)
@@ -31,6 +32,13 @@ main(int argc, char **argv)
   if (lou_checkTable(badTable) != 0)
   {
     printf("Getting %s succeeded, expected failure\n", badTable);
+    result = 1;
+  }
+
+  /* A variable holds a value from 0 to 255 (issue #2219). */
+  if (lou_checkTable(badPassVariable) != 0)
+  {
+    printf("Getting %s succeeded, expected failure\n", badPassVariable);
     result = 1;
   }
 

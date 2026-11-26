@@ -1998,11 +1998,13 @@ the need for new opcodes. This suboperand is valid everywhere.
 
 Variables are set in the action part. To set a variable, use an
 expression like @code{#1=1}. All of the variables are initialized to 0
-at the start of each pass.
+at the start of each pass. A variable holds a value from 0 to 255; a
+larger value in a rule is a compile error.
 
 Variables can also be incremented and decremented by one in the action
 part with expressions like @code{#1+} and @code{#3-} respectively.
-An attempt to decrement a variable below 0 is silently ignored.
+An attempt to decrement a variable below 0 or increment it above 255
+is silently ignored.
 
 Variables are tested in the test part with conditional expressions like:
 @code{#1=2}, @code{#3<4}, @code{#5>6}, @code{#7<=8}, @code{#9>=10}.

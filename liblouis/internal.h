@@ -56,6 +56,7 @@ extern "C" {
 #endif
 
 #define NUMVAR 50
+#define MAXVARVALUE 255
 #define EMPHMODECHARSSIZE 256
 #define NOEMPHCHARSSIZE 256
 #define LETSIGNSIZE 256

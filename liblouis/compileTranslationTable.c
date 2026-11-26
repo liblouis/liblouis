@@ -1818,6 +1818,23 @@ passGetNumber(CharsString *passLine, int *passLinepos, widechar *number) {
 }
 
 static int
+passGetVariableValue(
+		const FileInfo *file, CharsString *passLine, int *passLinepos, widechar *number) {
+	/* Read the value a variable is compared with or set to */
+	int value = 0;
+	while ((*passLinepos < passLine->length) && (passLine->chars[*passLinepos] >= '0') &&
+			(passLine->chars[*passLinepos] <= '9')) {
+		value = 10 * value + (passLine->chars[(*passLinepos)++] - '0');
+		if (value > MAXVARVALUE) {
+			compileError(file, "variable value out of range");
+			return 0;
+		}
+	}
+	*number = value;
+	return 1;
+}
+
+static int
 passGetVariableNumber(
 		const FileInfo *file, CharsString *passLine, int *passLinepos, widechar *number) {
 	if (!passGetNumber(passLine, passLinepos, number)) {
@@ -2051,7 +2068,8 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 							file, passInstructions, &passIC, passHoldNumber))
 					return 0;
 				passLinepos++;
-				passGetNumber(&passLine, &passLinepos, &passHoldNumber);
+				if (!passGetVariableValue(file, &passLine, &passLinepos, &passHoldNumber))
+					return 0;
 				if (!appendInstructionChar(
 							file, passInstructions, &passIC, passHoldNumber))
 					return 0;
@@ -2242,7 +2260,8 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 							file, passInstructions, &passIC, passHoldNumber))
 					return 0;
 				passLinepos++;
-				passGetNumber(&passLine, &passLinepos, &passHoldNumber);
+				if (!passGetVariableValue(file, &passLine, &passLinepos, &passHoldNumber))
+					return 0;
 				if (!appendInstructionChar(
 							file, passInstructions, &passIC, passHoldNumber))
 					return 0;
