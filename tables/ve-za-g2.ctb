@@ -160,7 +160,17 @@ always mi 345
 begmidword mb 23
 begword dz 256
 noback match %[^_]|%[^_~]%<*[([{] ye %[^_]|[)}\\]]%>*%[^_~] 26
+attribute openingbracket ([{
 partword ye 26
+# Back-translation of a lower wordsign standing alone before a closing
+# bracket, e.g. "(by)" or " by)". This mirrors the match rules above. The wordsign
+# cell and the two-cell closing bracket are matched together because the
+# wordsign cell on its own is also a punctuation sign (e.g. 356 is a closing
+# quote). The rules only apply after a space or an opening bracket, so that a
+# closing quote followed by a closing bracket, as in ("abc"), is left alone.
+nofor after openingbracket after space always ye) 26-5-345
+nofor after openingbracket after space always ye] 26-46-345
+nofor after openingbracket after space always ye} 26-456-345
 begmidword fh 235
 partword zw 35
 
