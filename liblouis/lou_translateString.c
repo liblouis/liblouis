@@ -1184,6 +1184,7 @@ _lou_translate(const char *tableList, const char *displayTableList,
 	int haveEmphasis;
 	int compbrlStart = -1;
 	int compbrlEnd = -1;
+	int srcmax;
 	int k;
 	int goodTrans = 1;
 	if (tableList == NULL || inbufx == NULL || inlen == NULL || outbuf == NULL ||
@@ -1204,6 +1205,7 @@ _lou_translate(const char *tableList, const char *displayTableList,
 	if (table == NULL) return 0;
 	k = 0;
 	while (k < *inlen && inbufx[k]) k++;
+	srcmax = k;
 	input = (InString){ .chars = inbufx, .length = k, .bufferIndex = -1 };
 	haveEmphasis = 0;
 	if (!(typebuf = _lou_allocMem(alloc_typebuf, 0, input.length, *outlen))) return 0;
@@ -1387,7 +1389,7 @@ _lou_translate(const char *tableList, const char *displayTableList,
 		}
 	}
 	if (cursorPos != NULL && *cursorPos != -1) {
-		if (outputPos != NULL)
+		if (outputPos != NULL && *cursorPos >= 0 && *cursorPos < srcmax)
 			*cursorPos = outputPos[*cursorPos];
 		else
 			*cursorPos = cursorPosition;
