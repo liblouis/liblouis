@@ -48,6 +48,22 @@ tests:
   - [";'a", "A"]
   - [";'aa", "Aa"]
 
+# A multind rule whose indicators can not be applied to its cells (here the
+# only defined indicator is longer than the one cell) is not applied, and the
+# other rules for the same cells are tried instead.
+display: tables/text_nabcc.dis
+table: |
+  include tables/spaces.uti
+  lowercase a 1
+  punctuation ' 3
+  numsign 3456-3456
+  multind 56 letsign numsign
+  always ' 56
+flags: {testmode: backward}
+tests:
+  - [";", "'"]
+  - [";a", "'a"]
+
 # A multind rule whose cells are fewer than its opcodes: the indicators share
 # the cells of the multind rule, and all of them are applied. Without
 # nocontractsign, "b" would be read as "but"; without capsletter, it would not
