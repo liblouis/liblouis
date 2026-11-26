@@ -25,7 +25,7 @@ tests:
   - - radio
     - ⠗⠹⠊⠕
   - - ciudad
-    - ⠉⠊⠥⠙⠹
+    - ⠉⠊⠥⠹
   - - alba
     - ⠅⠃⠁
   - - falda
@@ -53,7 +53,7 @@ tests:
   - - bravo
     - ⠆⠁⠧⠕
   - - cobre
-    - ⠉⠕⠆⠑
+    - ⠉⠕⠆
   - - crisol
     - ⠒⠊⠎⠕⠇
   - - sacro
@@ -61,7 +61,7 @@ tests:
   - - drama
     - ⠲⠁⠍⠁
   - - ladrillo
-    - ⠇⠁⠲⠊⠇⠇⠕
+    - ⠇⠁⠲⠊⠿⠕
   - - embudo
     - ⠣⠃⠥⠙⠕
   - - gema
@@ -71,7 +71,7 @@ tests:
   - - enchufe
     - ⠢⠉⠓⠥⠋⠑
   - - gente
-    - ⠛⠢⠞⠑
+    - ⠛⠢⠞
   - - pisen
     - ⠏⠊⠎⠢
   - - era
@@ -113,15 +113,15 @@ tests:
   - - tom
     - ⠞⠺
   - - once
-    - ⠕⠝⠉⠑
+    - ⠭⠉⠑
   - - leones
-    - ⠇⠑⠕⠝⠫
+    - ⠇⠑⠭⠫
   - - donativo
     - ⠙⠭⠁⠞⠊⠧⠕
   - - don
     - ⠙⠭
   - - orgullo
-    - ⠱⠛⠥⠇⠇⠕
+    - ⠱⠛⠥⠿⠕
   - - tortuga
     - ⠞⠱⠞⠥⠛⠁
   - - dolor
@@ -133,13 +133,13 @@ tests:
   - - cocos
     - ⠉⠕⠉⠪
   - - probeta
-    - ⠖⠕⠃⠑⠞⠁
+    - ⠏⠃⠑⠞⠁
   - - aprisa
     - ⠁⠖⠊⠎⠁
   - - quieto
     - ⠟⠊⠑⠞⠕
   - - paquete
-    - ⠏⠁⠟⠑⠞⠑
+    - ⠏⠁⠟⠞
   - - truco
     - ⠴⠥⠉⠕
   - - cuatro
@@ -148,8 +148,9 @@ tests:
     - ⠓⠳⠇⠛⠁
   - - tenue
     - ⠞⠢⠳
+  # ab at the end of a word (B 16-1 v3, Table 23)
   - - mayab
-    - ⠍⠁⠽⠁⠃
+    - ⠍⠁⠽⠂
 
   # intersyllabic tests where a contraction might be a syllable itself or part syllable
   - - abdica
@@ -221,7 +222,7 @@ tests:
   - - cono
     - ⠉⠭⠕
   - - corte
-    - ⠉⠱⠞⠑
+    - ⠉⠱⠞
   - - mora
     - ⠍⠱⠁
   - - mostaza
@@ -291,7 +292,7 @@ tests:
   - - ominosos
     - ⠺⠔⠪⠪
   - - onerosos
-    - ⠕⠝⠦⠪⠪
+    - ⠭⠦⠪⠪
   - - opiniones
     - ⠕⠏⠔⠼⠫
   - - oros
@@ -299,7 +300,7 @@ tests:
   - - osos
     - ⠪⠪
   - - principales
-    - ⠖⠔⠉⠊⠏⠅⠫
+    - ⠖⠉⠇⠫
   - - quinqué
     - ⠟⠔⠟⠮
   - - rueden
@@ -311,20 +312,22 @@ tests:
   - - trompos
     - ⠴⠺⠏⠪
 
-  # lower sign exceptions: when a word consists of lowered signs only, first contraction is
-  # destroyed to avoid confussion with punctuation signs
+  # words made up only of contractions whose signs are in the lower part of the cell
+  # (B 16-1 v3, 3.4.2): all contractions are used
   - - tren
-    - ⠞⠗⠢
+    - ⠴⠢
   - - trinen
-    - ⠞⠗⠔⠢
+    - ⠴⠔⠢
   - - entrenen
-    - ⠑⠝⠴⠢⠢
+    - ⠴⠝⠢
   - - crin
-    - ⠉⠗⠔
+    - ⠒⠔
   - - graben
-    - ⠛⠗⠂⠢
+    - ⠶⠂⠢
   - - drenen
-    - ⠙⠗⠢⠢
+    - ⠲⠢⠢
+  - - traben
+    - ⠴⠂⠢
 
   # lang realization: contractions may not abbreviate accented (acute) vowels
   - - ábside
@@ -362,7 +365,7 @@ tests:
   - - cóselos
     - ⠉⠬⠎⠑⠇⠪
   - - Cuéllar
-    - ⠨⠉⠥⠮⠇⠇⠡
+    - ⠨⠉⠥⠮⠿⠡
 
   # word endings tests
   - - filas
@@ -435,9 +438,9 @@ tests:
   - - amígdala
     - ⠁⠍⠌⠛⠙⠅⠁
   - - occidente
-    - ⠕⠉⠉⠊⠙⠢⠞⠑
+    - ⠕⠉⠉⠊⠙⠢⠞
   - - cercamente
-    - ⠉⠉⠍
+    - ⠉⠦⠉⠁⠍
   - - ignoro
     - ⠊⠛⠝⠱⠕
   
@@ -447,7 +450,7 @@ tests:
   - - ladra
     - ⠇⠁⠲⠁
   - - esquema
-    - ⠫⠟⠣⠁
+    - ⠫⠟⠍⠁
   - - fueron
     - ⠋⠥⠦⠭
   - - hueso
@@ -456,7 +459,6 @@ tests:
     - ⠎⠌⠛⠥⠣⠑
   
   # word beginnings may not be followed by vowels (to avoid confussion with punctuation signs), including accented ones.
-  # also, word beginnings might not be followed by a contraction which abbreviates a consonant.
   - - comunicar
     - ⠉⠺⠥⠝⠊⠉⠡
   - - comando
@@ -466,56 +468,56 @@ tests:
   - - conato
     - ⠉⠭⠁⠞⠕
   - - contrato
-    - ⠒⠞⠗⠁⠞⠕
+    - ⠒⠴⠁⠞⠕
   - - consumo
     - ⠒⠎⠥⠍⠕
   - - congruente
-    - ⠒⠛⠗⠥⠢⠞⠑
+    - ⠒⠶⠥⠢⠞
   - - ingrato
     - ⠔⠶⠁⠞⠕
   - - distrae
-    - ⠲⠞⠗⠁⠑
+    - ⠲⠴⠁⠑
   - - concreto
-    - ⠒⠉⠗⠑⠞⠕
+    - ⠒⠒⠞
   - - comprar
-    - ⠤⠏⠗⠡
+    - ⠤⠖⠡
 
   - - expresar
-    - ⠭⠏⠗⠫⠡
+    - ⠭⠖⠎⠡
   - - interpretar
-    - ⠽⠏⠗⠑⠞⠡
+    - ⠽⠖⠞⠡
   - - pregrabar
-    - ⠖⠛⠗⠂⠡
+    - ⠖⠶⠂⠡
   - - pregrado
-    - ⠖⠛⠗⠹⠕
+    - ⠖⠶
   - - pregrados
-    - ⠖⠛⠗⠹⠪
+    - ⠖⠶⠪
   - - condrioma
-    - ⠒⠙⠗⠊⠺⠁
+    - ⠒⠲⠊⠺⠁
   - - reprende
-    - ⠗⠏⠗⠢⠙⠑
+    - ⠗⠖⠝⠙⠑
   - - ingresaron
     - ⠔⠶⠫⠡⠭
   - - retraso
-    - ⠗⠞⠗⠯⠕
+    - ⠗⠴⠯⠕
   - - extraño
-    - ⠭⠞⠗⠁⠻⠕
+    - ⠭⠴⠁⠻⠕
   - - entrecruzar
-    - ⠴⠉⠗⠥⠵⠡
+    - ⠴⠒⠥⠵⠡
   - - intergrupal
-    - ⠽⠛⠗⠥⠏⠅
+    - ⠽⠶⠥⠏⠅
   - - sobreproducido
-    - ⠆⠏⠗⠕⠙⠥⠉⠊⠙⠕
+    - ⠆⠏⠙⠥⠉⠊⠙⠕
 
-  # stenographic interruption: whenever x, w or k is anywhere in a word, the entire word is
-  # uncontracted and dot 5 prefixes the word.
+  # stenographic interruption: whenever w or k is anywhere in a word, the entire word is
+  # uncontracted and dot 5 prefixes the word (B 16-1 v3, 4.2.1).
   # most are african based or arabic derived words in the language.
   - - kiosco
     - ⠐⠅⠊⠕⠎⠉⠕
   - - wagner
     - ⠐⠺⠁⠛⠝⠑⠗
   - - xalapa
-    - ⠐⠭⠁⠇⠁⠏⠁
+    - ⠭⠅⠁⠏⠁
   - - hardware
     - ⠐⠓⠁⠗⠙⠺⠁⠗⠑
   - - hawaiano
@@ -549,47 +551,1138 @@ tests:
   - - folklórica
     - ⠐⠋⠕⠇⠅⠇⠬⠗⠊⠉⠁
   - - anexar
-    - ⠐⠁⠝⠑⠭⠁⠗
+    - ⠩⠑⠭⠡
   - - anorexia
-    - ⠐⠁⠝⠕⠗⠑⠭⠊⠁
+    - ⠩⠱⠑⠭⠊⠁
   - - aproximación
-    - ⠐⠁⠏⠗⠕⠭⠊⠍⠁⠉⠊⠬⠝
+    - ⠁⠖⠕⠭⠜⠁⠉⠼
   - - aproximadamente
-    - ⠐⠁⠏⠗⠕⠭⠊⠍⠁⠙⠁⠍⠑⠝⠞⠑
+    - ⠁⠖⠕⠭⠜⠹⠁⠍
   - - auxiliador
-    - ⠐⠁⠥⠭⠊⠇⠊⠁⠙⠕⠗
+    - ⠁⠥⠭⠊⠇⠊⠹⠱
   - - xilófono
-    - ⠐⠭⠊⠇⠬⠋⠕⠝⠕
+    - ⠭⠊⠇⠬⠋⠭⠕
   - - exponer
-    - ⠐⠑⠭⠏⠕⠝⠑⠗
-    - xfail: the exception to the interruption rule is applied correctly here
+    - ⠭⠏⠭⠦
+  # the letter x does not interrupt stenography
+  - - taxi
+    - ⠞⠁⠭⠊
+  - - examen
+    - ⠑⠭⠁⠍⠢
     
   # testing to check if dot 5 is also added before closing quotation or question mark symbols
   - - no quieres que hablen?
     - ⠝ ⠟⠊⠦⠫ ⠟ ⠓⠂⠇⠢⠐⠢
   - - la tienda se llama "el retén"
-    - ⠄ ⠞⠊⠢⠙⠁ ⠎ ⠇⠇⠁⠍⠁ ⠦⠑ ⠗⠞⠮⠝⠐⠦
+    - ⠄ ⠞⠊⠢⠙⠁ ⠎ ⠿⠁⠍⠁ ⠐⠦⠑ ⠗⠞⠮⠝⠐⠦
 
   # test lower sign exceptions and stenographic interruption with capitalization
   - - toma un Tren
-    - ⠞⠺⠁ ⠥ ⠨⠞⠗⠢
+    - ⠞⠺⠁ ⠥ ⠨⠴⠢
   - - fueron con Walter
     - ⠋⠥⠦⠭ ⠉ ⠐⠨⠺⠁⠇⠞⠑⠗
   - - es el señor Kraller
-    - ⠫ ⠑ ⠎⠑⠻⠱ ⠐⠨⠅⠗⠁⠇⠇⠑⠗
+    - ⠫ ⠑ ⠎⠗ ⠐⠨⠅⠗⠁⠇⠇⠑⠗
   - - es para MAXWELL
     - ⠫ ⠡ ⠐⠨⠨⠍⠁⠭⠺⠑⠇⠇
 
   # testing these with punctuation
+  # B 16-1 v3, 4.2.2: dot 5 goes before an opening sign that precedes a lowercase word
+  # and before the closing question mark and quotation mark
   - - no "drenen" el lago
-    - ⠝ ⠦⠙⠗⠢⠢⠐⠦ ⠑ ⠇⠁⠛⠕
-    - xfail: unresolved multipass situation
+    - ⠝ ⠐⠦⠲⠢⠢⠐⠦ ⠑ ⠇⠁⠛⠕
   - - toma un "tren"
-    - ⠞⠺⠁ ⠥ ⠦⠞⠗⠢⠐⠦
-    - xfail: unresolved multipass situation
+    - ⠞⠺⠁ ⠥ ⠐⠦⠴⠢⠐⠦
   - - toma un ¿tren?
-    - ⠞⠺⠁ ⠥ ⠢⠞⠗⠢⠐⠢
-    - xfail: unresolved multipass situation
+    - ⠞⠺⠁ ⠥ ⠐⠢⠴⠢⠐⠢
   - - es su ¿bikini?
     - ⠫ ⠜ ⠢⠐⠃⠊⠅⠊⠝⠊⠐⠢
-    - xfail: unresolved multipass situation
+  - - ¿whisky?
+    - ⠢⠐⠺⠓⠊⠎⠅⠽⠐⠢
+  - - ¿kilo?"
+    - ⠢⠐⠅⠊⠇⠕⠐⠢⠦
+
+  # Spanish grade 2 word list, Documento técnico B 16-1 (CBE), version 3, Apéndice C.
+  # Word and its listed variants with their prefixed abbreviation.
+  - - abajo
+    - ⠂⠚
+  - - haber
+    - ⠓⠗
+  - - efectiva
+    - ⠑⠋⠧⠁
+  - - pronto
+    - ⠏⠞
+  - - propio
+    - ⠏⠏
+  - - propia
+    - ⠏⠏⠁
+  - - propias
+    - ⠏⠏⠯
+  - - propios
+    - ⠏⠏⠪
+  - - propiamente
+    - ⠏⠏⠍
+  - - propiedad
+    - ⠏⠏⠹
+  - - personalidad
+    - ⠏⠝⠇⠹
+  - - ocasionalmente
+    - ⠕⠼⠇⠍
+  - - condicionalmente
+    - ⠒⠙⠼⠇⠍
+  - - inmediatamente
+    - ⠔⠍⠍
+  - - relativamente
+    - ⠗⠇⠧⠍
+  - - únicamente
+    - ⠾⠉⠍
+  - - últimamente
+    - ⠾⠇⠍
+  - - nuestras
+    - ⠝⠳⠯
+  - - nuestros
+    - ⠝⠳⠪
+  - - numerosas
+    - ⠼⠎⠯
+  - - numerosos
+    - ⠼⠎⠪
+  - - buenas
+    - ⠃⠯
+  - - buenos
+    - ⠃⠪
+  - - absolutas
+    - ⠁⠃⠯
+  - - ejemplos
+    - ⠑⠚⠎
+  - - compadre
+    - ⠤⠏⠁
+  - - consecuente
+    - ⠒⠎⠞
+  - - sobres
+    - ⠆⠫
+  - - seres
+    - ⠎⠦⠫
+
+  # Word beginnings (B 16-1 v3, 3.1): used before a consonant only, the consonant after
+  # them may be contracted, and several can follow one another. Examples from the document.
+  - - retina
+    - ⠗⠞⠔⠁
+  # the document prints com-p-ar-ar here, but the sequence para (3.3.1) can be used anywhere
+  - - comparar
+    - ⠤⠸⠡⠗
+  - - comprar
+    - ⠤⠖⠡
+  # v3 prints recomenzar with the sign of on; the letters are re- + c + om, as here
+  - - recomenzar
+    - ⠗⠉⠺⠢⠵⠡
+  - - extraño
+    - ⠭⠴⠁⠻⠕
+  - - entreplanta
+    - ⠴⠏⠇⠩⠞⠁
+  - - trazo
+    - ⠴⠁⠵⠕
+  - - exvoto
+    - ⠭⠧⠕⠞⠕
+  - - repreprogramar
+    - ⠗⠖⠏⠶⠁⠍⠡
+  - - precomponer
+    - ⠖⠤⠏⠭⠦
+  - - reconquista
+    - ⠗⠒⠟⠊⠎⠞⠁
+  - - sobreinterpretar
+    - ⠆⠽⠖⠞⠡
+  - - reinterpretación
+    - ⠗⠽⠖⠞⠁⠉⠼
+  - - disconforme
+    - ⠲⠒⠋⠱⠍⠑
+  - - recompensa
+    - ⠗⠤⠏⠢⠎⠁
+  - - interdisciplinar
+    - ⠽⠲⠉⠊⠏⠇⠔⠡
+  - - preconsular
+    - ⠖⠒⠎⠥⠇⠡
+  - - exconvicto
+    - ⠭⠒⠧⠊⠉⠞⠕
+  - - comprensión
+    - ⠤⠖⠝⠎⠼
+  - - intercontinental
+    - ⠽⠒⠞⠔⠢⠞⠅
+  - - recomponer
+    - ⠗⠤⠏⠭⠦
+  - - recompre
+    - ⠗⠤⠖⠑
+  - - recompremos
+    - ⠗⠤⠖⠍⠪
+  - - consumo
+    - ⠒⠎⠥⠍⠕
+  - - contrato
+    - ⠒⠴⠁⠞⠕
+  - - renglón
+    - ⠗⠝⠛⠇⠬⠝
+  - - reno
+    - ⠗⠝⠕
+  - - procede
+    - ⠏⠉⠑⠙⠑
+  - - propósito
+    - ⠏⠏⠬⠎⠊⠞⠕
+  - - prohibir
+    - ⠏⠓⠊⠃⠊⠗
+  # not before a vowel
+  - - reactivo
+    - ⠗⠑⠁⠉⠞⠊⠧⠕
+  - - común
+    - ⠉⠺⠾⠝
+
+  # Word endings (B 16-1 v3, 3.2): single endings, plurals and endings in a row.
+  # Examples from the document.
+  - - siendo
+    - ⠎⠲⠙
+  - - producción
+    - ⠏⠙⠥⠼
+  - - finalmente
+    - ⠋⠔⠅⠍
+  - - influenciables
+    - ⠔⠋⠇⠥⠢⠉⠃⠎
+  - - mimbres
+    - ⠍⠜⠆⠎
+  - - provincias
+    - ⠏⠧⠔⠉⠎
+  - - asientos
+    - ⠯⠲⠞⠪
+  - - tormentos
+    - ⠞⠱⠍⠞⠪
+  - - asientas
+    - ⠯⠲⠞⠯
+  - - tormentas
+    - ⠞⠱⠍⠞⠯
+  - - canciones
+    - ⠉⠩⠉⠼⠫
+  - - pensiones
+    - ⠏⠢⠎⠼⠫
+  - - producciones
+    - ⠏⠙⠥⠼⠫
+  - - asientes
+    - ⠯⠲⠞⠫
+  - - dementes
+    - ⠙⠑⠍⠎
+  - - venturas
+    - ⠧⠢⠞⠗⠎
+  - - busques
+    - ⠃⠥⠎⠟⠎
+  - - tomates
+    - ⠞⠺⠁⠞⠎
+  - - amables
+    - ⠁⠍⠁⠃⠎
+  - - cumbres
+    - ⠉⠥⠍⠆⠎
+  - - recias
+    - ⠗⠉⠎
+  - - ciencias
+    - ⠉⠊⠢⠉⠎
+  - - comandos
+    - ⠉⠺⠩⠙⠎
+  - - complementes
+    - ⠤⠏⠇⠑⠍⠎
+  - - tristemente
+    - ⠴⠊⠎⠞⠍
+  - - pateando
+    - ⠏⠁⠞⠩⠙
+  - - tembleque
+    - ⠞⠣⠃⠟
+  - - iníciate
+    - ⠔⠌⠉⠞
+  - - pronunciable
+    - ⠏⠝⠥⠝⠉⠃
+  - - reciamente
+    - ⠗⠉⠍
+  - - licenciatura
+    - ⠇⠊⠉⠢⠉⠞⠗
+  - - sociable
+    - ⠎⠕⠉⠃
+  - - apreciablemente
+    - ⠁⠖⠑⠉⠃⠍
+  - - nulidad
+    - ⠝⠥⠇⠊⠹
+  - - ansiedad
+    - ⠩⠎⠊⠑⠹
+  - - baobabs
+    - ⠃⠁⠕⠃⠂⠎
+
+  # Sequences (B 16-1 v3, 3.3): que, para, ante and esta.
+  # Examples from the document.
+  - - anteojos
+    - ⠸⠩⠕⠚⠪
+  - - panteísmo
+    - ⠏⠸⠩⠌⠎⠍⠕
+  - - constante
+    - ⠒⠎⠞⠩⠞
+  - - mangante
+    - ⠍⠩⠛⠩⠞
+  - - estadio
+    - ⠵⠙⠊⠕
+  - - condestable
+    - ⠒⠙⠵⠃
+  - - floresta
+    - ⠋⠇⠱⠵
+  - - paraguas
+    - ⠸⠡⠛⠥⠯
+  - - imparable
+    - ⠜⠸⠡⠃
+  - - prepara
+    - ⠖⠸⠡
+  - - quebranto
+    - ⠟⠆⠩⠞⠕
+  - - querida
+    - ⠟⠗⠊⠙⠁
+  - - quedamos
+    - ⠟⠙⠁⠍⠪
+  - - requemar
+    - ⠗⠟⠍⠡
+  - - renquear
+    - ⠗⠝⠟⠡
+  - - bloque
+    - ⠃⠇⠕⠟
+
+  # Words of the list in B 16-1 v3 (Apendice C) and their accepted variants. The names of
+  # countries start with the sign 456 instead of the capital sign.
+  - - absoluta
+    - ⠁⠃⠁
+  - - alrededores
+    - ⠅⠗⠫
+  - - anteriores
+    - ⠩⠗⠫
+  - - anteriormente
+    - ⠩⠗⠍
+  - - anterioridades
+    - ⠩⠗⠹⠫
+  - - Argentina
+    - ⠸⠁⠗
+  - - baja
+    - ⠃⠚⠁
+  - - Bolivia
+    - ⠸⠃⠕
+  - - braille
+    - ⠆⠿
+  - - brailles
+    - ⠆⠿⠫
+  - - prebraille
+    - ⠖⠆⠿
+  - - probraille
+    - ⠏⠆⠿
+  - - Brasil
+    - ⠸⠃⠗
+  - - ceguera
+    - ⠉⠛⠗
+  - - cegueras
+    - ⠉⠛⠗⠯
+  - - Chile
+    - ⠸⠉⠇
+  - - ciega
+    - ⠉⠛⠁
+  - - prociegos
+    - ⠏⠉⠛⠪
+  - - Colombia
+    - ⠸⠉⠕
+  - - concreto
+    - ⠒⠒⠞
+  - - concreta
+    - ⠒⠒⠞⠁
+  - - concretas
+    - ⠒⠒⠞⠯
+  - - concretos
+    - ⠒⠒⠞⠪
+  - - concretamente
+    - ⠒⠒⠞⠍
+  - - condicional
+    - ⠒⠙⠼⠇
+  - - condicionales
+    - ⠒⠙⠼⠇⠫
+  - - consecuencial
+    - ⠒⠎⠉⠇
+  - - consecuenciales
+    - ⠒⠎⠉⠇⠫
+  - - consecuencialmente
+    - ⠒⠎⠉⠇⠍
+  - - consecuentes
+    - ⠒⠎⠞⠫
+  - - consecuentemente
+    - ⠒⠎⠞⠍
+  - - contras
+    - ⠒⠴⠯
+  - - contraria
+    - ⠒⠴⠗⠁
+  - - contrarias
+    - ⠒⠴⠗⠯
+  - - contrarios
+    - ⠒⠴⠗⠪
+  - - contrariamente
+    - ⠒⠴⠗⠍
+  - - contrariedades
+    - ⠒⠴⠗⠹⠫
+  - - cuándo
+    - ⠐⠉⠙
+  - - cuanta
+    - ⠉⠥⠁
+  - - cuánta
+    - ⠐⠉⠥⠁
+  - - Cuba
+    - ⠸⠉⠥
+  - - decías
+    - ⠙⠉⠎
+  - - predecía
+    - ⠖⠙⠉
+  - - predecías
+    - ⠖⠙⠉⠎
+  - - predecían
+    - ⠖⠙⠉⠝
+  - - demasiada
+    - ⠙⠍⠙⠁
+  - - diferencial
+    - ⠙⠋⠉⠇
+  - - diferenciales
+    - ⠙⠋⠉⠇⠫
+  - - diferencialmente
+    - ⠙⠋⠉⠇⠍
+  - - diferenciable
+    - ⠙⠋⠉⠃
+  - - diferenciables
+    - ⠙⠋⠉⠃⠫
+  - - diferentemente
+    - ⠙⠋⠞⠍
+  - - difíciles
+    - ⠙⠋⠫
+  - - difícilmente
+    - ⠙⠋⠍
+  - - predijo
+    - ⠖⠙⠚
+  - - doctor
+    - ⠙⠗
+  - - doctora
+    - ⠙⠗⠁
+  - - doctoras
+    - ⠙⠗⠁⠎
+  - - doctores
+    - ⠙⠗⠑⠎
+  - - Ecuador
+    - ⠸⠑⠉
+  - - efectividades
+    - ⠑⠋⠧⠹⠫
+  - - ejemplares
+    - ⠑⠚⠗⠫
+  - - ejemplarmente
+    - ⠑⠚⠗⠍
+  - - ejemplaridad
+    - ⠑⠚⠗⠹
+  - - ejemplaridades
+    - ⠑⠚⠗⠹⠫
+  - - ente
+    - ⠢⠞⠑
+  - - entes
+    - ⠢⠞⠫
+  - - entretantos
+    - ⠴⠞⠪
+  - - España
+    - ⠸⠑⠎
+  - - estás
+    - ⠫⠞⠎
+  - - estabas
+    - ⠫⠃⠎
+  - - estados
+    - ⠫⠙⠪
+  - - esta
+    - ⠵⠁
+  - - esto
+    - ⠵⠕
+  - - exteriores
+    - ⠭⠗⠫
+  - - exteriormente
+    - ⠭⠗⠍
+  - - exterioridad
+    - ⠭⠗⠹
+  - - exterioridades
+    - ⠭⠗⠹⠫
+  - - fáciles
+    - ⠋⠷⠫
+  - - fácilmente
+    - ⠋⠷⠍
+  - - facilidades
+    - ⠋⠹⠫
+  - - favorable
+    - ⠋⠧⠃
+  - - favorables
+    - ⠋⠧⠃⠫
+  - - favorablemente
+    - ⠋⠧⠃⠍
+  - - generales
+    - ⠛⠝⠫
+  - - exgeneral
+    - ⠭⠛⠝
+  - - exgenerales
+    - ⠭⠛⠝⠫
+  - - generalmente
+    - ⠛⠝⠍
+  - - generalidades
+    - ⠛⠝⠹⠫
+  - - pregrado
+    - ⠖⠶
+  - - pregrados
+    - ⠖⠶⠪
+  - - grande
+    - ⠛⠙
+  - - grandemente
+    - ⠛⠙⠍
+  - - Guatemala
+    - ⠸⠛⠞
+  - - ha
+    - ⠓
+  - - haberes
+    - ⠓⠗⠫
+  - - habías
+    - ⠓⠃⠎
+  - - rehacer
+    - ⠗⠦⠗
+  - - hacías
+    - ⠦⠉⠎
+  - - rehacía
+    - ⠗⠦⠉
+  - - rehacías
+    - ⠗⠦⠉⠎
+  - - rehacían
+    - ⠗⠦⠉⠝
+  - - hayas
+    - ⠓⠽⠎
+  - - hija
+    - ⠓⠚⠁
+  - - historial
+    - ⠓⠞⠇
+  - - historiales
+    - ⠓⠞⠇⠫
+  - - historiable
+    - ⠓⠞⠃
+  - - historiables
+    - ⠓⠞⠃⠫
+  - - histórico
+    - ⠓⠞⠉
+  - - histórica
+    - ⠓⠞⠉⠁
+  - - históricas
+    - ⠓⠞⠉⠯
+  - - históricos
+    - ⠓⠞⠉⠪
+  - - históricamente
+    - ⠓⠞⠉⠍
+  - - prehistórico
+    - ⠖⠓⠞⠉
+  - - prehistórica
+    - ⠖⠓⠞⠉⠁
+  - - prehistóricas
+    - ⠖⠓⠞⠉⠯
+  - - prehistóricos
+    - ⠖⠓⠞⠉⠪
+  - - prehistóricamente
+    - ⠖⠓⠞⠉⠍
+  - - prohombre
+    - ⠏⠓⠺
+  - - prohombres
+    - ⠏⠓⠺⠫
+  - - Honduras
+    - ⠸⠓⠝
+  - - iguales
+    - ⠊⠛⠫
+  - - igualmente
+    - ⠊⠛⠍
+  - - igualdades
+    - ⠊⠛⠹⠫
+  - - importantemente
+    - ⠜⠏⠞⠍
+  - - inferiores
+    - ⠔⠋⠫
+  - - inferiormente
+    - ⠔⠋⠍
+  - - inferioridades
+    - ⠔⠋⠹⠫
+  - - interiores
+    - ⠔⠗⠫
+  - - interiormente
+    - ⠔⠗⠍
+  - - interioridades
+    - ⠔⠗⠹⠫
+  - - juntamente
+    - ⠚⠞⠍
+  - - conjuntamente
+    - ⠒⠚⠞⠍
+  - - disjunto
+    - ⠲⠚⠞
+  - - disjunta
+    - ⠲⠚⠞⠁
+  - - disjuntamente
+    - ⠲⠚⠞⠍
+  - - juventudes
+    - ⠚⠧⠞⠫
+  - - larga
+    - ⠇⠛⠁
+  - - largamente
+    - ⠇⠛⠍
+  - - les
+    - ⠇⠫
+  - - lugares
+    - ⠇⠥⠫
+  - - mayores
+    - ⠍⠽⠫
+  - - mayormente
+    - ⠍⠽⠍
+  - - mayorías
+    - ⠍⠽⠗⠯
+  - - mediante
+    - ⠍⠙⠞
+  - - media
+    - ⠍⠙⠁
+  - - promedio
+    - ⠏⠍⠙
+  - - promedios
+    - ⠏⠍⠙⠪
+  - - intermedio
+    - ⠽⠍⠙
+  - - intermedios
+    - ⠽⠍⠙⠪
+  - - remedio
+    - ⠗⠍⠙
+  - - remedios
+    - ⠗⠍⠙⠪
+  - - mejores
+    - ⠍⠚⠫
+  - - México
+    - ⠸⠍⠭
+  - - mismamente
+    - ⠍⠍⠍
+  - - mucha
+    - ⠈⠍⠁
+  - - mujeres
+    - ⠍⠥⠫
+  - - exmujer
+    - ⠭⠍⠥
+  - - exmujeres
+    - ⠭⠍⠥⠫
+  - - naturales
+    - ⠝⠞⠫
+  - - naturalmente
+    - ⠝⠞⠍
+  - - naturalidades
+    - ⠝⠞⠹⠫
+  - - connatural
+    - ⠒⠝⠞
+  - - connaturales
+    - ⠒⠝⠞⠫
+  - - connaturalmente
+    - ⠒⠝⠞⠍
+  - - connaturalidad
+    - ⠒⠝⠞⠹
+  - - connaturalidades
+    - ⠒⠝⠞⠹⠫
+  - - sobrenatural
+    - ⠆⠝⠞
+  - - sobrenaturales
+    - ⠆⠝⠞⠫
+  - - sobrenaturalmente
+    - ⠆⠝⠞⠍
+  - - sobrenaturalidad
+    - ⠆⠝⠞⠹
+  - - sobrenaturalidades
+    - ⠆⠝⠞⠹⠫
+  - - necesaria
+    - ⠝⠉⠗⠁
+  - - necesidades
+    - ⠝⠉⠹⠫
+  - - Nicaragua
+    - ⠸⠝⠊
+  - - ningunos
+    - ⠝⠛⠪
+  - - ningunas
+    - ⠝⠛⠯
+  - - novedades
+    - ⠝⠧⠹⠫
+  - - nuestra
+    - ⠝⠳⠁
+  - - nueva
+    - ⠝⠧⠁
+  - - numeral
+    - ⠼⠇
+  - - numerales
+    - ⠼⠇⠫
+  - - numerosa
+    - ⠼⠎⠁
+  - - ocasional
+    - ⠕⠼⠇
+  - - ocasionales
+    - ⠕⠼⠇⠫
+  - - oficina
+    - ⠕⠋⠝
+  - - oficinas
+    - ⠕⠋⠝⠯
+  - - oficiales
+    - ⠕⠋⠇⠫
+  - - oficialmente
+    - ⠕⠋⠇⠍
+  - - oficialidad
+    - ⠕⠋⠇⠹
+  - - oficialidades
+    - ⠕⠋⠇⠹⠫
+  - - oportuna
+    - ⠕⠏⠁
+  - - oportunamente
+    - ⠕⠏⠍
+  - - oportunidades
+    - ⠕⠏⠹⠫
+  - - otra
+    - ⠕⠴⠁
+  - - país
+    - ⠏⠌
+  - - países
+    - ⠏⠌⠎
+  - - Panamá
+    - ⠸⠏⠁
+  - - Paraguay
+    - ⠸⠏⠽
+  - - pequeñamente
+    - ⠏⠻⠍
+  - - personal
+    - ⠏⠝⠇
+  - - personales
+    - ⠏⠝⠇⠫
+  - - personalmente
+    - ⠏⠝⠇⠍
+  - - personalidades
+    - ⠏⠝⠇⠹⠫
+  - - Perú
+    - ⠸⠏⠑
+  - - poderes
+    - ⠏⠗⠫
+  - - podías
+    - ⠏⠙⠎
+  - - porqué
+    - ⠐⠏⠟
+  - - porqués
+    - ⠐⠏⠟⠫
+  - - Portugal
+    - ⠸⠏⠞
+  - - principales
+    - ⠖⠉⠇⠫
+  - - principalmente
+    - ⠖⠉⠇⠍
+  - - pronta
+    - ⠏⠞⠁
+  - - prontas
+    - ⠏⠞⠯
+  - - prontos
+    - ⠏⠞⠪
+  - - prontamente
+    - ⠏⠞⠍
+  - - propiedades
+    - ⠏⠏⠹⠫
+  - - razonable
+    - ⠗⠵⠃
+  - - razonables
+    - ⠗⠵⠃⠫
+  - - razonablemente
+    - ⠗⠵⠃⠍
+  - - relacionable
+    - ⠗⠇⠃
+  - - relacionables
+    - ⠗⠇⠃⠫
+  - - relacional
+    - ⠗⠇⠇
+  - - relacionales
+    - ⠗⠇⠇⠫
+  - - relacionalmente
+    - ⠗⠇⠇⠍
+  - - interrelación
+    - ⠽⠗⠇
+  - - interrelaciones
+    - ⠽⠗⠇⠫
+  - - interrelacional
+    - ⠽⠗⠇⠇
+  - - interrelacionales
+    - ⠽⠗⠇⠇⠫
+  - - interrelacionalmente
+    - ⠽⠗⠇⠇⠍
+  - - señor
+    - ⠎⠗
+  - - señora
+    - ⠎⠗⠁
+  - - señoras
+    - ⠎⠗⠁⠎
+  - - señores
+    - ⠎⠗⠑⠎
+  - - consiguiente
+    - ⠒⠎⠛
+  - - consiguientes
+    - ⠒⠎⠛⠫
+  - - consiguientemente
+    - ⠒⠎⠛⠍
+  - - sinos
+    - ⠎⠝⠪
+  - - situacional
+    - ⠎⠞⠼⠇
+  - - situacionales
+    - ⠎⠞⠼⠇⠫
+  - - situacionalmente
+    - ⠎⠞⠼⠇⠍
+  - - solamente
+    - ⠎⠇⠍
+  - - soledad
+    - ⠎⠇⠹
+  - - soledades
+    - ⠎⠇⠹⠫
+  - - sordera
+    - ⠎⠱⠗
+  - - sorderas
+    - ⠎⠱⠗⠯
+  - - sordo
+    - ⠎⠱
+  - - sorda
+    - ⠎⠱⠁
+  - - sordas
+    - ⠎⠱⠯
+  - - sordos
+    - ⠎⠱⠪
+  - - sordamente
+    - ⠎⠱⠍
+  - - sordoceguera
+    - ⠎⠉⠗
+  - - sordocegueras
+    - ⠎⠉⠗⠯
+  - - sordociego
+    - ⠎⠉⠛
+  - - sordociega
+    - ⠎⠉⠛⠁
+  - - sordociegas
+    - ⠎⠉⠛⠯
+  - - sordociegos
+    - ⠎⠉⠛⠪
+  - - superiores
+    - ⠎⠏⠫
+  - - superiormente
+    - ⠎⠏⠍
+  - - superioridades
+    - ⠎⠏⠹⠫
+  - - suya
+    - ⠎⠽⠁
+  - - tanta
+    - ⠞⠞⠁
+  - - tantas
+    - ⠞⠞⠯
+  - - tantos
+    - ⠞⠞⠪
+  - - teléfono
+    - ⠞⠇⠋
+  - - teléfonos
+    - ⠞⠇⠋⠎
+  - - retener
+    - ⠗⠞⠗
+  - - tenías
+    - ⠞⠝⠎
+  - - contenías
+    - ⠒⠞⠝⠎
+  - - entretenías
+    - ⠴⠞⠝⠎
+  - - retenías
+    - ⠗⠞⠝⠎
+  - - tenida
+    - ⠞⠝⠙⠁
+  - - tenidas
+    - ⠞⠝⠙⠯
+  - - tenidos
+    - ⠞⠝⠙⠪
+  - - contenida
+    - ⠒⠞⠝⠙⠁
+  - - contenidas
+    - ⠒⠞⠝⠙⠯
+  - - contenido
+    - ⠒⠞⠝⠙
+  - - contenidos
+    - ⠒⠞⠝⠙⠪
+  - - contenidamente
+    - ⠒⠞⠝⠙⠍
+  - - entretenida
+    - ⠴⠞⠝⠙⠁
+  - - entretenidas
+    - ⠴⠞⠝⠙⠯
+  - - entretenido
+    - ⠴⠞⠝⠙
+  - - entretenidos
+    - ⠴⠞⠝⠙⠪
+  - - entretenidamente
+    - ⠴⠞⠝⠙⠍
+  - - retenida
+    - ⠗⠞⠝⠙⠁
+  - - retenidas
+    - ⠗⠞⠝⠙⠯
+  - - retenido
+    - ⠗⠞⠝⠙
+  - - retenidos
+    - ⠗⠞⠝⠙⠪
+  - - retenidamente
+    - ⠗⠞⠝⠙⠍
+  - - temporales
+    - ⠞⠏⠇⠫
+  - - temporalmente
+    - ⠞⠏⠇⠍
+  - - temporalidad
+    - ⠞⠏⠇⠹
+  - - temporalidades
+    - ⠞⠏⠇⠹⠫
+  - - toda
+    - ⠞⠙⠁
+  - - sobretodos
+    - ⠆⠞⠙⠪
+  - - trabajadora
+    - ⠴⠃⠱⠁
+  - - trabajadoras
+    - ⠴⠃⠱⠯
+  - - trabajadores
+    - ⠴⠃⠱⠫
+  - - contrabajo
+    - ⠒⠴⠃
+  - - contrabajos
+    - ⠒⠴⠃⠪
+  - - tuya
+    - ⠞⠽⠁
+  - - Uruguay
+    - ⠸⠥⠽
+  - - usted
+    - ⠥⠙
+  - - ustedes
+    - ⠥⠙⠎
+  - - Venezuela
+    - ⠸⠧⠑
+  - - verdades
+    - ⠧⠹⠫
+  - - vuestra
+    - ⠧⠳⠁
+
+  # Words built on a word of the list that the document does not list are written with
+  # the general rules (B 16-1 v3, 2.2.3). Hacer is in the list, hacerlo is not; the verb forms
+  # hacen and se (with the accent) are not abbreviated either.
+  - - hacerlo
+    - ⠓⠁⠉⠦⠇⠕
+  - - mejorar
+    - ⠍⠑⠚⠱⠡
+  - - cercano
+    - ⠉⠦⠉⠩⠕
+  - - generalizado
+    - ⠛⠢⠦⠅⠊⠵⠹⠕
+  - - hacen
+    - ⠓⠁⠉⠢
+  - - sé
+    - ⠎⠮
+
+  # Dot 5 (B 16-1 v3, 4.1 and 4.2.2): before an opening sign that precedes a word in lower case,
+  # before the first of several closing signs, after the sign when the word has its own dot 5,
+  # before a semicolon after -bre and before a comma after ab. Accented sólo, éste and aquél.
+  # Checked by hand against the examples of the document.
+  - - ¿qué hora es?
+    - ⠢⠐⠟ ⠓⠱⠁ ⠫⠐⠢
+  - - ¿tú qué opinas?
+    - ⠐⠢⠞⠾ ⠐⠟ ⠕⠏⠔⠯⠐⠢
+  - - ¿Cómo te sientes?
+    - ⠢⠨⠐⠺ ⠞ ⠎⠲⠞⠫⠐⠢
+  - - ¡ojo con eso!
+    - ⠐⠖⠕⠚⠕ ⠉ ⠫⠕⠖
+  - - ¡¡ojo!!
+    - ⠖⠐⠖⠕⠚⠕⠖⠖
+  - - «cuidado con lo que dices»
+    - ⠐⠦⠉⠥⠊⠙⠹⠕ ⠉ ⠤ ⠟ ⠙⠊⠉⠫⠐⠦
+  - - «¿qué?»
+    - ⠦⠢⠐⠟⠐⠢⠦
+  - - 'Me dijo: «Ven a comer».'
+    - ⠨⠍ ⠙⠚⠒ ⠦⠨⠧⠢ ⠁ ⠉⠺⠦⠐⠦⠄
+  - - (ver más).
+    - ⠐⠣⠧⠦ ⠷⠜⠄
+  - - “¡ahora!”
+    - ⠦⠐⠖⠈⠓⠐⠖⠦
+  - - (¡ahora!)
+    - ⠣⠐⠖⠈⠓⠐⠖⠜
+  - - Llueve en otoño, en octubre; pero
+    - ⠨⠿⠳⠧⠑ ⠢ ⠕⠞⠕⠻⠕⠂ ⠢ ⠕⠉⠞⠥⠆⠐⠆ ⠖
+  - - baobab, pero
+    - ⠃⠁⠕⠃⠂⠐⠂ ⠖
+  - - sobre; pero
+    - ⠆⠐⠆ ⠖
+  - - Aquel hombre (Manuel) es mi padre.
+    - ⠨⠬ ⠓⠺ ⠣⠨⠍⠩⠳⠇⠜ ⠫ ⠍⠊ ⠏⠁⠄
+  - - Mejor déjalo –dijo– y vete.
+    - ⠨⠍⠚ ⠙⠮⠚⠅⠕ ⠐⠤⠙⠚⠤ ⠽ ⠧⠑⠞⠄
+  - - Cómo
+    - ⠨⠐⠺
+  - - Quién
+    - ⠨⠐⠟⠝
+  - - éste
+    - ⠐⠵
+  - - aquél
+    - ⠐⠬
+  - - sólo
+    - ⠐⠎⠇
+
+  # Contiguous contractions (B 16-1 v3, 3.4.1, Table 19), the contraction ll, on at the beginning of a word
+  # and the word onceavo; entren is the principle entre- and n. Examples from the document.
+  - - labrar
+    - ⠇⠁⠆⠡
+  - - descuadrar
+    - ⠙⠫⠉⠥⠁⠲⠡
+  - - mallazo
+    - ⠍⠁⠿⠁⠵⠕
+  - - roguemos
+    - ⠗⠕⠛⠥⠣⠪
+  - - cuento
+    - ⠉⠥⠢⠞⠕
+  - - cuerpo
+    - ⠉⠥⠦⠏⠕
+  - - puesto
+    - ⠏⠥⠫⠞⠕
+  - - lloriquear
+    - ⠿⠱⠊⠟⠡
+  - - onceavo
+    - ⠭⠉⠑⠁⠧⠕
+  - - entren
+    - ⠴⠝
+
+  # Names of countries made of several words: the sign 456 (B 16-1 v3, Apendice C).
+  - - Costa Rica
+    - ⠸⠉⠗
+  - - COSTA RICA
+    - ⠸⠉⠗
+  - - El Salvador
+    - ⠸⠎⠧
+  - - República Dominicana
+    - ⠸⠙⠕
+  - - Vive en Costa Rica.
+    - ⠨⠧⠊⠧⠑ ⠢ ⠸⠉⠗⠄
+  - - El Salvador y Cuba
+    - ⠸⠎⠧ ⠽ ⠸⠉⠥
+  - - Costa Ricas
+    - ⠨⠉⠪⠞⠁ ⠨⠗⠊⠉⠯
+
+  # The names of countries are only abbreviated as whole words; the punctuation around them does not
+  # matter, a following letter makes it another word.
+  - - Cuba.
+    - ⠸⠉⠥⠄
+  - - Cuba,
+    - ⠸⠉⠥⠂
+  - - '"Cuba"'
+    - ⠐⠦⠸⠉⠥⠐⠦
+  - - Cuba;
+    - ⠸⠉⠥⠆
+  - - (Cuba)
+    - ⠐⠣⠸⠉⠥⠜
+  - - 'Cuba: sí'
+    - ⠸⠉⠥⠒ ⠌
+  - - Cuba!
+    - ⠸⠉⠥⠖
+  - - Cubano
+    - ⠨⠉⠥⠃⠩⠕
+  - - Perú-Chile
+    - ⠸⠏⠑⠤⠸⠉⠇
+  - - Costa Rica.
+    - ⠸⠉⠗⠄
+  - - Costa Rica;
+    - ⠸⠉⠗⠆
+  - - (Costa Rica)
+    - ⠐⠣⠸⠉⠗⠜
+  - - Costa Rica-Perú
+    - ⠸⠉⠗⠤⠸⠏⠑
+  - - Costa Rican
+    - ⠨⠉⠪⠞⠁ ⠨⠗⠊⠉⠩
+  - - El Salvador de la patria
+    - ⠸⠎⠧ ⠙ ⠄ ⠏⠁⠴⠊⠁
+  - - El salvador
+    - ⠨⠑ ⠎⠅⠧⠹⠱
+  - - El Salvador y Costa Rica
+    - ⠸⠎⠧ ⠽ ⠸⠉⠗
+  - - REPÚBLICA DOMINICANA
+    - ⠸⠙⠕
+  - - República Dominicana,
+    - ⠸⠙⠕⠂
+  - - Cuba»
+    - ⠸⠉⠥⠐⠦
+  - - Cuba”
+    - ⠸⠉⠥⠐⠦
+  - - Cuba“
+    - ⠸⠉⠥⠦
+  - - Costa Rica»
+    - ⠸⠉⠗⠐⠦
+  - - El Salvador”
+    - ⠸⠎⠧⠐⠦
+
+  # The contraction ue is not used after g (B 16-1 v3, 3.4.2 rule 3), dr is not used in the
+  # abbreviation Dr. when the text already has it abbreviated (rule 4).
+  - - sigue
+    - ⠎⠊⠛⠥⠑
+  - - consigue
+    - ⠒⠎⠊⠛⠥⠑
+  - - cuello
+    - ⠉⠳⠿⠕
+  - - El Dr. Sancho
+    - ⠨⠑ ⠨⠙⠗⠄ ⠨⠎⠩⠉⠓⠕
+  - - la Dra. Vega
+    - ⠄ ⠨⠙⠗⠁⠄ ⠨⠧⠑⠛⠁
+
+  # Chained principles com- + pre- followed by the final consonant; compre is com- + pr + e, never
+  # three principles (B 16-1 v3, 3.1.1).
+  - - compre
+    - ⠤⠖⠑
+  - - compren
+    - ⠤⠖⠝
+  - - compres
+    - ⠤⠖⠎
+
+  # An ending takes priority over a contraction (B 16-1 v3, 3.2): the whole word -bre is a + -bre.
+  - - abre
+    - ⠁⠆
+  - - abres
+    - ⠁⠆⠎
+  - - labre
+    - ⠇⠁⠆
+
+  # The contractions on and ion have no position restriction; they are not used on accented vowels.
+  - - onza
+    - ⠭⠵⠁
+  - - onomástico
+    - ⠭⠺⠷⠎⠞⠊⠉⠕
+  - - leones
+    - ⠇⠑⠭⠫
+  - - león
+    - ⠇⠑⠬⠝
+  - - ion
+    - ⠊⠕⠝
+
+  # In lower case these are other words and are not abbreviated (B 16-1 v3, 2.2.2.1 rule 1:
+  # cuba, chile, argentina, honduras, panamá).
+  - - cuba
+    - ⠉⠥⠃⠁
+  - - el chile
+    - ⠑ ⠉⠓⠊⠇⠑
+  - - argentina
+    - ⠡⠛⠢⠞⠔⠁
+  - - honduras
+    - ⠓⠭⠙⠥⠗⠯
+  - - panamá
+    - ⠏⠩⠁⠍⠷
+  - - Argentina
+    - ⠸⠁⠗
+
+  # The sign 456 of a country does not separate an opening sign from it as the capital sign does,
+  # so the opening sign takes dot 5 (B 16-1 v3, 4.2.2.1, Portugal).
+  - - «Cuba»
+    - ⠐⠦⠸⠉⠥⠐⠦
+  - - '"Costa Rica"'
+    - ⠐⠦⠸⠉⠗⠐⠦
+  - - (Cuba y
+    - ⠐⠣⠸⠉⠥ ⠽
+  - - «Manuel»
+    - ⠦⠨⠍⠩⠳⠇⠐⠦
+
+  # The asterisk of an erroneous expression is written 256 like dis- and takes dot 5 (Table 23).
+  - - '*cocretas'
+    - ⠐⠲⠉⠕⠒⠑⠞⠯
+  - - '*distrezas'
+    - ⠐⠲⠙⠊⠎⠴⠑⠵⠯
