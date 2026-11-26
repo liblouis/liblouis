@@ -16,6 +16,7 @@ LDADD =							\
 
 backtranslation_emphasis_SOURCES = backtranslation_emphasis.c
 checkTable_SOURCES = checkTable.c
+checkFailureDiagnostics_SOURCES = checkFailureDiagnostics.c
 emphclass_SOURCES = emphclass.c
 attributeNames_SOURCES = attributeNames.c
 swapOperands_SOURCES = swapOperands.c
@@ -36,6 +37,7 @@ charToFallbackDots_SOURCES = charToFallbackDots.c
 program_TESTS =					\
 	backtranslation_emphasis		\
 	checkTable				\
+	checkFailureDiagnostics			\
 	check_metadata				\
 	emphclass				\
 	attributeNames				\
