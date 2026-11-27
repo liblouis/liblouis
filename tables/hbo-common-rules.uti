@@ -61,6 +61,11 @@ noback correct [$l%vowelCant.]"ּ" "ּ"*
 noback correct [%vowelCant.]"ׂ" "ׂ"*
 noback correct [%vowelCant.]"ׁ" "ׁ"*
 
+## Move a holam written on the waw next to the waw's own vowel
+## before the waw
+noback correct ["\x05d5"%vowel]"\x05b9" "\x05b9"*
+noback correct ["\x05d5\x05b9"]%vowel "\x05b9\x05d5"
+
 # Contracting dagesh for bet, kaf, pe, and tav
 noback context "ּב" @12
 noback context "ּכ" @13
@@ -77,7 +82,19 @@ attribute vowelCantDagesh \x05bc\x05bd
 noback pass3 !%vowelCantDagesh[@2456-135a] @246
 noback pass3 [@2456-135a]$sp @246
 noback pass3 [@2456-135a]~ @246
-noback pass3 [@135a-2456]%hebLetter @246
+
+## Holam written before its mater waw, with cantillation marks,
+## meteg, rafe or dagesh in between
+attribute cantDagesh \x0591\x0592\x0593\x0594\x0595\x0596\x0597\x0598\x0599\x059a\x059b\x059c\x059d\x059e\x059f\x05a0\x05a1\x05a2\x05a3\x05a4\x05a5\x05a6\x05a7\x05a8\x05a9\x05aa\x05ab\x05ac\x05ad\x05ae\x05bc\x05bd\x05bf
+### A waw with a vowel of its own is a consonant, as in לֹוֶה, and
+### keeps its holam. Otherwise the holam is dropped and the waw is
+### brailled as holam-waw.
+noback context ["\x05b9\x05d5"]!%vowel @246
+### With marks in between, the holam is dropped and variable 1 flags
+### the waw, which is brailled as holam-waw when it is reached. The
+### marks are handled by their own rules.
+noback context ["\x05b9"]%cantDagesh."\x05d5"!%vowel ?#1=1
+noback context #1=1["\x05d5"] @246#1=0
 
 ## Shuruq and consonantal waw
 ## A dagesh+waw that is followed by a vowel is a consonantal waw with
@@ -87,6 +104,12 @@ noback pass3 [@135a-2456]%hebLetter @246
 ## the naked 346 cell, which would also match identical cells produced by
 ## other languages when this table is combined with them.
 noback context ["ּו"]%vowel @5a-2456
+### A dagesh+waw followed by a mater waw (holam-waw or shuruq),
+### with at most one mark in between, is a doubled consonantal waw
+noback context ["ּו"]"וֹ" @5a-2456
+noback context ["ּו"]%cantDagesh"וֹ" @5a-2456
+noback context ["ּו"]"ּו" @5a-2456
+noback context ["ּו"]%cantDagesh"ּו" @5a-2456
 noback context "ּו" @346
 
 ## Hiriq Yod
