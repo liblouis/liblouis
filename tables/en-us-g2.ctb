@@ -27,6 +27,15 @@ include en-us-g1.ctb
 # Braille indicators specific to Grade 2
 multind 56-6 letsign capsletter
 
+# Letter sign after a number (see issue #1113). The single-letter words
+# defined below (largesign a, word I) are implicitly noletsign, and
+# single-character rules are tried in the order they are defined, so these
+# context rules must come before them or they are never reached. Only the
+# letters a-j can be confused with digits, so word O needs no such rule.
+noback context _$d["a"] @56-1
+noback context _$d["A"] @56-1
+noback context _$d["I"] @56-24
+
 # Contractions beginning with the letter a
 largesign a 1
 largesign A 1
@@ -1071,8 +1080,6 @@ always \s\x2014\s 36-36 # em dash
 # removed: context rule conflicted with endword apostrophe rules (see #1608)
 # noback context $U2-20[]"'"$l @6-3
 noback context _$l["."]$l @256 U.S.
-noback context _$d["a"] @56-1
-noback context _$d["A"] @56-1
 
 # problems handled with multipass opcodes
 noback pass2 @36-36-36 @36-36

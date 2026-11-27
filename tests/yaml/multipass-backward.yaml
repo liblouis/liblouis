@@ -1,5 +1,5 @@
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/en-us-comp8.ctb
   nofor correct $d "d" # digit
   nofor correct $m "m" # math
@@ -14,8 +14,8 @@ tests:
   - ⠢⠬⠱⠀⠸⠭⡽
   - dmpsSuU
 
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/en-ueb-g1.ctb
   nofor correct $D "D" # literary digit
   nofor correct $l "l" # letter
@@ -26,8 +26,8 @@ tests:
   - ⠼⠑⠭⠤⡽
   - Dlal
 
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/en-us-comp8.ctb
   nofor context $p "p" # punctuation
 flags: {testmode: backward}
@@ -36,8 +36,8 @@ tests:
   - ⠿⠨⠬
   - =p+
 
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/en-us-comp8.ctb
   attribute one abcde
   attribute two fghij
@@ -69,8 +69,8 @@ tests:
   - \x0001\x0002
   - xfail: not implemented
 
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/en-us-comp8.ctb
   nofor correct $l4-5 "z"
   nofor correct $l2 "y"
@@ -96,8 +96,8 @@ tests:
   - ⠁⠃⠉⠙⠑⠋
   - zx
 
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/en-us-comp8.ctb
   nofor correct [$d5]_6 "f" # fail
   nofor correct [$d5]_5 "s" # succeed
@@ -113,8 +113,8 @@ tests:
   - ⠂⠆⠒
   - fml
 
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/en-us-comp8.ctb
   nofor correct `$l9~ *
   nofor correct `$l3[$d.]$l3~ *
@@ -135,8 +135,8 @@ tests:
   - ⠂⠆⠒⠙⠑⠋⠶⠦⠔
   - 123789
 
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/en-us-comp8.ctb
   nofor correct #1=0"0" *
   nofor correct "+" #1+?
@@ -160,8 +160,8 @@ tests:
   - ⠴⠤⠬⠬⠬⠬⠬⠤⠤⠑⡑⠇⡇⠛⡛⠭⡭⠽⡽⠤⠑⡑⠇⡇⠛⡛⠭⡭⠽⡽⠬⠬⠑⡑⠇⡇⠛⡛⠭⡭⠽⡽⠿⠵
   - 0eLGxyElGxYELgXyz
 
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/en-us-comp8.ctb
   nofor correct #1=0"4" #1=5"5"
   nofor context #1=0@25 #1=4"4"
@@ -175,8 +175,8 @@ tests:
   - 5
 
 # Multipass rules should not go in endless loop when startMatch == endReplace
+display: tables/unicode-without-blank.dis
 table: |
-  include tables/unicode-without-blank.dis
   include tables/en-us-comp8.ctb
   nofor correct []"bar0" "foo"
   nofor context []@12-1-1235-2 "foo"
@@ -187,12 +187,24 @@ tests:
     - foobar0
   - - ⠃⠁⠗⠂
     - foobar1
-    - xfail: context rule can still cause endless loop
   - - ⠃⠁⠗⠆
     - foobar2
 
+# A context rule that consumes nothing is not tried again at the same
+# position, also when no other rule matches there
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  nofor context []@123 "x"
+flags: {testmode: backward}
+tests:
+  - [⠇, xl]
+  - [⠇⠇, xlxl]
+  - [⠁⠇⠁, axla]
+
+display: tables/unicode.dis
+table: |
   include tables/loweredDigits6Dots.uti
   include tables/latinLetterDef6Dots.uti
   nofor context `[]$l "foo"
@@ -202,8 +214,8 @@ tests:
     - foobar1
     - xfail: context rule can still cause endless loop
 
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/loweredDigits6Dots.uti
   include tables/latinLetterDef6Dots.uti
   nofor pass2 `[]$l @124-135-135

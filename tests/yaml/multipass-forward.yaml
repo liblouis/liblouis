@@ -1,6 +1,6 @@
+display: tables/unicode-without-blank.dis
 table: |
   include tables/spaces.uti
-  include tables/unicode-without-blank.dis
   include tables/en-us-comp8.ctb
   noback correct $d "d" # digit
   noback correct $m "m" # math
@@ -15,8 +15,8 @@ tests:
   - '5+: _xY'
   - ⠙⠍⠏⠎⡎⠥⡥
 
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/en-ueb-g1.ctb
   noback correct $D "D" # literary digit
   noback correct $l "l" # letter
@@ -27,8 +27,8 @@ tests:
   - '5x-Y'
   - ⠠⠙⠇⠁⠇
 
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/en-us-comp8.ctb
   noback context $p @1234 # punctuation
 flags: {testmode: forward}
@@ -37,8 +37,8 @@ tests:
   - =.+
   - ⠿⠏⠬
 
+display: tables/unicode-without-blank.dis
 table: |
-  include tables/unicode-without-blank.dis
   include tables/en-us-comp8.ctb
   attribute one abcde
   attribute two fghij
@@ -68,8 +68,8 @@ tests:
   - \x0001\x0002
   - ⣹⣏
 
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/en-us-comp8.ctb
   noback correct $l4-5 "z"
   noback correct $l2 "y"
@@ -95,8 +95,8 @@ tests:
   - abcdef
   - ⠵⠭
 
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/en-us-comp8.ctb
   noback correct [$d5]_6 "f" # fail
   noback correct [$d5]_5 "s" # succeed
@@ -112,8 +112,8 @@ tests:
   - 123
   - ⠋⠍⠇
 
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/en-us-comp8.ctb
   noback correct `$l9~ *
   noback correct `$l3[$d.]$l3~ *
@@ -134,8 +134,8 @@ tests:
   - 123def789
   - ⠂⠆⠒⠶⠦⠔
 
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/en-us-comp8.ctb
   noback correct #1=0"0" *
   noback correct "+" #1+?
@@ -159,8 +159,8 @@ tests:
   - 0-+++++--eElLgGxXyY-eElLgGxXyY++eElLgGxXyY=z
   - ⠴⠑⡇⡛⠭⠽⡑⠇⡛⠭⡽⡑⡇⠛⡭⠽⠵
 
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/en-us-comp8.ctb
   noback correct #1=0"0" #1=1"1"
   noback context #1=0"1" #1=2@23
@@ -174,8 +174,8 @@ tests:
   - ⠢
 
 # Multipass rules should not go in endless loop when startMatch == endReplace
+display: tables/unicode-without-blank.dis
 table: |
-  include tables/unicode-without-blank.dis
   include tables/en-us-comp8.ctb
   noback correct []"bar0" "foo"
   noback context `[]"bar1" @124-135-135
@@ -188,8 +188,8 @@ tests:
   - - bar2
     - ⠋⠕⠕⠃⠁⠗⠆
 
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/loweredDigits6Dots.uti
   include tables/latinLetterDef6Dots.uti
   noback context `[]$l @124-135-135
@@ -197,8 +197,8 @@ tests:
   - - bar1
     - ⠋⠕⠕⠃⠁⠗⠂
 
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/loweredDigits6Dots.uti
   include tables/latinLetterDef6Dots.uti
   noback pass2 `[]$l @124-135-135

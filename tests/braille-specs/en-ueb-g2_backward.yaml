@@ -41,6 +41,20 @@ tests:
   - [B, ⠰⠠⠃]
   - [ab, ⠰⠁⠃]
   - [Ab, ⠰⠠⠁⠃]
+  # #1607: grade 1 indicator followed by a capitalized word indicator
+  - [AB, ⠰⠠⠠⠁⠃]
+  - [BLC, ⠰⠠⠠⠃⠇⠉]
+  - [AB about, ⠰⠠⠠⠁⠃ ⠁⠃]
+  # Capitals passages (begcapsphrase / endcapsphrase after)
+  - [THE DOG RAN, ⠠⠠⠠⠮ ⠙⠕⠛ ⠗⠁⠝⠠⠄]
+  - [THIS IS LOUD. not this, ⠠⠠⠠⠹ ⠊⠎ ⠇⠳⠙⠲⠠⠄ ⠝ ⠹]
+  - [IT'S THE FBI'S CAR, ⠠⠠⠠⠭⠄⠎ ⠮ ⠋⠃⠊⠄⠎ ⠉⠜⠠⠄]
+  - [THE AB CD EF., ⠠⠠⠠⠮ ⠰⠁⠃ ⠰⠉⠙ ⠑⠋⠲⠠⠄]
+  # Capitals passage starting with a grade 1 indicator
+  - [AB CD EF, ⠰⠠⠠⠠⠁⠃ ⠰⠉⠙ ⠑⠋⠠⠄]
+  - [BLC IS AB, ⠰⠠⠠⠠⠃⠇⠉ ⠊⠎ ⠰⠁⠃⠠⠄]
+  # Capitalized words (not passages) are unaffected
+  - [CAN-DO SPIRIT is here, ⠠⠠⠉⠤⠠⠠⠙ ⠠⠠⠸⠎ ⠊⠎ ⠐⠓]
   - [1a, ⠼⠁⠰⠁]
   - [1A, ⠼⠁⠠⠁]
 # the cancel sign (56) is not strictly needed before a cap sign, but it is allowed

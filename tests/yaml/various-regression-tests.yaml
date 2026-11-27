@@ -6,9 +6,9 @@
 
 # ----------------------
 # Regression test for issue #35: "AAs" translates to ",,aas" (https://github.com/liblouis/liblouis/issues/35)
+display: tables/text_nabcc.dis
 table: |
   include tables/spaces.uti
-  include tables/text_nabcc.dis
   lowercase a 1
   base uppercase A a
   punctuation ' 3
@@ -31,6 +31,10 @@ tests:
 # The issue was fixed by https://github.com/liblouis/liblouis/pull/799.
 
 # The table below makes liblouis hang
+display: |
+  display . 256
+  display - 36
+  include tables/text_nabcc.dis
 table: |
   include tables/latinLetterDef6Dots.uti
   punctuation . 256
@@ -42,6 +46,11 @@ tests:
   - [---.com, ---.com]
 
 # if I remove the nocont rule it doesn't hang
+display: |
+  display \s 6
+  display . 256
+  display - 36
+  include tables/text_nabcc.dis
 table: |
   include tables/latinLetterDef6Dots.uti
   punctuation . 256
@@ -52,6 +61,10 @@ tests:
   - [---.com, " - - -.com"]
 
 # also if I remove the repeated rule it doesn't hang
+display: |
+  display . 256
+  display - 36
+  include tables/text_nabcc.dis
 table: |
   include tables/latinLetterDef6Dots.uti
   punctuation . 256
@@ -65,7 +78,8 @@ tests:
 # The second line ("three bold words") would fail unless the first
 # line ("three italic words") was commented out. The first translation
 # was somehow influencing the second one.
-table: [tables/unicode-without-blank.dis, tables/en-ueb-g1.ctb]
+display: tables/unicode-without-blank.dis
+table: [tables/en-ueb-g1.ctb]
 tests:
   - [three italic words, ⠨⠶⠞⠓⠗⠑⠑ ⠊⠞⠁⠇⠊⠉ ⠺⠕⠗⠙⠎⠨⠄, {typeform: {italic: '++++++++++++++++++'}}]
   - [three bold words, ⠘⠶⠞⠓⠗⠑⠑ ⠃⠕⠇⠙ ⠺⠕⠗⠙⠎⠘⠄, {typeform: {bold: '++++++++++++++++'}}]
@@ -74,6 +88,7 @@ tests:
 # Regression test for issue #238: Pass2 with swapdd opcode selects wrong dot pattern
 # (https://github.com/liblouis/liblouis/issues/238)
 # The issue was fixed by https://github.com/liblouis/liblouis/pull/536 (commit 0d3aaac).
+display: tables/da-dk-octobraille.dis
 table: |
   include tables/da-dk-g08.ctb
   swapdd AddSeven 1,12,14,145,15,124,1245,125,24,245 17,127,147,1457,157,1247,12457,1257,247,2457
@@ -86,6 +101,7 @@ tests:
 # Regression test for issue #412: Word wrapping not working with en-us-g1.ctb (https://github.com/liblouis/liblouis/issues/412)
 # Back-tracking was not working with all caps words.
 # The issue was fixed by https://github.com/liblouis/liblouis/pull/567.
+display: tables/text_nabcc.dis
 table: [tables/en-us-g1.ctb]
 tests:
   - - "SARVESH KUMAR Upadhyay"
@@ -102,6 +118,7 @@ tests:
 # (https://github.com/liblouis/liblouis/issues/498)
 # The issue was fixed by https://github.com/liblouis/liblouis/pull/756.
 
+display: tables/text_nabcc.dis
 table: |
   space \s 0
   include tables/latinLetterDef8Dots.uti
@@ -109,6 +126,9 @@ tests:
   - - AB cd Ef gH
     - AB cd Ef gH
 
+display: |
+  display - 36
+  include tables/text_nabcc.dis
 table: |
   display - 36
   space \s 0
@@ -125,6 +145,7 @@ tests:
 # (https://github.com/liblouis/liblouis/issues/537)
 # There was a bug in the input output mapping of context rules.
 # The issue was fixed by https://github.com/liblouis/liblouis/pull/547.
+display: tables/unicode.dis
 table: |
   include tables/braille-patterns.cti
   letter \x4EA4 13-246-3
@@ -153,6 +174,7 @@ tests:
 # Regression test for issue #583: en-ueb-g1.ctb back translation returns wrong inlen
 # (https://github.com/liblouis/liblouis/issues/583)
 # The issue was fixed by https://github.com/liblouis/liblouis/pull/624.
+display: tables/text_nabcc.dis
 table: |
   include tables/en-ueb-g1.ctb
 flags: {testmode: backward}
@@ -164,6 +186,7 @@ tests:
 # Regression test for issue #584: en-ueb-g1.ctb back translation of undefined braille does not fill in inpos
 # (https://github.com/liblouis/liblouis/issues/584)
 # The issue was fixed by https://github.com/liblouis/liblouis/pull/624.
+display: tables/text_nabcc.dis
 table: |
   include tables/en-ueb-g1.ctb
 flags: {testmode: backward}

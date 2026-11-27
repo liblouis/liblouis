@@ -1,6 +1,6 @@
 # Test for issue #963: dot 7 capitalization indicator remains active when it shouldn't (https://github.com/liblouis/liblouis/issues/963)
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   space \s 0
   include tables/latinLetterDef6Dots.uti
   include tables/latinUppercaseComp6.uti
