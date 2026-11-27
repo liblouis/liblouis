@@ -18,7 +18,6 @@ display: unicode-without-blank.dis
 table:
   language: uk
   type: literary
-  variant: european
   __assert-match: uk-eu.utb
 flags: {testmode: forward}
 tests:
@@ -171,6 +170,7 @@ display: unicode-without-blank.dis,ru-unicode.dis
 table:
   language: uk
   type: literary
+  variant: no-capitals
   __assert-match: uk.utb
 tests:
   - - Вона мріє про зів’яле листя на ґанку, але її мрії не збуваються.
