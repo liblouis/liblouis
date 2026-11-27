@@ -41,10 +41,10 @@ include braille-patterns.cti
 space \t 9 tab
 space \x001B 1b      # escape
 space \x00A0 a       # no-break space
-space \x007f 0
 undefined 0
 display \s 0
 include spaces.uti
+space \x007f 0
 display @ 345
 display ó 346
 
