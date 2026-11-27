@@ -1,0 +1,205 @@
+# Tests for Indonesian uncontracted braille
+#
+# Copyright © 2026 Muhammad <muha.aku@gmail.com>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# The rules are those of Sistem Simbol Braille Indonesia Bidang Bahasa
+# Indonesia (Keputusan Menteri Pendidikan Nasional Nomor 053/U/2000), as
+# taught in Didi Tarsidi, Belajar Braille dalam 6 Modul (Universitas
+# Pendidikan Indonesia, 2010), Modul 2 and Modul 4.
+# ---------------------------------------------------------------------
+
+display: unicode.dis
+table:
+  language: id
+  type: literary
+  contraction: no
+  __assert-match: id-id-g1.utb
+
+flags: {testmode: bothDirections}
+tests:
+  # Letters
+  - - "saya membaca buku"
+    - "⠎⠁⠽⠁⠀⠍⠑⠍⠃⠁⠉⠁⠀⠃⠥⠅⠥"
+  # Capital letter: dot 6
+  - - "Bandung"
+    - "⠠⠃⠁⠝⠙⠥⠝⠛"
+  # Word in capitals: dots 6 6
+  - - "TVRI dan RRI"
+    - "⠠⠠⠞⠧⠗⠊⠀⠙⠁⠝⠀⠠⠠⠗⠗⠊"
+  # Roman numerals follow the capital rules
+  - - "Bab II"
+    - "⠠⠃⠁⠃⠀⠠⠠⠊⠊"
+  - - "Pasal I"
+    - "⠠⠏⠁⠎⠁⠇⠀⠠⠊"
+  # Number sign before the letters a-j
+  - - "7"
+    - "⠼⠛"
+  - - "10"
+    - "⠼⠁⠚"
+  - - "2026"
+    - "⠼⠃⠚⠃⠋"
+  # Thousands separator: dot 2
+  - - "15.000"
+    - "⠼⠁⠑⠂⠚⠚⠚"
+  - - "1.250.000"
+    - "⠼⠁⠂⠃⠑⠚⠂⠚⠚⠚"
+  # Decimal comma: dots 4-6
+  - - "2,5"
+    - "⠼⠃⠨⠑"
+  - - "0,83"
+    - "⠼⠚⠨⠓⠉"
+  # Tanda pugar (dots 5-6) before a letter a-j after a number
+  - - "2b"
+    - "⠼⠃⠰⠃"
+  - - "14d"
+    - "⠼⠁⠙⠰⠙"
+  # Tanda pugar comes before the capital sign
+  - - "2B"
+    - "⠼⠃⠰⠠⠃"
+  # No tanda pugar for a letter before a number
+  - - "B2"
+    - "⠠⠃⠼⠃"
+  # No tanda pugar for a letter after j
+  - - "3k"
+    - "⠼⠉⠅"
+  # Period, comma
+  - - "Ya, saya datang."
+    - "⠠⠽⠁⠂⠀⠎⠁⠽⠁⠀⠙⠁⠞⠁⠝⠛⠲"
+  # Exclamation mark
+  - - "Awas!"
+    - "⠠⠁⠺⠁⠎⠖"
+  # Semicolon
+  - - "pagi; siang"
+    - "⠏⠁⠛⠊⠆⠀⠎⠊⠁⠝⠛"
+  # Colon
+  - - "yaitu: buku"
+    - "⠽⠁⠊⠞⠥⠒⠀⠃⠥⠅⠥"
+  # Hyphen
+  - - "laki-laki"
+    - "⠇⠁⠅⠊⠤⠇⠁⠅⠊"
+  # Slash
+  - - "dan/atau"
+    - "⠙⠁⠝⠌⠁⠞⠁⠥"
+  # Apostrophe
+  - - "Qur'an"
+    - "⠠⠟⠥⠗⠄⠁⠝"
+  # Multiplication and division signs: dots 1-6 and 3-4 3-4
+  - - "3 × 4"
+    - "⠼⠉⠀⠡⠀⠼⠙"
+  - - "10 ÷ 2"
+    - "⠼⠁⠚⠀⠌⠌⠀⠼⠃"
+  # Superscript three: dots 1-4-6
+  - - "m³"
+    - "⠍⠩"
+  # Equals sign: dots 2-5 2-5
+  - - "5 = 5"
+    - "⠼⠑⠀⠒⠒⠀⠼⠑"
+  # Symbols that the course does not give follow Mitranetra Braille Converter
+  - - "email@contoh.com"
+    - "⠑⠍⠁⠊⠇⠈⠉⠕⠝⠞⠕⠓⠲⠉⠕⠍"
+  - - "Tom & Jerry"
+    - "⠠⠞⠕⠍⠀⠈⠯⠀⠠⠚⠑⠗⠗⠽"
+  - - "harga $5"
+    - "⠓⠁⠗⠛⠁⠀⠫⠼⠑"
+  - - "a < b"
+    - "⠁⠀⠣⠀⠃"
+  - - "[catatan]"
+    - "⠪⠉⠁⠞⠁⠞⠁⠝⠻"
+  - - "{kurung}"
+    - "⠠⠦⠅⠥⠗⠥⠝⠛⠴⠄"
+  - - "`kode`"
+    - "⠠⠄⠅⠕⠙⠑⠠⠄"
+  - - "a\\\\b"
+    - "⠁⠈⠳⠃"
+  # The number sign alone is #, also before another number sign
+  - - "#1"
+    - "⠼⠼⠁"
+  - - "# saja"
+    - "⠼⠀⠎⠁⠚⠁"
+  # and before a letter k-z
+  - - "#saya"
+    - "⠼⠎⠁⠽⠁"
+  # Underscore: dots 4-5-6, as on the iOS braille keyboard
+  - - "nama_file"
+    - "⠝⠁⠍⠁⠸⠋⠊⠇⠑"
+  - - "Nama_file"
+    - "⠠⠝⠁⠍⠁⠸⠋⠊⠇⠑"
+  # An ellipsis between numbers ends the first number
+  - - "5...10"
+    - "⠼⠑⠄⠄⠄⠼⠁⠚"
+  # The greater-than sign has a space on both sides
+  - - "a > b"
+    - "⠁⠀⠴⠀⠃"
+  - - "\"ya\" > tidak"
+    - "⠦⠽⠁⠴⠀⠴⠀⠞⠊⠙⠁⠅"
+
+flags: {testmode: forward}
+tests:
+  # Question mark: dots 2-3-6
+  - - "Apa kabar?"
+    - "⠠⠁⠏⠁⠀⠅⠁⠃⠁⠗⠦"
+  # Opening and closing quotation marks differ
+  - - "\"Ya,\" katanya."
+    - "⠦⠠⠽⠁⠂⠴⠀⠅⠁⠞⠁⠝⠽⠁⠲"
+  - - "“Ya”"
+    - "⠦⠠⠽⠁⠴"
+  # Both parentheses are dots 2-3-5-6
+  - - "(tujuh)"
+    - "⠶⠞⠥⠚⠥⠓⠶"
+  # Ellipsis: three apostrophes
+  - - "tunggu..."
+    - "⠞⠥⠝⠛⠛⠥⠄⠄⠄"
+  - - "tunggu…"
+    - "⠞⠥⠝⠛⠛⠥⠄⠄⠄"
+  # Four periods: an ellipsis and a period
+  - - "tunggu...."
+    - "⠞⠥⠝⠛⠛⠥⠄⠄⠄⠲"
+  # Asterisk: dots 3-5 3-5
+  - - "catatan*"
+    - "⠉⠁⠞⠁⠞⠁⠝⠔⠔"
+  # Plus-minus sign: dots 2-6 3-5
+  - - "±5"
+    - "⠢⠔⠼⠑"
+  # Tanda kursif (dots 4-6) before an italic word
+  - - "Sekali merdeka tetap merdeka"
+    - "⠠⠎⠑⠅⠁⠇⠊⠀⠨⠍⠑⠗⠙⠑⠅⠁⠀⠞⠑⠞⠁⠏⠀⠍⠑⠗⠙⠑⠅⠁"
+    - typeform:
+        italic: "       +++++++              "
+  # Three words or more: twice before the first word, once before the last
+  - - "sekali merdeka tetap merdeka"
+    - "⠨⠨⠎⠑⠅⠁⠇⠊⠀⠍⠑⠗⠙⠑⠅⠁⠀⠞⠑⠞⠁⠏⠀⠨⠍⠑⠗⠙⠑⠅⠁"
+    - typeform:
+        italic: "++++++++++++++++++++++++++++"
+  # Bold and underlined text use the same sign
+  - - "Sekali merdeka tetap merdeka"
+    - "⠠⠎⠑⠅⠁⠇⠊⠀⠨⠍⠑⠗⠙⠑⠅⠁⠀⠞⠑⠞⠁⠏⠀⠍⠑⠗⠙⠑⠅⠁"
+    - typeform:
+        bold: "       +++++++              "
+  # Tanda kursif comes before the capital sign
+  - - "Demi negara RI"
+    - "⠨⠨⠠⠙⠑⠍⠊⠀⠝⠑⠛⠁⠗⠁⠀⠨⠠⠠⠗⠊"
+    - typeform:
+        italic: "++++++++++++++"
+  # Percent is the letters "ps", plus is spelt, as in Mitranetra Braille Converter
+  - - "50% diskon"
+    - "⠼⠑⠚⠏⠎⠀⠙⠊⠎⠅⠕⠝"
+  - - "5 + 3 = 8"
+    - "⠼⠑⠀⠏⠇⠥⠎⠀⠼⠉⠀⠒⠒⠀⠼⠓"
+  # Superscript two: dots 1-2-6, the same as the less-than sign
+  - - "m²"
+    - "⠍⠣"
+
+flags: {testmode: backward}
+tests:
+  # Expected failures: the same dots have two meanings
+  - - "⠼⠊⠝⠙⠕⠝⠑⠎⠊⠁"
+    - "#indonesia"
+    - xfail: "The number sign before a letter a-j starts a number, so this reads 9ndonesia."
+  - - "⠍⠣"
+    - "m²"
+    - xfail: "Dots 1-2-6 are also the less-than sign, so this reads m<."

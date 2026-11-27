@@ -1,0 +1,308 @@
+# Tests for Indonesian contracted braille (Tusing)
+#
+# Copyright © 2026 Muhammad <muha.aku@gmail.com>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# The rules are those of Sistem Simbol Braille Indonesia Bidang Bahasa
+# Indonesia (Keputusan Menteri Pendidikan Nasional Nomor 053/U/2000), as
+# taught in Didi Tarsidi, Belajar Braille dalam 6 Modul (Universitas
+# Pendidikan Indonesia, 2010), Modul 5 and Modul 6. The examples are
+# taken from the course. The examples of Modul 5 use only the signs
+# taught so far; here they are written with all the signs.
+# ---------------------------------------------------------------------
+
+display: unicode.dis
+table:
+  language: id
+  type: literary
+  contraction: full
+  __assert-match: id-id-g2.ctb
+
+flags: {testmode: bothDirections}
+tests:
+  # Word signs: letters (Modul 5.1.1). They stand alone and may carry
+  # punctuation and the capital sign.
+  - - "Emas ini untuk anda lagi."
+    - "⠠⠑⠀⠝⠀⠥⠀⠁⠀⠛⠲"
+  - - "Lagi-lagi saya cemas karena aksi bandar itu."
+    - "⠠⠸⠛⠣⠀⠎⠀⠉⠸⠑⠀⠗⠀⠭⠀⠃⠸⠁⠗⠀⠊⠲"
+  # Word signs: reversed letters (Modul 5.1.2)
+  - - "Jangan kamu buat mereka sebagai saksi!"
+    - "⠠⠻⠀⠩⠀⠬⠀⠍⠀⠼⠀⠎⠸⠭⠖"
+  - - "Jangan-jangan kamus itu untuk Nanda."
+    - "⠠⠸⠻⠣⠀⠸⠩⠎⠀⠊⠀⠥⠀⠠⠝⠸⠁⠲"
+  # Word signs: lower signs (Modul 5.1.3). They are used only between
+  # spaces; next to a punctuation mark the word is written in letters.
+  - - "Memang ia yang buat agar-agar."
+    - "⠠⠢⠀⠔⠀⠽⠀⠬⠀⠁⠛⠁⠗⠣⠲"
+  - - "\"Ia masih lemas.\""
+    - "⠦⠠⠊⠁⠀⠦⠀⠇⠸⠑⠲⠴"
+  - - "Pagar ini memang masih kokoh."
+    - "⠠⠏⠈⠛⠗⠀⠝⠀⠢⠀⠦⠀⠅⠕⠅⠕⠓⠲"
+  # Word signs: other signs (Modul 5.1.4). ke, ia and di are also
+  # part-word signs.
+  - - "Aku akan di sini sampai sore."
+    - "⠠⠾⠀⠷⠀⠌⠀⠎⠶⠊⠀⠡⠀⠎⠕⠗⠑⠲"
+  - - "Tiba di kelas, ia dikejar Nia sampai ke kebun."
+    - "⠠⠞⠃⠀⠌⠀⠹⠇⠁⠎⠂⠀⠔⠀⠌⠹⠚⠁⠗⠀⠠⠝⠔⠀⠡⠀⠹⠀⠹⠃⠥⠝⠲"
+  # Word signs with dot 5 (Modul 5.2)
+  - - "Karena kerja yang berat, Haris jadi sangat capai."
+    - "⠠⠗⠀⠐⠹⠀⠽⠀⠖⠁⠞⠂⠀⠠⠐⠓⠎⠀⠚⠀⠐⠎⠀⠐⠉⠲"
+  - - "Dini dan Dirin tinggal di Kalimas."
+    - "⠠⠌⠝⠊⠀⠜⠀⠠⠐⠌⠝⠀⠐⠿⠀⠌⠀⠠⠐⠅⠍⠁⠎⠲"
+  # Word signs with dots 4-5 (Modul 5.3)
+  - - "Catur ini khusus untuk tunanetra."
+    - "⠠⠉⠘⠁⠀⠝⠀⠘⠟⠀⠥⠀⠘⠱⠲"
+  - - "Pak Wiguna diganggu orang di Cianjur."
+    - "⠠⠏⠁⠅⠀⠠⠺⠊⠘⠛⠀⠌⠘⠿⠀⠐⠕⠀⠌⠀⠠⠉⠊⠘⠜⠲"
+  # Word signs with dot 4 (Modul 5.4.1)
+  - - "Pribadi pak Darus aneh dan abnormal."
+    - "⠠⠏⠗⠊⠃⠁⠌⠀⠏⠁⠅⠀⠠⠙⠈⠥⠀⠈⠑⠀⠜⠀⠈⠕⠲"
+  # Word signs with dots 3-4-5-6 (Modul 5.4.2)
+  - - "Selesai kerja, semua orang keluar sekaligus."
+    - "⠠⠼⠡⠀⠐⠹⠂⠀⠼⠬⠀⠐⠕⠀⠹⠘⠇⠀⠼⠅⠛⠥⠎⠲"
+  # Free part-word signs (Modul 6.1.1, examples and Latihan 6.1)
+  - - "Aku tahu kucingku akan makan tikus di gudang padi."
+    - "⠠⠾⠀⠐⠞⠀⠾⠉⠊⠻⠾⠀⠷⠀⠍⠁⠷⠀⠞⠊⠾⠎⠀⠌⠀⠛⠥⠙⠁⠻⠀⠏⠁⠌⠲"
+  - - "Fuad telah mengambil sate kambing di kantin buat anaknya."
+    - "⠠⠋⠬⠙⠀⠳⠀⠢⠻⠜⠃⠊⠇⠀⠎⠁⠳⠀⠷⠃⠊⠻⠀⠌⠀⠷⠞⠊⠝⠀⠬⠀⠜⠁⠅⠮⠲"
+  - - "mudah murah tamu gemuk"
+    - "⠩⠙⠁⠓⠀⠩⠗⠁⠓⠀⠞⠁⠩⠀⠛⠑⠩⠅"
+  - - "Taufik aura kemarau"
+    - "⠠⠞⠪⠋⠊⠅⠀⠪⠗⠁⠀⠹⠍⠁⠗⠪"
+  - - "kena kemah sekedar tiket kecap"
+    - "⠹⠝⠁⠀⠹⠍⠁⠓⠀⠯⠹⠙⠁⠗⠀⠞⠊⠹⠞⠀⠹⠉⠁⠏"
+  - - "pasti nista Hesti"
+    - "⠏⠁⠱⠊⠀⠝⠊⠱⠁⠀⠠⠓⠑⠱⠊"
+  - - "teliti motel sate ketel ketemu"
+    - "⠳⠇⠊⠞⠊⠀⠍⠕⠳⠇⠀⠎⠁⠳⠀⠹⠳⠇⠀⠹⠳⠩"
+  - - "membuat buah uang dua ruang tua"
+    - "⠢⠍⠸⠬⠀⠃⠬⠓⠀⠬⠻⠀⠙⠬⠀⠗⠬⠻⠀⠞⠬"
+  - - "serat kaset lesehan fase"
+    - "⠯⠗⠁⠞⠀⠅⠁⠯⠞⠀⠇⠑⠯⠓⠜⠀⠋⠁⠯"
+  - - "nyaring kenyang nyamuk hanya"
+    - "⠮⠗⠊⠻⠀⠹⠮⠻⠀⠮⠩⠅⠀⠓⠁⠮"
+  - - "Unyil konyol menyisir menyusui"
+    - "⠠⠥⠫⠊⠇⠀⠅⠕⠫⠕⠇⠀⠢⠫⠊⠎⠊⠗⠀⠢⠫⠥⠎⠥⠊"
+  - - "tenang menangis renang angkat"
+    - "⠳⠝⠁⠻⠀⠢⠝⠁⠻⠊⠎⠀⠗⠑⠝⠁⠻⠀⠁⠻⠅⠁⠞"
+  - - "memaki memeriksa pamer opname reklame"
+    - "⠢⠍⠁⠅⠊⠀⠢⠢⠗⠊⠅⠎⠁⠀⠏⠁⠢⠗⠀⠕⠏⠝⠁⠢⠀⠗⠑⠅⠇⠁⠢"
+  - - "Ria kiat tiap setia agraria"
+    - "⠠⠗⠔⠀⠅⠔⠞⠀⠞⠔⠏⠀⠯⠞⠔⠀⠁⠛⠗⠁⠗⠔"
+  - - "pekan ikan kantor kantong kampak kambuh"
+    - "⠏⠑⠷⠀⠊⠷⠀⠷⠞⠕⠗⠀⠷⠞⠕⠻⠀⠷⠏⠁⠅⠀⠷⠃⠥⠓"
+    - xfail: {forward: "The course writes the p and e of pekan as letters; the table uses the sign for pe."}
+  - - "akui saku kuku Kudus"
+    - "⠁⠾⠊⠀⠎⠁⠾⠀⠾⠾⠀⠠⠾⠙⠥⠎"
+  - - "Danti Wildan antar andong amplop ambil uban keran Sultan"
+    - "⠠⠙⠜⠞⠊⠀⠠⠺⠊⠇⠙⠜⠀⠜⠞⠁⠗⠀⠜⠙⠕⠻⠀⠜⠏⠇⠕⠏⠀⠜⠃⠊⠇⠀⠥⠃⠜⠀⠹⠗⠜⠀⠠⠎⠥⠇⠞⠜"
+  - - "Didi padi"
+    - "⠠⠌⠌⠀⠏⠁⠌"
+  - - "sesampai Aisyah rantai pantai gulai"
+    - "⠯⠸⠡⠀⠠⠡⠎⠽⠁⠓⠀⠗⠜⠞⠡⠀⠏⠜⠞⠡⠀⠛⠥⠇⠡"
+  # Repetition (Modul 6.1.2): the repeat sign after the word, dots 4-5-6
+  # before a repeated single-cell word sign, a hyphen after a prefix and
+  # the suffix after the repeat sign.
+  - - "ibu-ibu ayam-ayam mobil-mobil"
+    - "⠊⠃⠥⠣⠀⠈⠽⠍⠣⠀⠍⠃⠇⠣"
+  - - "bagi-bagi bagian-bagian"
+    - "⠸⠃⠣⠀⠸⠃⠜⠣"
+  - - "berlari-lari terbagi-bagi sehari-hari"
+    - "⠖⠤⠇⠁⠗⠊⠣⠀⠴⠤⠸⠃⠣⠀⠯⠤⠐⠓⠣"
+  - - "berhati-hatilah sedalam-dalamnya"
+    - "⠖⠤⠓⠞⠣⠸⠀⠯⠤⠐⠙⠣⠮"
+  - - "satu-satunya seakan-akan sampai-sampai"
+    - "⠸⠱⠣⠮⠀⠯⠤⠸⠷⠣⠀⠸⠡⠣"
+  - - "kupu-kupu padi-padian sia-sia"
+    - "⠾⠏⠥⠣⠀⠏⠁⠌⠣⠜⠀⠎⠔⠣"
+  - - "sekurang-kurangnya"
+    - "⠯⠤⠘⠅⠣⠮"
+  - - "Jakarta-Ambon"
+    - "⠠⠚⠈⠅⠗⠞⠁⠤⠠⠜⠃⠕⠝"
+  - - "Bangsa-Bangsa Guru-Guru"
+    - "⠠⠃⠁⠻⠎⠁⠤⠠⠃⠁⠻⠎⠁⠀⠠⠛⠗⠤⠠⠛⠗"
+  - - "serba-serbi mereka-reka"
+    - "⠯⠗⠃⠁⠤⠯⠗⠃⠊⠀⠢⠤⠗⠑⠅⠁⠣"
+  - - "kasak-kusuk"
+    - "⠅⠈⠎⠅⠤⠾⠎⠥⠅"
+    - xfail: {forward: "liblouis takes the k before the hyphen as a repeated root."}
+  # Part-word signs for the start and the middle of a word (Modul 6.2.1).
+  # At the end ber, per and ter are written be-r, pe-r and te-r.
+  - - "Suster, ambilkan air bersih dari ember!"
+    - "⠠⠎⠥⠎⠳⠗⠂⠀⠜⠃⠊⠇⠷⠀⠡⠗⠀⠖⠎⠊⠓⠀⠙⠀⠑⠍⠆⠗⠖"
+  - - "Mentari sudah terbenam; pelaut itu akan pergi."
+    - "⠠⠢⠝⠞⠁⠗⠊⠀⠘⠎⠀⠴⠆⠝⠁⠍⠆⠀⠒⠇⠪⠞⠀⠊⠀⠷⠀⠲⠛⠊⠲"
+  - - "benar kebenaran bela dibela"
+    - "⠆⠝⠁⠗⠀⠹⠆⠝⠁⠗⠜⠀⠆⠇⠁⠀⠌⠆⠇⠁"
+  - - "Pengacara peluru pedas sepeda"
+    - "⠠⠒⠻⠁⠸⠉⠀⠒⠇⠥⠗⠥⠀⠒⠙⠁⠎⠀⠯⠒⠙⠁"
+  - - "teratur terampil keterampilan veteran semester"
+    - "⠴⠘⠁⠀⠴⠜⠏⠊⠇⠀⠹⠴⠜⠏⠊⠇⠜⠀⠧⠑⠴⠜⠀⠯⠢⠎⠳⠗"
+  - - "berenang seberkas seberang November Desember"
+    - "⠖⠑⠝⠁⠻⠀⠯⠖⠅⠁⠎⠀⠯⠖⠁⠻⠀⠠⠝⠕⠧⠑⠍⠆⠗⠀⠠⠙⠑⠯⠍⠆⠗"
+  - - "persis perdana perang berperang properti operasi"
+    - "⠲⠎⠊⠎⠀⠲⠙⠜⠁⠀⠲⠁⠻⠀⠖⠲⠁⠻⠀⠏⠗⠕⠲⠞⠊⠀⠕⠲⠁⠎⠊"
+  # Part-word signs for the middle of a word (Modul 6.2.2)
+  - - "Aam maaf faal taat manfaat"
+    - "⠠⠁⠁⠍⠀⠍⠂⠋⠀⠋⠂⠇⠀⠞⠂⠞⠀⠍⠜⠋⠂⠞"
+  - - "intan minum pimpin timbul muslim induk"
+    - "⠊⠝⠞⠜⠀⠍⠶⠥⠍⠀⠏⠶⠏⠊⠝⠀⠞⠶⠃⠥⠇⠀⠩⠎⠇⠊⠍⠀⠊⠝⠙⠥⠅"
+  - - "Aminah mimpi rindu bimbang pindah rimbun"
+    - "⠠⠁⠍⠶⠁⠓⠀⠍⠶⠏⠊⠀⠗⠶⠙⠥⠀⠃⠶⠃⠁⠻⠀⠏⠶⠙⠁⠓⠀⠗⠶⠃⠥⠝"
+  - - "unta gunung rumit kebun tumbuh tumpul"
+    - "⠥⠝⠞⠁⠀⠛⠦⠥⠻⠀⠗⠥⠍⠊⠞⠀⠹⠃⠥⠝⠀⠞⠦⠃⠥⠓⠀⠞⠦⠏⠥⠇"
+  - - "Untung beruntung buntut bumbu sumpah Bunda"
+    - "⠠⠥⠝⠞⠥⠻⠀⠖⠦⠞⠥⠻⠀⠃⠦⠞⠥⠞⠀⠃⠦⠃⠥⠀⠎⠦⠏⠁⠓⠀⠠⠃⠦⠙⠁"
+  - - "manggis canggih panggung nggak Singgih"
+    - "⠍⠁⠿⠊⠎⠀⠉⠁⠿⠊⠓⠀⠏⠁⠿⠥⠻⠀⠻⠛⠁⠅⠀⠠⠎⠊⠿⠊⠓"
+  # Part-word signs for the end of a word (Modul 6.2.3)
+  - - "berkah berkahnya belah belahlah"
+    - "⠖⠨⠀⠖⠅⠁⠓⠮⠀⠆⠸⠀⠆⠇⠁⠓⠸"
+  - - "nikah sedekah Mekah dinikahi"
+    - "⠝⠊⠨⠀⠯⠙⠑⠨⠀⠠⠢⠨⠀⠌⠝⠊⠅⠁⠓⠊"
+  - - "islah makalah sekolah salah ulah ulahku"
+    - "⠊⠎⠸⠀⠸⠖⠸⠀⠯⠅⠕⠸⠀⠎⠁⠸⠀⠥⠸⠀⠥⠇⠁⠓⠾"
+  - - "ampun diampuni ataupun rumpun walaupun"
+    - "⠜⠘⠀⠌⠜⠏⠦⠊⠀⠸⠪⠘⠀⠗⠦⠘⠀⠐⠺⠘"
+  - - "Itu pun cukup."
+    - "⠠⠊⠀⠏⠥⠝⠀⠘⠉⠲"
+  # Tanda apit, dot 4 (Modul 6.2.4)
+  - - "apa kapal hangat kasta mangga"
+    - "⠈⠏⠀⠅⠈⠏⠇⠀⠓⠈⠻⠞⠀⠅⠈⠱⠀⠍⠈⠿"
+  - - "Krakatau"
+    - "⠠⠅⠗⠁⠅⠸⠪"
+    - xfail: {forward: "The course writes krak-atau; liblouis takes the earliest contraction, the apit of aka."}
+  # Sibra (Modul 6.3): with affixes only when the Sibra is the root
+  - - "sedemikian demikianlah"
+    - "⠯⠙⠍⠅⠀⠙⠍⠅⠸"
+  - - "Bahasaku kebahasaan bahasan pembahasan"
+    - "⠠⠃⠓⠎⠾⠀⠹⠃⠓⠎⠜⠀⠃⠈⠓⠎⠜⠀⠒⠍⠃⠈⠓⠎⠜"
+  - - "Pilihlah penglihatan tertulis didapatnya"
+    - "⠠⠏⠇⠓⠸⠀⠒⠻⠇⠓⠞⠜⠀⠴⠞⠇⠎⠀⠌⠙⠏⠞⠮"
+  - - "gerakan kebalikan"
+    - "⠛⠗⠅⠜⠀⠹⠃⠁⠇⠊⠷"
+  # Capital sign before contractions (Modul 6.4.1)
+  - - "Kita KITA Kali KALI"
+    - "⠠⠅⠀⠠⠠⠅⠀⠠⠐⠅⠀⠠⠠⠐⠅"
+  - - "Kurang KURANG Kitab KITAB"
+    - "⠠⠘⠅⠀⠠⠠⠘⠅⠀⠠⠸⠅⠃⠀⠠⠠⠸⠅⠃"
+  # Tanda pugar, dots 5-6, before a single letter (Modul 6.4.2)
+  - - "Pilihlah a, b atau c."
+    - "⠠⠏⠇⠓⠸⠀⠰⠁⠂⠀⠰⠃⠀⠪⠀⠰⠉⠲"
+  - - "Sinar X"
+    - "⠠⠎⠶⠁⠗⠀⠰⠠⠭"
+  - - "kelas 3A"
+    - "⠹⠇⠁⠎⠀⠼⠉⠰⠠⠁"
+  - - "kelas 2b"
+    - "⠹⠇⠁⠎⠀⠼⠃⠰⠃"
+  - - "a.n. kepala sekolah"
+    - "⠁⠲⠝⠲⠀⠹⠏⠈⠇⠀⠯⠅⠕⠸"
+  - - "A.H. Nasution"
+    - "⠠⠁⠲⠠⠓⠲⠀⠠⠝⠁⠎⠥⠞⠊⠕⠝"
+  - - "DPR MPR"
+    - "⠠⠠⠙⠏⠗⠀⠠⠠⠍⠏⠗"
+  - - "siang/malam dan/atau lentera/dian"
+    - "⠎⠔⠻⠌⠍⠈⠇⠍⠀⠜⠌⠪⠀⠇⠑⠝⠴⠁⠌⠌⠜"
+    - xfail: {backward: "Dots 3-4 between letters are read as di; only dan/atau is read with the slash."}
+  - - "SMU"
+    - "⠠⠠⠎⠍⠥"
+    - xfail: {forward: "Abbreviations in capitals are not recognised, so mu is contracted."}
+  - - "I II III"
+    - "⠠⠊⠀⠠⠠⠊⠊⠀⠠⠠⠊⠊⠊"
+    - xfail: {forward: "A single capital I is taken as a letter and gets the letter sign.", backward: "Without the letter sign, I is the word sign itu."}
+  - - "i ii iii"
+    - "⠰⠊⠀⠰⠊⠊⠀⠰⠊⠊⠊"
+    - xfail: {forward: "Only a single letter gets the letter sign, not ii or iii."}
+  # Choosing between contractions (Modul 6.4.3, rules and Latihan 6.4)
+  - - "makan kunci cahaya tanah tanda"
+    - "⠍⠁⠷⠀⠾⠝⠉⠊⠀⠉⠈⠓⠽⠁⠀⠞⠜⠁⠓⠀⠞⠸⠁"
+  - - "bangun hanyut landai"
+    - "⠃⠻⠝⠀⠓⠁⠫⠥⠞⠀⠇⠜⠙⠡"
+  - - "kepandaian keteraturan berkeberatan berserakan"
+    - "⠹⠏⠜⠙⠡⠜⠀⠹⠴⠘⠁⠜⠀⠖⠹⠖⠁⠞⠜⠀⠖⠯⠗⠁⠷"
+  - - "pengakuan penandatanganan keharusan perbaikan"
+    - "⠒⠻⠁⠾⠜⠀⠒⠝⠸⠁⠞⠁⠻⠜⠜⠀⠹⠸⠓⠜⠀⠲⠐⠃⠜"
+  - - "Gunawan makanan memanggang merekah"
+    - "⠠⠘⠛⠺⠜⠀⠍⠁⠷⠜⠀⠸⠢⠛⠁⠻⠀⠸⠍⠓"
+  - - "sayang semuanya Sudarini dandanan"
+    - "⠸⠎⠻⠀⠼⠬⠮⠀⠠⠎⠥⠸⠙⠝⠊⠀⠙⠜⠙⠜⠜"
+  - - "penelitian perbedaan"
+    - "⠒⠝⠑⠇⠊⠞⠊⠜⠀⠲⠆⠙⠁⠜"
+  - - "kemasan"
+    - "⠅⠸⠑⠜"
+    - xfail: {forward: "The course prefers k-emas-an; liblouis takes ke first."}
+  - - "Drupada"
+    - "⠠⠙⠗⠥⠸⠏"
+    - xfail: {forward: "The course prefers Dru-pada; liblouis takes rupa first."}
+  # Tes formatif 6
+  - - "Telah diungkap oleh berbagai penelitian bahwa membaca melalui saluran penglihatan lebih cepat daripada membaca melalui saluran perabaan."
+    - "⠠⠳⠀⠌⠥⠻⠅⠁⠏⠀⠕⠀⠖⠃⠁⠛⠡⠀⠒⠝⠑⠇⠊⠞⠊⠜⠀⠆⠀⠢⠍⠃⠈⠉⠀⠢⠸⠇⠊⠀⠎⠁⠇⠥⠗⠜⠀⠒⠻⠇⠓⠞⠜⠀⠇⠃⠓⠀⠉⠏⠞⠀⠙⠏⠀⠢⠍⠃⠈⠉⠀⠢⠸⠇⠊⠀⠎⠁⠇⠥⠗⠜⠀⠲⠈⠃⠜⠲"
+  - - "Dapat diasumsikan bahwa penyebab utama dari perbedaan kedua jenis membaca tersebut terletak pada jumlah informasi yang dapat diserap melalui kedua alat indera tersebut."
+    - "⠠⠙⠏⠞⠀⠌⠁⠎⠥⠍⠎⠊⠷⠀⠆⠀⠒⠫⠑⠃⠁⠃⠀⠥⠞⠈⠍⠀⠙⠀⠲⠆⠙⠁⠜⠀⠹⠙⠬⠀⠚⠑⠝⠊⠎⠀⠢⠍⠃⠈⠉⠀⠴⠯⠃⠥⠞⠀⠴⠇⠑⠸⠞⠀⠏⠀⠚⠥⠍⠸⠀⠊⠝⠋⠕⠗⠍⠁⠎⠊⠀⠽⠀⠙⠏⠞⠀⠌⠯⠗⠁⠏⠀⠢⠸⠇⠊⠀⠹⠙⠬⠀⠈⠇⠞⠀⠊⠝⠙⠑⠗⠁⠀⠴⠯⠃⠥⠞⠲"
+  - - "Yang memungkinkan didapatnya informasi tertulis oleh pembaca Braille adalah gerakan tangan yang kontinyu, bukan sentuhan ujung-ujung jari pada tulisan itu saja."
+    - "⠠⠽⠀⠢⠘⠍⠷⠀⠌⠙⠏⠞⠮⠀⠊⠝⠋⠕⠗⠍⠁⠎⠊⠀⠴⠞⠇⠎⠀⠕⠀⠒⠍⠃⠈⠉⠀⠠⠃⠗⠇⠀⠈⠙⠸⠀⠛⠗⠅⠜⠀⠞⠁⠻⠜⠀⠽⠀⠅⠕⠝⠞⠊⠫⠥⠂⠀⠫⠀⠯⠝⠞⠥⠓⠜⠀⠥⠚⠥⠻⠣⠀⠚⠁⠗⠊⠀⠏⠀⠞⠇⠎⠜⠀⠊⠀⠎⠈⠚⠲"
+  - - "menggunakan teknik membaca dengan dua tangan"
+    - "⠢⠻⠘⠛⠷⠀⠳⠅⠝⠊⠅⠀⠢⠍⠃⠈⠉⠀⠲⠀⠙⠬⠀⠞⠁⠻⠜"
+  - - "menunjukkan kemampuan membaca huruf-huruf dengan cepat dan tidak dibingungkan oleh huruf-huruf yang merupakan bayangan cermin dari huruf-huruf lain."
+    - "⠢⠝⠦⠚⠥⠅⠷⠀⠹⠍⠜⠏⠥⠜⠀⠢⠍⠃⠈⠉⠀⠓⠗⠋⠣⠀⠲⠀⠉⠏⠞⠀⠜⠀⠞⠙⠅⠀⠌⠃⠊⠻⠥⠻⠷⠀⠕⠀⠓⠗⠋⠣⠀⠽⠀⠢⠘⠗⠷⠀⠃⠁⠸⠽⠜⠀⠉⠑⠗⠍⠊⠝⠀⠙⠀⠓⠗⠋⠣⠀⠐⠇⠲"
+
+flags: {testmode: backward}
+tests:
+  # Sentences with capitals, punctuation, numbers and the repeat sign
+  - - "⠠⠏⠀⠐⠞⠝⠀⠼⠃⠚⠁⠚⠂⠀⠈⠙⠀⠼⠃⠑⠀⠎⠺⠀⠌⠀⠹⠇⠁⠎⠀⠼⠉⠰⠠⠁⠲"
+    - "Pada tahun 2010, ada 25 siswa di kelas 3A."
+  - - "⠠⠜⠁⠅⠣⠀⠖⠍⠡⠝⠀⠌⠀⠓⠈⠇⠍⠜⠆⠀⠍⠀⠼⠝⠀⠼⠅⠖"
+    - "Anak-anak bermain di halaman; mereka senang sekali!"
+  - - "⠦⠠⠎⠀⠞⠙⠅⠀⠐⠞⠂⠴⠀⠅⠈⠞⠮⠲"
+    - "\"Saya tidak tahu,\" katanya."
+  - - "⠠⠔⠀⠖⠅⠈⠞⠒⠀⠶⠇⠓⠞⠀⠓⠈⠇⠍⠜⠀⠼⠁⠃⠶⠲"
+    - "Ia berkata: (lihat halaman 12)."
+  - - "⠠⠍⠀⠖⠤⠇⠁⠗⠊⠣⠀⠜⠀⠴⠤⠞⠈⠺⠣⠲"
+    - "Mereka berlari-lari dan tertawa-tawa."
+  - - "⠠⠃⠈⠏⠅⠀⠜⠀⠠⠊⠃⠥⠀⠲⠛⠊⠀⠹⠀⠠⠚⠈⠅⠗⠞⠁⠀⠏⠀⠐⠓⠀⠠⠯⠝⠊⠝⠂⠀⠼⠑⠀⠠⠢⠊⠀⠼⠃⠚⠃⠑⠲"
+    - "Bapak dan Ibu pergi ke Jakarta pada hari Senin, 5 Mei 2025."
+  - - "⠠⠒⠢⠗⠶⠞⠁⠓⠀⠢⠍⠲⠓⠞⠷⠀⠹⠯⠚⠁⠓⠴⠁⠜⠀⠐⠗⠲"
+    - "Pemerintah memperhatikan kesejahteraan rakyat."
+  - - "⠠⠦⠀⠈⠙⠀⠺⠀⠥⠀⠢⠍⠲⠐⠃⠊⠀⠹⠎⠈⠇⠓⠜⠲"
+    - "Masih ada waktu untuk memperbaiki kesalahan."
+  - - "⠠⠴⠀⠞⠙⠅⠀⠴⠇⠜⠃⠁⠞⠂⠀⠔⠀⠖⠁⠻⠅⠁⠞⠀⠏⠥⠾⠇⠀⠼⠚⠋⠂⠉⠚⠲"
+    - "Supaya tidak terlambat, ia berangkat pukul 06.30."
+  - - "⠠⠃⠥⠾⠣⠀⠊⠀⠘⠎⠀⠌⠃⠈⠉⠀⠕⠀⠏⠈⠗⠀⠎⠺⠲"
+    - "Buku-buku itu sudah dibaca oleh para siswa."
+  - - "⠠⠙⠏⠞⠨⠀⠠⠁⠀⠢⠍⠃⠜⠞⠥⠀⠎⠦"
+    - "Dapatkah Anda membantu saya?"
+  - - "⠠⠯⠤⠐⠃⠣⠮⠀⠍⠜⠥⠎⠔⠀⠈⠙⠸⠀⠽⠀⠖⠍⠜⠋⠂⠞⠲"
+    - "Sebaik-baiknya manusia adalah yang bermanfaat."
+  # Ambiguous braille: the reading chosen
+  - - "⠠⠛⠗⠣"
+    - "Guru-guru"
+  - - "⠅⠁⠏⠜⠘"
+    - "kapanpun"
+  - - "⠒⠻⠜⠘"
+    - "pengampun"
+    - xfail: "Before pun, dots 3-4-5 are read as an (kapanpun); only the word ampun has am."
+  - - "⠊⠅⠇⠜"
+    - "iklan"
+  - - "⠢⠎⠅⠊⠀⠖⠎⠅⠊"
+    - "meski berski"
+  - - "⠎⠅⠊"
+    - "sukai"
+  - - "⠢⠍⠃⠗⠜"
+    - "membran"
+    - xfail: "Read as mem-baru-an, as in pembaruan."
+  - - "⠑⠤⠍⠡⠇"
+    - "e-mail"
+  - - "⠍⠤⠗⠑⠅⠁"
+    - "m-reka"
+  - - "⠦"
+    - "masih"
+  - - "⠦⠠⠽⠁⠂⠴⠀⠠⠈⠏⠦"
+    - "\"Ya,\" Apa?"
+  - - "⠠⠏⠲⠀⠠⠞⠲"
+    - "P. T."
+    - xfail: "A letter with a period is read as a word sign: Pada. Tak."

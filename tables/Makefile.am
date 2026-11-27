@@ -236,6 +236,8 @@ table_files = \
 	hy.tbl \
 	IPA-unicode-range.uti \
 	IPA.utb \
+	id-id-g1.utb \
+	id-id-g2.ctb \
 	is-chardefs6.cti \
 	is-chardefs8.cti \
 	is.ctb \
